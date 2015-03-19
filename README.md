@@ -1,1 +1,1 @@
-Every single example needs to run from an HTTP server, I recommend to install Python, then run a command line from the project path: python -m SimpleHTTPServer 80
+Every examples need to run from an HTTP server, I recommend to install Python, once installed you can run this command line from the project path: python -m SimpleHTTPServer 80
