@@ -24546,8 +24546,6 @@ Phaser.ScaleManager.prototype = {
 
         if (boundsChanged || orientationChanged)
         {
-            console.log('custom override preUpdate');
-            /*
             if (this.onResize)
             {
                 this.onResize.call(this.onResizeContext, this, bounds);
@@ -24556,7 +24554,6 @@ Phaser.ScaleManager.prototype = {
             this.updateLayout();
 
             this.signalSizeChange();
-            */
         }
 
         // Next throttle, eg. 25, 50, 100, 200..
