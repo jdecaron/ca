@@ -76,31 +76,28 @@
 
             // Let's make a load of cubes on a grid, but do it back-to-front so they get added out of order.
             var cube;
-            for (var xx = 400; xx > 0; xx -= 40) {
-                for (var yy = 400; yy > 0; yy -= 40) {
-                    // Create a cube using the new game.add.isoSprite factory method at the specified position.
-                    // The last parameter is the group you want to add it to (just like game.add.sprite)
-                    cube = game.add.isoSprite(xx, yy, 0, 'cube', 0, isoGroup);
-                    cube.anchor.set(0.5);
+            for (var zz = 80; zz > 0; zz -= 40) {
+                for (var xx = 600; xx > 200; xx -= 40) {
+                    for (var yy = 600; yy > 200; yy -= 40) {
+                        // Create a cube using the new game.add.isoSprite factory method at the specified position.
+                        // The last parameter is the group you want to add it to (just like game.add.sprite)
+                        cube = game.add.isoSprite(xx, yy, zz, 'cube', 0, isoGroup);
+                        cube.anchor.set(0.5);
 
-                    // Enable the physics body on this cube.
-                    game.physics.isoArcade.enable(cube);
+                        // Enable the physics body on this cube.
+                        game.physics.isoArcade.enable(cube);
 
-                    // Collide with the world bounds so it doesn't go falling forever or fly off the screen!
-                    //cube.body.collideWorldBounds = true;
+                        // Add some X and Y drag to make cubes slow down after being pushed.
+                        cube.body.drag.set(100, 100, 0);
 
-                    // Add a full bounce on the x and y axes, and a bit on the z axis. 
-                    //cube.body.bounce.set(0, 0, 0);
-
-                    // Add some X and Y drag to make cubes slow down after being pushed.
-                    cube.body.drag.set(100, 100, 0);
-
-                    cube.body.moves = false;
+                        cube.body.immovable = true;
+                        cube.body.moves = false;
+                    }
                 }
             }
 
             // Create another cube as our 'player', and set it up just like the cubes above.
-            player = game.add.isoSprite(128, 128, 50, 'cube', 0, isoGroup);
+            player = game.add.isoSprite(300, 300, 120, 'cube', 0, isoGroup);
             player.tint = 0x86bfda;
             player.anchor.set(0.5);
             game.physics.isoArcade.enable(player);
@@ -149,12 +146,8 @@
                     cube = game.add.isoSprite(xPosition, yPosition, zPosition, 'cube', 0, isoGroup);
                     cube.anchor.set(0.5);
 
-
                     // Enable the physics body on this cube.
                     game.physics.isoArcade.enable(cube);
-
-                    // Collide with the world bounds so it doesn't go falling forever or fly off the screen!
-                    cube.body.collideWorldBounds = true;
 
                     cube.body.moves = false;
                     zPosition = -5000;
