@@ -106,7 +106,7 @@
 
             // Create another cube as our 'player', and set it up just like the cubes above.
             player = game.add.isoSprite(300, 300, 120, 'player', 0, isoGroup);
-            player.tint = 0xffffff;
+            player.tint = tint;
             player.anchor.set(0.5);
             game.physics.isoArcade.enable(player);
             player.body.collideWorldBounds = true;
