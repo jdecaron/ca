@@ -124,9 +124,6 @@
             event.initEvent('addToDOM',true,true);
             document.dispatchEvent(event);
 
-            var mouse = new Phaser.Mouse(game);
-            mouse.mouseDownCallback = function() { console.log('sauce'); };
-
             var key1Action = function() {
                 clickAction = 'add';
                 tint = 0x86bfda;
@@ -145,7 +142,6 @@
             var clickActions = function() {
                 if(clickAction == 'add') {
                     isoGroup.forEach(function (tile) {
-                        console.log(tile);
                         if(tile.isoPosition.x == xPosition && tile.isoPosition.y == yPosition && tile.isoPosition.z >= zPosition) {
                             zPosition = tile.isoPosition.z + 40;
                         }
@@ -168,8 +164,6 @@
                     for(var i = 0; i < isoGroup.children.length; i++) {
                         var child = isoGroup.children[i];
                         var isoPosition = child.isoPosition;
-                        console.log(child);
-                        console.log(toRemove);
                         if(
                             (child.isoBounds.containsXY(xPosition, yPosition) && child.isoPosition.z > toRemove.isoPosition.z)
                           ) {
@@ -234,6 +228,12 @@
                 }
             }
             isoGroup.forEach(function (tile) {
+                if(Phaser.Rectangle.intersects(tile.getBounds(), player.getBounds()) && tile.isoBounds.z > player.isoBounds.z) {
+                    tile.alpha = 0.5;
+                }
+                else {
+                    tile.alpha = 1;
+                }
                 var inBounds = tile.isoBounds.containsXY(xPosition, yPosition);
                 // If it does, do a little animation and tint change.
                 if (!tile.selected && inBounds) {
