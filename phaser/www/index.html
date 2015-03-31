@@ -39,7 +39,7 @@
     var leftKey;
     var rightKey;
 
-    var tint = 0x86bfda;
+    var tint = 0xff0000;
 
     var xPosition = 0;
     var yPosition = 0;
@@ -48,7 +48,9 @@
     BasicGame.Boot.prototype =
     {
         preload: function () {
-            game.load.image('cube', 'assets/images/cube.png');
+            game.load.image('cube', 'assets/images/cube0.png');
+            game.load.image('cube1', 'assets/images/cube1.png');
+            game.load.image('player', 'assets/images/player.png');
 
             game.time.advancedTiming = true;
 
@@ -81,24 +83,30 @@
                     for (var yy = 600; yy > 200; yy -= 40) {
                         // Create a cube using the new game.add.isoSprite factory method at the specified position.
                         // The last parameter is the group you want to add it to (just like game.add.sprite)
-                        cube = game.add.isoSprite(xx, yy, zz, 'cube', 0, isoGroup);
-                        cube.anchor.set(0.5);
+                        var sprite = 'cube';
+                        if(zz == 40) {
+                            sprite = 'cube1';
+                        }
+                        if(sprite == 'cube1' || Math.floor((Math.random() * 2)) > 0) {
+                            cube = game.add.isoSprite(xx, yy, zz, sprite, 0, isoGroup);
+                            cube.anchor.set(0.5);
 
-                        // Enable the physics body on this cube.
-                        game.physics.isoArcade.enable(cube);
+                            // Enable the physics body on this cube.
+                            game.physics.isoArcade.enable(cube);
 
-                        // Add some X and Y drag to make cubes slow down after being pushed.
-                        cube.body.drag.set(100, 100, 0);
+                            // Add some X and Y drag to make cubes slow down after being pushed.
+                            cube.body.drag.set(100, 100, 0);
 
-                        cube.body.immovable = true;
-                        cube.body.moves = false;
+                            cube.body.immovable = true;
+                            cube.body.moves = false;
+                        }
                     }
                 }
             }
 
             // Create another cube as our 'player', and set it up just like the cubes above.
-            player = game.add.isoSprite(300, 300, 120, 'cube', 0, isoGroup);
-            player.tint = 0x86bfda;
+            player = game.add.isoSprite(300, 300, 120, 'player', 0, isoGroup);
+            player.tint = 0xffffff;
             player.anchor.set(0.5);
             game.physics.isoArcade.enable(player);
             player.body.collideWorldBounds = true;
@@ -123,14 +131,14 @@
 
             var key1Action = function() {
                 clickAction = 'add';
-                tint = 0x86bfda;
+                tint = 0xff0000;
                 player.tint = tint;
             };
             key1 = game.input.keyboard.addKey(Phaser.Keyboard.ONE);
             key1.onDown.add(key1Action, this);
             var key2Action = function() {
                 clickAction = 'remove';
-                tint = 0x86da88;
+                tint = 0x0000ff;
                 player.tint = tint;
             };
             key2 = game.input.keyboard.addKey(Phaser.Keyboard.TWO);
@@ -138,18 +146,25 @@
 
             var clickActions = function() {
                 if(clickAction == 'add') {
+                    var toRemove = [];
+                    var addCube = function(x, y, z, sprite){
+                        var cube = game.add.isoSprite(x, y, z, sprite, 0, isoGroup);
+                        cube.anchor.set(0.5);
+                        game.physics.isoArcade.enable(cube);
+                        cube.body.immovable = true;
+                        cube.body.moves = false;
+                    }
                     isoGroup.forEach(function (tile) {
                         if(tile.isoPosition.x == xPosition && tile.isoPosition.y == yPosition && tile.isoPosition.z >= zPosition) {
                             zPosition = tile.isoPosition.z + 40;
+                            addCube(tile.isoPosition.x, tile.isoPosition.y, tile.isoPosition.z, 'cube1');
+                            toRemove.push(tile);
                         }
                     });
-                    cube = game.add.isoSprite(xPosition, yPosition, zPosition, 'cube', 0, isoGroup);
-                    cube.anchor.set(0.5);
-
-                    // Enable the physics body on this cube.
-                    game.physics.isoArcade.enable(cube);
-
-                    cube.body.moves = false;
+                    addCube(xPosition, yPosition, zPosition, 'cube');
+                    for(var i=0; i<toRemove.length; i++) {
+                        isoGroup.remove(toRemove[i]);
+                    }
                     zPosition = -5000;
                 }
                 else if(clickAction == 'remove') {
