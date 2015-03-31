@@ -29,10 +29,21 @@
 
     BasicGame.Boot = function (game) { };
 
-    var cameraPos, cursorPos, isoGroup, player;
+    var isoGroup, player;
 
     var addPositions = {x:40, y:0};
     var clickAction = 'add';
+
+    var upKey;
+    var downKey;
+    var leftKey;
+    var rightKey;
+
+    var tint = 0x86bfda;
+
+    var xPosition = 0;
+    var yPosition = 0;
+    var zPosition = 0;
 
     BasicGame.Boot.prototype =
     {
@@ -76,40 +87,17 @@
                     game.physics.isoArcade.enable(cube);
 
                     // Collide with the world bounds so it doesn't go falling forever or fly off the screen!
-                    cube.body.collideWorldBounds = true;
+                    //cube.body.collideWorldBounds = true;
 
                     // Add a full bounce on the x and y axes, and a bit on the z axis. 
-                    cube.body.bounce.set(0, 0, 0);
+                    //cube.body.bounce.set(0, 0, 0);
 
                     // Add some X and Y drag to make cubes slow down after being pushed.
                     cube.body.drag.set(100, 100, 0);
+
+                    cube.body.moves = false;
                 }
             }
-            /*
-            for (var xx = 400; xx > 0; xx -= 140) {
-                for (var yy = 400; yy > 0; yy -= 140) {
-                    // Create a cube using the new game.add.isoSprite factory method at the specified position.
-                    // The last parameter is the group you want to add it to (just like game.add.sprite)
-                    cube = game.add.isoSprite(xx, yy, 100, 'cube', 0, isoGroup);
-                    cube.anchor.set(0.5);
-
-                    // Enable the physics body on this cube.
-                    game.physics.isoArcade.enable(cube);
-
-                    // Collide with the world bounds so it doesn't go falling forever or fly off the screen!
-                    cube.body.collideWorldBounds = true;
-
-                    // Add a full bounce on the x and y axes, and a bit on the z axis. 
-                    cube.body.bounce.set(1, 1, 0.2);
-
-                    // Add some X and Y drag to make cubes slow down after being pushed.
-                    cube.body.drag.set(100, 100, 0);
-                }
-            }
-            */
-
-            cameraPos = new Phaser.Plugin.Isometric.Point3();
-            cursorPos = new Phaser.Plugin.Isometric.Point3();
 
             // Create another cube as our 'player', and set it up just like the cubes above.
             player = game.add.isoSprite(128, 128, 50, 'cube', 0, isoGroup);
@@ -118,16 +106,10 @@
             game.physics.isoArcade.enable(player);
             player.body.collideWorldBounds = true;
 
-            // Set up our controls.
-            this.cursors = game.input.keyboard.createCursorKeys();
-
-            this.game.input.keyboard.addKeyCapture([
-                Phaser.Keyboard.LEFT,
-                Phaser.Keyboard.RIGHT,
-                Phaser.Keyboard.UP,
-                Phaser.Keyboard.DOWN,
-                Phaser.Keyboard.SPACEBAR
-            ]);
+            upKey = game.input.keyboard.addKey(Phaser.Keyboard.W);
+            downKey = game.input.keyboard.addKey(Phaser.Keyboard.S);
+            leftKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
+            rightKey = game.input.keyboard.addKey(Phaser.Keyboard.D);
 
             var space = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
@@ -147,49 +129,27 @@
 
             var key1Action = function() {
                 clickAction = 'add';
-                player.tint = 0x86bfda;
+                tint = 0x86bfda;
+                player.tint = tint;
             };
             key1 = game.input.keyboard.addKey(Phaser.Keyboard.ONE);
             key1.onDown.add(key1Action, this);
             var key2Action = function() {
                 clickAction = 'remove';
-                player.tint = 0x86da88;
+                tint = 0x86da88;
+                player.tint = tint;
             };
             key2 = game.input.keyboard.addKey(Phaser.Keyboard.TWO);
             key2.onDown.add(key2Action, this);
 
             var clickActions = function() {
                 if(clickAction == 'add') {
-                    var xPosition = (Math.floor(player.isoPosition.x / 40) * 40);
-                    var yPosition = (Math.floor(player.isoPosition.y / 40) * 40);
-                    var zPosition = 0;
-                    {
-
-                        if(addPositions.x == 0) {
-                            var xPosition = xPosition + 40;
+                    isoGroup.forEach(function (tile) {
+                        console.log(tile);
+                        if(tile.isoPosition.x == xPosition && tile.isoPosition.y == yPosition && tile.isoPosition.z >= zPosition) {
+                            zPosition = tile.isoPosition.z + 40;
                         }
-                        if(addPositions.x > 0) {
-                            var xPosition = xPosition + 80;
-                        }
-                        else{
-                            var xPosition = xPosition - 40;
-                        }
-                        if(addPositions.y == 0) {
-                            var yPosition = yPosition + 40;
-                        }
-                        if(addPositions.y > 0) {
-                            var yPosition = yPosition + 80;
-                        }
-                        else{
-                            var yPosition = yPosition - 40;
-                        }
-                        isoGroup.forEach(function (tile) {
-                            console.log(tile);
-                            if(tile.isoPosition.x == xPosition && tile.isoPosition.y == yPosition && tile.isoPosition.z >= zPosition) {
-                                zPosition = tile.isoPosition.z + 80;
-                            }
-                        });
-                    }
+                    });
                     cube = game.add.isoSprite(xPosition, yPosition, zPosition, 'cube', 0, isoGroup);
                     cube.anchor.set(0.5);
 
@@ -200,24 +160,23 @@
                     // Collide with the world bounds so it doesn't go falling forever or fly off the screen!
                     cube.body.collideWorldBounds = true;
 
-                    // Add a full bounce on the x and y axes, and a bit on the z axis. 
-                    cube.body.bounce.set(0, 0, 0);
-
-                    // Add some X and Y drag to make cubes slow down after being pushed.
-                    cube.body.drag.set(100, 100, 0);
+                    cube.body.moves = false;
+                    zPosition = -5000;
                 }
                 else if(clickAction == 'remove') {
+                    var toRemove = {alive:false, isoPosition:{z:-5000}};
                     for(var i = 0; i < isoGroup.children.length; i++) {
                         var child = isoGroup.children[i];
                         var isoPosition = child.isoPosition;
-                        console.log(isoPosition.x, player.isoPosition.x, isoPosition.y, player.isoPosition.y);
+                        console.log(child);
+                        console.log(toRemove);
                         if(
-                            (isoPosition.x - orientation.x > player.isoPosition.x)
-                            //(isoPosition.y - orientation.y > player.isoPosition.y && isoPosition.y - orientation.y < player.isoPosition.y + 40)
+                            (child.isoBounds.containsXY(xPosition, yPosition) && child.isoPosition.z > toRemove.isoPosition.z)
                           ) {
-                            isoGroup.remove(child);
+                            toRemove = child;
                         }
                     }
+                    isoGroup.remove(toRemove);
                 }
             }
 
@@ -227,11 +186,11 @@
             // Move the player at this speed.
             var speed = 100;
 
-            if (this.cursors.up.isDown) {
+            if (upKey.isDown) {
                 addPositions = {x:0,y:-40};
                 player.body.velocity.y = -speed;
             }
-            else if (this.cursors.down.isDown) {
+            else if (downKey.isDown) {
                 player.body.velocity.y = speed;
                 addPositions = {x:0,y:40};
             }
@@ -239,11 +198,11 @@
                 player.body.velocity.y = 0;
             }
 
-            if (this.cursors.left.isDown) {
+            if (leftKey.isDown) {
                 player.body.velocity.x = -speed;
                 addPositions = {x:-40,y:0};
             }
-            else if (this.cursors.right.isDown) {
+            else if (rightKey.isDown) {
                 player.body.velocity.x = speed;
                 addPositions = {x:40,y:0};
             }
@@ -251,31 +210,54 @@
                 player.body.velocity.x = 0;
             }
 
-            game.iso.unproject(game.input.activePointer.position, cursorPos);
-            game.iso.unproject(game.camera.position, cameraPos);
-            //console.log('pointer', game.input.activePointer.position.x, game.input.activePointer.position.y, 'cursorPos', cursorPos.x, cursorPos.y, 'camera', game.camera.position.x, game.camera.position.y, 'cameraPos', cameraPos.x, cameraPos.y);
-            /*
+            {
+                xPosition = (Math.floor(player.isoPosition.x / 40) * 40);
+                yPosition = (Math.floor(player.isoPosition.y / 40) * 40);
+
+                if(addPositions.x == 0) {
+                    xPosition = xPosition + 40;
+                }
+                if(addPositions.x > 0) {
+                    xPosition = xPosition + 80;
+                }
+                else{
+                    xPosition = xPosition - 40;
+                }
+                if(addPositions.y == 0) {
+                    yPosition = yPosition + 40;
+                }
+                if(addPositions.y > 0) {
+                    yPosition = yPosition + 80;
+                }
+                else{
+                    yPosition = yPosition - 40;
+                }
+            }
             isoGroup.forEach(function (tile) {
-                var inBounds = tile.isoBounds.containsXY(cameraPos.x, cameraPos.y);
+                var inBounds = tile.isoBounds.containsXY(xPosition, yPosition);
                 // If it does, do a little animation and tint change.
                 if (!tile.selected && inBounds) {
                     tile.selected = true;
-                    tile.tint = 0x86bfda;
+                    tile.tint = tint;
                 }
                 // If not, revert back to how it was.
-                else if (tile.selected && !inBounds) {
-                    tile.selected = false;
-                    tile.tint = 0xffffff;
+                else if (tile.selected) {
+                    if(!inBounds) {
+                        tile.tint = 0xffffff;
+                        tile.selected = false;
+                    }
+                    else {
+                        tile.tint = tint;
+                    }
                 }
             });
-            */
 
             // Our collision and sorting code again.
             game.physics.isoArcade.collide(isoGroup);
             game.iso.topologicalSort(isoGroup);
         },
         render: function () {
-            game.debug.text("Move with cursors, jump with space!", 2, 36, "#ffffff");
+            game.debug.text("Move with WASD, 1 & 2 (add / remove mode), click to interract, jump with space!", 2, 36, "#ffffff");
             game.debug.text(game.time.fps || '--', 2, 14, "#a7aebe");
         }
     };
