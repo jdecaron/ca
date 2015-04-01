@@ -46254,7 +46254,10 @@ Phaser.Canvas = {
         canvas.width = width;
         canvas.height = height;
 
+        canvas.style.verticalAlign = 'bottom';
+
         //canvas.style.display = 'block';
+        
 
         return canvas;
 
