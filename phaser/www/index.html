@@ -45,9 +45,15 @@
     var yPosition = 0;
     var zPosition = 0;
 
+    var sound;
+    var text;
+    var timeout;
+
     BasicGame.Boot.prototype =
     {
         preload: function () {
+            game.load.audio('bq1', 'assets/audio/bq1.mp3');
+
             game.load.image('cube', 'assets/images/cube0.png');
             game.load.image('cube1', 'assets/images/cube1.png');
             game.load.image('player', 'assets/images/player.png');
@@ -75,6 +81,8 @@
 
             // Set the global gravity for IsoArcade.
             game.physics.isoArcade.gravity.setTo(0, 0, -500);
+
+            sound = game.add.audio('bq1');
 
             // Let's make a load of cubes on a grid, but do it back-to-front so they get added out of order.
             var cube;
@@ -136,6 +144,7 @@
             };
             key1 = game.input.keyboard.addKey(Phaser.Keyboard.ONE);
             key1.onDown.add(key1Action, this);
+
             var key2Action = function() {
                 clickAction = 'remove';
                 tint = 0x0000ff;
@@ -143,6 +152,50 @@
             };
             key2 = game.input.keyboard.addKey(Phaser.Keyboard.TWO);
             key2.onDown.add(key2Action, this);
+
+            var key3Action = function() {
+                var style = { font: "48px Arial", fill: "#ffffff", align: "center" };
+                if(text) {
+                    game.world.remove(text);
+                }
+                text = game.add.text(game.world.centerX, 350, "Who are the Kombai people,\n and how do they live?", style);
+                text.anchor.set(0.5);
+                sound.play();
+                var p = 0;
+                var positions = [
+                    [200, 0],
+                    [200, 3],
+                    [200, 6],
+                    [200, 9],
+                    [200, 12],
+                    [200, 15],
+                    [200, 18],
+                    [200, 21],
+                    [600, 26],
+                    [100, 29],
+                    [100, 32],
+                    [100, 35],
+                    [100, 38],
+                    [300, 42],
+                    [100, 45],
+                    [100, 48]
+                ];
+                if(timeout) {
+                    clearTimeout(timeout);
+                }
+                var handleSound = function() {
+                    if(positions.length > p) {
+                        text.colors = [];
+                        text.addColor('#000000', 0);
+                        text.addColor('#ffffff', positions[p][1]);
+                        timeout = setTimeout(handleSound, positions[p][0]);
+                        p = p + 1;
+                    }
+                }
+                handleSound();
+            };
+            key3 = game.input.keyboard.addKey(Phaser.Keyboard.THREE);
+            key3.onDown.add(key3Action, this);
 
             var clickActions = function() {
                 if(clickAction == 'add') {

@@ -79,7 +79,6 @@ var options = function(event) {
 options();
 window.onhashchange = options;
 
-/*
 var canvas;
 var sizes;
 
@@ -135,4 +134,3 @@ document.addEventListener('addToDOM', function() {
         last.pageYOffset = window.pageYOffset;
     }, 200);
 });
-*/

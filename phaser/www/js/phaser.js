@@ -25063,6 +25063,8 @@ Phaser.ScaleManager.prototype = {
     */
     reflowCanvas: function () {
 
+        console.warn('override reflowCanvas');
+        /*
         if (!this.incorrectOrientation)
         {
             this.width = Phaser.Math.clamp(this.width, this.minWidth || 0, this.maxWidth || this.width);
@@ -25084,6 +25086,7 @@ Phaser.ScaleManager.prototype = {
         }
 
         this.updateScalingAndBounds();
+        */
 
     },
 
@@ -46251,7 +46254,7 @@ Phaser.Canvas = {
         canvas.width = width;
         canvas.height = height;
 
-        canvas.style.display = 'block';
+        //canvas.style.display = 'block';
 
         return canvas;
 
