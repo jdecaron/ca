@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Font - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+							<a href="documentation-class-reference.html">Class Reference</a> <span class="sub">&raquo;</span>
+						Font		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+					<h2>Class Reference</h2>
+			<ul>
+													<li><a href="documentation-class-reference-ig-core.html" >ig Core</a></li>
+									<li><a href="documentation-class-reference-animation.html" >Animation</a></li>
+									<li><a href="documentation-class-reference-animationsheet.html" >AnimationSheet</a></li>
+									<li><a href="documentation-class-reference-backgroundmap.html" >BackgroundMap</a></li>
+									<li><a href="documentation-class-reference-class.html" >Class</a></li>
+									<li><a href="documentation-class-reference-collisionmap.html" >CollisionMap</a></li>
+									<li><a href="documentation-class-reference-entity.html" >Entity</a></li>
+									<li><a href="documentation-class-reference-font.html" class="active">Font</a></li>
+									<li><a href="documentation-class-reference-game.html" >Game</a></li>
+									<li><a href="documentation-class-reference-image.html" >Image</a></li>
+									<li><a href="documentation-class-reference-input.html" >Input</a></li>
+									<li><a href="documentation-class-reference-loader.html" >Loader</a></li>
+									<li><a href="documentation-class-reference-map.html" >Map</a></li>
+									<li><a href="documentation-class-reference-music.html" >Music</a></li>
+									<li><a href="documentation-class-reference-sound.html" >Sound</a></li>
+									<li><a href="documentation-class-reference-soundmanager.html" >SoundManager</a></li>
+									<li><a href="documentation-class-reference-system.html" >System</a></li>
+									<li><a href="documentation-class-reference-timer.html" >Timer</a></li>
+							</ul>	
+				
+					<div id="fragmentMenu">
+				<h2>Font</h2>
+			</div>	
+			</div>
+	
+	
+	
+	<div id="content">
+		<p>Defined in Module <strong>impact.font</strong>, inherits from <a href="documentation-class-reference-image.html">ig.Image</a></p>
+<h2 id="synopsis">Synopsis</h2>
+<pre class="javascript">
+var font = new ig.Font( 'font.png' );
+font.draw( 'Some text', x, y, ig.Font.ALIGN.RIGHT );
+</pre>
+<h2 id="description">Description</h2>
+<p>An <code>ig.Font</code> object loads a specially formatted font image and allows you to draw text with it.<br/></p>
+<p><code>ig.Font</code> uses bitmap fonts – it draws glyphs from an image rather than using the Canvas APIs <code>.fillText()</code> method.</p>
+<p>The bottommost line of pixels in a font image specifies the character widths for each single character. A run of non-transparent pixels represents a character and its width. Therefore all characters in a font image must be on one line.</p>
+<p><img class="noalign" src="media/font.png" alt="The default font for Impact"/></p>
+<p>You can use the <a href="font-tool/">Font Tool</a> to generate a font image from any installed System Font.</p>
+<h2 id="constructor">Constructor</h2>
+<h3 id="new-ig-font">new ig.Font( filename )</h3>
+<ul>
+	<li><code>filename</code> The path and name of the font image to be loaded.</li>
+
+</ul>
+<p>Note that, similar to <a href="documentation-class-reference-image.html">ig.Image</a>, fonts are cached. That means that if you create two fonts with the same font image, the constructor returns the same instance. E.g.:
+	</p>
+<pre class="javascript">
+var font1 = new ig.Font( 'font.png' );
+var font2 = new ig.Font( 'font.png' );
+
+font1 == font2; // =&gt; true
+</pre>
+<h2 id="properties">Properties</h2>
+<h3 id="alpha">.alpha</h3>
+<p><em>New in 1.20</em></p>
+<p>Specifies the alpha transparency of the font. The default is <code>1</code> (fully opaque).</p>
+<h3 id="firstchar">.firstChar</h3>
+<p>The first ASCII character that is present in the font image. The default is <code>32</code> (space).</p>
+<h3 id="height">.height</h3>
+<p><em>New in 1.16</em></p>
+<p>The height of the font in pixels. This is equal to the source image's height-1 to account for the bottommost line of pixels.</p>
+<h3 id="letterspacing">.letterSpacing</h3>
+<p><em>New in 1.20</em></p>
+<p>Horizontal spacing between individual characters when drawing text. A negative spacing is useful italic fonts, where the bounding boxes should overlap each other. The default is <code>1</code>.</p>
+<h3 id="linespacing">.lineSpacing</h3>
+<p><em>New in 1.20</em></p>
+<p>Vertical spacing when drawing text with line breaks (<code>\n</code>). The default is <code>1</code>.</p>
+<h2 id="methods">Methods</h2>
+<h3 id="draw">.draw( text, x, y, [align] )</h3>
+<p>This methods draws the string <code>text</code> at <code>x</code>, <code>y</code>.<br/></p>
+<p>The optional <code>align</code> parameter can be one of:</p>
+<ul>
+	<li><code>ig.Font.ALIGN.LEFT</code></li>
+	<li><code>ig.Font.ALIGN.RIGHT</code></li>
+	<li><code>ig.Font.ALIGN.CENTER</code></li>
+
+</ul>
+<p>If omitted, <code>LEFT</code> is assumed.</p>
+<p><em>New in 1.19</em></p>
+<p>Line breaks (<code>'\n'</code>) are now correctly honored and drawing continues <code>.height</code> pixels further down</p>
+<h3 id="heightforstring">.heightForString( text )</h3>
+<p><em>New in 1.20</em></p>
+<p>Returns the height in pixels that the given text string has with this font. Useful for multi-line strings.</p>
+<h3 id="widthforstring">.widthForString( text )</h3>
+<p><em>New in 1.16</em></p>
+<p>Returns the width in pixels that the given text string has with this font.
+</p>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000936 -->
+	</div>
+</div>
+
+</body>
+</html>

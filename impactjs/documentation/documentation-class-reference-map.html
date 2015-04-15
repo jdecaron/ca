@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Map - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+							<a href="documentation-class-reference.html">Class Reference</a> <span class="sub">&raquo;</span>
+						Map		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+					<h2>Class Reference</h2>
+			<ul>
+													<li><a href="documentation-class-reference-ig-core.html" >ig Core</a></li>
+									<li><a href="documentation-class-reference-animation.html" >Animation</a></li>
+									<li><a href="documentation-class-reference-animationsheet.html" >AnimationSheet</a></li>
+									<li><a href="documentation-class-reference-backgroundmap.html" >BackgroundMap</a></li>
+									<li><a href="documentation-class-reference-class.html" >Class</a></li>
+									<li><a href="documentation-class-reference-collisionmap.html" >CollisionMap</a></li>
+									<li><a href="documentation-class-reference-entity.html" >Entity</a></li>
+									<li><a href="documentation-class-reference-font.html" >Font</a></li>
+									<li><a href="documentation-class-reference-game.html" >Game</a></li>
+									<li><a href="documentation-class-reference-image.html" >Image</a></li>
+									<li><a href="documentation-class-reference-input.html" >Input</a></li>
+									<li><a href="documentation-class-reference-loader.html" >Loader</a></li>
+									<li><a href="documentation-class-reference-map.html" class="active">Map</a></li>
+									<li><a href="documentation-class-reference-music.html" >Music</a></li>
+									<li><a href="documentation-class-reference-sound.html" >Sound</a></li>
+									<li><a href="documentation-class-reference-soundmanager.html" >SoundManager</a></li>
+									<li><a href="documentation-class-reference-system.html" >System</a></li>
+									<li><a href="documentation-class-reference-timer.html" >Timer</a></li>
+							</ul>	
+				
+					<div id="fragmentMenu">
+				<h2>Map</h2>
+			</div>	
+			</div>
+	
+	
+	
+	<div id="content">
+		<p>Defined in Module <strong>impact.map</strong>, inherits from <a href="documentation-class-reference-class.html">ig.Class</a></p>
+<h2 id="synopsis">Synopsis</h2>
+<pre class="javascript">
+// Create a map
+var data = [
+	[1,2,6],
+	[0,3,5],
+	[2,8,1],
+];
+var map = new ig.Map( 16, data );
+
+// 40, 20 are the pixel coordinates for the tile to set
+// So this essentially does data[2][1] = 8;
+map.setTile( 40, 20, 8 );
+
+// Gets the same tile we just set, even though the 
+// pixel coordinates are not the exact same
+var tile = map.getTile( 46, 18 ); 
+tile; // =&gt; 8
+</pre>
+<h2 id="description">Description</h2>
+<p><code>ig.Map</code> is the base class for <a href="documentation-class-reference-backgroundmap.html">ig.BackgroundMap</a> and <a href="documentation-class-reference-collisionmap.html">ig.CollisionMap</a>. It only provides basic access to the tiles in the map data.</p>
+<p>You usually won't need to create instances of an <code>ig.Map</code>.</p>
+<h2 id="constructor">Constructor</h2>
+<h3 id="new-ig-map">new ig.Map( tilesize, data )</h3>
+<ul>
+	<li><code>tilesize</code> Width and height of a single tile in pixels</li>
+	<li><code>data</code> A 2D Array (<em>Array of Arrays</em>) used as the data for this map</li>
+
+</ul>
+<h2 id="properties">Properties</h2>
+<h3 id="data">.data</h3>
+<p>The 2D data array for this map, as set through the constructor.</p>
+<h3 id="tilesize">.tilesize</h3>
+<p>The width and height of a single tile in pixels, as set through the constructor.</p>
+<h3 id="width-height">.width, .height</h3>
+<p>The width and height of the map in tiles.</p>
+<h2 id="methods">Methods</h2>
+<h3 id="gettile">.getTile( x, y )</h3>
+<p>Get the tile at the pixel coordinates <code>x</code>, <code>y</code>. Returns <code>0</code> if the coordinates lie outside of this map.<br/></p>
+<h3 id="settile">.setTile( x, y, tile)</h3>
+<p>Set the tile at the pixel coordinates <code>x</code>, <code>y</code> to the given <code>tile</code>. Does nothing if the coordinates lie outside of this map.</p>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000937 -->
+	</div>
+</div>
+
+</body>
+</html>

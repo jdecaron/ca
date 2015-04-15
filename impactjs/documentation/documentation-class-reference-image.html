@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Image - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+							<a href="documentation-class-reference.html">Class Reference</a> <span class="sub">&raquo;</span>
+						Image		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+					<h2>Class Reference</h2>
+			<ul>
+													<li><a href="documentation-class-reference-ig-core.html" >ig Core</a></li>
+									<li><a href="documentation-class-reference-animation.html" >Animation</a></li>
+									<li><a href="documentation-class-reference-animationsheet.html" >AnimationSheet</a></li>
+									<li><a href="documentation-class-reference-backgroundmap.html" >BackgroundMap</a></li>
+									<li><a href="documentation-class-reference-class.html" >Class</a></li>
+									<li><a href="documentation-class-reference-collisionmap.html" >CollisionMap</a></li>
+									<li><a href="documentation-class-reference-entity.html" >Entity</a></li>
+									<li><a href="documentation-class-reference-font.html" >Font</a></li>
+									<li><a href="documentation-class-reference-game.html" >Game</a></li>
+									<li><a href="documentation-class-reference-image.html" class="active">Image</a></li>
+									<li><a href="documentation-class-reference-input.html" >Input</a></li>
+									<li><a href="documentation-class-reference-loader.html" >Loader</a></li>
+									<li><a href="documentation-class-reference-map.html" >Map</a></li>
+									<li><a href="documentation-class-reference-music.html" >Music</a></li>
+									<li><a href="documentation-class-reference-sound.html" >Sound</a></li>
+									<li><a href="documentation-class-reference-soundmanager.html" >SoundManager</a></li>
+									<li><a href="documentation-class-reference-system.html" >System</a></li>
+									<li><a href="documentation-class-reference-timer.html" >Timer</a></li>
+							</ul>	
+				
+					<div id="fragmentMenu">
+				<h2>Image</h2>
+			</div>	
+			</div>
+	
+	
+	
+	<div id="content">
+		<p>Defined in Module <strong>impact.image</strong>, inherits from <a href="documentation-class-reference-class.html">ig.Class</a></p>
+<h2 id="synopsis">Synopsis</h2>
+<pre class="javascript">
+// Load an image
+var img = new ig.Image( 'player.png' );
+
+// Draw the whole image
+img.draw( x, y );
+
+// Draw one 'tile' of the image 
+// (tile 3, with a tilesize of 16x16 pixels)
+img.drawTile( x, y, 3, 16 );
+</pre>
+<h2 id="description">Description</h2>
+<p><code>ig.Image</code> is a wrapper around image resources (png, gif or jpeg). It takes care of loading and scaling the source image. You can draw the whole image (<a href="#draw">.draw()</a>) or just one tile of it (<a href="#drawtile">.drawTile()</a>).</p>
+<p>Most of the time you shouldn't need to draw an <code>ig.Image</code> directly, but instead use <a href="documentation-class-reference-animation.html">ig.Animation</a> or <a href="documentation-class-reference-backgroundmap.html">ig.BackgroundMap</a>.</p>
+<h2 id="constructor">Constructor</h2>
+<h3 id="new-ig-image">new ig.Image( filename )</h3>
+<ul>
+	<li><code>filename</code> The path and name of the image file to be loaded.</li>
+
+</ul>
+<p>Note that images are cached. That means that if you create two images with the same source file, the constructor returns the same instance. E.g.:<br/>
+	</p>
+<pre class="javascript">
+var img1 = new ig.Image( 'player.png' );
+var img2 = new ig.Image( 'player.png' );
+
+img1 == img2; // =&gt; true
+</pre>
+<p>After loading an image, it is automatically scaled (nearest neighbor) according to <code>ig.system.scale</code> if necessary.
+	
+If the engine hasn't completely loaded all required modules (denoted by <code>ig.ready</code>), the image is added to the resources to be loaded by the preloader.</p>
+<h2 id="properties">Properties</h2>
+<h3 id="data">.data</h3>
+<p>The actual image resource when the image is loaded. This is either an <code>&lt;img&gt;</code> or (if <a href="documentation-class-reference-system.html#scale">ig.system.scale</a> is not <code>1</code>) <code>&lt;canvas&gt;</code> element.</p>
+<h3 id="failed">.failed</h3>
+<p><code>true</code> when the image resource could not be loaded (e.g. at an 404 or 403 error)</p>
+<h3 id="loaded">.loaded</h3>
+<p><code>true</code> when the image resource has been loaded, <code>false</code> otherwise</p>
+<h3 id="path">.path</h3>
+<p>The path and name of the image file as passed to the constructor.</p>
+<h3 id="width-height">.width, .height</h3>
+<p>Size of the image in (unscaled) pixels.</p>
+<h2 id="methods">Methods</h2>
+<h3 id="draw">.draw( targetX, targetY, [sourceX], [sourceY], [width], [height] )</h3>
+<p>Draws the whole image at <code>targetX</code>, <code>targetY</code>, or a part of it when <code>sourceX</code>, <code>sourceY</code> and <code>width</code> and <code>height</code> are given.</p>
+<h3 id="drawtile">.drawTile( targetX, targetY, tile, tileWidth, [tileHeight], [flipX], [flipY] )</h3>
+<p>Draws a single tile with the index <code>tile</code> at <code>targetX</code>, <code>targetY</code>.<br/></p>
+<p>The position of the specified tile is calculated with the given <code>tileWidth</code> and <code>tileHeight</code>. If <code>tileHeight</code> is ommitted, it is assumed to be the same as <code>tileWidth</code>.</p>
+<p><code>flipX</code> and <code>flipY</code> are booleans, denoting if the tile should be drawn flipped (&quot;mirrored&quot;) on the given axis.
+</p>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000936 -->
+	</div>
+</div>
+
+</body>
+</html>

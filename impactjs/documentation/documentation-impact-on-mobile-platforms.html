@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Impact on Mobile Platforms - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+						Impact on Mobile Platforms		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+				
+			</div>
+	
+	
+	
+	<div id="content">
+		<h2 id="overview">Overview</h2>
+<p>While Impact runs surprisingly well on most mobile platforms, there are still some issues to be aware of:</p>
+<ul>
+	<li>Performance – mobile platforms are still quite slow, but with some tricks you can almost always achive good frame rates</li>
+	<li>Resolution – The screen size is different for many devices. The iPhone 4's <em>device pixel ratio</em> further complicates things</li>
+	<li>Sound – Only one sound at a time can be played and there are browser bugs with loading sound files.</li>
+	<li><strong>Update: this is fixed in iOS6.</strong> Multitouch Issues – sadly, this iOS 4.2.1 <a href="http://www.phoboslab.org/crap/mt.html">introduced a bug</a> where sometimes a second touch in the browser is not recognized. Apple is already aware of the problem.</li>
+
+</ul>
+<p>As it is now, the best mobile device to play HTML5 games on is the iPhone 3GS or 3rd gen iPod Touch. Impact also runs well on all other iOS devices, but those are a bit slower. Even the newer iPhone 4 and iPad can't compete with the 3GS' speed, because they have more pixels to paint.</p>
+<p>My guess is, that Apple has full hardware acceleration for the HTML5 Canvas tag somewhere in their roadmap for iOS, so that the larger screen size of the iPhone 4 and iPad won't matter anymore. It will only get faster.</p>
+<h2 id="targeting-different-devices">Targeting Different Devices</h2>
+<p>You can use Impacts <a href="documentation-class-reference-ig-core.html#ig-ua">ig.ua.*</a> properties to check for particular devices. <code>ig.ua</code> can be used as soon as the main <code>impact.js</code> file is loaded.</p>
+<p>With this, you can, for instance, start the game with different resolutions, depending on the device it is running on:</p>
+<pre class="javascript">
+if( ig.ua.mobile ) {
+	// Disable sound for all mobile devices
+	ig.Sound.enabled = false;
+}
+
+if( ig.ua.iPhone4 ) {
+	// The iPhone 4 has more pixels - we'll scale the 
+	// game up by a factor of 4
+	ig.main('#canvas', MyGame, 60, 160, 160, 4);
+}
+else if( ig.ua.mobile ) {
+	// All other mobile devices
+	ig.main('#canvas', MyGame, 60, 160, 160, 2);
+}
+else {
+	// Desktop browsers
+	ig.main('#canvas', MyGame, 60, 240, 160, 2);
+}
+</pre>
+
+<p>&nbsp;</p>
+
+<p>If you want to provide a different HTML file for each device, you can do so with a simple <code>index.php</code>. This example assumes you have an <code>index-iphone.html</code>, <code>index-ipad.html</code> and <code>index-desktop.html</code> file in the same directory.</p>
+<pre>
+&lt;?php
+if( preg_match('/iphone|android/i', $_SERVER['HTTP_USER_AGENT']) ) {
+	include('index-iphone.html');
+}
+else if( preg_match('/ipad/i', $_SERVER['HTTP_USER_AGENT']) ) {
+	include('index-ipad.html');
+}
+else {
+	include('index-desktop.html');
+}
+?&gt;
+</pre>
+<h2 id="always-render-in-the-native-resolution">Always Render in the Native Resolution</h2>
+<p>If one pixel on your Canvas does not directly correspond to one pixel of the device's screen the whole Canvas has to be scaled by the browser before being shown – which is extremely slow.</p>
+<p>Most mobile browser support the <code>viewport</code> meta tag. With this tag you can lock the zoom level of your page to <code>1</code>, i.e. no zoom.</p>
+<pre>
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width; 
+	initial-scale=1; maximum-scale=1; user-scalable=0;&quot;/&gt;
+</pre>
+<p>This already ensures that the Canvas is rendered in its native resolution.<br/></p>
+<p>Of course there is one exception: the iPhone 4 and the 4th. generation iPod Touch actually scale the page up by a factor of 2 if you specify a scaling of 1. Their displays have so many dots per inch that everything that is normally one pixel in size will be scaled up twice on these devices to appear in the same size. I.e. they have a <em>device pixel ratio</em> of 2.</p>
+<p>If we scale up the Canvas twice for the iPhone 4 through the <a href="documentation-class-reference-ig-core.html#main-function">ig.main()</a> function, it will be displayed larger than we wanted and will still not be rendered in its native resolution. We actually now have to scale the Canvas' display size (not the Canvas' internal resolution) down again with some CSS.</p>
+<p>E.g. for a game with a native resolution of 160x160px, you would have the following calls to <code>ig.main()</code>:</p>
+<pre class="javascript">
+if( ig.ua.iPhone4 ) {
+	// The game's native resolution is 160x160. It will be 
+	// scaled up 4x for the iPhone4, resulting in a drawing 
+	// resolution of 640x640 px
+	ig.main('#canvas', MyGame, 60, 160, 160, 4);
+}
+else {
+	// For all other devices (including desktop browsers),
+	// the game will be scaled up 2x, resulting in a drawing
+	// resolution of 320x320 px
+	ig.main('#canvas', MyGame, 60, 160, 160, 2);
+}
+</pre>
+<p>And the following CSS:</p>
+<pre>
+#canvas {
+	/* Remember, those 320 &quot;px&quot; will be displayed over 640 pixels
+	on the iPhone 4's screen, that's why we have to render
+	the game at 640x640 pixels. */
+
+	width: 320px;
+	height: 320px;
+}
+</pre>
+
+<p>&nbsp;</p>
+
+<p>Here's a complete HTML file that works well on all iOS devices. This is essentially the HTML that is used for <a href="http://playbiolab.com">Biolab Disaster</a>. It also defines four buttons that can be bound to game actions via. <a href="documentation-class-reference-input.html#bindtouch">ig.input.bindTouch()</a>. You can download the image file that is used for these buttons <a href="http://playbiolab.com/media/iphone-buttons.png?">here</a>.</p>
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;title&gt;Impact Game&lt;/title&gt;
+	&lt;style type=&quot;text/css&quot;&gt;
+		html,body {
+			background-color: #000;
+			margin: 0;
+			padding: 0;
+			min-height: 416px;
+			position: relative;
+		}
+		
+		#canvas {
+			width: 320px;
+			height: 320px;
+		}
+		
+		.button {
+			background-image: url(media/iphone-buttons.png);
+			background-repeat: no-repeat;
+			width: 80px;
+			height: 96px;
+			position: absolute;
+			bottom: 0px;
+			
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-webkit-tap-highlight-color: rgba(0,0,0,0);
+			-webkit-text-size-adjust: none;
+		}
+		#buttonLeft { left: 0; background-position: 0, 0; }
+		#buttonRight { left: 80px; background-position: -80px, 0; }
+		#buttonShoot { right: 80px; background-position: -160px, 0; }
+		#buttonJump { right: 0px; background-position: -240px, 0; }
+	&lt;/style&gt;
+	
+	&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width; 
+		initial-scale=1; maximum-scale=1; user-scalable=0;&quot;/&gt;
+	
+	&lt;!-- This meta tag ensures that the toolbar at the bottom of the browser 
+		is hidden when this page is accessed frome the Home Screen. --&gt;
+	&lt;meta name=&quot;apple-mobile-web-app-capable&quot; content=&quot;yes&quot; /&gt;
+	
+	&lt;!-- The icon that should be used when added to the Home Screen --&gt;
+	&lt;link rel=&quot;apple-touch-icon&quot; href=&quot;media/touch-icon.png&quot;/&gt;
+	
+	&lt;script type=&quot;text/javascript&quot; src=&quot;lib/impact/impact.js&quot;&gt;&lt;/script&gt;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;lib/game/game.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;!-- This will scroll the viewport, so that the navigation bar is no longer visible --&gt;
+&lt;body onload=&quot;setTimeout(function(){window.scrollTo(0,0);},1);&quot;&gt;
+	&lt;div id=&quot;game&quot;&gt;
+		&lt;canvas id=&quot;canvas&quot;&gt;&lt;/canvas&gt;
+		&lt;div class=&quot;button&quot; id=&quot;buttonLeft&quot;&gt;&lt;/div&gt;
+		&lt;div class=&quot;button&quot; id=&quot;buttonRight&quot;&gt;&lt;/div&gt;
+		&lt;div class=&quot;button&quot; id=&quot;buttonShoot&quot;&gt;&lt;/div&gt;
+		&lt;div class=&quot;button&quot; id=&quot;buttonJump&quot;&gt;&lt;/div&gt;
+	&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>You can also use another meta tag to specify how the iPhone's status bar should be displayed:</p>
+<pre>
+&lt;meta name=&quot;apple-mobile-web-app-status-bar-style&quot; content=&quot;black-translucent&quot; /&gt;
+</pre>
+<h2 id="use-as-few-draw-calls-as-possible">Use as Few Draw Calls as Possible</h2>
+<p>Each <em>draw call</em> has significant performance implications. You should limit your draw call to as few as possible. If you ever worked with OpenGL or Direct3D, this won't come to you as a surprise.</p>
+<p>A <em>draw call</em> is basically any invocation of the Canvas API that draws anything. In Impact, most of these calls to the API are done through <code>ig.Image's</code> <a href="documentation-class-reference-image.html#drawtile">.drawTile()</a> method. It is used everywhere: Animations use it to draw the current animation frame and BackgroundMaps use it draw each tile of the map from their tileset.</p>
+<p>Because BackgroundMaps, by default, need one draw call for each tile that is being displayed, they are easily the largest performance hog.</p>
+<p>Luckily BackgroundMaps come with a special mode that pre-renders the map into large chunks. This way the engine only has to render one or two chunks for each frame, instead of several hundred tiles.</p>
+<p>You can enable this mode at any time (usually right after loading a level) through the <a href="documentation-class-reference-backgroundmap.html#prerender">.preRender</a> property. E.g.:</p>
+<pre class="javascript">
+// in your ig.Game subclass
+loadLevel: function( level ) {
+	this.parent( level );
+	
+	// Enable the pre-rendered background mode for all 
+	// mobile devices
+	if( ig.ua.mobile ) {
+		for( var i = 0; i &lt; this.backgroundMaps.length; i++ ) {
+			this.backgroundMaps[i].preRender = true;
+		}
+	}
+}
+</pre>
+<p>Note that you will lose all background animations if you use the this mode.</p>
+<p>If you make use of particles that have no gameplay implications (i.e. are only there to look pretty) you should limit their number on mobile platforms.</p>
+<p>The <code>.kill()</code> method for the Blob enemy in Biolab Disaster for instance looks like this:</p>
+<pre class="javascript">
+kill: function() {
+	// Limit number of gibs on mobile platforms
+	var gibs = ig.ua.mobile ? 5 : 30;
+	
+	for( var i = 0; i &lt; gibs; i++ ) {
+		ig.game.spawnEntity( EntityBlobGib, this.pos.x, this.pos.y );
+	}
+	this.parent();
+},
+</pre>
+<h2 id="sound">Sound</h2>
+<p>As of now, all mobile platforms struggle to play HTML5 audio. On iOS you can get one single sound to play at a time, but there are still bugs that currently make it impossible to pre-load a sound file.</p>
+<p>Your best bet is to disable sound completely on these platforms. This also has the benefit, that you don't need to load sound files (which oftentimes are quite large) at all.</p>
+<p>You can disable sound globally with the <a href="documentation-class-reference-sound.html#ig-sound-enabled">ig.Sound.enabled</a> property.</p>
+<pre class="javascript">
+// Disable all sounds for mobile devices
+if( ig.ua.mobile ) {
+    ig.Sound.enabled = false;
+}
+
+// Start the game
+ig.main(…)
+</pre>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000933 -->
+	</div>
+</div>
+
+</body>
+</html>

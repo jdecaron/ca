@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Physics with Box2D - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+						Physics with Box2D		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+				
+			</div>
+	
+	
+	
+	<div id="content">
+		<h2 id="introduction">Introduction</h2>
+<p>Impact provides some basic game collision detection and response for entities. This is often sufficient for Jump'n'Run or RPG games, but sometimes you need some more accurate and realistic physics.
+	
+This is where <a href="http://www.box2d.org/">Box2D</a> comes in. Box2D is a physics engine, originally written in C++, <a href="http://box2dflash.sourceforge.net/">ported to ActionScript</a> and used in hundreds of games, including the incredibly popular <a href="http://www.rovio.com/index.php?page=angry-birds">Angry Brids</a>.</p>
+<p>Recently, the ActionScript version of Box2D has been <a href="http://29a.ch/2010/4/17/box2d-2-flash-ported-javascript">converted to JavaScript</a> by Jonas Wagner. So let's use that in Impact!</p>
+<p>I made some quick search/replace changes to Jonas Wagner's source to put Box2D in its own <em>namespace</em>. All Box2D Classes are now members of the <code>b2.</code> object. So instead of <code>b2AABB</code>, <code>b2Vec</code> or <code>b2World</code> we can now refer to <code>b2.AABB</code>, <code>b2.Vec</code>, <code>b2.World</code> and so on. I also wrapped the source into a module, to be easily loadable by Impact.</p>
+<p>Please refer to the <a href="http://www.box2dflash.org/docs/2.0.2/manual">Box2D 2.0.2 Manual</a>.</p>
+<h2 id="demo">Demo</h2>
+<p><a href="http://impactjs.com/demos/physics/">Jetpack Physics Demo</a></p>
+<p>The source code for this demo can be found on your <a href="http://impactjs.com/download">download page</a>.</p>
+<h2 id="basic-usage-of-box2d">Basic usage of Box2D</h2>
+<p>The first thing we need to do is setting up the Box2D World. For this, we just need to define a bounding box and a gravity vector and create an instance of <code>b2.World</code>:</p>
+<pre class="javascript">
+var boundingBox = new b2.AABB();
+boundingBox.lowerBound.Set( 0, 0 );
+boundingBox.upperBound.Set( 1024, 512);
+
+var gravity = new b2.Vec2( 0, 30 );
+
+// Create the world and make it globally available as part of ig.
+ig.world = new b2.World( boundingBox, gravity, true );
+</pre>
+<p>With the world ready, we can now add some objects to it.</p>
+<pre class="javascript">
+var bodyDef = new b2.BodyDef();
+bodyDef.position.Set( 100, 100 );
+
+var body = ig.world.CreateBody( bodyDef );
+
+var shape = new b2.PolygonDef();
+shape.SetAsBox( 5, 5 );
+body.CreateShape( shape );
+</pre>
+<p>Please note that the position we set (100, 100) specifies the <em>origin</em> of the object - its center point. This is different from Impact, where the position of an entity is set for the upper left corner of the entity. Also, the <code>SetAsBox</code> method takes half-width and half-height parameters. Thus box we created is 10 by 10 units in size and because its center is at (100,100), it will stretch out from (95,95) to (105,105).</p>
+<p>After everything is set up, we can advance the physics simulation in our game's update method. The <code>b2.World.Step()</code> method takes two parameters: the timestep in seconds and the number of internal iterations for the computations. <code>ig.system.tick</code> provides the time that has passed since the last frame - which is exactly the amount of time our physics simulation should advance:</p>
+<pre class="javascript">
+update: function() {
+	ig.world.Step( ig.system.tick, 5 );
+	this.parent();
+},
+</pre>
+<h2 id="setting-up-the-collision-map-and-entities">Setting up the Collision Map and Entities</h2>
+<p>The units in Box2D are tuned to work well as meters. Your objects should be roughly between 0.1 and 10 meters in size - for most games this means that simply taking the pixel sizes as foundation for the physics could introduce some artifacts. Therefore, we use a global scaling factor to convert from our pixels to meters: <code>b2.SCALE</code>. By default it is set to <code>0.1</code> - that means that 1 pixel equals 0.1 meters.</p>
+<p>Now, to integrate Box2D with Impact, it would be nice to have a base entity class that uses Box2D and a base Game class that creates the physics world. For this, I wrote the <code>ig.Box2DGame</code> and <code>ig.Box2DEntity</code> classes, that do all the dirty work for you. See the source code of the physics example game.</p>
+<p>The <code>.loadLevel()</code> method of the <code>ig.Box2DGame</code> creates the physics world from a collision map. However, instead of just creating one physics object for each tile, it tries to find larger rectangle regions of tiles to combine into one object. In my tests, this worked quite nice even for larger game worlds. The performance of Box2D seems to be mostly bound by the number of collisions and not the number of objects in th world.</p>
+<p><img class="center" src="media/physics-demo.png" alt=""/></p>
+<p><code>ig.Box2DGame</code> has a special property <code>debugCollisionRects</code>, that when set to <code>true</code> will draw all the collision boxes as green outlines.</p>
+<p>The <code>ig.Box2DEntity</code> automatically creates a physics body with the size of the entity. Its <code>update()</code> method takes the position of the body from the physics simulation and converts it back to Impact's unit system. This update method completely bypasses the one the base <code>ig.Entity</code> that normally moves the entity.</p>
+<p>So, to define a simple physics enabled crate entity, all you have to do is to subclass <code>ig.Box2DEntity</code>:</p>
+<pre class="javascript">
+// Subclassing ig.Box2DEntity instead of ig.Entity inherits
+// everything needed for the physics simulation
+EntityCrate = ig.Box2DEntity.extend({
+	size: {x: 8, y: 8},
+	
+	// Collision is already handled by Box2D!
+	collides: ig.Entity.COLLIDES.NEVER,
+	
+	animSheet: new ig.AnimationSheet( 'media/crate.png', 8, 8 ),
+	
+	init: function( x, y, settings ) {
+		this.addAnim( 'idle', 1, [0] );
+		this.parent( x, y, settings );
+	}
+});
+</pre>
+<p>To move your entities around, use Box2D's <code>ApplyForce</code> and <code>ApplyImpulse</code> functions. E.g. for our player entity:</p>
+<pre class="javascript">
+update: function() {
+	…
+	
+	// jetpack
+	if( ig.input.state('jump') ) {
+		this.body.ApplyForce(new b2.Vec2(0,-30), this.body.GetPosition());
+	}
+	
+	…
+	
+	this.parent();
+}
+</pre>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000933 -->
+	</div>
+</div>
+
+</body>
+</html>

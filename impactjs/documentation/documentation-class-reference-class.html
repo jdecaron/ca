@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Class - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+							<a href="documentation-class-reference.html">Class Reference</a> <span class="sub">&raquo;</span>
+						Class		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+					<h2>Class Reference</h2>
+			<ul>
+													<li><a href="documentation-class-reference-ig-core.html" >ig Core</a></li>
+									<li><a href="documentation-class-reference-animation.html" >Animation</a></li>
+									<li><a href="documentation-class-reference-animationsheet.html" >AnimationSheet</a></li>
+									<li><a href="documentation-class-reference-backgroundmap.html" >BackgroundMap</a></li>
+									<li><a href="documentation-class-reference-class.html" class="active">Class</a></li>
+									<li><a href="documentation-class-reference-collisionmap.html" >CollisionMap</a></li>
+									<li><a href="documentation-class-reference-entity.html" >Entity</a></li>
+									<li><a href="documentation-class-reference-font.html" >Font</a></li>
+									<li><a href="documentation-class-reference-game.html" >Game</a></li>
+									<li><a href="documentation-class-reference-image.html" >Image</a></li>
+									<li><a href="documentation-class-reference-input.html" >Input</a></li>
+									<li><a href="documentation-class-reference-loader.html" >Loader</a></li>
+									<li><a href="documentation-class-reference-map.html" >Map</a></li>
+									<li><a href="documentation-class-reference-music.html" >Music</a></li>
+									<li><a href="documentation-class-reference-sound.html" >Sound</a></li>
+									<li><a href="documentation-class-reference-soundmanager.html" >SoundManager</a></li>
+									<li><a href="documentation-class-reference-system.html" >System</a></li>
+									<li><a href="documentation-class-reference-timer.html" >Timer</a></li>
+							</ul>	
+				
+					<div id="fragmentMenu">
+				<h2>Class</h2>
+			</div>	
+			</div>
+	
+	
+	
+	<div id="content">
+		<p>Defined in Module <strong>impact.impact</strong></p>
+<h2 id="synopsis">Synopsis</h2>
+<pre class="javascript">
+// Create a new class &quot;Person&quot;
+var Person = ig.Class.extend({
+	name: '',
+	init: function( name ) {
+		this.name = name;
+	}
+});
+
+// Create another class by extending the &quot;Person&quot; class
+var Ninja = Person.extend({
+	init: function( name ) {
+		this.parent( 'Ninja: ' + name );
+	}
+});
+
+// Instatinate an object of the first class
+var e = new Person('Generic Person');
+e.name; // =&gt; Generic Person
+
+// Instatinate an object of the second class
+var p = new Ninja('John Resig');
+p.name; // =&gt; Ninja: John Resig
+
+</pre>
+<h2 id="description">Description</h2>
+<p>Impact's Class-Object is based on John Resig's <a href="http://ejohn.org/blog/simple-javascript-inheritance/">Simple Java Script Inheritance</a> code, but extends it with deep copying of properties and static instantiation.</p>
+<p>All of Impact's classes are derived from this base Class and you can use it to create your own classes.</p>
+<h2 id="usage">Usage</h2>
+<h3 id="extend">.extend( classDefinition )</h3>
+<p><code>.extend()</code> takes a JavaScript Object, specifying properties and methods of the new class. Inside of methods, <code>this</code> refers to the instance of this class.</p>
+<pre class="javascript">
+var Foo = ig.Class.extend({
+	bar: 'baz',
+	setBar: function( bar ) {
+		this.bar = bar;
+	}
+});
+
+var foo1 = new Foo();
+foo1.setBar( 'bar1' );
+foo1.bar; // =&gt; bar1
+
+var foo2 = new Foo();
+foo2.setBar( 'bar2' );
+foo2.bar; // =&gt; bar2
+</pre>
+<p>All classes that are created with <code>.extend()</code> will also have an <code>.extend()</code> function, that can be used for further subclassing.</p>
+<h3 id="inject">.inject( classDefinition )</h3>
+<p><em>New in 1.17</em></p>
+<p><code>.inject()</code> works similar to <code>.extend()</code> but does not create a new Class - instead, it changes the Class <em>in place</em>. This is useful if you want to change the behavior of one of Impacts classes without changing the engine's source code, e.g. for plugins.</p>
+<pre class="javascript">
+// Overwrite ig.Image's .resize method to provide your 
+// own scaling algorithm
+ig.Image.inject({
+	resize: function( scale ) {
+		if( scale == 2 ) {
+			this.data = awesome2XScalingAlgorithm( this.data );
+		}
+		else {
+			// Call ig.Image's resize function if scale is not 2
+			this.parent( scale );
+		}
+	}
+});
+
+// The new resize method will also be used in subclasses of 
+// ig.Image (e.g. ig.Font)
+</pre>
+<h3 id="init-function">init: function() {}</h3>
+<p>The <code>.init()</code> method of a class, if present, gets called when a new instance is created.</p>
+<pre class="javascript">
+var InitTest = ig.Class.extend({
+	init: function( fparam ) {
+		console.log( 'Init called with ' + fparam );
+	}
+});
+
+var t1 = new InitTest( 'ZOMG' ); // =&gt; Init called with ZOMG
+</pre>
+<h3 id="staticinstantiate-function">staticInstantiate: function() {}</h3>
+<p>If a class has a <code>staticInstantiate</code> function, it is called before a new instance of this class is created. When the <code>staticInstantiate</code> function returns <code>null</code>, a new instance of the class is created and returned. If <code>staticInstantiate</code> returns non-<code>null</code>, its return value is returned.</p>
+<p>This can for instance be used to create a <a href="http://en.wikipedia.org/wiki/Singleton_pattern">Singleton</a> class – a class that only allows one instance.</p>
+<pre class="javascript">
+var MySingleton= ig.Class.extend({
+	foo: 'bar',
+	staticInstantiate: function( ignoredFoo ) {
+		if( MySingleton.instance == null ) {
+			return null;
+		}
+		else {
+			return MySingleton.instance;
+		}
+	},
+	
+	init: function( foo ) {
+		this.foo = foo;
+		MySingleton.instance = this;
+	}
+});
+
+MySingleton.instance = null;
+
+var s1 = new MySingleton( 'baz' );
+var s2 = new MySingleton( 'ignored' );
+
+s1.foo; // baz
+s2.foo; // baz
+
+s1 == s2; // true
+</pre>
+<p>Note that <code>MySingleton.instance</code> is not defined as an instance property, but as a class property. You can also attach <em>&quot;static&quot;</em> functions to your class this way. This is similar to the <code>static</code> keyword in Java or PHP.</p>
+<h3 id="this-parent">this.parent(…)</h3>
+<p>Inside a method, <code>this.parent</code> always refers to the method with the same name of the super class - if present. I.e. when overwriting a method of a super class, you can still call it from within the sub classes method with <code>this.parent()</code>.</p>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000935 -->
+	</div>
+</div>
+
+</body>
+</html>

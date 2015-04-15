@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>CollisionMap - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+							<a href="documentation-class-reference.html">Class Reference</a> <span class="sub">&raquo;</span>
+						CollisionMap		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+					<h2>Class Reference</h2>
+			<ul>
+													<li><a href="documentation-class-reference-ig-core.html" >ig Core</a></li>
+									<li><a href="documentation-class-reference-animation.html" >Animation</a></li>
+									<li><a href="documentation-class-reference-animationsheet.html" >AnimationSheet</a></li>
+									<li><a href="documentation-class-reference-backgroundmap.html" >BackgroundMap</a></li>
+									<li><a href="documentation-class-reference-class.html" >Class</a></li>
+									<li><a href="documentation-class-reference-collisionmap.html" class="active">CollisionMap</a></li>
+									<li><a href="documentation-class-reference-entity.html" >Entity</a></li>
+									<li><a href="documentation-class-reference-font.html" >Font</a></li>
+									<li><a href="documentation-class-reference-game.html" >Game</a></li>
+									<li><a href="documentation-class-reference-image.html" >Image</a></li>
+									<li><a href="documentation-class-reference-input.html" >Input</a></li>
+									<li><a href="documentation-class-reference-loader.html" >Loader</a></li>
+									<li><a href="documentation-class-reference-map.html" >Map</a></li>
+									<li><a href="documentation-class-reference-music.html" >Music</a></li>
+									<li><a href="documentation-class-reference-sound.html" >Sound</a></li>
+									<li><a href="documentation-class-reference-soundmanager.html" >SoundManager</a></li>
+									<li><a href="documentation-class-reference-system.html" >System</a></li>
+									<li><a href="documentation-class-reference-timer.html" >Timer</a></li>
+							</ul>	
+				
+					<div id="fragmentMenu">
+				<h2>CollisionMap</h2>
+			</div>	
+			</div>
+	
+	
+	
+	<div id="content">
+		<p>Defined in Module <strong>impact.collision-map</strong>, inherits from <a href="documentation-class-reference-map.html">ig.Map</a></p>
+<h2 id="synopsis">Synopsis</h2>
+<pre class="javascript">
+// Create CollisionMap
+var data = [
+	[1,2,6],
+	[0,3,5],
+	[2,8,1],
+];
+var collision = new ig.CollisionMap( 16, data );
+
+// Do a trace
+var res = collision.trace( x, y, vx, vy, objectWidth, objectHeight );
+
+if( res.collision.x || res.collision.y ) {
+	// The trace collided with the map at
+	// (res.pos.x, res.pos.y)
+}
+</pre>
+<h2 id="description">Description</h2>
+<p>An <code>ig.Collision</code> takes a 2D tilemap and allows tracing against it for collisions.</p>
+<p>The <a href="documentation-class-reference-game.html">ig.Game</a> class' <a href="documentation-class-reference-game.html#loadlevel">.loadLevel()</a> method takes the save data from Weltmeister and creates a CollisonMap if present.</p>
+<p>By default, all entities trace against the <a href="documentation-class-reference-game.html#collisionMap">ig.game.collisionMap</a> as part of their update cycle.</p>
+<h2 id="constructor">Constructor</h2>
+<h3 id="new-ig-collisionmap">new ig.CollisionMap( tilesize, data, [tiledef] )</h3>
+<ul>
+	<li><code>tilesize</code> Width and height of a single tile in pixels</li>
+	<li><code>data</code> A 2D Array (<em>Array of Arrays</em>) indicating where to draw which tile from the Tileset.</li>
+
+</ul>
+<p><em>New in 1.19</em></p>
+<p>The optional <code>tiledef</code> parameter specifies the tile definition to use. This defines which tiles are slopes etc. The default is <code>ig.CollisionMap.defaultTileDef</code>. Pass an empty object (<code>{}</code>) to only have solid/non-solid tiles.</p>
+<h2 id="properties">Properties</h2>
+<h3 id="firstsolidtile">.firstSolidTile</h3>
+<p><em>Removed in 1.19</em></p>
+<p>First tile number that is considered solid. Default <code>1</code>.</p>
+<h3 id="lastsolidtile">.lastSolidTile</h3>
+<p><em>Removed in 1.19</em></p>
+<p>Last tile number that is considered solid. Default <code>255</code>.</p>
+<h3 id="lastslope">.lastSlope</h3>
+<p><em>New in 1.20</em></p>
+<p>The last tile number that is used for slopes. All tiles above this number can be used for custom tiles. <code>.lastSlope</code> is automatically determined by the constructor through the tiledef property.</p>
+<h2 id="methods">Methods</h2>
+<h3 id="trace">.trace( x, y, sx, sy, objectWidth, objectHeight )</h3>
+<p>Does a trace from <code>(x, y)</code> to <code>(x + sx, y + sy)</code> for an object with the specified <code>objectWidth</code> and <code>objectHeight</code>. This method returns a &quot;trace result&quot; in the following form:</p>
+<pre class="javascript">
+{
+	collision: { x: false, y: false, slope: false },
+	pos: { x: 0, y: 0 }, // Resulting object position
+	tile: { x: 0, y: 0 } // Tile for the collision
+}
+</pre>
+<p><em>New in 1.19</em></p>
+<p>The <code>collision.slope</code> property is either false (if there was no slope collision) or an object with the properties <code>x, y</code> - the slope direction - and <code>nx, ny</code> - the slope normal.</p>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000935 -->
+	</div>
+</div>
+
+</body>
+</html>

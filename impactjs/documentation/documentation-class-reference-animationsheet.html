@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>AnimationSheet - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+							<a href="documentation-class-reference.html">Class Reference</a> <span class="sub">&raquo;</span>
+						AnimationSheet		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+					<h2>Class Reference</h2>
+			<ul>
+													<li><a href="documentation-class-reference-ig-core.html" >ig Core</a></li>
+									<li><a href="documentation-class-reference-animation.html" >Animation</a></li>
+									<li><a href="documentation-class-reference-animationsheet.html" class="active">AnimationSheet</a></li>
+									<li><a href="documentation-class-reference-backgroundmap.html" >BackgroundMap</a></li>
+									<li><a href="documentation-class-reference-class.html" >Class</a></li>
+									<li><a href="documentation-class-reference-collisionmap.html" >CollisionMap</a></li>
+									<li><a href="documentation-class-reference-entity.html" >Entity</a></li>
+									<li><a href="documentation-class-reference-font.html" >Font</a></li>
+									<li><a href="documentation-class-reference-game.html" >Game</a></li>
+									<li><a href="documentation-class-reference-image.html" >Image</a></li>
+									<li><a href="documentation-class-reference-input.html" >Input</a></li>
+									<li><a href="documentation-class-reference-loader.html" >Loader</a></li>
+									<li><a href="documentation-class-reference-map.html" >Map</a></li>
+									<li><a href="documentation-class-reference-music.html" >Music</a></li>
+									<li><a href="documentation-class-reference-sound.html" >Sound</a></li>
+									<li><a href="documentation-class-reference-soundmanager.html" >SoundManager</a></li>
+									<li><a href="documentation-class-reference-system.html" >System</a></li>
+									<li><a href="documentation-class-reference-timer.html" >Timer</a></li>
+							</ul>	
+				
+					<div id="fragmentMenu">
+				<h2>AnimationSheet</h2>
+			</div>	
+			</div>
+	
+	
+	
+	<div id="content">
+		<p>Defined in Module <strong>impact.animation</strong>, inherits from <a href="documentation-class-reference-class.html">ig.Class</a></p>
+<h2 id="synopsis">Synopsis</h2>
+<pre class="javascript">
+// Create animation
+var animSheet = new ig.AnimationSheet( 'sheet.png', 16, 16 );
+var anim = new ig.Animation( animSheet, 0.1, [0,1,2,3,2,1] );
+</pre>
+<h2 id="description">Description</h2>
+<p><code>ig.AnimationSheet</code> is a thin wrapper around an <a href="documentation-class-reference-image.html">ig.Image</a> object. It specifies the width and height for each animation frame in the sheet. It is used by the <a href="documentation-class-reference-animation.html">ig.Animation</a> class.</p>
+<h2 id="constructor">Constructor</h2>
+<h3 id="new-ig-animationsheet">new ig.AnimationSheet( path, width, height )</h3>
+<ul>
+	<li><code>path</code> Location of the image file</li>
+	<li><code>width</code> Width of a single animation frame</li>
+	<li><code>height</code> Height of a single animation frame</li>
+
+</ul>
+<h2 id="properties">Properties</h2>
+<h3 id="image">.image</h3>
+<p>An <a href="documentation-class-reference-image.html">ig.Image</a> object, representing the actual animation sheet</p>
+<h3 id="width-height">.width, .height</h3>
+<p>The width/height for a single animation frame, as set in the constructor</p>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000934 -->
+	</div>
+</div>
+
+</body>
+</html>

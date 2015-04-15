@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>BackgroundMap - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+							<a href="documentation-class-reference.html">Class Reference</a> <span class="sub">&raquo;</span>
+						BackgroundMap		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+					<h2>Class Reference</h2>
+			<ul>
+													<li><a href="documentation-class-reference-ig-core.html" >ig Core</a></li>
+									<li><a href="documentation-class-reference-animation.html" >Animation</a></li>
+									<li><a href="documentation-class-reference-animationsheet.html" >AnimationSheet</a></li>
+									<li><a href="documentation-class-reference-backgroundmap.html" class="active">BackgroundMap</a></li>
+									<li><a href="documentation-class-reference-class.html" >Class</a></li>
+									<li><a href="documentation-class-reference-collisionmap.html" >CollisionMap</a></li>
+									<li><a href="documentation-class-reference-entity.html" >Entity</a></li>
+									<li><a href="documentation-class-reference-font.html" >Font</a></li>
+									<li><a href="documentation-class-reference-game.html" >Game</a></li>
+									<li><a href="documentation-class-reference-image.html" >Image</a></li>
+									<li><a href="documentation-class-reference-input.html" >Input</a></li>
+									<li><a href="documentation-class-reference-loader.html" >Loader</a></li>
+									<li><a href="documentation-class-reference-map.html" >Map</a></li>
+									<li><a href="documentation-class-reference-music.html" >Music</a></li>
+									<li><a href="documentation-class-reference-sound.html" >Sound</a></li>
+									<li><a href="documentation-class-reference-soundmanager.html" >SoundManager</a></li>
+									<li><a href="documentation-class-reference-system.html" >System</a></li>
+									<li><a href="documentation-class-reference-timer.html" >Timer</a></li>
+							</ul>	
+				
+					<div id="fragmentMenu">
+				<h2>BackgroundMap</h2>
+			</div>	
+			</div>
+	
+	
+	
+	<div id="content">
+		<p>Defined in Module <strong>impact.background-map</strong>, inherits from <a href="documentation-class-reference-map.html">ig.Map</a></p>
+<h2 id="synopsis">Synopsis</h2>
+<pre class="javascript">
+// Create BackgroundMap
+var data = [
+	[1,2,6],
+	[0,3,5],
+	[2,8,1],
+];
+var bg = new ig.BackgroundMap( 16, data, 'media/tileset.png' );
+
+// Move
+bg.setScreenPos( 25, 10 );
+
+// Draw
+bg.draw();
+</pre>
+<h2 id="description">Description</h2>
+<p>An <code>ig.BackgroundMap</code> draws tiles from a Tileset, as indicated by its 2D data Array.<br/></p>
+<p>The size of the tileset image must a multiple of the tilesize, otherwise Impact will get confused with the tile numbering. E.g. with a tilesize of <code>32</code> the width and height of your tileset image should be one of: 32, 64, 96, 128…</p>
+<p>You can either create a BackgroundMap by hand, or use the <a href="documentation-class-reference-game.html">ig.Game</a> class' <a href="documentation-class-reference-game.html#loadlevel">.loadLevel()</a> method, which takes the save data from Weltmeister and creates BackgroundMaps according to it.</p>
+<p>BackgroundMaps can be pre-rendered into &quot;chunks&quot; instead of drawing each tile separately. This speeds up the drawing process immensely, especially on mobile devices. However, the pre-rendered mode needs more RAM and doesn't support tileset animations.<br/></p>
+<h2 id="constructor">Constructor</h2>
+<h3 id="new-ig-backgroundmap">new ig.BackgroundMap( tilesize, data, tileset )</h3>
+<ul>
+	<li><code>tilesize</code> Width and height of a single tile in pixels</li>
+	<li><code>data</code> A 2D Array (<em>Array of Arrays</em>) indicating where to draw which tile from the Tileset. Note that the tile numbering is <em>off by one</em>, meaning that tile <code>0</code> draws nothing and tile <code>1</code> draws the zeroth (first) tile of the tileset image.</li>
+	<li><code>tileset</code> Location of the image file or instance of <a href="documentation-class-reference-image.html">ig.Image</a> used as the Tileset</li>
+
+</ul>
+<h2 id="properties">Properties</h2>
+<h3 id="anims">.anims{}</h3>
+<p>An object specifying the animations for certain tiles. Animations are <strong>not</strong> updated by the BackgroundMap, but must be updated externally. Usually <a href="documentation-class-reference-game.html">ig.Game</a> takes care of that – see <a href="documentation-class-reference-game.html">ig.Game's</a> <a href="documentation-class-reference-game.html#backgroundanims">.backgroundAnims</a> property.</p>
+<p>By default, this is an empty object (<code>{}</code>) indicating no animations.</p>
+<pre class="javascript">
+var data = [
+	[1,2,6],
+	[0,3,5],
+	[2,8,1],
+];
+var bg = new ig.BackgroundMap( 16, data, 'media/tileset.png' );
+
+// sets tile number 5 of the BackgroundMap to be animated
+var as = new ig.AnimationSheet( 'media/tiles.png', 16, 16 );
+bg.anims[5] = new ig.Animation( as, 0.1, [0,1,2,3,4] );
+</pre>
+<h3 id="chunksize">.chunkSize</h3>
+<p>The chunk width and height in pixels for pre-rendered BackgroundMaps. The default is <code>512</code>. See <a href="#prerender">.preRender</a>.<br/></p>
+<p>iOS devices seem to support a chunk size of up to 4096, but testing showed no further performance gain with chunk sizes larger than 512.</p>
+<h3 id="debugchunks">.debugChunks</h3>
+<p>If <code>.preRender</code> and <code>.debugChunks</code> are <code>true</code>, the <code>.draw()</code> method will draw a pink outline around each chunk.</p>
+<h3 id="distance">.distance</h3>
+<p>Distance factor of the BackgroundMap, indicating how fast the Map scrolls when <code>.setScreenPos()</code> is invoked. With a distance of <code>1</code>, the Map scrolls synchronous to the screen. With a distance of <code>2</code> the Map scrolls with half the speed, making it appear farther in the background. The default is <code>1</code></p>
+<h3 id="foreground">.foreground</h3>
+<p><em>New in 1.17</em></p>
+<p>Whether this layer will be drawn in front of all entities. This is set automatically by Weltmeister. The default is <code>false</code>.</p>
+<h3 id="prerender">.preRender</h3>
+<p>If set to <code>true</code>, the next call to <code>.draw()</code> will render the whole background map into chunks of <code>.chunkSize</code> pixels and then use these chunks to draw the map.</p>
+<p>Pre-rendered maps can not be animated but are usually drawn much faster than tiled maps.</p>
+<p>The default is <code>false</code>.</p>
+<h3 id="repeat">.repeat</h3>
+<p>A Boolean, indicating whether drawing of the Map wraps at the edges. This is useful for secondary BackgroundMaps that are repeated continuously.</p>
+<h3 id="scroll-x-scroll-y">.scroll.x, .scroll.y</h3>
+<p>Scroll position of the BackgroundMap in screen coordinates with the Map's <code>.distance</code> alreday factored in. Should only be read; use <code>.setScreenPos()</code> to set the scroll position of the Map.</p>
+<h3 id="tiles">.tiles</h3>
+<p>An instance of <a href="documentation-class-reference-image.html">ig.Image</a> representing the Tileset that is used for drawing, as set by the constructor or <code>.setTileset()</code></p>
+<h3 id="tilesetname">.tilesetName</h3>
+<p>Location of the loaded Tileset image (e.g. <code>'media/tileset.png'</code>)</p>
+<h2 id="methods">Methods</h2>
+<h3 id="draw">.draw()</h3>
+<p>Draws the BackgroundMap at its current <a href="#scroll">.scroll</a> position. If <a href="#prerender">.preRender</a> is true, the map's pre-rendered chunks are drawn, otherwise the map is drawn tile by tile.</p>
+<h3 id="setscreenpos">.setScreenPos( x, y )</h3>
+<p>Set the <code>x</code> and <code>y</code> position of the screen. The BackgroundMap's <code>.scroll</code> position will be set acording to its <code>.distance</code></p>
+<h3 id="settileset">.setTileset( tileset )</h3>
+<p>Set a new Tileset. <code>tileset</code> is the location of the image file or instance of <a href="documentation-class-reference-image.html">ig.Image</a> used as the Tileset.</p>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000935 -->
+	</div>
+</div>
+
+</body>
+</html>

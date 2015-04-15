@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Sound - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+							<a href="documentation-class-reference.html">Class Reference</a> <span class="sub">&raquo;</span>
+						Sound		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+					<h2>Class Reference</h2>
+			<ul>
+													<li><a href="documentation-class-reference-ig-core.html" >ig Core</a></li>
+									<li><a href="documentation-class-reference-animation.html" >Animation</a></li>
+									<li><a href="documentation-class-reference-animationsheet.html" >AnimationSheet</a></li>
+									<li><a href="documentation-class-reference-backgroundmap.html" >BackgroundMap</a></li>
+									<li><a href="documentation-class-reference-class.html" >Class</a></li>
+									<li><a href="documentation-class-reference-collisionmap.html" >CollisionMap</a></li>
+									<li><a href="documentation-class-reference-entity.html" >Entity</a></li>
+									<li><a href="documentation-class-reference-font.html" >Font</a></li>
+									<li><a href="documentation-class-reference-game.html" >Game</a></li>
+									<li><a href="documentation-class-reference-image.html" >Image</a></li>
+									<li><a href="documentation-class-reference-input.html" >Input</a></li>
+									<li><a href="documentation-class-reference-loader.html" >Loader</a></li>
+									<li><a href="documentation-class-reference-map.html" >Map</a></li>
+									<li><a href="documentation-class-reference-music.html" >Music</a></li>
+									<li><a href="documentation-class-reference-sound.html" class="active">Sound</a></li>
+									<li><a href="documentation-class-reference-soundmanager.html" >SoundManager</a></li>
+									<li><a href="documentation-class-reference-system.html" >System</a></li>
+									<li><a href="documentation-class-reference-timer.html" >Timer</a></li>
+							</ul>	
+				
+					<div id="fragmentMenu">
+				<h2>Sound</h2>
+			</div>	
+			</div>
+	
+	
+	
+	<div id="content">
+		<p>Defined in Module <strong>impact.sound</strong>, inherits from <a href="documentation-class-reference-class.html">ig.Class</a></p>
+<h2 id="synopsis">Synopsis</h2>
+<pre class="javascript">
+var sound = new ig.Sound( 'shoot.ogg' );
+sound.play();
+</pre>
+<h2 id="description">Description</h2>
+<p>An instance of <code>ig.Sound</code> represents a sound file, to be used as background music or game sound.</p>
+<h2 id="constructor">Constructor</h2>
+<h3 id="new-ig-sound">new ig.Sound( filename, [multiChannel] )</h3>
+<ul>
+	<li><code>filename</code> The path and name of the sound file to be loaded.</li>
+	<li><code>multiChannel</code> Whether multiple &quot;channels&quot; for concurrent play should be created. Pass <code>false</code> for music or sound files that are only played once. The default is <code>true</code></li>
+
+</ul>
+<p>All your sound files have to be present in OGG Vorbis and MP3 format. Their file name has to be the same, except for the file extension. The real file name that will be loaded can be different from the given <code>filename</code>, as the <a href="documentation-class-reference-soundmanager.html">ig.SoundManager</a> decides on the file extension. Also see <a href="#ig-sound-use">ig.Sound.use</a>.</p>
+<p>E.g. for a &quot;jump&quot; sound, you'd have the following files:</p>
+<pre>
+media/sounds/jump.ogg
+media/sounds/jump.mp3
+</pre>
+<p>These can then be loaded with one of the following statements</p>
+<pre class="javascript">
+// These 3 lines all do the same. The file extension (.ogg or .mp3) will 
+// be decided by the SoundManager, based on the browser's capabilities
+// Use whatever syntax you like best.
+var sound = new ig.Sound( 'media/sounds/jump.ogg' );
+
+var sound = new ig.Sound( 'media/sounds/jump.mp3' );
+
+var sound = new ig.Sound( 'media/sounds/jump.*' );
+</pre>
+<h2 id="properties">Properties</h2>
+<h3 id="path">.path</h3>
+<p>The path and name of the image file as passed to the constructor.</p>
+<h3 id="volume">.volume</h3>
+<p>The volume for this sound file from <code>0.0</code> to <code>1.0</code>. This will be multiplied with the <a href="documentation-class-reference-soundmanager.html#volume">ig.soundManager.volume</a> before the sound is played. The default is <code>1</code>.</p>
+<h2 id="methods">Methods</h2>
+<h3 id="play">.play()</h3>
+<p>Plays the sound file. If the sound file was not loaded as <code>multiChannel</code> (see constructor) and it is already playing, the sound restarts from the beginning, otherwise the sound is played concurrently in another channel.</p>
+<h3 id="stop">.stop()</h3>
+<p>Stops playback of the sound</p>
+<h2 id="global-properties">Global Properties</h2>
+<h3 id="ig-sound-enabled">ig.Sound.enabled</h3>
+<p>You can disable all sounds an music by setting this property to <code>false</code> before calling <a href="documentation-class-reference-ig-core.html#main-function">ig.main()</a>. The default is <code>true</code>.</p>
+<p>When <code>ig.Sound.enabled</code> is <code>false</code>, no sound files will be loaded or played back. This is useful for mobile devices that currently still have vast problems with sound playback in the browser.</p>
+<pre class="javascript">
+// Disable all sounds for mobile devices
+if( ig.ua.mobile ) {
+	ig.Sound.enabled = false;
+}
+
+// Start the game
+ig.main(…)
+</pre>
+<h3 id="ig-sound-channels">ig.Sound.channels</h3>
+<p><em>New in 1.17</em></p>
+<p>Set the number of copies to be created for each sound file. Having more copies means the sound can be played multiple times simultaneously. This has to be set before you call <code>ig.main()</code></p>
+<p>The default is 4.</p>
+<h3 id="ig-sound-format">ig.Sound.FORMAT{}</h3>
+<p><em>New in 1.17</em></p>
+<p>An object specifying the file extension and mime type for various sound formats. This is used in conjunction with <a href="#ig-sound-use">ig.Sound.use</a>. Currently implemented are:</p>
+<ul>
+	<li><code>ig.Sound.FORMAT.OGG</code></li>
+	<li><code>ig.Sound.FORMAT.MP3</code></li>
+	<li><code>ig.Sound.FORMAT.M4A</code></li>
+	<li><code>ig.Sound.FORMAT.WEBM</code></li>
+	<li><code>ig.Sound.FORMAT.CAF</code></li>
+
+</ul>
+<h3 id="ig-sound-use">ig.Sound.use[]</h3>
+<p><em>New in 1.17</em></p>
+<p>An array of <code>ig.Sound.FORMAT</code> properties to specify the sound formats to test support for. The file extension for all sound files that will be loaded is determined by the first supported format.<br/></p>
+<p>The default is<br/></p>
+<pre class="javascript">
+[ig.Sound.FORMAT.OGG, ig.Sound.FORMAT.MP3]
+</pre>
+<p>I.e. if the browser supports Ogg/Vorbis, Impact will attempt to load <code>filename.ogg</code>. If Ogg/Vorbis is not supported, the support for MP3 is tested and <code>filename.mp3</code> will be loaded. If neither format is supported, sound is completely disabled.</p>
+<p>Currently, Ogg/Vorbis is supported by Firefox, Opera and Chrome. MP3 and m4a are supported by Safari, Chrome and IE9. </p>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000937 -->
+	</div>
+</div>
+
+</body>
+</html>

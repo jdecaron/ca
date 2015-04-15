@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Documentation - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+						Documentation		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+				
+			</div>
+	
+	
+	
+	<div id="content">
+		<p>New here? The <a href="documentation-video-tutorial-create-a-game.html">Create a Game</a> video and the <a href="documentation-getting-started.html">Installation &amp; Getting Started</a> tutorial are probably a good starting point. They give you an overview of how to build a game with the engine.</p>
+<p>If you are stuck with anything and can't seem to find an answer here, try asking in the <a href="http://impactjs.com/forums">Forums</a> or in our <a href="irc:--irc.freenode.org-impactjs.html">#impactjs</a> IRC channel at irc.freenode.org.</p>
+<p>For offline use, this documentation can be <a href="http://impactjs.com/files/impact-docs.zip">downloaded as ZIP archive</a>.</p>
+<h2 id="books">Books</h2>
+<p>Jesse Freeman's <a href="http://www.amazon.com/gp/product/1449315178">Introducing HTML5 Game Development</a> walks you through the whole process of creating a game with Impact. It covers everything from setting up your working environment to packaging your game for release.</p>
+<h2 id="video-tutorials">Video Tutorials</h2>
+<ul>
+	<li><a href="documentation-video-tutorial-create-a-game.html">Create a Game</a> - Building the game Pong from start to finish</li>
+	<li><a href="documentation-video-tutorial-weltmeister.html">Working with Weltmeister</a> - How the level editor works and how you can create your own entities to be used by it</li>
+
+</ul>
+<h2 id="topics">Topics</h2>
+<ul>
+	<li><a href="documentation-getting-started.html">Installation &amp; Getting Started</a> - Installation instructions and a basic overview how Impact is structured into modules and classes</li>
+	<li><a href="documentation-weltmeister.html">Weltmeister</a> - Everything about the Level Editor</li>
+	<li><a href="documentation-working-with-assets.html">Working with Assets</a> - Referencing and loading image and sound files</li>
+	<li><a href="documentation-collision.html">Collision</a> - Entity vs. Map and Entity vs. Entity collisions</li>
+	<li><a href="documentation-animations.html">Animations</a> - Learn how to animate entities and background maps</li>
+	<li><a href="documentation-impact-on-mobile-platforms.html">Impact on Mobile Platforms</a> - How to deal with different mobile devices</li>
+	<li><a href="documentation-debug.html">Debug</a> - Enabling and extending the Debug Panel</li>
+	<li><a href="documentation-baking.html">Baking</a> - Packing up your game for release</li>
+	<li><a href="documentation-drop-source-code.html">Drop Source Code</a> - Source for the example game <a href="http://impactjs.com/drop">Drop</a></li>
+	<li><a href="documentation-physics-with-box2d.html">Physics with Box2D</a> - How to use the Box2D Physics engine with Impact</li>
+
+</ul>
+<h2 id="class-reference">Class Reference</h2>
+<p>The <a href="documentation-class-reference.html">Class Reference</a> lists all properties and methods for each of Impact's classes. If you are already familiar with the grand scheme of things, this is where you can look up the details.</p>
+<h3 id="core-and-system">Core and System</h3>
+<ul>
+	<li><a href="documentation-class-reference-ig-core.html">Core</a> - Module definition, module loading and the ig.main() and utility functions</li>
+	<li><a href="documentation-class-reference-class.html">Class</a> - Base Class for all classes</li>
+	<li><a href="documentation-class-reference-system.html">System</a> - Hosts the current Game object and maintains the run loop.</li>
+	<li><a href="documentation-class-reference-loader.html">Loader</a> - Preloads all assets (images and sounds) and starts the given Game when done.</li>
+
+</ul>
+<h3 id="logic">Logic</h3>
+<ul>
+	<li><a href="documentation-class-reference-game.html">Game</a> - The main hub for your game. It hosts all currently active entities, background maps and a collision map and takes care of updating and drawing everything.</li>
+	<li><a href="documentation-class-reference-entity.html">Entity</a> - Interactive objects in the game world are typically subclassed from this base Entity class. It provides animation, drawing and basic physics.</li>
+	<li><a href="documentation-class-reference-input.html">Input</a> - Handles all Keyboard and Mouse input.</li>
+	<li><a href="documentation-class-reference-timer.html">Timer</a> - Timing stuff.</li>
+	<li><a href="documentation-class-reference-map.html">Map</a> - Base class for CollisionMaps and BackgroundMaps.</li>
+	<li><a href="documentation-class-reference-collisionmap.html">CollisionMap</a> - Trace objects against a 2D Tile Map</li>
+
+</ul>
+<h3 id="graphics">Graphics</h3>
+<ul>
+	<li><a href="documentation-class-reference-image.html">Image</a> - A wrapper around image resources (png, gif or jpeg). It takes care of loading and scaling the source image.</li>
+	<li><a href="documentation-class-reference-animation.html">Animation</a> - Animate Entities and Background Map tiles with an Animation Sheet</li>
+	<li><a href="documentation-class-reference-animationsheet.html">AnimationSheet</a> - Load an Image as Animation Sheet and specify the width and height for each animation frame</li>
+	<li><a href="documentation-class-reference-font.html">Font</a> - Load a bitmap font image and draw text.</li>
+	<li><a href="documentation-class-reference-backgroundmap.html">BackgroundMap</a> - Draw a 2D Tile Map</li>
+
+</ul>
+<h3 id="sound">Sound</h3>
+<ul>
+	<li><a href="documentation-class-reference-sound.html">Sound</a> - Loads a sound file to be used as background music or game sound.</li>
+	<li><a href="documentation-class-reference-music.html">Music</a> - Provides functionality to play background music and create a playlist.</li>
+	<li><a href="documentation-class-reference-soundmanager.html">SoundManager</a> - Loads sound files for ig.Music and ig.Sound.</li>
+
+</ul>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000938 -->
+	</div>
+</div>
+
+</body>
+</html>

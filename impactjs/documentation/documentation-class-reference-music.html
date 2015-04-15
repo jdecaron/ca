@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Music - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+							<a href="documentation-class-reference.html">Class Reference</a> <span class="sub">&raquo;</span>
+						Music		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+					<h2>Class Reference</h2>
+			<ul>
+													<li><a href="documentation-class-reference-ig-core.html" >ig Core</a></li>
+									<li><a href="documentation-class-reference-animation.html" >Animation</a></li>
+									<li><a href="documentation-class-reference-animationsheet.html" >AnimationSheet</a></li>
+									<li><a href="documentation-class-reference-backgroundmap.html" >BackgroundMap</a></li>
+									<li><a href="documentation-class-reference-class.html" >Class</a></li>
+									<li><a href="documentation-class-reference-collisionmap.html" >CollisionMap</a></li>
+									<li><a href="documentation-class-reference-entity.html" >Entity</a></li>
+									<li><a href="documentation-class-reference-font.html" >Font</a></li>
+									<li><a href="documentation-class-reference-game.html" >Game</a></li>
+									<li><a href="documentation-class-reference-image.html" >Image</a></li>
+									<li><a href="documentation-class-reference-input.html" >Input</a></li>
+									<li><a href="documentation-class-reference-loader.html" >Loader</a></li>
+									<li><a href="documentation-class-reference-map.html" >Map</a></li>
+									<li><a href="documentation-class-reference-music.html" class="active">Music</a></li>
+									<li><a href="documentation-class-reference-sound.html" >Sound</a></li>
+									<li><a href="documentation-class-reference-soundmanager.html" >SoundManager</a></li>
+									<li><a href="documentation-class-reference-system.html" >System</a></li>
+									<li><a href="documentation-class-reference-timer.html" >Timer</a></li>
+							</ul>	
+				
+					<div id="fragmentMenu">
+				<h2>Music</h2>
+			</div>	
+			</div>
+	
+	
+	
+	<div id="content">
+		<p>Defined in Module <strong>impact.sound</strong>, inherits from <a href="documentation-class-reference-class.html">ig.Class</a></p>
+<h2 id="synopsis">Synopsis</h2>
+<pre class="javascript">
+ig.music.add( 'music/track1.ogg' );
+ig.music.add( 'music/track2.ogg' );
+ig.music.add( 'music/track3.ogg' );
+
+ig.music.volume = 0.5;
+ig.music.play();
+</pre>
+<h2 id="description">Description</h2>
+<p><code>ig.Music</code> offers capabilities to play a list of background music in ordered or random fashion.</p>
+<p>An instance of <code>ig.Music</code> is automatically created at <code>ig.music</code> (lowercase) by the <code>ig.main()</code> function.</p>
+<h2 id="properties">Properties</h2>
+<h3 id="currentindex">.currentIndex</h3>
+<p>The index of the current track in the <a href="#tracks">.tracks</a> array.</p>
+<h3 id="currenttrack">.currentTrack</h3>
+<p>The instance of <a href="documentation-class-reference-sound.html">ig.Sound</a> that is currently playing. <code>null</code> if <a href="#tracks">.tracks</a> is empty.</p>
+<h3 id="loop">.loop</h3>
+<p>Wheter the current track should be looped instead of jumping to the next track. If there is only one track in the <code>.tracks</code> array, this property is ignored. The default is <code>false</code>.</p>
+<h3 id="random">.random</h3>
+<p>If <code>true</code>, tracks are played in random order. The default is <code>false</code>.</p>
+<h3 id="tracks">.tracks[]</h3>
+<p>An array of instances of <a href="documentation-class-reference-sound.html">ig.Sound</a> to be played back.</p>
+<h3 id="volume">.volume</h3>
+<p>The volume for all music tracks from <code>0.0</code> to <code>1.0</code>. The default is <code>1</code>.</p>
+<h2 id="methods">Methods</h2>
+<h3 id="add">.add( track, [name] )</h3>
+<p>Adds the given <code>track</code> to the <code>.tracks</code> array and sets <a href="#currenttrack">.currentTrack</a> to this one, if it is the first track to be added.</p>
+<p><code>track</code> can be either an instance of <code>ig.Sound</code> or the filename and path to a sound file. You should load all sound files as class properties, to make sure they are loaded by the preloader. See <a href="documentation-working-with-assets.html">Working with Assets</a>.</p>
+<p><em>New in 1.19</em></p>
+<p>Use the optional <code>name</code> parameter to specify a name for the track. Named tracks can be played with the <a href="#play">.play()</a> method.</p>
+<h3 id="fadeout">.fadeOut( time )</h3>
+<p>Linearly fade out the current track over <code>time</code> seconds.</p>
+<p>When the fade out is complete, <a href="#stop">.stop()</a> is called and the volume for this track is reset to it's original volume.</p>
+<h3 id="next">.next()</h3>
+<p>Stops the current track and jumps to the next track in the <code>.tracks</code> array. If <code>.random</code> is true, the next track is chosen randomly.</p>
+<h3 id="pause">.pause()</h3>
+<p>Pauses the current track.</p>
+<h3 id="play">.play( [name] )</h3>
+<p>Starts playing the current track.</p>
+<p><em>New in 1.19</em></p>
+<p>Use the optional <code>name</code> parameter to directly jump to and play a named track. The name can be specified when calling <a href="#add">.add()</a>.</p>
+<h3 id="stop">.stop()</h3>
+<p>Stops the current track. Same as <a href="#pause">.pause()</a>, but additionally &quot;rewinds&quot; the track to the beginning.
+</p>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000937 -->
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Game - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+							<a href="documentation-class-reference.html">Class Reference</a> <span class="sub">&raquo;</span>
+						Game		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+					<h2>Class Reference</h2>
+			<ul>
+													<li><a href="documentation-class-reference-ig-core.html" >ig Core</a></li>
+									<li><a href="documentation-class-reference-animation.html" >Animation</a></li>
+									<li><a href="documentation-class-reference-animationsheet.html" >AnimationSheet</a></li>
+									<li><a href="documentation-class-reference-backgroundmap.html" >BackgroundMap</a></li>
+									<li><a href="documentation-class-reference-class.html" >Class</a></li>
+									<li><a href="documentation-class-reference-collisionmap.html" >CollisionMap</a></li>
+									<li><a href="documentation-class-reference-entity.html" >Entity</a></li>
+									<li><a href="documentation-class-reference-font.html" >Font</a></li>
+									<li><a href="documentation-class-reference-game.html" class="active">Game</a></li>
+									<li><a href="documentation-class-reference-image.html" >Image</a></li>
+									<li><a href="documentation-class-reference-input.html" >Input</a></li>
+									<li><a href="documentation-class-reference-loader.html" >Loader</a></li>
+									<li><a href="documentation-class-reference-map.html" >Map</a></li>
+									<li><a href="documentation-class-reference-music.html" >Music</a></li>
+									<li><a href="documentation-class-reference-sound.html" >Sound</a></li>
+									<li><a href="documentation-class-reference-soundmanager.html" >SoundManager</a></li>
+									<li><a href="documentation-class-reference-system.html" >System</a></li>
+									<li><a href="documentation-class-reference-timer.html" >Timer</a></li>
+							</ul>	
+				
+					<div id="fragmentMenu">
+				<h2>Game</h2>
+			</div>	
+			</div>
+	
+	
+	
+	<div id="content">
+		<p>Defined in Module <strong>impact.game</strong>, inherits from <a href="documentation-class-reference-class.html">ig.Class</a></p>
+<h2 id="synopsis">Synopsis</h2>
+<pre class="javascript">
+// Create your own game class
+MyGame = ig.Game.extend({
+	init: function() {
+		// initialize your game world, bind some 
+		// keys, etc.
+		ig.input.bind( ig.KEY.SPACE, 'jump' );
+		this.loadLevel( LevelMyGame1 );
+	}
+});
+
+// Start your game
+// 60fps, 320x240 pixels, scaled up by a factor of 2
+ig.main('#canvas', MyGame, 60, 320, 240, 2 );
+</pre>
+<h2 id="description">Description</h2>
+<p><code>ig.Game</code> is the main <em>hub</em> for your game. It hosts all currently active entities, background maps and a collision map. You can subclass your own Game Class from <code>ig.Game</code>.</p>
+<p>Its <a href="#update">.update()</a> and <a href="#draw">.draw()</a> methods take care of collision detection, checking entities against each other and drawing everything to the screen.</p>
+<h2 id="constructor">Constructor</h2>
+<h3 id="new-ig-game">new ig.Game()</h3>
+<p>The default constructor does nothing. You can subclass <code>ig.Game</code> and provide your own code. Usually a game's constructor is called through <a href="documentation-class-reference-ig-core.html#ig-main">ig.main()</a> when the <a href="documentation-class-reference-loader.html">preloader</a> finished loading, or through <a href="documentation-class-reference-system.html#setgame">ig.system.setGame()</a> when you want to load another game class.</p>
+<p>The currently running instance of a Game class is provided at <code>ig.game</code> (lowercase), to be referenced from entities etc.</p>
+<h2 id="properties">Properties</h2>
+<h3 id="autosort">.autoSort</h3>
+<p><em>New in 1.19</em></p>
+<p>Whether to sort entities by the <a href="#sortby">.sortBy</a> function each frame. The default is <code>false</code>.</p>
+<h3 id="backgroundmaps">.backgroundMaps[]</h3>
+<p>An array of instances of <a href="documentation-class-reference-backgroundmap.html">ig.BackgroundMap</a>, holding the background layers. You can use the <a href="#loadlevel">.loadLevel()</a> method to load these from a level saved with Weltmeister.</p>
+<h3 id="backgroundanims">.backgroundAnims{}</h3>
+<p><em>Disclaimer: This is somewhat stupid an may change in future versions :/</em><br/></p>
+<p>An object, specifying the animated tiles for particular tileset. Note that you have to set this before loading a level through <a href="#loadlevel">.loadLevel()</a>.</p>
+<pre class="javascript">
+// This sets two tiles (tile 0 and tile 5) of any background map with 
+// the 'media/tiles.png' tileset to be animated.
+var as = new ig.AnimationSheet( 'media/tiles.png', 16, 16 );
+this.backgroundAnims = {
+	'media/tiles.png': {
+		0: new ig.Animation( as, 0.1, [0,1,2,3,4] ),
+		5: new ig.Animation( as, 0.2, [5,6,7] )
+	}
+};
+this.loadLevel( MyLevel );
+</pre>
+<h3 id="cellsize">.cellSize</h3>
+<p>The size of each cell for the spacial hash when checking and colliding entities (see <a href="#checkentities">.checkEntities()</a>). As a rule of thumb, this should be about 4 times as big as your common entity size. E.g. if most of your entities are 8x8 pixels in size, set the <code>.cellSize</code> to <code>32</code>. Don't worry too much about it though.</p>
+<p>The default is <code>64</code>.</p>
+<h3 id="clearcolor">.clearColor</h3>
+<p>A CSS string specifying the color each frame is cleared with before drawing, e.g. <code>'#00ff00'</code> or <code>'rgb(0,255,0)'</code>.<br/></p>
+<p><em>Added in 1.17</em>: Set this property to <code>null</code> if you don't want to clear the screen before drawing each frame.</p>
+<p>The default is <code>'#000000'</code> (black).</p>
+<h3 id="collisionmap">.collisionMap</h3>
+<p>An instance of <a href="documentation-class-reference-collisionmap.html">ig.CollisionMap</a> or <code>ig.CollisionMap.staticNoCollision</code> if you don't want collisions against a collisionMap.<br/></p>
+<p>The default is <code>ig.CollisionMap.staticNoCollision</code>.</p>
+<p>You can use the game's <a href="#loadlevel">.loadLevel()</a> method to load a level saved with Weltmeister. If this level has a map with the name <code>'collision'</code> it will be automatically set as the collision map.<br/></p>
+<p>Otherwise, create a collision map using the constructor:</p>
+<pre class="javascript">
+// somewhere in your Game's init() method..
+var data = [
+    [1,2,6],
+    [0,3,5],
+    [2,8,1],
+];
+this.collisionMap = new ig.CollisionMap( 16, data );
+</pre>
+<h3 id="entities">.entities[]</h3>
+<p>An array holding all entities in the game world. After a level is loaded (<a href="#loadlevel">.loadLevel()</a>) or <a href="#sortentities">.sortEntities()</a> is called this array is sorted by the entities <code>.zIndex</code>.</p>
+<p>You shouldn't need to manipulate this array directly. Use the games <a href="#spawentity">.spawnEntity()</a> and <a href="#removeentity">.removeEntity()</a> methods to add and remove entities. The <a href="#getentitybyname">.getEntityByName()</a> and <a href="#getentitiesbytype">.getEntitiesByType()</a> methods can be used to retrieve entities from this array.</p>
+<h3 id="gravity">.gravity</h3>
+<p>The gravity (positive acceleration on the y axis) applied to all entities. Note that entities can specify a <a href="documentation-class-reference-entity.html#gravityfactor">.gravityFactor</a> to be more or less affected by the game's <code>.gravity</code>.<br/></p>
+<p>The default is <code>0</code> – i.e. no gravity.</p>
+<h3 id="namedentities">.namedEntities{}</h3>
+<p>An object holding all named entities (those entities with the <code>.name</code> property set). The game's <a href="#spawnentity">.spawnEntity()</a> method automatically adds entities that have a name to this object. Use <a href="#getentitybyname">.getEntityByName()</a> to retrieve a named entity.</p>
+<h3 id="screen-x-screen-y">.screen.x, .screen.y</h3>
+<p>The screen position in pixels. Think of it as the position of a window into the game world.</p>
+<h3 id="sortby">.sortBy</h3>
+<p><em>New in 1.19</em></p>
+<p>Specify the sort function used by <a href="#sortentities">.sortEntities()</a>. Can be one of</p>
+<ul>
+	<li><code>ig.Game.SORT.Z_INDEX</code></li>
+	<li><code>ig.Game.SORT.POS_X</code></li>
+	<li><code>ig.Game.SORT.POS_Y</code></li>
+
+</ul>
+<p>The default is <code>Z_INDEX</code>. Sorting by <code>POS_Y</code> can be useful for top down RPGs, so that characters in the front always overlap those in the back.</p>
+<h2 id="methods">Methods</h2>
+<h3 id="checkentities">.checkEntities()</h3>
+<p>This method is called for each frame by the <code>.update()</code> method and checks all entities against each other. It uses a spacial hash with a cell size of <a href="#cellsize">.cellSize</a> to do so.</p>
+<p>If two entities are overlapping, the static <code>ig.Entity.checkPair()</code> function is called with these two entities as arguments. This in turn resolves all entity vs. entity collisions.</p>
+<h3 id="draw">.draw()</h3>
+<p>This method is called for each frame and draws all BackgroundMaps and entities.</p>
+<h3 id="getentitybyname">.getEntityByName( name )</h3>
+<p>Get the entity with the name <code>name</code> from the <code>.entities</code> array. Returns <code>undefined</code> if the entity can't be found.</p>
+<h3 id="getentitiesbytype">.getEntitiesByType( type )</h3>
+<p>Get an array of entities with the given type from the <code>.entities</code> array. <code>type</code> can either be a string or the actual class object. E.g.:</p>
+<pre class="javascript">
+var blobs = this.getEntitiesByType( 'EntityBlob' );
+// or 
+var blobs = this.getEntitiesByType( EntityBlob );
+</pre>
+<p>Note that subclasses of <code>EntityBlob</code> (e.g. <code>EntityBlobLarge</code>) will also be of the type <code>EntityBlob</code>, because <code>getEntitiesByType()</code> traverses the whole prototype chain of your classes.</p>
+<h3 id="getmapbyname">.getMapByName( name )</h3>
+<p><em>New in 1.20</em></p>
+<p>Returns the Background- or CollisionMap with the given name.</p>
+<h3 id="loadlevel">.loadLevel( levelObject )</h3>
+<p>Loads the given <code>levelObject</code> as saved from Weltmeister.</p>
+<p>This method deletes all entities and background and collision maps currently present in the game and resets the screen coordinates to <code>0</code>, <code>0</code> prior to creating the new entities and maps.</p>
+<p>The structure of the levelObject, as saved from Weltmeister, is as follows:</p>
+<pre class="javascript">
+{
+	entities: [
+		{type: &quot;EntityClassName&quot;, x: 64, y: 32, settings: {}},
+		{type: &quot;EntityClassName&quot;, x: 16, y: 0, settings: {}},
+		…
+	],
+	
+	layer: [
+		{
+			name: &quot;background1&quot;,
+			tilesetName: &quot;media/tiles/biolab.png&quot;,
+			repeat: false,
+			distance: 1,
+			tilesize: 8,
+			foreground: false,
+			data: [
+				[1,2,6],
+				[0,3,5],
+				[2,8,1],
+			]
+		},
+		…
+	]
+}
+</pre>
+<p>Note that if a layer is named <code>&quot;collision&quot;</code> it is assumed to be the CollisionMap for this level.</p>
+<p>Be careful not to call this method in the midst of an <code>update()</code> cycle (eg. through a trigger) - it switches out all entities while they are still being updated and can cause some unexpected behavior. Use <a href="#loadleveldeferred">.loadLevelDeferred</a> instead.</p>
+<h3 id="loadleveldeferred">.loadLevelDeferred( levelObject  )</h3>
+<p><em>New in 1.16</em></p>
+<p>Defers a call to <code>.loadLevel()</code> to the end of an update cycle. This makes sure that entities aren't &quot;switched out&quot;, while they are still being updated.</p>
+<h3 id="sortentities">.sortEntities()</h3>
+<p>Re-sort the <code>.entities</code> array by their <a href="documentation-class-reference-entity.html#zindex">.zIndex</a> to correctly set the drawing order.</p>
+<p>Be careful not to call this method in the midst of an <code>update()</code> cycle (eg. through a trigger) - it re-sorts all entities while they are still being updated and can cause some unexpected behavior. Use <a href="#sortentitiesdeferred">.sortEntitiesDeferred</a> instead.</p>
+<p><em>New in 1.19</em></p>
+<p>You can specify the sort function to use with the <a href="#sortby">.sortBy</a> property.</p>
+<h3 id="sortentitiesdeferred">.sortEntitiesDeferred()</h3>
+<p><em>New in 1.18</em></p>
+<p>Defers a call to <code>.sortEntities()</code> to the end of an update cycle.</p>
+<h3 id="spawnentity">.spawnEntity( type, x, y, settings )</h3>
+<p>Create a new entity of the specified <code>type</code> (string or class object) and add it to the game world at <code>x</code>, <code>y</code>. This method calls the constructor of the entity class, just as usual.</p>
+<p>The entity is appended to the <code>.entities</code> array at the end. You can call <a href="#sortentities">.sortEntities()</a> after spawning the entity, to resort the entities by their <code>.zIndex</code>.</p>
+<p>The return value is the newly created entity.</p>
+<h3 id="removeentity">.removeEntity( entity )</h3>
+<p>Removes an entity from the game world. Usually, this is called from the entity's <a href="documentation-class-reference-entity.html#kill">.kill()</a> method.</p>
+<h3 id="run">.run()</h3>
+<p>This is the main &quot;run loop&quot; method of the game. It is called <em>fps</em> times per second and, by default, only calls the game's <a href="#update">.update()</a> and <a href="#draw">.draw()</a> methods.</p>
+<h3 id="update">.update()</h3>
+<p>This method is called for each frame and updates all entities, BackgroundMaps and tileset animations.
+</p>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000936 -->
+	</div>
+</div>
+
+</body>
+</html>

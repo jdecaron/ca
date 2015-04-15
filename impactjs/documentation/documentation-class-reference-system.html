@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>System - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+							<a href="documentation-class-reference.html">Class Reference</a> <span class="sub">&raquo;</span>
+						System		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+					<h2>Class Reference</h2>
+			<ul>
+													<li><a href="documentation-class-reference-ig-core.html" >ig Core</a></li>
+									<li><a href="documentation-class-reference-animation.html" >Animation</a></li>
+									<li><a href="documentation-class-reference-animationsheet.html" >AnimationSheet</a></li>
+									<li><a href="documentation-class-reference-backgroundmap.html" >BackgroundMap</a></li>
+									<li><a href="documentation-class-reference-class.html" >Class</a></li>
+									<li><a href="documentation-class-reference-collisionmap.html" >CollisionMap</a></li>
+									<li><a href="documentation-class-reference-entity.html" >Entity</a></li>
+									<li><a href="documentation-class-reference-font.html" >Font</a></li>
+									<li><a href="documentation-class-reference-game.html" >Game</a></li>
+									<li><a href="documentation-class-reference-image.html" >Image</a></li>
+									<li><a href="documentation-class-reference-input.html" >Input</a></li>
+									<li><a href="documentation-class-reference-loader.html" >Loader</a></li>
+									<li><a href="documentation-class-reference-map.html" >Map</a></li>
+									<li><a href="documentation-class-reference-music.html" >Music</a></li>
+									<li><a href="documentation-class-reference-sound.html" >Sound</a></li>
+									<li><a href="documentation-class-reference-soundmanager.html" >SoundManager</a></li>
+									<li><a href="documentation-class-reference-system.html" class="active">System</a></li>
+									<li><a href="documentation-class-reference-timer.html" >Timer</a></li>
+							</ul>	
+				
+					<div id="fragmentMenu">
+				<h2>System</h2>
+			</div>	
+			</div>
+	
+	
+	
+	<div id="content">
+		<p>Defined in Module <strong>impact.system</strong>, inherits from <a href="documentation-class-reference-class.html">ig.Class</a></p>
+<h2 id="description">Description</h2>
+<p><code>ig.System</code> takes care of starting and stopping the run loop and calls the <code>.run()</code> method on the current Game object. It also does the housekeeping for <code>ig.Input</code> and provides some utility methods.</p>
+<p>An instance of <code>ig.System</code> is automatically created at <code>ig.system</code> (lowercase) by the ig.main() function.</p>
+<h2 id="constructor">Constructor</h2>
+<h3 id="new-ig-system">new ig.System( canvasId, fps, width, height, scale )</h3>
+<ul>
+	<li><code>canvasId</code> An ID-Selector string, specifying the canvas element used for drawing. E.g. <code>'#canvas'</code></li>
+	<li><code>fps</code> The desired frames per second for this game</li>
+	<li><code>width</code> The (unscaled) width of the game screen</li>
+	<li><code>height</code> The (unscaled) height of the game screen</li>
+	<li><code>scale</code> The scaling factor for the game screen</li>
+
+</ul>
+<p><br/>
+The constructor for <code>ig.System</code> is usually called through <a href="documentation-class-reference-ig-core.html#main-function">ig.main()</a> and the instance is provided at <code>ig.system</code> (lowercase).</p>
+<h2 id="properties">Properties</h2>
+<h3 id="canvas">.canvas</h3>
+<p>The canvas element.</p>
+<h3 id="context">.context</h3>
+<p>The <code>'2d'</code> drawing context of the canvas element.<br/></p>
+<h3 id="fps">.fps</h3>
+<p><em>Obsolete in 1.20</em> - See <a href="documentation-class-reference-ig-core.html#main-function">ig.main()</a>.</p>
+<h3 id="realwidth-realheight">.realWidth, .realHeight</h3>
+<p>The scaled size of the game screen. E.g. with a <code>.width</code> of <code>320</code> pixels and a <code>.scale</code> of <code>2</code> will result in a <code>.realWidth</code> of <code>640</code>.</p>
+<h3 id="running">.running</h3>
+<p><code>true</code> if a game is running, <code>false</code> otherwise.</p>
+<h3 id="scale">.scale</h3>
+<p>The scaling factor for the game screen.</p>
+<h3 id="smoothpositioning">.smoothPositioning</h3>
+<p><em>Removed in 1.20, see <a href="#ig-system-drawmode">ig.System.drawMode</a></em></p>
+<h3 id="tick">.tick</h3>
+<p>The time in seconds since the last frame. Use this for movement calculations and the like. E.g.:</p>
+<pre class="javascript">
+pos.x = pos.x + vel.x * ig.system.tick;
+</pre>
+<p>Note that this value does <strong>not</strong> represent <em>real</em> time, but <em>game</em> time. If, for instance, the browser is unable to run the game at 20 fps, the whole game will be slowed down and the <code>.tick</code> will be lower than the real time since the last frame. See <a href="documentation-class-reference-timer.html">ig.Timer</a> for a more detailed explanation.</p>
+<h3 id="width-height">.width, .height</h3>
+<p>The (unscaled) size of the game screen in pixels, as set by the constructor.</p>
+<h2 id="methods">Methods</h2>
+<h3 id="clear">.clear( color )</h3>
+<p>Clear the game screen with the specified color, where <code>color</code> is a CSS string. E.g. <code>'#f0f'</code>.</p>
+<p>The <a href="documentation-class-reference-game.html">ig.Game's</a> <code>.draw()</code> method calls <code>.clear()</code> for every frame with the Games <code>.clearColor</code>.</p>
+<h3 id="getdrawpos">.getDrawPos( p )</h3>
+<p>Get the real target position for drawing into the canvas. This takes the <code>.scale</code> and <a href="#drawmode">ig.System.drawMode</a> into account.</p>
+<p>You'll only need this method if you work directly with the <code>.context</code>, instead of drawing through <a href="documentation-class-reference-image.html">ig.Image</a>, <a href="documentation-class-reference-font.html">ig.Font</a> or <a href="documentation-class-reference-backgroundmap.html">ig.BackgroundMap</a>.</p>
+<pre class="javascript">
+// Using the canvas context directly, we need to take the 
+// ig.system.scale into account. Using getDrawPos() will
+// give us the &quot;scaled position&quot;
+
+ig.system.context.fillText(
+	'Test Text',
+	ig.system.getDrawPos( x ),
+	ig.system.getDrawPos( y )
+);
+</pre>
+<h3 id="resize">.resize( width, height, [scale] )</h3>
+<p><em>New in 1.17</em></p>
+<p>Set the <code>width</code> and <code>height</code> of the canvas element in (unscaled) pixels. If the optional <code>scale</code> parameter is not present, the scale factor is not changed.</p>
+<h3 id="setgame">.setGame( gameClass )</h3>
+<p>Run the specified <code>gameClass</code>. This stops the currently running game (if any), creates a new instance of the <code>gameClass</code> and starts the run loop again.<br/></p>
+<p>This method is safe to call from anywhere in the game, as the new game will only be started after the current frame has finished updating and drawing.</p>
+<h2 id="global-properties">Global Properties</h2>
+<h3 id="ig-system-drawmode">ig.System.drawMode</h3>
+<p><em>New in 1.20</em></p>
+<p>One of</p>
+<ul>
+	<li><code>ig.System.DRAW.AUTHENTIC</code></li>
+	<li><code>ig.System.DRAW.SMOOTH</code></li>
+	<li><code>ig.System.DRAW.SUBPIXEL</code></li>
+
+</ul>
+<p>The default is <code>SMOOTH</code>.</p>
+<p>Specifies how graphics are positioned when drawing. <code>AUTHENTIC</code> rounds all drawing positions to unscaled pixels, <code>SMOOTH</code> rounds to scaled pixels and <code>SUBPIXEL</code> doesn't round at all.</p>
+<p>E.g. if the <code>.scale</code> is <code>4</code> and <code>drawMode</code> is <code>SMOOTH</code>, moving an entity will move it one pixel at a time. If <code>drawMode</code> is <code>AUTHENTIC</code>, the entity's smallest movement step will be <code>4</code> pixels.</p>
+<p>While <code>SMOOTH</code> is somewhat &quot;un-authentic&quot; for pixel-style games, it provides much smoother movements of entities and background layers when the game screen is scaled up.</p>
+<p>Note that not all browsers support <code>SUBPIXEL</code> drawing. Depending on your game, subpixel positioning may lead to visual artifacts, such as seams between tiles. In most browsers it also comes with the price of a bit of performance.</p>
+<p>You have to specify the draw mode before calling <code>ig.main()</code>, i.e.:</p>
+<pre class="javascript">
+ig.System.drawMode = ig.System.DRAW.AUTHENTIC;
+ig.main( ... );
+</pre>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000938 -->
+	</div>
+</div>
+
+</body>
+</html>

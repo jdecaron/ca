@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Animations - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+						Animations		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+				
+			</div>
+	
+	
+	
+	<div id="content">
+		<h2 id="creating-animations">Creating Animations</h2>
+<p>Animations in Impact are handled with an <a href="documentation-class-reference-animationsheet.html">AnimationSheet</a> – a big image containing all individual animation frames.<br/></p>
+<p><img class="right" src="media/blob-sprite.png" alt="Blob Animation Sheet"/>
+The frame numbering of an AnimationSheet starts at <code>0</code> in the upper left corner and continues in reading direction. Note that this is different from the tile numbering for <a href="documentation-class-reference-backgroundmap.html">BackgroundMaps</a>, which starts at <code>1</code>.</p>
+<p>To create an AnimationSheet, you specify the image file to use, as well as the width and height for each frame in this image. This AnimationSheet should be created as a class property to be loaded by the preloader. See <a href="documentation-working-with-assets.html">Working With Assets</a> for more info.</p>
+<p>When you can create a new <a href="documentation-class-reference-animation.html">Animation</a>, you hand over the AnimationSheet, the time each frame is displayed in seconds and an array of frames, specifying the sequence.</p>
+<pre class="javascript">
+// Create an AnimationSheet with the blob.png file.
+// Each frame is 16x16 px 
+var animSheet = new ig.AnimationSheet( 'blob.png', 16, 16 );
+
+// Create an animation using the AnimationSheet.
+// Display each frame for 0.2 Seconds. The Sequence 
+// is [2,3,4] and the Animation stops at the last 
+// frame (last parameter is true)
+var jumpAnim = new ig.Animation( animSheet, 0.2, [2,3,4], true );
+</pre>
+<p>After you have created an Animation, you have to update it for each game frame using <code>.update()</code> and you can draw it using <code>.draw()</code>.</p>
+<h2 id="animating-entities">Animating Entities</h2>
+<p>When animating <a href="documentation-class-reference-entity.html">Entities</a> you can use some of the entity's utility methods to make your life a bit easier.</p>
+<p>Each entity has an <a href="documentation-class-reference-entity.html#animsheet">.animSheet</a> property, where you can load the default AnimationSheet for it.<br/></p>
+<p>Entities also have  an <a href="documentation-class-reference-entity.html#anims">.anims</a> object, to which all the animations you define with the <a href="documentation-class-reference-entity.html#addanim">.addAnim()</a> method are added to. The <code>.addAnim()</code> method takes the same parameters like the constructor for Animations, except that it always uses the <code>.animSheet</code> as the AnimationSheet.</p>
+<p>The entitie's <a href="documentation-class-reference-entity.html#draw">.draw()</a> method automatically draws the <a href="documentation-class-reference-entity.html#currentanim">.currentAnim</a> at the entities position.</p>
+<pre class="javascript">
+// Create your own entity, subclassed from ig.Enitity
+EntityBlob = ig.Entity.extend({    
+    // Load an animation sheet
+    animSheet: new ig.AnimationSheet( 'blob.png', 16, 16 ),
+    
+    init: function( x, y, settings ) {
+        // Add animations for the animation sheet
+        this.addAnim( 'idle', 1.5, [1,1,2] );
+        this.addAnim( 'jump', 0.2, [2,3,4], true );
+        
+        // Call the parent constructor
+        this.parent( x, y, settings );
+    }
+});
+</pre>
+<p>This entity can already be used in Weltmeister and will be animated in the game. It's <code>.currentAnim</code> will be set to the <code>'idle'</code> Animation, because it was added first.</p>
+<p>To switch between animations, you can just set <code>.currentAnim</code> to one of the Animations now defined in <code>.anims</code>. E.g.:</p>
+<pre class="javascript">
+update: function() {
+	if( someCondition ) {
+		this.currentAnim = this.anims.jump.rewind();
+	}
+	else {
+		this.currentAnim = this.anims.idle;
+	}
+}
+</pre>
+<h2 id="animating-backgroundmaps">Animating BackgroundMaps</h2>
+<p>For <a href="documentation-class-reference-backgroundmap.html">BackgroundMaps</a> you can specify certain tiles to be animated. Each BackgroundMap has an <a href="documentation-class-reference-backgroundmap.html#anims">.anims</a> property that maps a tile number to an Animation. E.g.:</p>
+<pre class="javascript">
+var data = [
+    [1,2,6],
+    [0,3,5],
+    [2,8,1],
+];
+var bg = new ig.BackgroundMap( 16, data, 'media/tileset.png' );
+
+// The image used for the AnimationSheet *can* be different from
+// the one used as the tileset for the BackgroundMap
+var as = new ig.AnimationSheet( 'media/tiles.png', 16, 16 );
+
+// Sets tile number 5 of the BackgroundMap to be animated
+bg.anims[5] = new ig.Animation( as, 0.1, [0,1,2,3,4] );
+</pre>
+<p>Note that Animations are <strong>not</strong> updated by the BackgroundMap, but must be updated externally. <a href="documentation-class-reference-game.html">ig.Game</a> has some facilities for that. See <a href="documentation-class-reference-game.html#backgroundanims">.backgroundAnims</a>.
+</p>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000932 -->
+	</div>
+</div>
+
+</body>
+</html>

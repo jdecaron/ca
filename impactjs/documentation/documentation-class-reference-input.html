@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Input - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+							<a href="documentation-class-reference.html">Class Reference</a> <span class="sub">&raquo;</span>
+						Input		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+					<h2>Class Reference</h2>
+			<ul>
+													<li><a href="documentation-class-reference-ig-core.html" >ig Core</a></li>
+									<li><a href="documentation-class-reference-animation.html" >Animation</a></li>
+									<li><a href="documentation-class-reference-animationsheet.html" >AnimationSheet</a></li>
+									<li><a href="documentation-class-reference-backgroundmap.html" >BackgroundMap</a></li>
+									<li><a href="documentation-class-reference-class.html" >Class</a></li>
+									<li><a href="documentation-class-reference-collisionmap.html" >CollisionMap</a></li>
+									<li><a href="documentation-class-reference-entity.html" >Entity</a></li>
+									<li><a href="documentation-class-reference-font.html" >Font</a></li>
+									<li><a href="documentation-class-reference-game.html" >Game</a></li>
+									<li><a href="documentation-class-reference-image.html" >Image</a></li>
+									<li><a href="documentation-class-reference-input.html" class="active">Input</a></li>
+									<li><a href="documentation-class-reference-loader.html" >Loader</a></li>
+									<li><a href="documentation-class-reference-map.html" >Map</a></li>
+									<li><a href="documentation-class-reference-music.html" >Music</a></li>
+									<li><a href="documentation-class-reference-sound.html" >Sound</a></li>
+									<li><a href="documentation-class-reference-soundmanager.html" >SoundManager</a></li>
+									<li><a href="documentation-class-reference-system.html" >System</a></li>
+									<li><a href="documentation-class-reference-timer.html" >Timer</a></li>
+							</ul>	
+				
+					<div id="fragmentMenu">
+				<h2>Input</h2>
+			</div>	
+			</div>
+	
+	
+	
+	<div id="content">
+		<p>Defined in Module <strong>impact.input</strong>, inherits from <a href="documentation-class-reference-class.html">ig.Class</a></p>
+<h2 id="synopsis">Synopsis</h2>
+<pre class="javascript">
+// On game start
+ig.input.bind( ig.KEY.UP_ARROW, 'jump' );
+
+// In your game's or entity's update() method
+if( ig.input.pressed('jump') ) {
+	this.vel.y = -100;
+}
+</pre>
+<h2 id="description">Description</h2>
+<p><code>ig.Input</code> handles all Keyboard and Mouse input.<br/></p>
+<p>You can bind keys to specific <em>actions</em> and then ask if one of these actions is currently held down (<a href="#state">.state()</a>) or was just pressed down after the last frame (<a href="#pressed">.pressed()</a>).</p>
+<p>Note that an instance of <code>ig.Input</code> is automatically created at <code>ig.input</code> (lowercase) by the <code>ig.main()</code> function.</p>
+<h2 id="properties">Properties</h2>
+<h3 id="accel-x-accel-y-accel-z">.accel.x, .accel.y, .accel.z</h3>
+<p><em>New in 1.18</em></p>
+<p>Current acceleration of the device in m/s². This will be <code>0</code> for devices that don't have an accelerometer.</p>
+<p>Call <a href="#initaccelerometer">.initAccelerometer()</a> to start capturing accelerometer input.</p>
+<h3 id="mouse-x-mouse-y">.mouse.x, .mouse.y</h3>
+<p>Position of the mouse cursor on your game screen in pixels. Note that this position is only updated when at least one mouse button is bound to an action.</p>
+<p>If you haven't bound any mouse button, you can call <a href="#initmouse">.initMouse()</a> yourself once, to start capturing mouse input.</p>
+<h2 id="methods">Methods</h2>
+<h3 id="bind">.bind( key, action )</h3>
+<p>Bind a Keyboard or Mouse button to an action. <code>action</code> is a string or integer, identifying the action in your game. Call this function for each button and action pair at the start of your game.</p>
+<p><code>key</code> can be anything of <a href="#mouse-and-keyboard-button-names">ig.KEY.*</a>.</p>
+<p>Several buttons can be bound to the same action, but a button can <strong>not</strong> be bound to several actions.</p>
+<pre class="javascript">
+// Binds both, UP_ARROW and SPACE, to the same action
+ig.input.bind( ig.KEY.UP_ARROW, 'jump' );
+ig.input.bind( ig.KEY.SPACE, 'jump' );
+</pre>
+<h3 id="bindtouch">.bindTouch( selector, action )</h3>
+<p><em>Note: this is a bit cumbersome to use. Consider using the <a href="http://impactjs.com/ejecta/integrating-impact-games">TouchButton plugin</a> instead, as it will work in Mobile Browsers as well as in Ejecta.</em></p>
+<p>Bind an HTML element to issue the specified <code>action</code> when the element is <em>touched</em>. This will only work for devices that implement the <code>touchstart</code> and <code>touchend</code> events - currently iOS and Android devices.</p>
+<p>The element specified by the <code>selector</code> must already be present. It will not be created by Impact. <code>selector</code> can only be an id-selector; e.g. <code>'#button'</code>.</p>
+<pre class="javascript">
+// Bind the &lt;div id=&quot;button1&quot;&gt;&lt;/div&gt; element to the &quot;jump&quot; action
+ig.input.bindTouch( '#button1', 'jump' );
+</pre>
+<h3 id="initaccelerometer">.initAccelerometer()</h3>
+<p><em>New in 1.18</em></p>
+<p>Start capturing accelerometer input. The acceleration will be available at <a href="#accel-x-accel-y-accel-z">.accel.x, .accel.y, .accel.z</a>. This will be ignored for devices that don't have an accelerometer.</p>
+<h3 id="initmouse">.initMouse()</h3>
+<p>Start capturing mouse input. The current mouse position will be available at <a href="#mouse-x-mouse-y">.mouse.x, .mouse.y</a>.</p>
+<p>This method is automatically called as soon as one of the mouse buttons has been bound.</p>
+<h3 id="pressed">.pressed( action )</h3>
+<p>Returns <code>true</code> if one of the buttons bound to the specified <code>action</code> was just pressed down, <code>false</code> otherwise.<br/></p>
+<p>In contrast to <a href="#state">.state()</a>, this method only returns <code>true</code> once for each button press. You can use this for example if you want the user to repeatedly press a button to shoot instead of having &quot;autofire&quot;.</p>
+<h3 id="released">.released( action )</h3>
+<p><em>New in 1.19</em></p>
+<p>Returns <code>true</code> if one of the buttons bound to the specified <code>action</code> was just released, <code>false</code> otherwise.<br/></p>
+<h3 id="state">.state( action )</h3>
+<p>Returns <code>true</code> if one of the buttons bound to the specified <code>action</code> is currently pressed down, <code>false</code> otherwise.</p>
+<h3 id="unbind">.unbind( key )</h3>
+<p>Unbind a Keyboard or Mouse button from its current action.</p>
+<p><code>key</code> can be anything of <code>ig.KEY.*</code>. See below for a list.</p>
+<h3 id="unbindall">.unbindAll()</h3>
+<p>Unbind all Keyboard, Mouse and Touch buttons.</p>
+<h2 id="mouse-and-keyboard-button-names">Mouse and Keyboard button names</h2>
+<pre>
+ig.KEY.MOUSE1
+ig.KEY.MOUSE2
+ig.KEY.MWHEEL_UP
+ig.KEY.MWHEEL_DOWN
+
+ig.KEY.BACKSPACE
+ig.KEY.TAB
+ig.KEY.ENTER
+ig.KEY.PAUSE
+ig.KEY.CAPS
+ig.KEY.ESC
+ig.KEY.SPACE
+ig.KEY.PAGE_UP
+ig.KEY.PAGE_DOWN
+ig.KEY.END
+ig.KEY.HOME
+ig.KEY.LEFT_ARROW
+ig.KEY.UP_ARROW
+ig.KEY.RIGHT_ARROW
+ig.KEY.DOWN_ARROW
+ig.KEY.INSERT
+ig.KEY.DELETE
+ig.KEY._0
+ig.KEY._1
+ig.KEY._2
+ig.KEY._3
+ig.KEY._4
+ig.KEY._5
+ig.KEY._6
+ig.KEY._7
+ig.KEY._8
+ig.KEY._9
+ig.KEY.A
+ig.KEY.B
+ig.KEY.C
+ig.KEY.D
+ig.KEY.E
+ig.KEY.F
+ig.KEY.G
+ig.KEY.H
+ig.KEY.I
+ig.KEY.J
+ig.KEY.K
+ig.KEY.L
+ig.KEY.M
+ig.KEY.N
+ig.KEY.O
+ig.KEY.P
+ig.KEY.Q
+ig.KEY.R
+ig.KEY.S
+ig.KEY.T
+ig.KEY.U
+ig.KEY.V
+ig.KEY.W
+ig.KEY.X
+ig.KEY.Y
+ig.KEY.Z
+ig.KEY.NUMPAD_0
+ig.KEY.NUMPAD_1
+ig.KEY.NUMPAD_2
+ig.KEY.NUMPAD_3
+ig.KEY.NUMPAD_4
+ig.KEY.NUMPAD_5
+ig.KEY.NUMPAD_6
+ig.KEY.NUMPAD_7
+ig.KEY.NUMPAD_8
+ig.KEY.NUMPAD_9
+ig.KEY.MULTIPLY
+ig.KEY.ADD
+ig.KEY.SUBSTRACT
+ig.KEY.DECIMAL
+ig.KEY.DIVIDE
+ig.KEY.F1
+ig.KEY.F2
+ig.KEY.F3
+ig.KEY.F4
+ig.KEY.F5
+ig.KEY.F6
+ig.KEY.F7
+ig.KEY.F8
+ig.KEY.F9
+ig.KEY.F10
+ig.KEY.F11
+ig.KEY.F12
+ig.KEY.SHIFT
+ig.KEY.CTRL
+ig.KEY.ALT
+ig.KEY.PLUS
+ig.KEY.COMMA
+ig.KEY.MINUS
+ig.KEY.PERIOD
+</pre>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000937 -->
+	</div>
+</div>
+
+</body>
+</html>

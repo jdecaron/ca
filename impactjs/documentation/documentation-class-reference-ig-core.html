@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>ig Core - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+							<a href="documentation-class-reference.html">Class Reference</a> <span class="sub">&raquo;</span>
+						ig Core		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+					<h2>Class Reference</h2>
+			<ul>
+													<li><a href="documentation-class-reference-ig-core.html" class="active">ig Core</a></li>
+									<li><a href="documentation-class-reference-animation.html" >Animation</a></li>
+									<li><a href="documentation-class-reference-animationsheet.html" >AnimationSheet</a></li>
+									<li><a href="documentation-class-reference-backgroundmap.html" >BackgroundMap</a></li>
+									<li><a href="documentation-class-reference-class.html" >Class</a></li>
+									<li><a href="documentation-class-reference-collisionmap.html" >CollisionMap</a></li>
+									<li><a href="documentation-class-reference-entity.html" >Entity</a></li>
+									<li><a href="documentation-class-reference-font.html" >Font</a></li>
+									<li><a href="documentation-class-reference-game.html" >Game</a></li>
+									<li><a href="documentation-class-reference-image.html" >Image</a></li>
+									<li><a href="documentation-class-reference-input.html" >Input</a></li>
+									<li><a href="documentation-class-reference-loader.html" >Loader</a></li>
+									<li><a href="documentation-class-reference-map.html" >Map</a></li>
+									<li><a href="documentation-class-reference-music.html" >Music</a></li>
+									<li><a href="documentation-class-reference-sound.html" >Sound</a></li>
+									<li><a href="documentation-class-reference-soundmanager.html" >SoundManager</a></li>
+									<li><a href="documentation-class-reference-system.html" >System</a></li>
+									<li><a href="documentation-class-reference-timer.html" >Timer</a></li>
+							</ul>	
+				
+					<div id="fragmentMenu">
+				<h2>ig Core</h2>
+			</div>	
+			</div>
+	
+	
+	
+	<div id="content">
+		<p>Defined in Module <strong>impact.impact</strong></p>
+<h2 id="description">Description</h2>
+<p>The <code>ig</code> object provides the Module definition and loading capabilities as well as some utility functions. All your code should be wrapped in Modules, so it can be properly loaded and baked.</p>
+<p><code>ig</code> is <strong>not</strong> an instance of a ig.Class, but just a simple JavaScript object and thus can't be subclassed.</p>
+<h2 id="module-definition">Module Definition</h2>
+<pre class="javascript">
+ig.module( 
+	'game.my-file' 
+)
+.requires(
+	'impact.game',
+	'impact.image',
+	'game.other-file'
+)
+.defines(function(){
+
+	// code for this module
+
+});
+</pre>
+<p>Define a new Module with a <code>name</code>, requiring all the specified Modules. As soon as all required Modules are loaded, the function passed to <code>.defines()</code> is executed.<br/></p>
+<p>If the Module does not require any other Modules, the call to <code>.requires()</code> can be omitted, as in<br/></p>
+<pre class="javascript">
+ig.module( 
+	'name' 
+)
+.defines(function(){ 
+
+	// code
+	
+});
+</pre>
+<p>The name of a Module directly corresponds to its file location and name. E.g. the file <code>lib/mygame/my-file.js</code> must define a module with the name <code>'mygame.my-file'</code>, so it can be properly loaded from other Modules.</p>
+<p>You can put multiple modules into one file, but be advised, that a module that is referenced from an external file <strong>must</strong> have it's own file.</p>
+<h2 id="properties">Properties</h2>
+<h3 id="ig-baked">ig.baked</h3>
+<p>Set to <code>true</code> by <code>bake.php</code> to skip the &quot;unresolved dependencies&quot; check when loading modules. The default is <code>false</code>. See <a href="documentation-baking.html">Baking</a>.</p>
+<h3 id="ig-game">ig.game</h3>
+<p>The currently running <a href="documentation-class-reference-game.html">ig.Game</a> instance, as created by <a href="#main-function">ig.main()</a> or <a href="documentation-class-reference-system.html#setgame">system.setGame()</a>. If no game has started, <code>ig.game</code> is <code>null</code>.</p>
+<h3 id="ig-global">ig.global</h3>
+<p>The global context object (same as <code>window</code> when running in a browser)</p>
+<h3 id="ig-nocache">ig.nocache</h3>
+<p>By default, <code>ig.nocache</code> is an empty string. When the site is loaded with <code>game.html?nocache</code> or <a href="#ig-setnocache">ig.setNocache( true )</a> is called, <code>ig.nocache</code> is set to a random parameter (like <code>'?23478976'</code>) to be appended on URLs to bypass the Browser's cache.</p>
+<p>This is used by all of Impact's loading functions: Module loading, Images and Sounds.</p>
+<h3 id="ig-prefix">ig.prefix</h3>
+<p><em>New in 1.20</em></p>
+<p>The prefix to use for all paths when loading modules files or assets. The default is an empty string.</p>
+<p>This value can also be set through the global <code>ImpactPrefix</code> variable before loading Impact. This is, for example, useful if you want to run your game on a page that has a URL of <code>/?page=42</code>, while the game is located in <code>/games/pong/</code>.</p>
+<pre class="javascript">
+&lt;script&gt;ImpactPrefix='/games/pong/';&lt;/script&gt;
+
+&lt;script src=&quot;/games/pong/lib/impact/impact.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;/games/pong/lib/game/main.js&quot;&gt;&lt;/script&gt;
+</pre>
+<h3 id="ig-version">ig.version</h3>
+<p>The version string of the Impact Game Engine in the form of <code>x.xx</code></p>
+<h3 id="ig-ua">ig.ua</h3>
+<p>Booleans, indicating if the User Agent is one of the following devices:</p>
+<ul>
+	<li><code>ig.ua.iPhone</code> - <code>true</code> for all iPhone and iPod Touch devices</li>
+	<li><code>ig.ua.iPhone4</code> - <code>true</code> for iPhone 4 and 4th gen iPod Touch devices</li>
+	<li><code>ig.ua.iPad</code> - <code>true</code> for iPad devices</li>
+	<li><code>ig.ua.iOS</code> - <code>true</code> for all iPhone, iPod Touch or iPad devices</li>
+	<li><code>ig.ua.android</code> - <code>true</code> for Android devices</li>
+	<li><code>ig.ua.mobile</code> - <code>true</code> for all iPhone, iPad, Android or WinPhone devices</li>
+
+</ul>
+<p><em>New in 1.15</em></p>
+<ul>
+	<li><code>ig.ua.pixelRatio</code> - the ratio of CSS pixels to hardware screen pixels. Usually <code>1</code> for Desktop computers, <code>2</code> for the iPhone 4 or similar.</li>
+	<li><code>ig.ua.screen.width</code>, <code>ig.ua.screen.height</code> - The size of the device' screen in hardware pixels.</li>
+	<li><code>ig.ua.viewport.width</code>, <code>ig.ua.viewport.height</code> – The size of the current viewport in CSS pixels.</li>
+
+</ul>
+<p><em>New in 1.22</em></p>
+<ul>
+	<li><code>ig.ua.touchDevice</code> - <code>true</code> if the device supports touch events</li>
+	<li><code>ig.ua.winPhone</code> - <code>true</code> for WinPhone devices</li>
+
+</ul>
+<h2 id="main-function">Main Function</h2>
+<h3 id="ig-main">ig.main( canvas, gameClass, fps, width, height, [scale], [loaderClass] );</h3>
+<p>Initializes <code>ig.system</code>, <code>ig.input</code>, <code>ig.soundManager</code> and <code>ig.music</code> and starts the preloader. When the preloader has finished, an instance of <code>gameClass</code> is created at <code>ig.game</code> and the run loop is started.</p>
+<ul>
+	<li><code>canvas</code> A string with an ID selector for the canvas element in which the game will be drawn. E.g.: <code>'#myCanvas'</code></li>
+	<li>gameClass A subclass of <a href="documentation-class-reference-game.html">ig.Game</a> of which an instance will be created and the <code>.run()</code> method called <code>fps</code> times per second.</li>
+	<li><code>fps</code> Desired frames per second - <em>Ignored in 1.20</em></li>
+	<li><code>width</code>, <code>height</code> Size of the game screen</li>
+	<li><code>scale</code> Scaling of the game screen. E.g. a <code>width</code> of <code>320</code> and a <code>scale</code> of <code>2</code> will result in a <code>640</code> pixel wide canvas element. The default is <code>1</code> (no scaling).</li>
+	<li><code>loaderClass</code> A subclass of <a href="documentation-class-reference-loader.html">ig.Loader</a> to act as the preloader. The default is the <code>ig.Loader</code> class itself.</li>
+
+</ul>
+<p>Note that as of <em>1.20</em>, the <code>fps</code> parameter is ignored in favor of <code>requestAnimationFrame</code>. This allows the browser to decide the best drawing interval, based on the display's refresh rate. If the drawing interval drops below <code>20hz</code>, the timestep will be capped at 1/20th of a second, essentially slowing the game down. E.g. when only 10 fps can be rendered, an &quot;in game second&quot; takes two &quot;real time seconds&quot;. See <a href="documentation-class-reference-timer.html#ig-timer-maxstep">ig.Timer.maxStep</a>.</p>
+<h2 id="debug-functions">Debug Functions</h2>
+<p><em>New in 1.18</em></p>
+<p>Impact defines four different functions for debug output: <code>ig.log()</code>, <code>ig.assert()</code> <code>ig.show()</code> and <code>ig.mark()</code>. However, these functions only actually do something when the Debug Module is loaded. See <a href="http://impactjs.com/documentation/debug">Debug Messages</a> for details.</p>
+<p>It's always safe to call these functions, even when the Debug Module is not loaded.</p>
+<h2 id="utility-functions">Utility Functions</h2>
+<h3 id="ig">ig.$( selector )</h3>
+<p>Get the DOM-Element(s) from the page according to the given selector. Only element names and IDs are currently supported.<br/></p>
+<p>When an Element name is specified (e.g. <code>'head'</code>) an Array of matched elements is returned. When an ID is specified as the selector (e.g. <code>'#canvas'</code>) the single Element with this ID is returned.</p>
+<p><em>(This behavior is somewhat inconsistent and might change in future versions)</em></p>
+<h3 id="ig-new">ig.$new( name )</h3>
+<p>Create a new DOM-Element with the given <code>name</code>. E.g.:<br/></p>
+<pre class="javascript">
+var audio = ig.$new('Audio');
+</pre>
+<h3 id="ig-copy">ig.copy( object )</h3>
+<p>Returns a deep copy of the given object.<br/></p>
+<p>Note that this function can't copy instances of <code>ig.Class</code> or subclasses thereof and just returns them uncopied.</p>
+<h3 id="ig-ksort">ig.ksort( obj )</h3>
+<p>Takes an object and returns an Array, sorted by the object properties' keys. E.g.:</p>
+<pre class="javascript">
+var unsorted = { z: 'baz', a: 'bar', b: 'foo' };
+var sorted = ig.ksort( unsorted );
+
+sorted[0]; // =&gt; bar
+sorted[1]; // =&gt; foo
+sorted[2]; // =&gt; baz
+</pre>
+<h3 id="ig-merge">ig.merge( target, extended )</h3>
+<p>Merges all the properties of the <code>extended</code> object recursively into the <code>target</code> object, overwriting existing properties. E.g.:</p>
+<pre class="javascript">
+var settings = { width: 256, height: 128 };
+var extendedSettings = { width: 512, foo: 'bar' };
+
+ig.merge( settings, extendedSettings );
+
+settings.width; // =&gt; 512
+settings.height; // =&gt; 128
+settings.foo; // =&gt; bar
+</pre>
+<h3 id="ig-setnocache">ig.setNocache( set )</h3>
+<p>When <code>set</code> is <code>true</code>, <code>ig.nocache</code> will be set to a random parameter string. When <code>set</code> is <code>false</code>, <code>ig.nocache</code> will be set to an empty string.</p>
+<h2 id="native-javascript-object-extensions">Native JavaScript Object Extensions</h2>
+<p>Impact extends some of JavaScripts native objects, such as <code>Number</code>, <code>Array</code> and <code>Function</code>. It does <strong>not</strong> extend <code>Object</code> so you can still safely use <code>for…in</code> loops.</p>
+<h3 id="number-map">Number.map( fromMin, fromMax, toMin, toMax )</h3>
+<p>Map a number from a range of values to another range. Numbers are not clamped.<br/></p>
+<pre class="javascript">
+var num = 50;
+num.map( 0, 100, 200, 400 ); // =&gt; 300
+
+(50).map( 0, 100, 200, 400 ); // =&gt; 300
+(25).map( 0, 100, 200, 400 ); // =&gt; 250
+(150).map( 0, 100, 200, 400 ); // =&gt; 500
+</pre>
+<h3 id="number-limit">Number.limit( min, max )</h3>
+<p>Clamp a number to the range of <code>min</code> and <code>max</code>.</p>
+<pre class="javascript">
+(75).limit( 50, 100 ); // =&gt; 75
+(25).limit( 50, 100 ); // =&gt; 50
+(150).limit( 50, 100 ); // =&gt; 100
+</pre>
+<h3 id="number-round">Number.round( [precision] )</h3>
+<p>Round a number to <code>precision</code> decimal places (default <code>0</code>).</p>
+<pre class="javascript">
+(3.1415).round(); // =&gt; 3
+(3.1415).round(2); // =&gt; 3.14
+</pre>
+<h3 id="number-floor">Number.floor()</h3>
+<p>Convenience method for <code>Math.floor()</code></p>
+<h3 id="number-ceil">Number.ceil()</h3>
+<p>Convenience method for <code>Math.ceil()</code></p>
+<h3 id="number-toint">Number.toInt()</h3>
+<p>Discard decimal places of a number. For negative numbers, the behavior is different to <code>Number.floor()</code>.</p>
+<pre class="javascript">
+(2.8).toInt(); // =&gt; 2
+(-2.8).toInt(); // =&gt; -2
+
+(2.8).floor(); // =&gt; 2
+(-2.8).floor(); // =&gt; -3
+</pre>
+<h3 id="number-todeg">Number.toDeg()</h3>
+<p><em>New in 1.19</em></p>
+<p>Convert radians to degrees</p>
+<pre class="javascript">
+(0.7853981633974483).toDeg(); // =&gt; 45
+</pre>
+<h3 id="number-torad">Number.toRad()</h3>
+<p><em>New in 1.19</em></p>
+<p>Convert degrees to radians</p>
+<pre class="javascript">
+(45).toRad(); // =&gt; 0.7853981633974483
+</pre>
+<h3 id="array-erase">Array.erase( item )</h3>
+<p>Find and delete the given <code>item</code> in an array. This method manipulates the array in place.</p>
+<pre class="javascript">
+var a = [4,8,13,15,16,23,42];
+a.erase(13);
+a; // =&gt; [4,8,15,16,23,42]
+</pre>
+<h3 id="array-random">Array.random()</h3>
+<p>Returns a random element from an array.</p>
+<h3 id="function-bind">Function.bind( bind )</h3>
+<p>Sets the <code>this</code> inside the function to <code>bind</code>. <code>Function.bind()</code> is useful for maintaining the <code>this</code> object for methods used in callbacks.</p>
+<pre class="javascript">
+var foo = {
+	bar: 100,
+	inc: function() {
+		this.bar++;
+		console.log( this.bar );
+	}
+};
+
+// Without using bind(), the &quot;this&quot; inside foo.inc() would refer to the 
+// &quot;window&quot; instead to itself, when called through setInterval()
+setInterval( foo.inc.bind(foo), 1000 );
+</pre>
+<h2 id="global-modifiers">Global Modifiers</h2>
+<h3 id="impactmixin">ImpactMixin</h3>
+<p><em>New in 1.22</em></p>
+<p>If present, the object at <code>ImpactMixin</code> will be <a href="#ig-merge">merged</a> into the <code>ig</code> namespace before any module loading takes place. This allows you to overwrite Impact's module code to work with different environments (e.g. NodeJS).</p>
+<p>Example:</p>
+<pre class="javascript">
+&lt;script type=&quot;text/javascript&quot;&gt;
+ImpactMixin = {
+	// This function will overwrite Impact's ig.require
+	requires: function() {
+		console.log(arguments);
+	}
+};
+&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;lib/impact/impact.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;lib/game/main.js&quot;&gt;&lt;/script&gt;
+</pre>
+<h3 id="impactprefix">ImpactPrefix</h3>
+<p>If present, this string overwrites <a href="#ig-prefix">ig.prefix</a>.</p>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000934 -->
+	</div>
+</div>
+
+</body>
+</html>

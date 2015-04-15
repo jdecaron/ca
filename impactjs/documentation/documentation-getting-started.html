@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Getting Started - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+						Getting Started		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+				
+			</div>
+	
+	
+	
+	<div id="content">
+		<h2 id="installation">Installation</h2>
+<p>While games written with Impact <em>should</em> work offline, most browsers wont allow them to. These browser deny access to certain functions, due to their faulty same origin policy (a file in <code>file://game/lib/</code> is not considered to be in the same &quot;domain&quot; as a file in <code>file://game/</code>). Opera is a notable exception to this.</p>
+<p>Also, the Weltmeister level editor uses some .php scripts to load an save levels and list directory contents.</p>
+<p>Long story short: you need a webserver. And by webserver I don't mean a separate server computer, but just a program on your computer to serve web pages. If you are using MacOSX, you already have a webserver and PHP installed and just need to enable it. On Windows you can install Apache and PHP; it's not that complicated. If you're using Linux, you should be nerd enough to figure this one out by yourself :)</p>
+<p>The <a href="http://www.apachefriends.org/en/xampp.html">XAMMP</a> project is awesome to have a webserver working in no time. It comes with a bit of bloat that you won't really need for Impact, but that's totally okay.</p>
+<p>If you want to install Apache and PHP manually and need some help, please ask google:<br/></p>
+<ul>
+	<li><a href="http://www.google.com/search?q=windows+apache+php">install Apache and PHP on Windows</a></li>
+	<li><a href="http://www.google.com/search?q=osx+apache+php">enable Apache and PHP on OSX</a></li>
+
+</ul>
+<p>So you have your webserver and PHP running now, right? Good! Now just unpack Impact into the webserver's root directory and point your browser to <a href="http://localhost/">http://localhost/</a>. You should see a directory listing, including your just created <code>impact/</code> subdirectory. Try loading Weltmeister through <a href="http://localhost/impact/weltmeister.html">http://localhost/impact/weltmeister.html</a>. It should load without any errors.</p>
+<p>If there are error messages, you should see them in your browsers console. Read on if you don't know where to find the error console.</p>
+
+<p>&nbsp;</p>
+
+<p><strong>Other Solutions</strong></p>
+<ul>
+	<li>For Windows users, Microsoft's <a href="http://www.microsoft.com/web/platform/phponwindows.aspx">PHP on Windows</a> is supposed to be pretty good.</li>
+	<li>Amadeus' <a href="https://github.com/amadeus/python-impact/">python-impact</a> is a single file Python script that allows you to run Impact games and Weltmeister without installing a &quot;real&quot; webserver. Should run out-of-the-box on Mac.</li>
+	<li>If you don't want to use PHP or Apache, Conner Petzold made a nodejs module that allows Impact to run on a node http server. His <a href="https://github.com/cpetzold/node-impact">node-impact</a> module is on github.</li>
+	<li>If you are using Windows and would like to develop with Impact on IIS and .NET rather than in Apache and PHP, check out the <a href="http://code.google.com/p/impactjs-iis-backend/">ImpactJS-IIS-.NET-API project</a> by Mike Hamilton.</li>
+	<li>For Ruby enthusiasts, Chris Darroch put together a Sinatra backend for Impact. Just remove the <code>.php</code> extensions for the API calls in your <code>lib/weltmeister/config.js</code> and fire up <a href="https://github.com/chrisdarroch/impactrb">impact.rb</a>.</li>
+
+</ul>
+<h2 id="setting-up-you-working-environment">Setting Up you working environment</h2>
+<p>If you are building a game with Impact (or anything in the browser really) the browser's developer tools and JavaScript consoles come in handy. If you don't use them you will to be in the dark when something isn't working.</p>
+<ul>
+	<li>In <strong>Google Chrome</strong> you can get to the console by clicking the <em>Wrench Icon -&gt; Tools -&gt; JavaScript console</em>.</li>
+	<li>In <strong>Safari</strong> you first have to enable the <em>Developer</em> menu: Open Safari's Preferences through <em>Safari -&gt; Preferences</em>, go the the <em>Advanced</em> Tab and check <em>Show Develop menu in menu bar</em>. After that, you can open the console through <em>Develop -&gt; Show Error Console</em>.</li>
+	<li>For <strong>Firefox</strong>, please install the awesome <a href="http://getfirebug.com/">Firebug</a> extension. You can however get to a basic error console through <em>Extras -&gt; Error console</em>.</li>
+	<li>In <strong>Opera</strong> you can find the developer tools in <em>Menu -&gt; Page -&gt; Developer Tools -&gt; Opera Dragonfly</em>.</li>
+	<li>If you are using <strong>Internet Explorer</strong>, consider using another browser. Impact runs on IE9, but it's a bit slow. You can get to the developer tools by pressing F12.</li>
+
+</ul>
+<p>Now you just need a text editor to edit your source files. If you are masochistic, even Windows Notepad will work. An editor with Syntax Highlighting will make your life easier, though.</p>
+<p>I'm using <a href="http://www.activestate.com/komodo-edit">Komodo Edit</a>, which basically is the free version of Komodo IDE. Despite it's name, Komodo Edit is still an IDE of sorts. It pretty awesome and runs on Windows, MacOSX and Linux.</p>
+<p>If you just want a lightweight editor, I can recommend <a href="http://www.scintilla.org/SciTE.html">SciTE</a> for Windows and Linux. It also runs on MacOSX, but it's a bit of a hassle to set it up.<br/></p>
+<p>For MacOSX, I hear that <a href="http://www.barebones.com/products/bbedit/index.html">BBEdit</a> and <a href="http://macromates.com/">TextMate</a> are &quot;the best&quot; editors around. I also used <a href="http://smultron.sourceforge.net/">Smultron</a> for some time, which is now discontinued, but still great.</p>
+<p>These are just some recommendations, based on my personal experience. Don't trust me. Feel free to look around and try different editors and IDEs.</p>
+<h2 id="directory-structure">Directory Structure</h2>
+<p>After having installed Impact you should have the following directory structure:</p>
+<pre>
+media/
+lib/
+lib/game/
+lib/game/entities/
+lib/game/levels/
+lib/impact/
+lib/weltmeister/
+</pre>
+<p>All of your games resources, such as images, sounds and music, should go in the <code>media/</code> directory.</p>
+<p>The <code>lib/</code> directory hosts all JavaScript files. <code>lib/impact/</code> hosts the Impact engine itself, <code>lib/weltmeister/</code> hosts all sources for the level editor. Your own game source files should go into <code>lib/game/</code> and the source files for your entities should go into <code>lib/game/entities/</code>, so Weltmeister can find them.</p>
+<h2 id="html-files">HTML Files</h2>
+<p>Games written with Impact run directly in the browser. There's no plugin needed anywhere. However, since JavaScript itself has no facilities to display anything, Impact needs an HTML page with a <code>&lt;canvas&gt;</code> tag in which it can render the game screen.</p>
+<p>The most basic HTML page looks like this:</p>
+<pre>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;title&gt;My Awesome Game!&lt;/title&gt;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;lib/impact/impact.js&quot;&gt;&lt;/script&gt;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;lib/game/game.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+	&lt;canvas id=&quot;canvas&quot;&gt;&lt;/canvas&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+<p>This page can of course be extended with further content (text, links. images...) just like any other HTML page. It can also be <em>styled</em> using CSS. I really can't go into the details here as this is a huge topic on its own. But this basic HTML page is really everything you need for your game to work.</p>
+<p>Note that only two JavaScript files are referenced by this HTML page: The engine and your main game script. All other JavaScript files will be automatically <em>included</em> from within these two files.<br/></p>
+<p>Before releasing your game you can also <em>bake</em> all your JavaScript together into one (compressed) file. This will shorten the initial loading time for your game. For development purposes however, it is best to keep your files separated to have a better overview. See <a href="documentation-baking.html">Baking</a> for more info.</p>
+<p>All images and sound files needed for your game will be loaded dynamically through JavaScript as well. Impact's Preloader ensures that all resources are loaded, before your game is started.</p>
+<p>Impact comes with a default <code>index.html</code> for your game that loads the <code>lib/game/game.js</code> file.</p>
+<p>The <code>weltmeister.html</code> loads the editor. See the introduction to the <a href="documentation-weltmeister.html">Weltmeister Editor</a> for more info.</p>
+<h2 id="modules">Modules</h2>
+<p>JavaScript itself does not provide an <code>include()</code> function, that loads other JavaScript source files. You could write your own <code>include()</code> function that uses AJAX to load files, but this would make your game rather impossible to debug, because all line numbers and file names will get lost and error messages would state little more than <em>&quot;Error in anonymous()&quot;</em>.</p>
+<p>Instead, Impact's source code is organized into modules. A module definition typically looks like this:</p>
+<pre class="javascript">
+ig.module( 
+    'game.my-file' 
+)
+.requires(
+    'impact.game',
+    'impact.image',
+    'game.other-file'
+)
+.defines(function(){
+
+    // code for this module
+
+});
+</pre>
+<p>The module name <code>'game.my-file'</code> directly corresponds to the filename. So this module sits in <code>lib/game/my-file.js</code>. Similarly, the modules listed in the <code>.requires()</code> method will be loaded from <code>lib/impact/game.js</code>, <code>lib/impact/image.js</code> and <code>lib/game/other-file.js</code> respectively. These <em>required</em> files will be loaded, before the module's body - the function passed to <code>.defines()</code> - is executed. You can read a bit more about modules in the <a href="documentation-class-reference-ig-core.html#module-definition">ig Core</a> reference.</p>
+<h2 id="how-impact-works">How Impact Works</h2>
+<p>The Impact Engine, at it's heart, is not a library but a framework. What this means, is that Impact provides a fully functional box, where you can throw your code in. Impact runs on its own. You just add your stuff to it, and it will be managed by the Engine as well.</p>
+<p>&quot;Your stuff&quot;, in most cases, are sub-classes of one of Impact's base classes. The most important one is the <a href="documentation-class-reference-entity.html">ig.Entity</a> class. Every object in the game world has to be a sub-class of <code>ig.Entity</code>.</p>
+<p>As soon as you start your game, Impact will set up an interval that calls the <code>ig.system.run()</code> method 60 times per second. This method does some housekeeping stuff and then calls your game's <code>.run()</code> method - which, by default, just calls <code>.update()</code> and <code>.draw()</code> on itself.</p>
+<p>The <a href="documentation-class-reference-game.html">ig.Game</a>'s <code>.draw()</code> method is pretty boring: it just clears the screen and calls <code>.draw()</code> on each background layer and entity.</p>
+<p>The <code>.update()</code> method updates the background layer positions and - this is where it gets interesting - calls <code>.update()</code> on each entity. The default <code>.update()</code> method of an entity moves it according to it's physics properties (position, velocity, bounciness...) and takes the game's collision map into account.</p>
+<p>After all entities have been updated, the game's <code>.checkEntities()</code> method is called. This resolves all <em>dynamic</em> collisions - that is, <em>Entity vs. Entity</em> collisions. It also calls an entities <code>.check()</code> method, if it overlaps with another entity and &quot;wants&quot; checks (see the <a href="documentation-class-reference-entity.html">Class Reference</a> for more details).<br/></p>
+<p>You can overwrite any of these methods in your own <code>ig.Entity</code> and <code>ig.Game</code> sub-classes - you can provide your own logic and then, if you want, call the original methods with <code>this.parent()</code>.</p>
+<p>Remember, this all is happening for each and every frame. That is (if the browser can keep up) 60 times per second.</p>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000933 -->
+	</div>
+</div>
+
+</body>
+</html>

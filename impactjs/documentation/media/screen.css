@@ -1,0 +1,636 @@
+/* Layout & Typo
+------------------------------------------------------------------ */
+
+html {
+	margin: 0;
+	padding: 0;
+}
+
+body {	
+	background-color: #24272a;
+	margin: 0;
+	color: #fff;
+	font-family: helvetica, arial, sans-serif;
+	font-size: 12pt;
+}
+
+.content {
+	width: 600px;
+	margin: 0 auto;
+}
+
+.wideContent {
+	width: 920px;
+	margin: 0 auto;
+}
+
+h1 {
+	margin: 0;
+	padding: 0;
+}
+
+#title {
+	padding: 30px 0 10px 0;
+	background: #000;
+	background: -moz-linear-gradient(top, #000, #222);
+}
+
+#breadcrumbs {
+	border-bottom: 1px solid #111;
+	padding: 28px 0 16px 0;
+	margin-bottom: 32px;
+	background: #d06300;
+    background: -moz-linear-gradient(top, #d06300, #ee7202);
+    background: -webkit-gradient(linear,
+                left top, left bottom, from(#d06300), to(#ee7202));
+
+}
+
+#breadcrumbs.narrow {
+	padding: 8px 0;
+}
+
+#impact {
+	margin-left: -48px;
+	float: left;
+}
+
+div#foot {
+	font-size: 80%;
+	margin: 5em 0;
+	color: #999;
+}
+
+div#menu {
+	float: right;
+	padding: 24px 0 0 0;
+	font-size: 18px;
+	font-weight: bold;
+	color: #fff;
+}
+
+div#generated {
+	float: right;
+	padding: 24px 0 0 110px;
+	font-size: 80%;
+	color: #666;
+}
+
+div#menu a {
+	color: #fff;
+	margin: 0 0 0 20px;
+}
+
+div#menu a:hover {
+	xcolor: #ff9536;
+}
+
+div#menu a.notRelevant {
+	color: #555;
+}
+
+div#menu a.notRelevant:hover {
+	color: #fff;
+}
+
+div#sidebar {
+	min-height: 1px;
+	float: left;
+	width: 144px;
+	margin-right: 13px;
+	margin-top: 10px;
+}
+
+div#sidebar a {
+	display: block;
+	padding: 0.1em 8px 0.1em 8px;
+}
+
+div#sidebar a.active {
+	background-color: #333;
+}
+
+div#sidebar h2 {
+	margin: 0 8px 0 0;
+	font-size: 100%;
+}
+
+div#sidebar ul {
+	margin: 0.5em 0 0 0;
+	padding: 0;
+}
+
+div#sidebar li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+div#fragmentMenu {
+	font-size: 80%;
+	margin-top: 16px;
+	margin-right: 0.2em;
+	padding-top: 1em;
+	border-top: 1px dotted #333;
+	overflow: hidden;
+	width: 144px;
+}
+
+div#fragmentMenu.fixed {
+	overflow-y: auto;
+	top: 0;
+	position: fixed;
+}
+
+div#fragmentMenu a.h2 {
+	font-weight: bold;
+	margin: 0.6em 0 0.2em 0;
+}
+
+div#fragmentMenu.fixed *:last-child {
+	padding-bottom: 8px;
+}
+
+div#fragmentMenu a.h3 {
+	margin-left: 0.4em;
+}
+
+div#fragmentMenu a.active {
+	background-color: #333;
+}
+
+div#content {
+	float: left;
+	width: 600px;
+}
+
+div.clear {
+	clear: both;
+}
+
+a {
+	color: #F47920;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #fff;
+	text-shadow: #fff 0px 0px 2px;
+}
+
+#content p a[href^="http"] {
+  background-image: url(icon-external.png);
+  background-position: right top;
+  background-repeat: no-repeat;
+  padding-right: 11px;
+}
+
+p {
+	line-height: 1.4;
+	padding: 0;
+	margin: 0.5em 0 1em 0.5em;
+}
+
+h1 {
+	font-size: 260%;
+	font-weight: bold;
+	letter-spacing: -0.03em;
+	line-height: 0.94;
+	color: #fff;
+	
+	text-shadow: #A34C00 0px -1px 0px;
+}
+
+h1.main {
+	font-size: 290%;
+}
+
+h1 a {
+	text-decoration: none;
+	color: #6e3400;
+	text-shadow: #ff7900 0px 1px 0px;
+}
+
+h1 span.sub {
+	color: #ae5300;
+}
+
+h2 {
+	margin: 2em 0 0 0;
+	padding: 0;
+	font-size: 160%;
+	font-weight: bold;
+}
+
+h2:first-child {
+	margin: 0;
+}
+
+h3 {
+	font-family: Bitstream Vera Sans Mono, Courier New, Lucida Console, monospace; 
+	margin: 2em 0 0.5em 0;
+	padding: 0.1em 0.2em;
+	font-size: 14px;
+	font-weight: normal;
+	border-bottom: 3px solid #444;
+}
+
+h4 {
+	font-size: 80%;
+	margin: 0;
+}
+
+a.pilcrow {
+    visibility: hidden;
+	font-size: 80%;
+    padding: 0 0.4em 0 0.4em;
+	color: #aaa;
+}
+a.pilcrow:hover {
+	color: #fff;
+}
+
+h1:hover > a.pilcrow,
+h2:hover > a.pilcrow,
+h3:hover > a.pilcrow {
+    visibility: visible;
+}
+h1:target, h2:target, h3:target {
+	xtext-shadow: #F47920 0px 0px 2px;
+	xbackground-color: #F47920;
+	background-color: #555;
+	xborder-right: 10px solid #F47920;
+}
+
+blockquote {
+	border-left: 5px solid #eee;
+	padding-left: 0.5em;
+	margin: 1.5em 0 1.5em 2em;
+}
+
+a img { border: 0; }
+img.left{ float:left; margin-right: 10px; }
+img.right{ float: right; margin-left: 5px; }
+img.center { display: block; margin-left: auto; margin-right: auto; }
+img.full { display: block; margin-left: -160px; }
+img.noalign{}
+
+ul {
+	list-style-type: square;
+}
+
+li {
+	margin: 0 0 0.3em 0;
+}
+
+dt {
+	float: left;
+	display: block;
+	width: 8em;
+	text-align: right;
+}
+
+dd {
+	display: block;
+}
+
+a.button, input.button {
+	border: 1px solid #F47920;
+	background: #d06300;
+    background: -moz-linear-gradient(top, #F47920, #d06300);
+    background: -webkit-gradient(linear,
+                left top, left bottom, from(#F47920), to(#d06300));
+	color: #6e3400;
+	text-shadow: #ff7900 0px 1px 0px;
+	
+	font-weight: bold;
+	font-size: 120%;
+	padding: 0.2em 1em;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	width: auto;
+	cursor: pointer;
+}
+
+a.button.right {
+	text-align: right;
+}
+
+a.button:hover, input.button:hover {
+	color: #fff;
+	text-shadow: #fff 0px 0px 2px;
+	background-color: #F47920;
+	background: -moz-linear-gradient(top, #d06300, #F47920);
+    background: -webkit-gradient(linear,
+                left top, left bottom, from(#d06300), to(#F47920));
+}
+
+
+div.xsplit {
+	
+	float: left;
+}
+
+div.xsplit.right {
+	width: 280px;
+}
+
+div.xsplit.left {
+	width: 280px;
+	margin-right: 40px;
+}
+
+#platforms-teaser {
+	position: relative;
+	left: -160px;
+	height: 450px;
+	width: 920px;
+}
+
+#platforms-teaser img {
+	position: absolute;
+	top: 30px;
+	left: 253px;
+	width: 413px;
+	height: 390px;
+}
+
+
+
+
+
+
+
+input, textarea, button {
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 12px;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	padding: 0.2em;
+	margin: 0.5em 0;
+	font-size: 12pt;
+	border: 1px solid #333;
+	color: #fafafa;
+	width: 200px;
+	
+	background: #1b1d1f;
+    background: -moz-linear-gradient(top, #151719, #202325);
+    background: -webkit-gradient(linear,
+                left top, left bottom, from(#151719), to(#202325));
+}
+
+textarea {
+	width: 100%;
+	height: 180px;
+	
+}
+
+textarea.description {
+	height: 80px;
+}
+
+input:focus, textarea:focus {
+	border-color: #F47920;
+}
+
+input.formbutton {
+	height: 16pt;
+}
+
+input.formbutton::-moz-focus-inner {
+	border: 0;
+	padding: 0;
+    margin: -1px 0 0 0;
+}
+
+input.title {
+	width: 100%;
+}
+
+input.formbutton {
+	width: auto;
+	display: inline-block;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	xborder: 0;
+	text-align: center;
+	padding: 1pt 6pt 0 6pt;
+	color: #fff;
+	cursor: pointer;
+	background-color: #777;
+}
+
+input.formbutton:hover, .formbutton:focus {
+	background-color: #d1854e;
+}
+
+input.formbutton:active {
+	background-color: #F47920;
+	background: -moz-linear-gradient(top, #F47920, #d1854e);
+    background: -webkit-gradient(linear,
+                left top, left bottom, from(#F47920), to(#d1854e));
+}
+
+input.empty {
+	color: #555;
+}
+
+.warn {
+	color: #FF0550;
+}
+
+
+/* Blog
+------------------------------------------------------------------ */
+
+div.post {
+	margin: 0 0 6.5em 0;
+}
+
+	div.post div.foot {
+		text-align: right;
+		font-size: 80%;
+		color: #999;
+	}
+
+div.prev { font-size: 80%; float: left; }
+div.next { font-size: 80%; float: right; }
+div.archive { font-size: 80%; clear: both; text-align: center; }
+
+ul.archive { color: #eee; }
+span.archiveDate, span.archiveCount { font-size: 80%; color: #999; }
+
+
+
+/* Code and Syntax Highlighting 
+------------------------------------------------------------------ */
+
+code { 
+	font-family: Bitstream Vera Sans Mono, Courier New, Lucida Console, monospace; 
+	font-size: 14px;
+	background-color: #2C3033;
+	padding: 0.1em 0.2em;
+}
+
+pre { 
+	font-family: Bitstream Vera Sans Mono, Monaco, Consolas, Courier New, Lucida Console, monospace; 
+	font-size: 13px;
+	padding: 0.5em 0 0.5em 0.5em;
+	margin: 0.5em 0 0.5em 0;
+	color: #fff;
+	background-color: #2C3033;
+}
+
+span.comments { color: #999; }
+span.strings { color: #ae2; }
+span.regexp { color: #b8f; }
+span.punct { color: #5df; }
+span.keywords { color: #f07; }
+span.numbers { color: #fa4; }
+
+
+
+/* Whitebox
+------------------------------------------------------------------ */
+
+#whitebox {
+	cursor: pointer;
+	display: none;
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background-color: #000;
+	background-color: rgba(0,0,0,0.5);
+}
+
+#whitebox img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+
+/*
+ * jQuery Nivo Slider v2.3
+ * http://nivo.dev7studios.com
+ *
+ * Copyright 2010, Gilbert Pellegrom
+ * Free to use and abuse under the MIT license.
+ * http://www.opensource.org/licenses/mit-license.php
+ * 
+ * March 2010
+ */
+ 
+ 
+/* The Nivo Slider styles */
+.nivoSlider {
+	position:relative;
+}
+.nivoSlider img {
+	position:absolute;
+	top:0px;
+	left:0px;
+}
+/* If an image is wrapped in a link */
+.nivoSlider a.nivo-imageLink {
+	position:absolute;
+	top:0px;
+	left:0px;
+	width:100%;
+	height:100%;
+	border:0;
+	padding:0;
+	margin:0;
+	z-index:60;
+	display:none;
+}
+/* The slices in the Slider */
+.nivo-slice {
+	display:block;
+	position:absolute;
+	z-index:50;
+	height:100%;
+}
+/* Caption styles */
+.nivo-caption {
+	position:absolute;
+	left:0px;
+	bottom:0px;
+	background:#000;
+	color:#fff;
+	opacity:0.8; /* Overridden by captionOpacity setting */
+	width:100%;
+	z-index:89;
+}
+.nivo-caption p {
+	padding:5px;
+	margin:0;
+}
+.nivo-caption a {
+	display:inline !important;
+}
+.nivo-html-caption {
+    display:none;
+}
+/* Direction nav styles (e.g. Next & Prev) */
+.nivo-directionNav a {
+	position:absolute;
+	top:45%;
+	z-index:99;
+	cursor:pointer;
+}
+.nivo-prevNav {
+	left:0px;
+}
+.nivo-nextNav {
+	right:0px;
+}
+
+#slider {
+	margin-top: 2em;
+    position:relative;
+    width:600px; /* Change this to your images width */
+    height:260px; /* Change this to your images height */
+    background:url(/templates/impact/loader.gif) no-repeat 50% 50%;
+	-webkit-box-shadow: 0px 0px 10px #000;
+	-moz-box-shadow: 0px 0px 10px #000;
+	box-shadow: 0px 0px 10px #000; 
+}
+#slider img {
+    position:absolute;
+    top:0px;
+    left:0px;
+    display:none;
+}
+#slider a {
+    border:0;
+    display:block;
+}
+
+/* Control nav styles (e.g. 1,2,3...) */
+.nivo-controlNav {
+	text-align: right;
+	margin-bottom: 2em;
+}
+.nivo-controlNav a {
+	padding: 4px;
+	color: #888;
+	cursor: pointer;
+	font-size: 80%;
+	background-color: #24272a;
+	-webkit-box-shadow: 0px 0px 10px #000;
+	-moz-box-shadow: 0px 0px 10px #000;
+	box-shadow: 0px 0px 10px #000; 
+}
+.nivo-controlNav a.active, .nivo-controlNav a:hover {
+	background-color: #383d41;
+	text-shadow: none;
+}

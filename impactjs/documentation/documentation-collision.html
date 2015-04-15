@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Collision - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+						Collision		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+				
+			</div>
+	
+	
+	
+	<div id="content">
+		<h2 id="overview">Overview</h2>
+<p>Collision detection in Impact is done in two separate steps: <em>&quot;static&quot;</em> collison (Entity vs. World) and <em>&quot;dynamic&quot;</em> collision (Entity vs. Entity).</p>
+<p>Static collision is resolved by the entity itself while it's moving - i.e. the entity checks if it can move where it wants to. Before the entity moves, it does a trace from its current position to the destination. The game's CollisionMap answers with a trace result that states if and where there was a collision.</p>
+<p>Dynamic collision is resolved <strong>after</strong> all entities have moved. Dynamic collision only checks if two entities are currently overlapping - and if so - moves them apart.</p>
+<p>It is important to note that static collision is always accurate and framerate independent, while dynamic collision is not. This means, that fast moving entities can never move through walls but a collision between two fast moving entities <em>might</em> remain unnoticed.<br/></p>
+<p>Impact always maintains a minimum framerate of 20 frames per <em>game second</em>, so that all dynamic collisions are still adequately accurate. See <a href="documentation-class-reference-timer.html#ig-timer-maxstep">ig.Timer.maxStep</a>.</p>
+<h2 id="static-collision">Static Collision</h2>
+<p>By default, all entities will collide with the <a href="documentation-class-reference-game.html#collisionmap">game's .collisionMap</a>. The <a href="documentation-class-reference-entity.html#update">entity's .update()</a> method calculates the movement speed based on the entities properties and then does a trace against the <a href="documentation-class-reference-collisionmap.html">CollisionMap</a>. The result of this trace is then handled by the <a href="documentation-class-reference-entity.html#handlemovementtrace">entity's .handleMovementTrace()</a> method.<br/></p>
+<p>So if you want an entity to opt out of static collision, the easiest way to do this, is to overwrite the <code>.handleMovementTrace()</code> method for this entity with the following:</p>
+<pre class="javascript">
+handleMovementTrace: function( res ) {
+	// This completely ignores the trace result (res) and always
+	// moves the entity according to its velocity
+	this.pos.x += this.vel.x * ig.system.tick;
+	this.pos.y += this.vel.y * ig.system.tick;
+}
+</pre>
+<p>Refer to the CollisionMap's <a href="documentation-class-reference-collisionmap.html#trace">trace()</a> method for a description of the <code>res</code> argument.<br/></p>
+<p>You can also check with which tile the entity collided and act accordingly (e.g. if you have tiles that are slippery).<br/></p>
+<p>If you want to play a sound when your player entity hits the floor with a certain speed, you can overwrite <code>.handleMovementTrace()</code> and check for collision and speed.</p>
+<pre class="javascript">
+handleMovementTrace: function( res ) {
+	if( res.collision.y &amp;&amp; this.vel.y &gt; 32 ) {
+		this.soundBounce.play();
+	}
+
+	// Continue resolving the collision as normal
+	this.parent(res); 
+}
+</pre>
+<p>You can use Weltmeister to create a CollisionMap. By default, the game's <code>.loadLevel()</code> method assumes that a layer named <code>'collision'</code> is the CollisionMap for that level.</p>
+<p>You can always create a CollisionMap manually:</p>
+<pre class="javascript">
+// In your Game's init() method
+var map = [
+	0,0,0,0
+	0,1,1,0
+	0,0,0,0
+];
+this.collisionMap = new ig.CollisionMap( 8, map );
+</pre>
+<p>If you don't specify a CollisionMap at all, an empty dummy (<code>ig.CollisionMap.staticNoCollision</code>) will be used.<br/></p>
+<h2 id="dynamic-collision">Dynamic Collision</h2>
+<p>Entity vs. entity collision is a bit more complex, because an entity can have one of several collision modes. If two entities collide with each other, the collision modes of both of them determine if and how the collision will be resolved.</p>
+<p>The collision mode of an entity is specified by its <a href="documentation-class-reference-entity.html#collides">.collides</a> property. By default, this property is set to <code>ig.Entity.COLLIDES.NEVER</code>, ignoring all collisions no matter which collision mode the other entity has.</p>
+<p>The other collision modes are <code>LITE</code>, <code>PASSIVE</code>, <code>ACTIVE</code> and <code>FIXED</code>.<br/></p>
+<p>If a <code>PASSIVE</code> entity collides with an <code>ACTIVE</code> entity the collision will be resolved by moving both entities apart. The same is true for <code>ACTIVE</code> vs. <code>ACTIVE</code> collisions.</p>
+<p>The reason that there is a <code>PASSIVE</code> mode is that <code>PASSIVE</code> vs. <code>PASSIVE</code> collisions won't be resolved at all (i.e. they will just overlap). This can be useful for enemies that can move &quot;through&quot; each other, instead of blocking the way. These <code>PASSIVE</code> entities will still collide with <code>ACTIVE</code> entities.</p>
+<p>The two other modes effectively define a <em>&quot;weak&quot;</em> and a <em>&quot;strong&quot;</em> entity for each collision. In these cases only the weak entity will be moved to resolve the collision.<br/></p>
+<p>An entity that has the <code>LITE</code> collision mode set is always the weak entity - i.e. the entity that moves. An entity that has the <code>FIXED</code> collision mode set is always the strong entity - it will stay where it is.</p>
+<p><code>LITE</code> entities only collide with <code>ACTIVE</code> or <code>FIXED</code> entities. <code>FIXED</code> entities will collide with <code>LITE</code>, <code>PASSIVE</code> and <code>ACTIVE</code> entities.</p>
+<p>Still confused? Here's some general advice:</p>
+<p>The player and enemy character typically should be <code>PASSIVE</code> so that they don't collide with each other, but can collide with <code>ACTIVE</code> entities, such a crates.</p>
+<p>Platforms and elevators should be <code>FIXED</code> so that they move regardless if another entity is blockign their path.</p>
+<p>All entities that are purely visual and don't affect the gameplay, should collide <code>LITE</code> or <code>NEVER</code>.
+</p>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000932 -->
+	</div>
+</div>
+
+</body>
+</html>

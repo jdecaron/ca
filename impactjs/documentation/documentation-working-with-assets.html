@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Working with Assets - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+						Working with Assets		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+				
+			</div>
+	
+	
+	
+	<div id="content">
+		<h2 id="paths-to-your-image-and-sound-files">Paths to Your Image and Sound Files</h2>
+<p>When you load image or sound files, the path to this file is always relative to the .html file in which your game is running. I.e. the location of your .js files is irrelevant.<br/></p>
+<p>So let's assume you have the following directory structure and your <code>game.js</code> is loaded by the <code>game.html</code>:</p>
+<pre>
+/mygame/game.html
+/mygame/lib/game.js
+/mygame/media/some-image.png
+/mygame/media/some-sound.ogg
+/mygame/media/some-sound.mp3
+</pre>
+<p>When you now want to load <code>some-image.png</code> from within your <code>game.js</code> file, you'd do the following:</p>
+<pre class="javascript">
+// The game.html file is in /mygame/, that means that all
+// assets can be referenced relative to /mygame/ 
+var someImage = new ig.Image( 'media/some-image.png' );
+
+// It works exactly the same for sounds:
+var someSound = new ig.Sound( 'media/some-sound.*' );
+
+// Or AnimationSheets
+var someAnimSheet = new ig.AnimationSheet( 'media/some-image.png', 8, 8 );
+</pre>
+<p>The path <code>'media/some-sound.*'</code> is actually valid. Impact will load the appropiate sound file (MP3 or OGG Vorbis) depending on the browsers capabilities. See <a href="documentation-class-reference-sound.html#new-ig-sound">ig.Sound</a>.</p>
+<h2 id="using-the-preloader">Using the Preloader</h2>
+<p>All sound and image files that your game needs should be loaded by the <a href="documentation-class-reference-loader.html">preloader</a>, so that they are actually available when needed.<br/></p>
+<p>Calling the <code>.draw()</code> method on an image that has not yet been loaded, will do nothing. Attempting to play a sound file that has not been loaded, will result in a severe lag.</p>
+<p>All instances of <a href="documentation-class-reference-image.html">ig.Image</a>, <a href="documentation-class-reference-font.html">ig.Font</a>, <a href="documentation-class-reference-animationsheet.html">ig.AnimationSheet</a> and <a href="documentation-class-reference-sound.html">ig.Sound</a> that are created during <em>load-time</em> will be appended to the preloader's chain of assets to load. Images and Sounds that are only created at <em>runtime</em>, will <strong>not</strong> be loaded by the preloader.</p>
+<pre class="javascript">
+MyGame = ig.Game.extend({
+	// This image will be loaded by the preloader. It is created
+	// as soon as the script is executed
+	titleImage: new ig.Image( 'media/title.png' ),
+	
+	init: function() {
+		// This image file will NOT be loaded by the preloader. The
+		// init() method is only called after the preloader finishes
+		// and the game is started.
+		this.backgroundImage = new ig.Image( 'media/background.png' );
+	}
+});
+</pre>
+<h2 id="caching">Caching</h2>
+<p>All assets are automatically <em>cached</em>. They are only loaded once, no matter how often you need them. E.g. if two entities share the same AnimationSheet image it will not be loaded twice. So this is perfectly valid:</p>
+<pre class="javascript">
+EntityPlayer = ig.Entity.extend({
+	animSheet: new ig.AnimationSheet( 'media/player.png', 16, 16 )
+	…
+});
+
+EntityPlayerGibs = ig.Entity.extend({
+	// The player gibs are in the same image file
+	animSheet: new ig.AnimationSheet( 'media/player.png', 8, 8 )
+	…
+});
+</pre>
+<p>You can also use this to make sure your background music is loaded by the preloader. You can't use <a href="documentation-class-reference-music.html#add">ig.music.add()</a> at load time, but you can already load the sound file as an instance of <a href="documentation-class-reference-sound.html">ig.Sound</a>.</p>
+<pre class="javascript">
+MyGame = ig.Game.extend({
+	// Make sure the music is loaded by the preloader.
+	// Passing 'false' as the second argument, prevents loading this
+	// sound as multi channel.
+	bgtune: new ig.Sound( 'media/background-tune.*', false ),
+	
+	init: function() {
+		// Now add the file to the playlist
+		ig.music.add( this.bgtune );
+		
+		// You could also just specify the path again:
+		// ig.music.add( 'media/background-tune.*' );
+		
+		// Ready to Rock!
+		ig.music.play();
+	}
+});
+</pre>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000933 -->
+	</div>
+</div>
+
+</body>
+</html>

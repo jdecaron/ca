@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Entity - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+							<a href="documentation-class-reference.html">Class Reference</a> <span class="sub">&raquo;</span>
+						Entity		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+					<h2>Class Reference</h2>
+			<ul>
+													<li><a href="documentation-class-reference-ig-core.html" >ig Core</a></li>
+									<li><a href="documentation-class-reference-animation.html" >Animation</a></li>
+									<li><a href="documentation-class-reference-animationsheet.html" >AnimationSheet</a></li>
+									<li><a href="documentation-class-reference-backgroundmap.html" >BackgroundMap</a></li>
+									<li><a href="documentation-class-reference-class.html" >Class</a></li>
+									<li><a href="documentation-class-reference-collisionmap.html" >CollisionMap</a></li>
+									<li><a href="documentation-class-reference-entity.html" class="active">Entity</a></li>
+									<li><a href="documentation-class-reference-font.html" >Font</a></li>
+									<li><a href="documentation-class-reference-game.html" >Game</a></li>
+									<li><a href="documentation-class-reference-image.html" >Image</a></li>
+									<li><a href="documentation-class-reference-input.html" >Input</a></li>
+									<li><a href="documentation-class-reference-loader.html" >Loader</a></li>
+									<li><a href="documentation-class-reference-map.html" >Map</a></li>
+									<li><a href="documentation-class-reference-music.html" >Music</a></li>
+									<li><a href="documentation-class-reference-sound.html" >Sound</a></li>
+									<li><a href="documentation-class-reference-soundmanager.html" >SoundManager</a></li>
+									<li><a href="documentation-class-reference-system.html" >System</a></li>
+									<li><a href="documentation-class-reference-timer.html" >Timer</a></li>
+							</ul>	
+				
+					<div id="fragmentMenu">
+				<h2>Entity</h2>
+			</div>	
+			</div>
+	
+	
+	
+	<div id="content">
+		<p>Defined in Module <strong>impact.entity</strong>, inherits from <a href="documentation-class-reference-class.html">ig.Class</a></p>
+<h2 id="synopsis">Synopsis</h2>
+<pre class="javascript">
+// Create your own entity, subclassed from ig.Enitity
+EntityPlayer = ig.Entity.extend({
+
+	// Set some of the properties
+	collides: ig.Entity.COLLIDES.ACTIVE,
+	type: ig.Entity.TYPE.A,
+	checkAgainst: ig.Entity.TYPE.B,
+
+	size: {x: 16, y: 16},
+	health: 50,
+	
+	// Load an animation sheet
+	animSheet: new ig.AnimationSheet( 'media/player.png', 16, 16 ),
+	
+	init: function( x, y, settings ) {
+		// Add animations for the animation sheet
+		this.addAnim( 'idle', 0.1, [0,1,2] );
+		this.addAnim( 'jump', 0.1, [3,4,5] );
+		
+		// Call the parent constructor
+		this.parent( x, y, settings );
+	}
+	
+	update: function() {
+		// This method is called for every frame on each entity.
+		// React to input, or compute the entity's AI here.
+		
+		if( ig.input.pressed('jump') ) {
+			this.vel.y = -100;
+			this.currentAnim = this.anims.jump.rewind();
+		}
+		
+		// Call the parent update() method to move the entity
+		// according to its physics
+		this.parent(); 
+	}
+});
+</pre>
+<h2 id="description">Description</h2>
+<p>Interactive objects in the game world are typically subclassed from this base entity class. It provides animation, drawing and basic physics. Subclassing your entities from <code>ig.Entity</code> ensures that it can be added to the game world, react to the collision map and other entities and that it can be used in Weltmeister.<br/></p>
+<p>All of the methods listed here can be overwritten in your subclass and called with <a href="documentation-class-reference-class.html#this-parent">this.parent()</a> if needed.
+	</p>
+<h2 id="constructor">Constructor</h2>
+<h3 id="new-ig-entity">new ig.Entity( x, y, settings )</h3>
+<ul>
+	<li><code>x, y</code> Position to place this entity in the game world</li>
+	<li><code>settings</code> A JavaScript object, whose properties overwrite the entity's default properties</li>
+
+</ul>
+<p>Typically, you should create your entities through the <a href="documentation-class-reference-game.html">ig.Game's</a> <code>spawnEntity()</code> method, which creates the entity and adds it to the game world.
+<br/>
+The <code>settings</code> object overwrites the properties for this one particular entity. E.g.:</p>
+<pre class="javascript">
+var settings = {health: 100, vel: {x: 200, y: 100}};
+var myEnt = new EntityMyEntityClass( 0, 0, settings );
+</pre>
+<p>Weltmeister makes use of the <code>settings</code> object, to store additional settings for each entity.</p>
+<h2 id="properties">Properties</h2>
+<h3 id="accel-x-accel-y">.accel.x, .accel.y</h3>
+<p>Current acceleration to be added to the entity's velocity per second. E.g. an entity with a <code>.vel.x</code> of <code>0</code> and <code>.accel.x</code> of <code>10</code> will have a <code>.vel.x</code> of <code>100</code> ten seconds later.</p>
+<h3 id="animsheet">.animSheet</h3>
+<p>An instance of <a href="documentation-class-reference-animation.html">AnimationSheet</a>, used by the entity's <a href="#addanim">.addAnim()</a> method.</p>
+<h3 id="anims">.anims</h3>
+<p>An object holding all the entity's animations, created through <a href="#addanim">.addAnim()</a>. E.g.:</p>
+<pre class="javascript">
+this.addAnim( 'run', 0.1, [0,1,2] );
+this.currentAnim = this.anims.run;
+</pre>
+<h3 id="bounciness">.bounciness</h3>
+<p>A factor, indicating with which force the entity will bounce back after a collision. With a <code>.bounciness</code> set to <code>1</code>, the entity will bounce back with the same speed it has hit the other entity/collision map. Default <code>0</code>.</p>
+<h3 id="checkagainst">.checkAgainst</h3>
+<p>One of<br/></p>
+<ul>
+	<li><code>ig.Entity.TYPE.NONE</code></li>
+	<li><code>ig.Entity.TYPE.A</code></li>
+	<li><code>ig.Entity.TYPE.B</code></li>
+	<li><code>ig.Entity.TYPE.BOTH</code></li>
+
+</ul>
+<p>See the documentation for the <a href="#type">.type property</a>.</p>
+<p>The default is <code>NONE</code>.</p>
+<h3 id="collides">.collides</h3>
+<p>One of<br/></p>
+<ul>
+	<li><code>ig.Entity.COLLIDES.NEVER</code></li>
+	<li><code>ig.Entity.COLLIDES.LITE</code></li>
+	<li><code>ig.Entity.COLLIDES.PASSIVE</code> </li>
+	<li><code>ig.Entity.COLLIDES.ACTIVE</code></li>
+	<li><code>ig.Entity.COLLIDES.FIXED</code></li>
+
+</ul>
+<p>This property determines how the entity collides with other entities. Note that this is independent from the collision against a collision map.</p>
+<p>In <code>ACTIVE</code> vs. <code>LITE</code> or <code>FIXED</code> vs. <em>any</em> collisions, only the <em>weak</em> entity moves, while the other one stays fixed. In <code>ACTIVE</code> vs. <code>ACTIVE</code> and <code>ACTIVE</code> vs. <code>PASSIVE</code> collisions, both entities are moved. <code>LITE</code> or <code>PASSIVE</code> entities don't collide with other <code>LITE</code> or <code>PASSIVE</code> entities at all.</p>
+<p>The behavior for <code>FIXED</code> vs. <code>FIXED</code> collisions is undefined.</p>
+<p>Typically, entities that are unimportant for the game itself, such as particles, should collide <code>LITE</code> or <code>NEVER</code>. Moving platforms should collide <code>FIXED</code>, to be unaffected by the other entity's movement.</p>
+<p>Read more in the <a href="documentation-collision.html">Collision Tutorial</a>.</p>
+<h3 id="currentanim">.currentAnim</h3>
+<p>An instance of <a href="documentation-class-reference-animation.html">ig.Animation</a> that will be drawn by the entity's <a href="#draw">.draw()</a> method, or <code>null</code> if no animation has been defined yet.</p>
+<h3 id="friction-x-friction-y">.friction.x, .friction.y</h3>
+<p>Deceleration to be subtracted from the entity's velocity per second. Only applies if <a href="#accel-x-accel-y">.accel.*</a> is <code>0</code>.</p>
+<h3 id="gravityfactor">.gravityFactor</h3>
+<p>How much this entity is affected by the gravity set in the <a href="documentation-class-reference-game.html">game</a> class. A <code>.gravityFactor</code> of <code>0</code> will make the entity float, no matter what the game's gravity is set to. The default is <code>1</code>.</p>
+<h3 id="health">.health</h3>
+<p>Health for this entity. An entity's health is typically decreased through the <a href="#receivedamage">.receiveDamage()</a> method. If the health reaches <code>0</code>, the entity's <a href="#kill">.kill()</a> method is called, removing the entity from the game world.</p>
+<h3 id="id">.id</h3>
+<p>An integer representing a unique ID for this entity. This ID is set by the entity's <a href="#new-ig-entity">.init()</a> method.<br/></p>
+<p>Note that the <code>.id</code> of an entity might be different on each level load.</p>
+<h3 id="last-x-last-y">.last.x, .last.y</h3>
+<p>The entity's position in the last frame (before <a href="#update">.update()</a> is called). This is used for the entity vs. entity collision response.</p>
+<h3 id="maxvel-x-maxvel-y">.maxVel.x, .maxVel.y</h3>
+<p>Maximum velocity. The entity's speed will be capped at these values.<br/></p>
+<p>The default is <code>100</code>.</p>
+<h3 id="minbouncevelocity">.minBounceVelocity</h3>
+<p>If the entity's velocity is below this threshold, it won't bounce back. This is needed so an entity can come to a complete rest, instead of bouncing back with a tiny velocity. Default <code>40</code>.</p>
+<h3 id="name">.name</h3>
+<p>Specifies the name of the entity, to be retrieved by the Game's <a href="documentation-class-reference-game.html#getentitybyname">getEntityByName()</a> method. This should be set through the constructor or in Weltmeister with the key/value pair and should be unique per level.</p>
+<p>The default is <code>null</code> (no name).</p>
+<h3 id="offset-x-offset-y">.offset.x, .offset.y </h3>
+<p>Drawing offset for this entity's animations. E.g. If your entity's collision box (<code>.size.x, .size.y</code>) is 8 pixels wide, but your animations frame size is 16 pixels wide, you specify an <code>.offset.x</code> of 4, to shift the collision box 4 pixels to the right, to center it on the animation frame.</p>
+<h3 id="pos-x-pos-y">.pos.x, .pos.y</h3>
+<p>The entity's position in the game world.</p>
+<h3 id="size-x-size-y">.size.x, .size.y</h3>
+<p>The entity's size in pixels. This is used for collision detection and response.<br/>
+	
+The default x and y size is <code>16</code>.</p>
+<h3 id="standing">.standing</h3>
+<p>Boolean, stating if the entity is resting on the ground (y axis).</p>
+<h3 id="slopestanding">.slopeStanding</h3>
+<p><em>New in 1.19</em></p>
+<p>An object defining at which slope angle the <code>.standing</code> property is still set. The default is</p>
+<pre class="javascript">
+slopeStanding: {min: (44).toRad(), max: (136).toRad() }
+</pre>
+<h3 id="type">.type</h3>
+<p>One of<br/></p>
+<ul>
+	<li><code>ig.Entity.TYPE.NONE</code></li>
+	<li><code>ig.Entity.TYPE.A</code></li>
+	<li><code>ig.Entity.TYPE.B</code></li>
+
+</ul>
+<p>Through the <code>.type</code> property, entities can be organized into one of two groups (or none). This is useful in conjunction with the <a href="#checkagainst">.checkAgainst</a> property.</p>
+<p>When two entities are overlapping and the <code>.checkAgainst</code> property of one entity matches the <code>.type</code> of the other one, the former entity's <a href="#check">.check()</a> method is called with the latter entity as the parameter.</p>
+<p>You can, for instance, give all <em>friendly</em> entities the <code>.type</code> <code>A</code>, and set up all <em>hostile</em> entities to <code>.checkAgainst</code> <code>A</code>. In the <code>.check()</code> method of the hostile entity you can then give the friendly entity damage.</p>
+<p>The default is <code>NONE</code>.</p>
+<p>	</p>
+<h3 id="vel-x-vel-y">.vel.x, vel.y</h3>
+<p>Current velocity in pixels per second.</p>
+<h3 id="zindex">.zIndex</h3>
+<p>Drawing order. Entities with a higher <code>.zIndex</code> will get drawn last. Note that entities are, by default, only sorted once after level load (<a href="documentation-class-reference-game.html">ig.Game's</a> <a href="documentation-class-reference-game.html#loadlevel">.loadLevel()</a>). If you spawn entities after that, they will be appended at the end of the games <code>.entities</code> array and thus drawn last. Call <a href="documentation-class-reference-game.html">ig.Game's</a> <a href="documentation-class-reference-game.html#sortentitiesdeferred">.sortEntitiesDeferred()</a> to re-sort them. E.g.:
+	</p>
+<pre class="javascript">
+// Spawn 50 &quot;particle&quot; entities. Set a negative zIndex, so they will 
+// be drawn first and occluded by all other entities
+for( var i = 0; i &lt; 50; i++ ) {
+	var e = ig.game.spawnEntity( EntityMyParticle, x, y );
+	e.zIndex = -10;
+}
+
+// Re-sort Entities
+ig.game.sortEntitiesDeferred();
+</pre>
+<h3 id="wmscalable">._wmScalable</h3>
+<p>Whether the entity's <code>.size</code> can be changed in Weltmeister. The default is <code>false</code>.</p>
+<h3 id="wmignore">._wmIgnore</h3>
+<p>If <code>true</code>, this entity will not show up in the entity menu in Weltmeister. The default is <code>false</code>.</p>
+<h3 id="wmdrawbox">._wmDrawBox</h3>
+<p>Whether Weltmeister should draw a box for this entity. This is useful for entities that are invisible in the game. The default is <code>false</code>.</p>
+<h3 id="wmboxcolor">._wmBoxColor</h3>
+<p>When <code>._wmDrawBox</code> is <code>true</code>, this property specifies the color of the box that will be drawn in Weltmeister. Use a CSS-String such as <code>'#ff00ff'</code> or <code>'rgba(255,0,255,0.5)'</code>.</p>
+<h2 id="methods">Methods</h2>
+<h3 id="addanim">.addAnim( name, frameTime, sequence, [stop] )</h3>
+<p>Specify an animation for the entity's <code>.animSheet</code>. This method is essentially a shorthand for the <a href="documentation-class-reference-animation.html">Animation</a> constructor.
+	</p>
+<ul>
+	<li><code>name</code> The name of the new animation in the entity's <code>.anims</code> object. </li>
+	<li><code>frameTime</code> The time each frame of the animation will be displayed in seconds</li>
+	<li><code>sequence</code> An array of frame numbers for the animation. </li>
+	<li><code>stop</code> Boolean. Determines if the animation should stop at the last frame, or repeat indefinitely. Defaults to <code>false</code>.</li>
+
+</ul>
+<p>If the entities <a href="#currentanim">.currentAnim</a> is <code>null</code>, the newly created Animation is set as the <code>.currentAnim</code>.</p>
+<p>You can access an Animation created with this method through the <a href="#anims">.anims</a> property. E.g.:</p>
+<pre class="javascript">
+this.addAnim( 'run', 0.1, [0,1,2,3,4] );
+this.anims.run.flip.x = true;
+</pre>
+<h3 id="angleto">.angleTo( other ) </h3>
+<p>Return the angle from this entity's center to the <code>other</code> entity's center.</p>
+<h3 id="check">.check( other )</h3>
+<p>This method is called if this entity overlaps with the <code>other</code> entity and the <code>other</code> entity's <a href="#type">.type</a> matches this entity's <a href="#checkagainst">.checkAgainst</a> property.</p>
+<h3 id="collidewith">.collideWith( other, axis )</h3>
+<p>This method is called when this entity collides with another entity. <code>axis</code> is the collision axis: either <code>'x'</code> or <code>'y'</code>.</p>
+<h3 id="draw">.draw()</h3>
+<p>Automatically called by the <a href="documentation-class-reference-game.html">Game</a> for each frame. Draws the current animation.</p>
+<h3 id="distanceto">.distanceTo( other )</h3>
+<p>Returns the absolute distance in pixels from this entity's center to the <code>other</code> entity's center.</p>
+<h3 id="handlemovementtrace">.handleMovementTrace( res )</h3>
+<p>The default <a href="#update">.update()</a> method of an entity does a movement trace against the <a href="documentation-class-reference-collisionmap.html">CollisionMap</a>. The <code>.handleMovementTrace()</code> method receives the result of this trace and acts accordingly. Refer to the CollisionMap's <a href="documentation-class-reference-collisionmap.html#trace">trace()</a> method for a description of the <code>res</code> argument.<br/></p>
+<p>You can overwrite this method to opt out of collision or create some additional behavior.</p>
+<p>If, for instance, you want to play a sound when your player entity hits the floor with a certain speed, you can overwrite <code>.handleMovementTrace()</code> and check for collision and speed.</p>
+<pre class="javascript">
+EntityPlayer = ig.Entity.extend({
+
+…
+
+handleMovementTrace: function( res ) {
+	if( res.collision.y &amp;&amp; this.vel.y &gt; 32 ) {
+		this.soundBounce.play();
+	}
+
+	// Continue resolving the collision as normal
+	this.parent(res); 
+},
+
+…
+
+});
+</pre>
+<h3 id="kill">.kill()</h3>
+<p>Removes the entity from the game world. This method is called by <a href="#receivedamage">.receiveDamage()</a> if the entity's <a href="#health">health</a> is <code>0</code> or less.</p>
+<h3 id="ready">.ready()</h3>
+<p><em>New in 1.19</em></p>
+<p>This function is called once after a level was completely loaded and all entities are present. Use it to initialize connections between entities and such. The default implementation of this function does nothing.</p>
+<h3 id="receivedamage">.receiveDamage( amount, from )</h3>
+<p>Substracts <code>amount</code> from the entities <a href="#health">.health</a> and calls <a href="#kill">.kill()</a> if the entities new health is below or equal to <code>0</code>.</p>
+<p>This function should be called with the damage giving entity as the <code>from</code> parameter. This parameter, however, is currently not used.</p>
+<h3 id="touches">.touches( other )</h3>
+<p>Returns <code>true</code> if this entity touches the <code>other</code> entity, otherwise <code>false</code>.</p>
+<h3 id="update">.update()</h3>
+<p>This method is called each frame by the <a href="documentation-class-reference-game.html">Game</a> before drawing. The base entity's <code>.update()</code> method moves the entity according to it's velocity, friction, bounciness etc. and updates the current animation. This is the place to add your own logic for this entity. If you overwrite this method, you can still call the base entity's <code>.update()</code> method with <code>this.parent()</code>. See the <a href="#synopsis">Synopsis</a> for an example.</p>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000936 -->
+	</div>
+</div>
+
+</body>
+</html>

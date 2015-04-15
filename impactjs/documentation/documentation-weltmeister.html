@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Weltmeister - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+						Weltmeister		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+				
+			</div>
+	
+	
+	
+	<div id="content">
+		<p>This article will teach you the basics of the Weltmeister Level Editor. Note that there's also a <a href="documentation-video-tutorial-weltmeister.html">video tutorial</a> available.</p>
+<h2 id="starting-weltmeister">Starting Weltmeister</h2>
+<p>If your web server is configured correctly, you should be able to point your browser to <code>http://localhost/impact/weltmeister.html</code> where <code>/impact/</code> is of course the directory in which you extracted Impact.</p>
+<p>When Weltmeister has loaded you are presented with a new, empty level. If it doesn't load, check your JavaScript error console and make sure PHP works fine on your server.</p>
+<h2 id="controls">Controls</h2>
+<ul>
+	<li>Hold down the <strong>right mouse button</strong> or the <strong>ctrl key</strong> to drag the view around.</li>
+	<li>The <strong>left mouse button</strong> draws the currently selected tile or, when the entity layer is selected, selects the entity under the cursor.</li>
+	<li><strong>Space</strong> toggles the tile selection or entity selection menu, depending on which layer is active.</li>
+	<li><strong>Backspace</strong> or <strong>del</strong> will delete the currently selected entity. <strong>C</strong> will clone it.</li>
+	<li><strong>Z</strong> and <strong>Y</strong> are undo and redo respectively.</li>
+	<li>Press <strong>G</strong> to toggle the grid for BackgroundMaps</li>
+	<li>Hold down <strong>shift</strong> and the <strong>left mouse button</strong> to select an area of your map or tile selection screen as your new &quot;brush&quot;</li>
+
+</ul>
+<p>You can change these controls in your <code>lib/weltmeister/config.js</code> file.</p>
+<h2 id="working-with-layers">Working with Layers</h2>
+<p><img class="left" src="media/weltmeister-tutorial.png" alt="Weltmeister"/>
+You will see that even in your empty map one layer is present: the <em>entities</em> layer. All entities for your level are placed here. This layer is always there; it cannot be deleted.</p>
+<p>When you click on the <code>+</code> icon, a new layer will be created and selected. You can select layers by clicking on them in the menu, or pressing the corresponding number key on your keyboard.</p>
+<p>The visibility of a layer can be toggled by clicking on the box in front of the layer's name, or by shift-pressing the corresponding number key. This visibility is only respected in the editor - it won't have any effect on your game (if you use the default <a href="documentation-class-reference-game.html#loadlevel">.loadLevel()</a> method that is).</p>
+<p>You will see the <em>Layer Settings</em> menu for the selected layer (if it is not the entity layer). Here you can change the <em>Name</em> and the <em>Tileset</em> for this layer, as well as the <em>Tilesize</em> and the layer's width and height in tiles.</p>
+<p>Be careful when changing the layer's <em>Dimensions</em> or <em>Tilesize</em>: there is no undo!</p>
+<p>The <em>Distance</em> of a layer determines how fast this layer scrolls relative to your games <em>screen position</em>. With a distance of 1, the layer scrolls synchronous to the screen. With a distance of 2 the Map scrolls with half the speed, making it appear farther in the background. This is only useful for secondary background layers. For your main layer it should always be 1.</p>
+<p>The <em>Repeat</em> checkbox specifies if this layer should be drawn as a repeating &quot;background pattern&quot;. Again, this is useful for secondary background layers.</p>
+<p>If <em>Link with Collision</em> is checked, all manipulations on this layer will also be made on the <em>collision</em> layer. That means that every time you draw a tile on this layer the same spot on the collision layer will be made solid (tile #1). Every time you delete a tile, it will be deleted from the collision layer as well.</p>
+<p>You can create a collision layer like every other layer and tick the <em>Is Collision Layer</em> checkbox. It will automatically use the collision tileset and become the collision layer for this level. This also means, that this layer will not be drawn in your game.</p>
+<h2 id="drawing">Drawing</h2>
+<p>When a background or collision layer is selected, you can open the tile selection menu by pressing <strong>space</strong>. Select a tile by left clicking on it. After selecting a tile, simply left click to place it. Hold down <strong>shift</strong> and click+drag to select several tiles at once.</p>
+<p>If you want to delete some tiles from the layer, press <strong>space</strong> and click anywhere <strong>outside</strong> the tile selection menu. This will select the &quot;empty&quot; tile. Again, just left click anywhere you want to place it.</p>
+<p>All tile drawing operations can be undone or redone using <strong>Z</strong> or <strong>Y</strong> respectively.</p>
+<h2 id="loading-your-entities">Loading Your Entities</h2>
+<p>When the entities layer is selected, you can place an entity by pressing <strong>space</strong> and selecting it from the menu.</p>
+<p>This menu will list all entities that were found in the <code>lib/game/entities/</code> directory (this path can be changed in your <code>lib/weltmeister/config.js</code>). Entity names must be in a specific format in order to be loadable in Weltmeister.</p>
+<p>E.g. the file <code>lib/game/entities/player.js</code> must define an ig.Entity subclass with the name <code>EntityPlayer</code>. Dashes in the filename are used as an indicator for uppercase letters in the entity name. E.g. the file <code>enemy-blob.js</code> must define <code>EntityEnemyBlob</code>.</p>
+<p>If there's a mismatch between the filename and the entity name, Weltmeister will tell you so when starting.</p>
+<p>Entities can have some special properties that will only be used in Weltmeister. These properties all begin with <code>_wm</code>. See <a href="documentation-class-reference-entity.html#wmscalable">ig.Entity</a> for details.</p>
+<h2 id="manipulating-entities">Manipulating Entities</h2>
+<p>Entities can be dragged around by left clicking and holding them. If an entity is scalable (<code>._wmScalable = true</code>) you can change its size by dragging the the edges.</p>
+<p>Entities can be deleted by pressing <strong>backspace</strong> or <strong>del</strong>. You can &quot;clone&quot; entities by pressing <strong>C</strong> – note that this only create a new entity of the same type, it does not copy all the original entity's properties.</p>
+<p>When an entity is selected you will see the <em>Entity Settings</em> menu on the right. Some settings, like <code>x</code>, <code>y</code>, <code>size.x</code> and <code>size.y</code> will be automatically updated when you drag an entity around or change its size.</p>
+<p>If you click on one property, the &quot;key&quot; (name) and its value will appear in the input boxes at the bottom. If you press <strong>enter</strong> in the <em>Value</em> box the value will be written to the entity.</p>
+<p>You can add any number of settings to an entity by just entering a new key and value. E.g. if you want to set an entities name property to &quot;myName&quot;, just enter &quot;name&quot; as <em>Key</em> and &quot;myName&quot; as <em>Value</em> and press enter. You can delete properties by specifying an empty string as the value.</p>
+<p>You can connect two entities with each other, by giving one entity a name and the other entity a target with that name. E.g.:</p>
+<pre>
+EntityDoor
+  key: name   
+value: door1  
+
+EntityTrigger
+  key: target.1
+value: door1
+</pre>
+<p>An entity can have multiple targets, so you have number your targets with <code>target.1</code>, <code>target.2</code> etc. If two entities are connected, a line will be drawn between them.<br/></p>
+<p><img class="center" src="media/weltmeister-tutorial-entities.png" alt="Entity Settings"/></p>
+<p>You can then use this <code>target</code> object of your trigger entity like this:</p>
+<pre class="javascript">
+EntityTrigger = ig.Entity.extend({
+	size: {x: 16, y: 16},
+	target: {},
+	checkAgainst: ig.Entity.TYPE.BOTH,
+	
+	_wmScalable: true,
+	_wmDrawBox: true,
+	_wmBoxColor: 'rgba(196, 255, 0, 0.7)',
+	
+	check: function( other ) {
+		// Iterate over all targets
+		for( var t in this.target ) {
+			var ent = ig.game.getEntityByName( this.target[t] );
+				
+			// Check if we got a &quot;door&quot; entity with the given name
+			if( ent &amp;&amp; ent instanceof EntityDoor ) {
+				ent.open();
+			}
+		}
+	}
+});
+</pre>
+<p>All Entity Settings will be directly written to the entity's properties, so be careful not to overwrite any properties you need, like the <code>draw</code> or <code>update</code> functions.</p>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000933 -->
+	</div>
+</div>
+
+</body>
+</html>

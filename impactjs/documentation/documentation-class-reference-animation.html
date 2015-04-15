@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Animation - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+							<a href="documentation-class-reference.html">Class Reference</a> <span class="sub">&raquo;</span>
+						Animation		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+					<h2>Class Reference</h2>
+			<ul>
+													<li><a href="documentation-class-reference-ig-core.html" >ig Core</a></li>
+									<li><a href="documentation-class-reference-animation.html" class="active">Animation</a></li>
+									<li><a href="documentation-class-reference-animationsheet.html" >AnimationSheet</a></li>
+									<li><a href="documentation-class-reference-backgroundmap.html" >BackgroundMap</a></li>
+									<li><a href="documentation-class-reference-class.html" >Class</a></li>
+									<li><a href="documentation-class-reference-collisionmap.html" >CollisionMap</a></li>
+									<li><a href="documentation-class-reference-entity.html" >Entity</a></li>
+									<li><a href="documentation-class-reference-font.html" >Font</a></li>
+									<li><a href="documentation-class-reference-game.html" >Game</a></li>
+									<li><a href="documentation-class-reference-image.html" >Image</a></li>
+									<li><a href="documentation-class-reference-input.html" >Input</a></li>
+									<li><a href="documentation-class-reference-loader.html" >Loader</a></li>
+									<li><a href="documentation-class-reference-map.html" >Map</a></li>
+									<li><a href="documentation-class-reference-music.html" >Music</a></li>
+									<li><a href="documentation-class-reference-sound.html" >Sound</a></li>
+									<li><a href="documentation-class-reference-soundmanager.html" >SoundManager</a></li>
+									<li><a href="documentation-class-reference-system.html" >System</a></li>
+									<li><a href="documentation-class-reference-timer.html" >Timer</a></li>
+							</ul>	
+				
+					<div id="fragmentMenu">
+				<h2>Animation</h2>
+			</div>	
+			</div>
+	
+	
+	
+	<div id="content">
+		<p>Defined in Module <strong>impact.animation</strong>, inherits from <a href="documentation-class-reference-class.html">ig.Class</a></p>
+<h2 id="synopsis">Synopsis</h2>
+<pre class="javascript">
+// Create animation
+var animSheet = new ig.AnimationSheet( 'sheet.png', 16, 16 );
+var anim = new ig.Animation( animSheet, 0.1, [0,1,2,3,2,1] );
+
+// Update animation to current frame
+anim.update();
+
+// Draw current frame
+anim.draw( x, y );
+</pre>
+<h2 id="description">Description</h2>
+<p>An <code>ig.Animation</code> object takes care of animating an Entity or Background Map tile. Frames from an animation sheet – an image with all animation frames – are drawn as specified by the animations <code>frameTime</code> and <code>sequence</code>.</p>
+<p>In most cases you shouldn't need to create an animation object by yourself, but instead use the <a href="documentation-class-reference-entity.html">ig.Entity's</a> <a href="documentation-class-reference-entity.html#addanim">.addAnim()</a> method.</p>
+<p>Read more in the <a href="documentation-animations.html">Animations Tutorial</a>.</p>
+<h2 id="constructor">Constructor</h2>
+<h3 id="new-ig-animation">new ig.Animation( sheet, frameTime, sequence, [stop] )</h3>
+<ul>
+	<li><code>sheet</code> An <a href="documentation-class-reference-animationsheet.html">ig.AnimationSheet</a> object specifying the image to use and the width and height of each frame</li>
+	<li><code>frameTime</code> Time in seconds each frame is displayed</li>
+	<li><code>sequence</code> An Array of integers, specifying the actual animation frames</li>
+	<li><code>stop</code> A Boolean, indicating whether to stop the animation when it has reached the last frame. Defaults to <code>false</code>.</li>
+
+</ul>
+<h2 id="properties">Properties</h2>
+<h3 id="alpha">.alpha</h3>
+<p>Alpha opacity of the animation from <code>0</code> to <code>1</code>. The default is <code>1</code> (fully opaque).</p>
+<h3 id="angle">.angle</h3>
+<p><em>New in 1.15</em></p>
+<p>Rotation of the animation in radians. The center of rotation is specified by <a href="#pivot-x-pivot-y">.pivot</a>.</p>
+<h3 id="flip-x-flip-y">.flip.x, .flip.y</h3>
+<p>Booleans, indicating whether the animation should be drawn flipped on the x and/or y axis</p>
+<h3 id="frame">.frame</h3>
+<p>The current frame number, set by the <code>.update()</code> method</p>
+<h3 id="loopcount">.loopCount</h3>
+<p>An integer, specifying how often the animation has been played through since the last call to <code>.rewind()</code>.<br/></p>
+<p>Note that even if the animation has stopped at the last frame, the <code>.loopCount</code> is updated as if the animation was still running.</p>
+<h3 id="pivot-x-pivot-y">.pivot.x, .pivot.y</h3>
+<p><em>New in 1.15</em></p>
+<p>Center of the rotation when using <a href="#angle">.angle</a>. The default is half the <code>.width</code> and <code>.height</code> of the AnimationSheet, i.e. the center of the animation frame.</p>
+<h3 id="tile">.tile </h3>
+<p>The current tile of the animation sheet, set by the <code>.update()</code> method</p>
+<h2 id="methods">Methods</h2>
+<h3 id="draw">.draw( x, y)</h3>
+<p>Draws the current animation frame at the given screen coordinates</p>
+<h3 id="gotoframe">.gotoFrame( f )</h3>
+<p>Jumps to frame number <code>f</code></p>
+<h3 id="gotorandomframe">.gotoRandomFrame()</h3>
+<p>Jumps to a random frame</p>
+<h3 id="rewind">.rewind()</h3>
+<p>Rewinds the animation to its first frame and resets the <code>.loopCount</code></p>
+<p>This method returns the animation itself. This is useful when switching between animations. E.g:</p>
+<pre class="javascript">
+// In an entities .update() method
+this.currentAnim = this.anims.jump.rewind();
+</pre>
+<h3 id="update">.update()</h3>
+<p>Updates the animation to the current frame, based on its <code>frameTime</code></p>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000934 -->
+	</div>
+</div>
+
+</body>
+</html>

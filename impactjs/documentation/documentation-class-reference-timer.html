@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Timer - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+							<a href="documentation-class-reference.html">Class Reference</a> <span class="sub">&raquo;</span>
+						Timer		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+					<h2>Class Reference</h2>
+			<ul>
+													<li><a href="documentation-class-reference-ig-core.html" >ig Core</a></li>
+									<li><a href="documentation-class-reference-animation.html" >Animation</a></li>
+									<li><a href="documentation-class-reference-animationsheet.html" >AnimationSheet</a></li>
+									<li><a href="documentation-class-reference-backgroundmap.html" >BackgroundMap</a></li>
+									<li><a href="documentation-class-reference-class.html" >Class</a></li>
+									<li><a href="documentation-class-reference-collisionmap.html" >CollisionMap</a></li>
+									<li><a href="documentation-class-reference-entity.html" >Entity</a></li>
+									<li><a href="documentation-class-reference-font.html" >Font</a></li>
+									<li><a href="documentation-class-reference-game.html" >Game</a></li>
+									<li><a href="documentation-class-reference-image.html" >Image</a></li>
+									<li><a href="documentation-class-reference-input.html" >Input</a></li>
+									<li><a href="documentation-class-reference-loader.html" >Loader</a></li>
+									<li><a href="documentation-class-reference-map.html" >Map</a></li>
+									<li><a href="documentation-class-reference-music.html" >Music</a></li>
+									<li><a href="documentation-class-reference-sound.html" >Sound</a></li>
+									<li><a href="documentation-class-reference-soundmanager.html" >SoundManager</a></li>
+									<li><a href="documentation-class-reference-system.html" >System</a></li>
+									<li><a href="documentation-class-reference-timer.html" class="active">Timer</a></li>
+							</ul>	
+				
+					<div id="fragmentMenu">
+				<h2>Timer</h2>
+			</div>	
+			</div>
+	
+	
+	
+	<div id="content">
+		<p>Defined in Module <strong>impact.timer</strong>, inherits from <a href="documentation-class-reference-class.html">ig.Class</a></p>
+<h2 id="synopsis">Synopsis</h2>
+<pre class="javascript">
+var timer = new ig.Timer();
+
+// Difference between current time and the time .set()
+timer.delta(); // =&gt; 0
+
+// Set the timer to 5 seconds in the future
+timer.set( 5 );
+timer.delta(); // =&gt; -5
+
+// ... one second later
+timer.delta(); // =&gt; -4
+
+// ... 5 more seconds later
+timer.delta(); // =&gt; 1
+</pre>
+<h2 id="description">Description</h2>
+<p>The <code>ig.Timer</code> has two distinct modes of operation. You can either get the difference (<a href="#delta">.delta()</a>) between the current time and the timers <em>target</em> time (as set by the <a href="#new-ig-timer">constructor</a> or <a href="#set">.set()</a>) or just get the current <em>tick</em> - the time since the last call to <a href="#tick">.tick()</a>.</p>
+<p>All timers are only updated <strong>once</strong> for each frame. So calling <code>.delta()</code> on one timer several times during one frame, will result in the exact same return value.</p>
+<p><code>ig.Timer</code> <strong>does not measure real time</strong>, but game time. Game time can progress slower than the real time, when the browser can't keep up with executing the game loop several times (default 20) per second. See <a href="#ig-timer-maxstep">ig.Timer.maxStep</a>.</p>
+<p>How fast the game time progresses is also depended on the global <a href="#ig-timer-timescale">ig.Timer.timeScale</a> property.</p>
+<p>Be aware, that all time intervals are in seconds, as opposed to JavaScripts milliseconds.</p>
+<h2 id="constructor">Constructor</h2>
+<h3 id="new-ig-timer">new ig.Timer( [seconds] )</h3>
+<ul>
+	<li><code>seconds</code> Relative <em>target</em> time. Default <code>0</code>.</li>
+
+</ul>
+<p><br/></p>
+<h2 id="methods">Methods</h2>
+<h3 id="delta">.delta()</h3>
+<p>Returns the time in seconds relative to the timers <em>target</em> time. See <a href="#set">.set()</a>.</p>
+<p>If the <em>target</em> time is in the future, the return value of this function will be negative (e.g. <code>-5</code> for 5 seconds in the future). If the target time is in the past, the return value will be positive. It essentially returns the time &quot;since&quot; the <em>target</em> time.</p>
+<p>If you, for instance, want to measure how long the player took to finish a level of your game, just create a new timer when the level starts and call <code>.delta()</code> when the level ends.</p>
+<pre class="javascript">
+// at level start
+var playTimer = new ig.Timer(); // no &quot;target&quot; time given = NOW.
+
+// ... at level end
+var timeNeeded = playTimer.delta();
+
+// reset the timer at the start of the next level
+playTimer.reset();
+</pre>
+<h3 id="pause">.pause()</h3>
+<p><em>New in 1.20</em></p>
+<p>Pauses the timer. Calling <code>.delta()</code> for paused timers will always return the same value. <code>.tick()</code> will return <code>0</code>.</p>
+<p>Calling <code>.unpause()</code>, <code>.set()</code> or <code>.reset()</code> unpauses the timer.</p>
+<h3 id="unpause">.unpause()</h3>
+<p><em>New in 1.20</em></p>
+<p>Resumes a paused timer.</p>
+<h3 id="reset">.reset()</h3>
+<p>Reset the starting time for this timer. This does <strong>not</strong> reset the <em>target</em> time.</p>
+<pre class="javascript">
+var timer = new ig.Timer( 5 );
+
+// ... one second later
+timer.delta(); // =&gt; -4
+
+timer.reset();
+timer.delta(); // =&gt; -5
+</pre>
+<h3 id="set">.set( [seconds] )</h3>
+<p>Resets the starting time for this timer <strong>and</strong> sets the relative <em>target</em> time. Default <code>0</code>.</p>
+<pre class="javascript">
+var timer = new ig.Timer( 5 );
+
+// ... one second later
+timer.delta(); // =&gt; -4
+
+timer.set( 3 );
+timer.delta(); // =&gt; -3
+</pre>
+<h3 id="tick">.tick()</h3>
+<p>Get the time since the last call to .tick() for this timer. Note that, since <code>ig.Timer</code> represents game time, it does <strong>not</strong> update during a single frame. E.g.:</p>
+<pre class="javascript">
+var timer = new ig.Timer();
+
+timer.tick(); // =&gt; 0
+doSomethingVeryComplicatedThatTakesAFewSeconds( andBlocksEverything );
+timer.tick(); // =&gt; 0
+</pre>
+<p>A global <em>tick</em>, updated each frame, is also provided at <code>ig.system.tick</code>.</p>
+<h2 id="global-properties">Global properties</h2>
+<h3 id="ig-timer-maxstep">ig.Timer.maxStep</h3>
+<p>The max time step. The game time will never advance more than this per frame. The default is <code>0.05</code>, which equals a minimum frame rate of 20 fps. If the browser is unable to run at at least 20 fps, the game is essentially slowed down.</p>
+<h3 id="ig-timer-timescale">ig.Timer.timeScale</h3>
+<p>Game time factor. With a value of <code>0.5</code> the game will run in slow motion, with <code>2</code> it will run at twice the speed. The default is <code>1</code>.</p>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000938 -->
+	</div>
+</div>
+
+</body>
+</html>

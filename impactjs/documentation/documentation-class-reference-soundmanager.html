@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>SoundManager - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+							<a href="documentation-class-reference.html">Class Reference</a> <span class="sub">&raquo;</span>
+						SoundManager		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+					<h2>Class Reference</h2>
+			<ul>
+													<li><a href="documentation-class-reference-ig-core.html" >ig Core</a></li>
+									<li><a href="documentation-class-reference-animation.html" >Animation</a></li>
+									<li><a href="documentation-class-reference-animationsheet.html" >AnimationSheet</a></li>
+									<li><a href="documentation-class-reference-backgroundmap.html" >BackgroundMap</a></li>
+									<li><a href="documentation-class-reference-class.html" >Class</a></li>
+									<li><a href="documentation-class-reference-collisionmap.html" >CollisionMap</a></li>
+									<li><a href="documentation-class-reference-entity.html" >Entity</a></li>
+									<li><a href="documentation-class-reference-font.html" >Font</a></li>
+									<li><a href="documentation-class-reference-game.html" >Game</a></li>
+									<li><a href="documentation-class-reference-image.html" >Image</a></li>
+									<li><a href="documentation-class-reference-input.html" >Input</a></li>
+									<li><a href="documentation-class-reference-loader.html" >Loader</a></li>
+									<li><a href="documentation-class-reference-map.html" >Map</a></li>
+									<li><a href="documentation-class-reference-music.html" >Music</a></li>
+									<li><a href="documentation-class-reference-sound.html" >Sound</a></li>
+									<li><a href="documentation-class-reference-soundmanager.html" class="active">SoundManager</a></li>
+									<li><a href="documentation-class-reference-system.html" >System</a></li>
+									<li><a href="documentation-class-reference-timer.html" >Timer</a></li>
+							</ul>	
+				
+					<div id="fragmentMenu">
+				<h2>SoundManager</h2>
+			</div>	
+			</div>
+	
+	
+	
+	<div id="content">
+		<p>Defined in Module <strong>impact.sound</strong>, inherits from <a href="documentation-class-reference-class.html">ig.Class</a></p>
+<h2 id="description">Description</h2>
+<p>The sound managers takes care of loading sounds and providing them for <a href="documentation-class-reference-music.html">ig.Music</a> and <a href="documentation-class-reference-sound.html">ig.Sound</a> instances. An instance of the sound manager is automatically created at <code>ig.soundManager</code> (lowercase) by the <a href="documentation-class-reference-ig-core.html#main-function">ig.main()</a> function.</p>
+<h2 id="properties">Properties</h2>
+<h3 id="channels">.channels</h3>
+<p><em>This property has been removed in 1.17 - use <a href="documentation-class-reference-sound.html#ig-sound-channels">ig.Sound.channels</a> instead</em></p>
+<h3 id="format">.format</h3>
+<p>The sound format that is used by the current browser. Either <code>'mp3'</code> or <code>'ogg'</code>.</p>
+<p>The browsers capabilities are automatically detected and the format is set accordingly. When both are supported, the <code>'mp3'</code> format is favored, as Chrome seems to have more issues with <code>'ogg'</code>.</p>
+<p>If you want to set this manually, you have to do so before loading any sound file.</p>
+<h3 id="volume">.volume</h3>
+<p>Global volume for all <a href="documentation-class-reference-sound.html">ig.Sound</a> instances from <code>0.0</code> to <code>1.0</code>. The default is <code>1</code>.</p>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000937 -->
+	</div>
+</div>
+
+</body>
+</html>

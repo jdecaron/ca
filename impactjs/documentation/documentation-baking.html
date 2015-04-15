@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Baking - Impact</title>
+	<link rel="stylesheet" type="text/css" href="media/screen.css" />
+	<link rel="Shortcut Icon" href="media/favicon.png" />
+	<script type="text/javascript" src="media/jquery-1.4.3.min.js"></script>
+	<script type="text/javascript" src="media/impact.js?v5"></script>
+</head>
+<body>
+
+<div id="title">
+	<div class="content">
+		<a href="documentation.html" id="impact"><img src="media/impact.png" alt="Impact"/></a>
+		<div id="generated">
+			Generated: 2013-04-01		</div>
+	</div>
+	<div class="clear"></div>
+</div>
+
+<div id="breadcrumbs">
+	<div class="content">
+		<h1 >
+							<a href="documentation.html">Documentation</a> <span class="sub">&raquo;</span>
+						Baking		</h1>
+	</div>
+</div>
+
+<div class="wideContent">
+	<div id="sidebar">
+				
+			</div>
+	
+	
+	
+	<div id="content">
+		<p>So you have finished your game and want to show it to the internets? Great! However, before you do so, you should pack all your source files together into one big file. This will shorten the initial loading time for your visitors <strong>a lot</strong>.</p>
+<p>Impact comes with a PHP script that does the packing for you. You can call this script from the command line, or if you are on Windows double click the <code>bake.bat</code> in the <code>tools/</code> directory. On MacOSX open a terminal window, navigate into the <code>tools/</code> directory and write <code>./bake.sh</code>.</p>
+<p>If you get an error message, make sure all the paths are correct. You can open the <code>bake.bat</code> or <code>bake.sh</code> with a text editor. The only two lines you should ever need to change are these:</p>
+<pre>
+SET GAME=lib/game/main.js
+
+SET OUTPUT_FILE=game.min.js
+</pre>
+<p>The <code>GAME</code> variable should point to your game's main .js file (the one you load in the &lt;script&gt; tag of the .html page).</p>
+<p><code>OUTPUT_FILE</code> determines where the <em>baked</em> script file will be written.</p>
+<p>On Windows you also have to make sure that the <code>bake.bat</code> can find the <code>php.exe</code> on your system. You can either add the installation path of PHP to your <code>PATH</code> environment variable (<a href="http://www.google.com/search?q=windows+add+php+path">ask google</a>) or edit the <code>bake.bat</code> to point directly to your <code>php.exe</code>.</p>
+<p>If the script finishes without errors, you can find the <code>game.min.js</code> (or whatever you set it to in the <code>bake.bat</code>) in your Impact directory. You can now load this one .js file in your .html  instead of the two files you had previously.</p>
+<p>E.g. change this</p>
+<pre>
+&lt;script type=&quot;text/javascript&quot; src=&quot;lib/impact/impact.js&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;lib/game/main.js&quot;&gt;&lt;/script&gt;
+</pre>
+<p>to this</p>
+<pre>
+&lt;script type=&quot;text/javascript&quot; src=&quot;game.min.js&quot;&gt;&lt;/script&gt;
+</pre>
+<p>The <code>game.min.js</code> is then the only source file you'll have to upload or distribute.</p>
+	</div>
+	
+		
+		
+	<div class="clear"></div>
+
+</div>
+
+
+<div id="foot">
+	<div id="copy" class="content">
+		ImpactJS.com &copy; 2013 
+		<a href="http://www.phoboslab.org/">Dominic Szablewski</a>
+		(<a href="http://impactjs.com/contact">contact</a>)
+		- powered by <a href="http://www.pagenode.org">Pagenode</a>
+		- made in Hesse &#x2665;
+		<!-- ts:20130401000932 -->
+	</div>
+</div>
+
+</body>
+</html>
