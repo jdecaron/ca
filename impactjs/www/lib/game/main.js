@@ -18,6 +18,8 @@ MyGame = ig.Game.extend({
 	font: new ig.Font( 'media/04b03.font.png' ),
 	
     gravity: 800,
+    
+    mode: 'add',
 	
 	init: function() {
 		// Initialize your game here; bind keys etc.
@@ -29,6 +31,9 @@ MyGame = ig.Game.extend({
 		ig.input.bind( ig.KEY.RIGHT_ARROW, 'right' );
 		ig.input.bind( ig.KEY.D, 'right' );
         ig.input.bind( ig.KEY.SPACE, 'jump' );
+
+		ig.input.bind( ig.KEY._1, 'add' );
+		ig.input.bind( ig.KEY._2, 'remove' );
 
         ig.input.bind( ig.KEY.MOUSE1, 'action' );
         ig.input.initMouse();
@@ -135,8 +140,25 @@ MyGame = ig.Game.extend({
 
 		this.camera.follow( this.player );
 
+        if( ig.input.pressed('add') ) {
+            this.mode = 'add';
+        }
+
+        if( ig.input.pressed('remove') ) {
+            this.mode = 'remove';
+        }
+
         if( ig.input.pressed('action') ) {
-            console.log('action11');
+            var tileSize = this.currentLevel.layer[0].tilesize;
+            var x = Math.floor((this.camera.pos.x + ig.input.mouse.x)/tileSize);
+            var y = Math.floor((this.camera.pos.y + ig.input.mouse.y)/tileSize);
+            if(this.mode == 'add') {
+                this.currentLevel.layer[0].data[y][x] = 2;
+                this.currentLevel.layer[1].data[y][x] = 1;
+            } else {
+                this.currentLevel.layer[0].data[y][x] = 0;
+                this.currentLevel.layer[1].data[y][x] = 0;
+            }
         }
 		
 		// Add your own, additional update code here
@@ -151,7 +173,7 @@ MyGame = ig.Game.extend({
 		var x = ig.system.width/2,
 			y = ig.system.height/2;
 		
-		this.font.draw( 'create blocks', ig.input.mouse.x+10, ig.input.mouse.y);
+		this.font.draw( this.mode + ' blocks', ig.input.mouse.x+10, ig.input.mouse.y);
 	}
 });
 
