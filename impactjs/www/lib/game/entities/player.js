@@ -33,6 +33,8 @@ EntityPlayer = ig.Entity.extend({
         
         // Call the parent constructor
         this.parent( x, y, settings );
+
+        ig.game.player = this;
     },
     
     update: function() {
@@ -41,25 +43,21 @@ EntityPlayer = ig.Entity.extend({
 
 		var accel = this.standing ? this.accelGround : this.accelAir;
 		if( ig.input.state('left') ) {
-            console.log('left');
 			this.accel.x = -accel;
 			this.flip = true;
 		}
 		else if( ig.input.state('right') ) {
-            console.log('right');
 			this.accel.x = accel;
 			this.flip = false;
 		}
 		else {
-            console.log('right');
 			this.accel.x = 0;
 		}
         
 		if( this.standing && ig.input.pressed('jump') ) {
             this.vel.y = -this.jump;
-            console.log('jump');
         }
-        
+
         // Call the parent update() method to move the entity
         // according to its physics
         this.parent(); 
