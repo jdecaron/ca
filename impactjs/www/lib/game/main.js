@@ -40,36 +40,67 @@ MyGame = ig.Game.extend({
 	},
 
     loadLevel: function() {
-        var collision = [
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],
-            [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
-        ];
+        var collision = [];
+        for(var i = 0; i < 40; i++) {
+            collision[i] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        }
         var data = _.clone(collision, true);
+
+        var offset = 0;
+        var scale = 10;
+        var map = [];
+        var minimum = {'x':0, 'y':0};
+        var floodFill = function(x, y) {
+            var key = x + ':' + y;
+            var value = noise.perlin2((x+offset) / scale, (y+offset) / scale);
+            value = Math.floor(value * 256);
+            if(x < minimum.x) {
+                minimum.x = x;
+            }
+            if(y < minimum.y) {
+                minimum.y = y;
+            }
+            if(_.contains(map, key)) {
+                console.log('contains', key);
+                return;
+            }
+            if(value <= 0) {
+                console.log('value <= 0', value);
+                return;
+            }
+            map.push(key);
+            floodFill(x-1, y);
+            floodFill(x+1, y);
+            floodFill(x, y-1);
+            floodFill(x, y+1);
+            return;
+        }
+
+        floodFill(11, 0);
         
-        for(var x = 0; x < 30; x++) {
-            var t = 100/20;
-            var value = noise.perlin3((x+t)/20, (x+t)/20, 0);
+        offset = 0;
+        scale = 20;
+        for(var x = 0; x < 60; x++) {
+            var offset = 0;
+            var value = noise.perlin3((x+offset) / scale, (x+offset) / scale, 0);
             value = (1 + value) * 1.1 * 10;
-            collision[Math.ceil(value)-5][x] = 1;
-            data[Math.ceil(value)-5][x] = 1;
+            var y = Math.ceil(value)-5;
+            collision[y][x] = 1;
+            data[y][x] = 1;
+
+            for(var c = y+1; c < collision.length; c++) {
+                collision[c][x] = 1;
+                data[c][x] = 2;
+            }
+
+        }
+        for(var c = 0; c < map.length; c++) {
+            // Creating caves from the list.
+            var key = map[c].split(':');
+            key[0] = Number(key[0]);
+            key[1] = Number(key[1]);
+            collision[key[1]+15][key[0]] = 0;
+            data[key[1]+15][key[0]] = 3;
         }
         var level = {
             "entities": [
@@ -82,8 +113,8 @@ MyGame = ig.Game.extend({
             "layer": [
                 {
                     "name": "main",
-                    "width": 30,
-                    "height": 20,
+                    "width": 60,
+                    "height": 30,
                     "visible": true,
                     "tilesetName": "media/tiles.png",
                     "repeat": false,
@@ -95,8 +126,8 @@ MyGame = ig.Game.extend({
                 },
                 {
                     "name": "collision",
-                    "width": 30,
-                    "height": 20,
+                    "width": 60,
+                    "height": 30,
                     "visible": true,
                     "tilesetName": "",
                     "repeat": false,
