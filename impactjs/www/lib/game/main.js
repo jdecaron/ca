@@ -259,6 +259,9 @@ MyGame = ig.Game.extend({
                 if(this.original[y][x] != 0) {
                     this.currentLevel.layer[0].data[y][x] = 3;
                 }
+                else {
+                    this.currentLevel.layer[0].data[y][x] = 0;
+                }
                 this.currentLevel.layer[1].data[y][x] = 0;
             }
         }
