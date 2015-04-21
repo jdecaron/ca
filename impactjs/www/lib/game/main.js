@@ -20,6 +20,8 @@ MyGame = ig.Game.extend({
     gravity: 800,
     
     mode: 'add',
+    
+    original: [],
 	
 	init: function() {
 		// Initialize your game here; bind keys etc.
@@ -66,6 +68,7 @@ MyGame = ig.Game.extend({
             }
 
         }
+        this.original = _.clone(collision, true);
 
         var offset = 0;
         var scale = 5;
@@ -211,7 +214,9 @@ MyGame = ig.Game.extend({
                 this.currentLevel.layer[0].data[y][x] = 2;
                 this.currentLevel.layer[1].data[y][x] = 1;
             } else {
-                this.currentLevel.layer[0].data[y][x] = 0;
+                if(this.original[y][x] != 0) {
+                    this.currentLevel.layer[0].data[y][x] = 3;
+                }
                 this.currentLevel.layer[1].data[y][x] = 0;
             }
         }
