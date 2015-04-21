@@ -41,50 +41,22 @@ MyGame = ig.Game.extend({
 
     loadLevel: function() {
         var collision = [];
-        for(var i = 0; i < 40; i++) {
-            collision[i] = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+        var levelSize = {'x':120, 'y':40};
+        for(var i = 0; i < levelSize.y; i++) {
+            var inside = [];
+            for(var j = 0; j < levelSize.x; j++) {
+                inside.push(0);
+            }
+            collision[i] = inside;
         }
         var data = _.clone(collision, true);
 
-        var offset = 0;
-        var scale = 10;
-        var map = [];
-        var minimum = {'x':0, 'y':0};
-        var floodFill = function(x, y) {
-            var key = x + ':' + y;
-            var value = noise.perlin2((x+offset) / scale, (y+offset) / scale);
-            value = Math.floor(value * 256);
-            if(x < minimum.x) {
-                minimum.x = x;
-            }
-            if(y < minimum.y) {
-                minimum.y = y;
-            }
-            if(_.contains(map, key)) {
-                console.log('contains', key);
-                return;
-            }
-            if(value <= 0) {
-                console.log('value <= 0', value);
-                return;
-            }
-            map.push(key);
-            floodFill(x-1, y);
-            floodFill(x+1, y);
-            floodFill(x, y-1);
-            floodFill(x, y+1);
-            return;
-        }
-
-        floodFill(11, 0);
-        
-        offset = 0;
+        offset = Math.floor((Math.random() * 10000));
         scale = 20;
-        for(var x = 0; x < 60; x++) {
-            var offset = 0;
+        for(var x = 0; x < levelSize.x; x++) {
             var value = noise.perlin3((x+offset) / scale, (x+offset) / scale, 0);
             value = (1 + value) * 1.1 * 10;
-            var y = Math.ceil(value)-5;
+            var y = Math.ceil(value);
             collision[y][x] = 1;
             data[y][x] = 1;
 
@@ -94,27 +66,79 @@ MyGame = ig.Game.extend({
             }
 
         }
-        for(var c = 0; c < map.length; c++) {
-            // Creating caves from the list.
-            var key = map[c].split(':');
-            key[0] = Number(key[0]);
-            key[1] = Number(key[1]);
-            collision[key[1]+15][key[0]] = 0;
-            data[key[1]+15][key[0]] = 3;
+
+        var offset = 0;
+        var scale = 5;
+        var floodFill = function(cave, limits, x, y) {
+            var key = x + ':' + y;
+            var value = noise.perlin2((x+offset) / scale, (y+offset) / scale);
+            value = Math.floor(value * 256);
+
+            limits.maximum.x = Math.max(limits.maximum.x, x);
+            limits.maximum.y = Math.max(limits.maximum.y, y);
+            limits.minimum.x = Math.min(limits.minimum.x, x);
+            limits.minimum.y = Math.min(limits.minimum.y, y);
+
+            if(_.contains(cave, key)) {
+                //console.log('contains', key);
+                return;
+            }
+            if(value <= 0) {
+                //console.log('value <= 0', value);
+                return;
+            }
+            cave.push(key);
+            floodFill(cave, limits, x-1, y);
+            floodFill(cave, limits, x+1, y);
+            floodFill(cave, limits, x, y-1);
+            floodFill(cave, limits, x, y+1);
+            return;
         }
+
+        var caveList = [];
+        var limitList = [];
+        var generateCaves = function() {
+            var cave = [];
+            var limits = {'minimum': {'x':Infinity, 'y':Infinity}, 'maximum': {'x': -Infinity, 'y': -Infinity}};
+            floodFill(cave, limits, Math.floor((Math.random() * 100)), Math.floor((Math.random() * 100)));
+            if(cave.length > 0) {
+                caveList.push(cave);
+                limitList.push(limits);
+            }
+        }
+        for(var i = 0; i < 10; i++) {
+            generateCaves();
+        }
+        console.log(caveList);
+        console.log(limitList);
+
+        var firstBlock = Number(caveList[0][0].split(':')[1]);
+        console.log(firstBlock);
+        for(var c = 0; c < caveList[0].length; c++) {
+            // Creating caves from the list.
+            var key = caveList[0][c].split(':');
+            key[0] = Number(key[0]-limitList[0].minimum.x);
+            key[1] = Math.min(Math.max(Number(key[1]-limitList[0].minimum.y), 0), levelSize.y-1);
+            console.log(key[0], key[1])
+            collision[key[1]][key[0]] = 0;
+            if(data[key[1]][key[0]]) {
+                data[key[1]][key[0]] = 3;
+            }
+        }
+
         var level = {
             "entities": [
                 {
                     "type": "EntityPlayer",
-                    "x": 384,
-                    "y": 288
+                    "x": 200,
+                    "y": 0
                 }
             ],
             "layer": [
                 {
                     "name": "main",
-                    "width": 60,
-                    "height": 30,
+                    "width": levelSize.x,
+                    "height": levelSize.y,
                     "visible": true,
                     "tilesetName": "media/tiles.png",
                     "repeat": false,
@@ -126,8 +150,8 @@ MyGame = ig.Game.extend({
                 },
                 {
                     "name": "collision",
-                    "width": 60,
-                    "height": 30,
+                    "width": levelSize.x,
+                    "height": levelSize.y,
                     "visible": true,
                     "tilesetName": "",
                     "repeat": false,
