@@ -233,13 +233,8 @@ MyGame = ig.Game.extend({
             }
             var handleSound = function() {
                 if(positions.length > p) {
-                    //text.colors = [];
-                    //text.addColor('#000000', 0);
-                    //text.addColor('#ffffff', positions[p][1]);
-                    console.log(positions[p][1]);
                     var original = 'Who are the Kombai people,\n and how do they live?';
                     self.text = '[#000 ' + original.slice(0, positions[p][1]+1) + '][#FFF ' + original.slice(positions[p][1]+1) + ']';
-                    console.log(self.text);
                     self.timeout = setTimeout(handleSound, positions[p][0]);
                     p = p + 1;
                 }
