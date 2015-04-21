@@ -83,11 +83,9 @@ MyGame = ig.Game.extend({
             limits.minimum.y = Math.min(limits.minimum.y, y);
 
             if(_.contains(cave, key)) {
-                //console.log('contains', key);
                 return;
             }
             if(value <= 0) {
-                //console.log('value <= 0', value);
                 return;
             }
             cave.push(key);
@@ -112,17 +110,13 @@ MyGame = ig.Game.extend({
         for(var i = 0; i < 10; i++) {
             generateCaves();
         }
-        console.log(caveList);
-        console.log(limitList);
 
         var firstBlock = Number(caveList[0][0].split(':')[1]);
-        console.log(firstBlock);
         for(var c = 0; c < caveList[0].length; c++) {
             // Creating caves from the list.
             var key = caveList[0][c].split(':');
             key[0] = Number(key[0]-limitList[0].minimum.x);
             key[1] = Math.min(Math.max(Number(key[1]-limitList[0].minimum.y), 0), levelSize.y-1);
-            console.log(key[0], key[1])
             collision[key[1]][key[0]] = 0;
             if(data[key[1]][key[0]]) {
                 data[key[1]][key[0]] = 3;
