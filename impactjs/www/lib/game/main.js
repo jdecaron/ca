@@ -7,6 +7,7 @@ ig.module(
 	'impact.font',
 
 	'plugins.camera',
+	'plugins.font2',
 
     'game.entities.player'
 )
@@ -15,13 +16,18 @@ ig.module(
 MyGame = ig.Game.extend({
 	
 	// Load a font
-	font: new ig.Font( 'media/04b03.font.png' ),
+	font: new ig.Font( 'media/font.png' ),
+
+    sound: new ig.Sound( 'media/bq1.mp3' ),
+    timeout: null,
 	
     gravity: 800,
     
     mode: 'add',
     
     original: [],
+
+    text: [],
 	
 	init: function() {
 		// Initialize your game here; bind keys etc.
@@ -36,6 +42,7 @@ MyGame = ig.Game.extend({
 
 		ig.input.bind( ig.KEY._1, 'add' );
 		ig.input.bind( ig.KEY._2, 'remove' );
+		ig.input.bind( ig.KEY._3, 'sound' );
 
         ig.input.bind( ig.KEY.MOUSE1, 'action' );
         ig.input.initMouse();
@@ -200,6 +207,47 @@ MyGame = ig.Game.extend({
             this.mode = 'remove';
         }
 
+        if( ig.input.pressed('sound') ) {
+            var self = this;
+            var p = 0;
+            var positions = [
+                [200, 0],
+                [200, 3],
+                [200, 6],
+                [200, 9],
+                [200, 12],
+                [200, 15],
+                [200, 18],
+                [200, 21],
+                [600, 26],
+                [100, 29],
+                [100, 32],
+                [100, 35],
+                [100, 38],
+                [300, 42],
+                [100, 45],
+                [100, 48]
+            ];
+            if(self.timeout) {
+                clearTimeout(self.timeout);
+            }
+            var handleSound = function() {
+                if(positions.length > p) {
+                    //text.colors = [];
+                    //text.addColor('#000000', 0);
+                    //text.addColor('#ffffff', positions[p][1]);
+                    console.log(positions[p][1]);
+                    var original = 'Who are the Kombai people,\n and how do they live?';
+                    self.text = '[#000 ' + original.slice(0, positions[p][1]+1) + '][#FFF ' + original.slice(positions[p][1]+1) + ']';
+                    console.log(self.text);
+                    self.timeout = setTimeout(handleSound, positions[p][0]);
+                    p = p + 1;
+                }
+            }
+            handleSound();
+            self.sound.play();
+        }
+
         if( ig.input.pressed('action') ) {
             var tileSize = this.currentLevel.layer[0].tilesize;
             var x = Math.floor((this.camera.pos.x + ig.input.mouse.x)/tileSize);
@@ -227,7 +275,15 @@ MyGame = ig.Game.extend({
 		var x = ig.system.width/2,
 			y = ig.system.height/2;
 		
+        this.font.height = 37;
 		this.font.draw( this.mode + ' blocks', ig.input.mouse.x+10, ig.input.mouse.y);
+
+        this.font.draw(this.text, 200, 200);
+
+        ig.system.context.fillStyle = 'white';
+        ig.system.context.font         = 'bold 20px sans-serif';
+        ig.system.context.textBaseline = 'top';
+        ig.system.context.fillText (' Move with WASD, 1 & 2 (add / remove mode), click to interract, jump with space!', 0, 0);
 	}
 });
 

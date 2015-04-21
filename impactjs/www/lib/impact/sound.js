@@ -506,7 +506,7 @@ ig.Sound.FORMAT = {
 	WEBM: {ext: 'webm', mime: 'audio/webm; codecs=vorbis'},
 	CAF: {ext: 'caf', mime: 'audio/x-caf'}
 };
-ig.Sound.use = [ig.Sound.FORMAT.OGG, ig.Sound.FORMAT.MP3];
+ig.Sound.use = [ig.Sound.FORMAT.MP3, ig.Sound.FORMAT.OGG];
 ig.Sound.channels = 4;
 ig.Sound.enabled = true;
 
