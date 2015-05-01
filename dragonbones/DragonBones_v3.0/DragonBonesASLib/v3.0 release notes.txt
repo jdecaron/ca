@@ -1,0 +1,69 @@
+June-27-2014. DragonBones AS Library v3.0 
+
+DragonBones AS Library will be published separate with designpanel frome now on.
+IMPORTANT NOTICE: DragonBones AS Library v3.0 is applicable work with Design Panel 2.3 and above! If your dragonbones data is exported with older version designpanel, please installed the Designpanel V2.3 or above to import the you data and export again!
+
++New Feature:
+
+1.Animation support gotoAndStop
+2.Animation support play backward
+3.Factory and DataParser support delay parse animation data in parse data process.
+4.Improve Performance by Cache Animation and adjust animation Sampling Rate.
+5.Improve performance by Optimize handling still bones.
+
++Code Structure refine
+
+Remove DisplayBridge. Use Slot to replace it. Each rendering engine need to extend Slot to integrated with DragonBones.
+
++API refine:
+
+1.bone.fixRotation, replaced by bone.inheritRotation
+2.bone.scaleMode, replaced by bone.inheritScale
+3.slot.fixRotation£¬replaced by slot.inheritRotation
+4.slot.scaleMode£¬replaced by slot.inheritScale;
+5.animationState.currentTime£¬replaced by animationState.setCurrentTime
+6.armature.invalidUpdate(boneName:String = null)
+  It support updae a bone inside of the whole armature.
+7.animation.gotoAndPlay
+  return imported AnimationState Object.
+8.factory.parseData(bytes:ByteArray, dataName:String = null, ifSkipAnimationData:Boolean = false):SkeletonData
+  DataParser.parseData(rawData:Object, ifSkipAnimationData:Boolean = false):SkeletonData
+  Add new parameter ifSkipAnimationData, set it to true to skip parse animation data.
+
++API Added
+
+1.armature.cacheFrameRate
+  When armature.cacheFrameRate > 0, cache animation based on the frame rate. It will increase rendering performance as well as the memory consumption and also lose some animation feature (such as bone.offset can not be used. The timescale of bone's timeline must be 1/2^n (1, 0.5, 0.25)
+ 
+2.bone.invalidUpdate Force update bone in next frame even the bone is not moving
+
+3.animation.gotoAndStop Control the animation to stop with a specified time. If related   animationState haven't been created, then create a new animationState.
+  @param animationName : The name of the animationState.
+  @param time
+  @param normalizedTime
+  @param fadeInTime : A fade time to apply (>= 0), -1 means use xml data's fadeInTime.
+  @param duration : The duration of that AnimationData
+  @param layer : The layer of the animation.
+  @param group : The group of the animation.
+  @param fadeOutMode Fade out mode (none, sameLayer, sameGroup, sameLayerAndGroup, all).
+  @return AnimationState.
+
+4.factory.addAnimationToArmature(animationRawData:Object, armature:Armature, frameRate:uint):void
+  Add a new animation to armature.
+  @param animationRawData (XML, JSON).
+  @param target armature.
+  @param frame rate.
+
+5.DataParser.parseAnimationRawDataDictionary(rawData:Object, outputDictionary:Dictionary):void
+  Get animation raw data dictionary from skeleton raw data.
+
++Unrecommended API -> Recommended API
+
+1.bone.node -> bone.offset
+2.animation.movementList -> animation.animationList
+3.animation.movementID -> animation.lastAnimationName
+4.animationEvent.MOVEMENT_CHANGE -> animationEvent.FADE_IN or animationEvent.START
+5.animationEvent.movementID -> animation.animationName
+6.FrameEvent.MOVEMENT_FRAME_EVENT -> FrameEvent.ANIMATION_FRAME_EVENT
+7.bone.childArmature -> slot.childArmature
+8.bone.display -> slot.display
