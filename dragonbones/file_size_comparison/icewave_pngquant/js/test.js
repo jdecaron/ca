@@ -42,7 +42,6 @@ define(["require", "exports", 'core', 'util'], function(require, exports, core, 
             console.log('init scene');
 
             var armatureList = [
-                "bsl03_reels_boat-sd",
                 "bsl03_reels_cannon-sd",
                 "bsl03_reels_grog-sd",
                 "bsl03_reels_hook-sd",
@@ -67,7 +66,7 @@ define(["require", "exports", 'core', 'util'], function(require, exports, core, 
                 spriteAnim.y = 150;
                 this.addChild(spriteAnim);
             }
-            for(var i = 8; i < 11; i++) {
+            for(var i = 8; i < 10; i++) {
                 var spriteAnim = core.getSpriteAnim(armatureList[i]);
                 spriteAnim.x = -1200 + (150 * i);
                 spriteAnim.y = 300;

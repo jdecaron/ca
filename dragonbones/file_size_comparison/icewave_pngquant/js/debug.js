@@ -98,22 +98,3 @@ var options = function(event) {
 }
 options();
 window.onhashchange = options;
-
-var canvas = document.getElementById('test');
-var sizes = {'width':canvas.width, 'height':canvas.height};
-var lastAllowDefault  = false;
-
-var deviceOrientation = function() {
-	if(window.orientation == 90 || window.orientation == -90) {
-		var heightDiff 		= window.outerHeight - window.innerHeight;
-		allowDefault 		= (heightDiff > 0);
-		
-		if(lastAllowDefault != allowDefault) {
-			lastAllowDefault		= allowDefault;
-			var event 				= document.createEvent("Event");
-			event.initEvent("orientationChanged", true, true);
-			event['parameters'] = {'allowDefault': allowDefault};
-			document.dispatchEvent(event);
-		}
-	}
-}

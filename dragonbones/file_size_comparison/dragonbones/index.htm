@@ -63,7 +63,6 @@
 			
 
             var armatureList = [
-                "_export/1/bsl03_reels_bonus-sd",
                 "_export/1/bsl03_reels_cannon-sd",
                 "_export/1/bsl03_reels_grog-sd",
                 "_export/1/bsl03_reels_hook-sd",
@@ -74,11 +73,7 @@
                 "_export/2/bsl03_reels_captain-sd",
                 "_export/2/bsl03_reels_hookpirate-sd",
                 "_export/2/bsl03_reels_pirette-sd",
-                "_export/2/bsl03_reels_skeleton-sd",
-                "_export/en/bsl03_reels_jackpot_en-sd",
-                "_export/fr/bsl03_reels_jackpot_fr-sd",
-                "_export/en/bsl03_reels_scatter_en-sd",
-                "_export/fr/bsl03_reels_scatter_fr-sd",
+                "_export/2/bsl03_reels_skeleton-sd"
             ];
 
             var addArmature = function(name, x, y) {
@@ -98,11 +93,8 @@
             for(var i = 4; i < 8; i++) {
                 addArmature(armatureList[i], -600 + (150 * i), 150);
             }
-            for(var i = 8; i < 12; i++) {
+            for(var i = 8; i < 10; i++) {
                 addArmature(armatureList[i], -1200 + (150 * i), 300);
-            }
-            for(var i = 12; i < 14; i++) {
-                addArmature(armatureList[i], -1800 + (150 * i), 450);
             }
 
 			createjs.Ticker.setFPS(60);
