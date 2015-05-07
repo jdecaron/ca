@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>BSL03_Anim_Reel-Items_html5</title>
+
+<script src="./js/easeljs-NEXT.combined.js"></script>
+<script src="./js/tweenjs-NEXT.combined.js"></script>
+<script src="./js/movieclip-NEXT.combined.js"></script>
+<script src="http://code.createjs.com/preloadjs-0.4.1.min.js"></script>
+<script src="BSL03_Anim_Reel-Items_html5.js"></script>
+
+<script>
+var canvas, stage, exportRoot;
+
+function init() {
+	canvas = document.getElementById("canvas");
+	images = images||{};
+
+	var loader = new createjs.LoadQueue(false);
+	loader.addEventListener("fileload", handleFileLoad);
+	loader.addEventListener("complete", handleComplete);
+	loader.loadManifest(lib.properties.manifest);
+}
+
+function handleFileLoad(evt) {
+	if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
+}
+
+function handleComplete() {
+    var clipList = [
+        new lib.bsl03_reels_skeletonsd(),
+        new lib.bsl03_reels_hookpiratesd(),
+        new lib.bsl03_reels_captainsd(),
+        new lib.bsl03_reels_buccaneersd(),
+        new lib.bsl03_reels_pistolsd(),
+        new lib.bsl03_reels_sharksd(),
+        new lib.bsl03_reels_parrotsd(),
+        new lib.bsl03_reels_hooksd(),
+        new lib.bsl03_reels_grogsd(),
+        new lib.bsl03_reels_cannonsd()
+    ];
+
+    function buildComplete(event, x, y) {
+        var spriteSheet = event.target.spriteSheet;
+        var sprite = new createjs.Sprite(spriteSheet);
+        sprite.x = x;
+        sprite.y = y;
+        stage.addChild(sprite);
+        sprite.gotoAndPlay(0);
+    }
+
+    var build = function (clip, x, y) {
+        var builder = new createjs.SpriteSheetBuilder();
+        builder.addMovieClip(clip);
+        var callback = function(event) {
+            buildComplete(event, x, y);
+        };
+        builder.addEventListener("complete", callback);
+        builder.buildAsync();
+    }
+
+    for(var i = 0; i < 4; i++) {
+        build(clipList[i], 0 + (150 * i), 0);
+    }
+    for(var i = 4; i < 8; i++) {
+        build(clipList[i], -600 + (150 * i), 150);
+    }
+    for(var i = 8; i < 10; i++) {
+        build(clipList[i], -1200 + (150 * i), 300);
+    }
+
+	stage = new createjs.Stage(canvas);
+
+	stage.update();
+
+	createjs.Ticker.setFPS(lib.properties.fps);
+	createjs.Ticker.addEventListener("tick", stage);
+}
+</script>
+</head>
+
+<body onload="init();">
+	<canvas id="canvas" width="1280" height="768"></canvas>
+</body>
+</html>
