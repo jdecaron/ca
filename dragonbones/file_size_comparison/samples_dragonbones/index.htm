@@ -10,7 +10,7 @@
 </head>
 <body onLoad="init();">
     <div id="canvasHolder">
-        <canvas id="canvas" width="1280" height="720"></canvas>
+        <canvas id="canvas" width="1280" height="720" style="background-color: grey"></canvas>
     </div>
 	
 	<script type='text/javascript'>
@@ -73,8 +73,12 @@
                 armature.getDisplay().y = 300;
                 
                 dragonBones.animation.WorldClock.clock.add(armature);
+                armature.animation.tweenEnabled = false;
+
                 armature.animation.gotoAndPlay(armature['animation']['animationNameList'][0], -1, -1, false);
-                
+                if(name == "PET movie clips/walk") {
+                    armature.animation.timeScale = .5;
+                }
                 stage.addChild(armature.getDisplay());
             };
 
@@ -88,7 +92,7 @@
 		
 		function update() 
 		{
-			dragonBones.animation.WorldClock.clock.advanceTime(1/60);
+			dragonBones.animation.WorldClock.clock.advanceTime(1/24);
 			stage.update();
 		}
 
