@@ -11,6 +11,8 @@
     "modules" : ["cocos2d", "chipmunk"],
 
     "jsList" : [
+        "src/lodash.min.js",
+        "src/perlin.js",
         "src/resource.js",
         "src/app.js"
     ]
