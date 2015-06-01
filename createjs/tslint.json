@@ -1,0 +1,67 @@
+{
+    "rules": {
+        "class-name": true,
+        "comment-format": [
+            "check-space"
+        ],
+        "curly": false,
+        "eofline": true,
+        "forin": true,
+        "indent": [true, 4],
+        "interface-name": false,
+        "jsdoc-format": true,
+        "label-position": true,
+        "label-undefined": true,
+        "max-line-length": [true, 80],
+        "no-arg": true,
+        "no-bitwise": false,
+        "no-console": [
+            true,
+            "debug",
+            "info",
+            "time",
+            "timeEnd",
+            "trace"
+        ],
+        "no-consecutive-blank-lines": true,
+        "no-construct": true,
+        "no-debugger": true,
+        "no-duplicate-key": true,
+        "no-duplicate-variable": true,
+        "no-empty": false,
+        "no-eval": true,
+        "no-string-literal": false,
+        "no-trailing-whitespace": true,
+        "no-unreachable": false,
+        "one-line": [
+            false,
+            "check-open-brace",
+            "check-catch",
+            "check-else",
+            "check-whitespace"
+        ],
+        "quotemark": [true, "single"],
+        "radix": true,
+        "semicolon": true,
+        "triple-equals": [true, "allow-null-check"],
+        "typedef": [
+        ],
+        "typedef-whitespace": [
+            ["callSignature", "space"],
+            ["catchClause", "space"],
+            ["indexSignature", "space"]
+        ],
+        "use-strict": [
+            "check-module",
+            "check-function"
+        ],
+        "variable-name": [true, "allow-leading-underscore"],
+        "whitespace": [
+            true,
+            "check-decl",
+            "check-operator",
+            "check-separator",
+            "check-type"
+        ]
+    }
+}

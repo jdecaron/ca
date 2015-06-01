@@ -1,0 +1,14 @@
+{
+  "name": "SWARR",
+  "version": "0.1.0",
+  "description": "TODO",
+  "license": "TODO",
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-connect": "~0.6.0",
+    "grunt-contrib-less": "~1.0.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-ts": "~1.5.1"
+  },
+  "private": true
+}
