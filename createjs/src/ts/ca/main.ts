@@ -28,10 +28,14 @@ export class GameScreen extends core.Screen {
         var scope = this;
         var manifest = core.assetManifest(
             {
-                baseUrl: '../assets/'
+                baseUrl: '../assets',
+                sprites: ['0']
             }
         );
-        core.preloadAssets(manifest, _.noop);
+        core.preloadAssets(manifest, function() {
+                scope.init();
+            }
+        );
     }
 
     public init() {
@@ -39,6 +43,7 @@ export class GameScreen extends core.Screen {
 
         console.log('init scene');
 
+        this.addChild(core.getSprite('player'));
 
         if (util.os() != 'iOS') {
             core.playMusic('music');
