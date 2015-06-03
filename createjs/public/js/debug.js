@@ -99,57 +99,6 @@ var options = function(event) {
 options();
 window.onhashchange = options;
 
-var loading = function() {
-    var context = document.getElementById('ca').getContext('2d');
-    var clear = function() {
-        context.clearRect(0, 0, context.canvas.width, context.canvas.height);
-    }
-    var show = true;
-    document.addEventListener('loading', function(e) {
-        clear = function() {};
-        show = e['parameters']['show'];
-    });
-
-    var heart = new Image;
-    var swoosh = new Image;
-    heart.src = '../assets/common/images/loader_heart.png';
-    swoosh.src = '../assets/common/images/loader_swoosh.png';
-    var images = [heart, swoosh];
-    var imageLoad = function(e) {
-        var counter= 0;
-        for(var i=0; i<images.length;i++) {
-            if(images[i].complete == true) {
-                counter = counter + 1;
-            }
-        }
-        if(counter == images.length) {
-            callback();
-            imageLoad = function() {};
-        }
-    }
-    heart.onload = imageLoad;
-    swoosh.onload = imageLoad;
-
-    var rotation = 0;
-    var callback = function() {
-        if(show) {
-            var x = context.canvas.width / 2;
-            var y = context.canvas.height / 2;
-            var radians = rotation * (Math.PI/180);
-            clear();
-            context.drawImage(heart, x-(heart.width/2), y-(heart.height/2));
-            context.translate(x, y);
-            context.rotate(radians);
-            context.drawImage(swoosh, -swoosh.width, -swoosh.height, swoosh.width, swoosh.height);
-            context.rotate(-radians);
-            context.translate(-x, -y);
-            rotation = rotation + 5;
-        }
-        window.requestAnimationFrame(callback);
-    }
-}
-loading();
-
 var canvas = document.getElementById('ca');
 var sizes = {'width':canvas.width, 'height':canvas.height};
 var lastAllowDefault  = false;
