@@ -19,11 +19,11 @@ export function start() {
 export class Player {
     private collideableList:any[] = null;
     private collision:any = null;
-    private velocity:any = {x:0, y:25};
     private onGround:boolean = false;
     private world:any = null;
 
     public sprite:createjs.Sprite = null;
+    public velocity:any = {x:0, y:25};
 
     constructor(collideableList) {
         this.sprite = core.getSprite('player');
@@ -94,6 +94,7 @@ export class Player {
             }
             this.velocity.y = 0;
         }
+        this.sprite.x += this.velocity.x;
         this.collision = null;
     }
 
@@ -142,8 +143,19 @@ export class GameScreen extends core.Screen {
     }
 
     private keyDown(e) {
-        console.log(e);
-        this.player.jump();
+        if(e.keyCode == 32) {
+            this.player.jump();
+        } else if(e.keyCode == 65) {
+            this.player.velocity.x = -15;
+        } else if(e.keyCode == 68) {
+            this.player.velocity.x = 15;
+        }
+    }
+
+    private keyUp(e) {
+        if (e.keyCode == 65 || e.keyCode == 68) {
+            this.player.velocity.x = 0;
+        }
     }
 
     public init() {
@@ -158,6 +170,7 @@ export class GameScreen extends core.Screen {
         var time: number  = 500;
 
         document.onkeydown = this.keyDown.bind(this);
+        document.onkeyup = this.keyUp.bind(this);
 
         this.player = new Player(this.collideableList);
         this.generateMap();
