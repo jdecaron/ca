@@ -1,0 +1,1 @@
+Replace the NPM TypeScript grunt file with this one to get desktop notifications on compile error or success.
