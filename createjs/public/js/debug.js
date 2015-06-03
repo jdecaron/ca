@@ -9,14 +9,13 @@ document['frima'] = {
     enablerender: 	true,
     framerate: 	    30,
     load:         	'main',
-	theme:			'ski',
     multi:          false,
     musicvolume:   	0.3,
     soundvolume:  	1.0,
     locale:       	'en',
 	ratio:			false,
-	maxWidth:	0,
-	maxHeight:	0,
+	maxWidth:	    0,
+	maxHeight:	    0,
 	scalable:		true
 };
 
@@ -78,7 +77,7 @@ var options = function(event) {
             'hd':{'height':720,'width':1280},
             'sd':{'height':360,'width':640}
         };
-        var canvas 		= document.getElementById('swarr');
+        var canvas 		= document.getElementById('id');
         var definition 	= document['frima']['definition'];
 		
 		var maxWidth 	= definitions[definition]['width'];
@@ -101,7 +100,7 @@ options();
 window.onhashchange = options;
 
 var loading = function() {
-    var context = document.getElementById('swarr').getContext('2d');
+    var context = document.getElementById('ca').getContext('2d');
     var clear = function() {
         context.clearRect(0, 0, context.canvas.width, context.canvas.height);
     }
@@ -151,7 +150,7 @@ var loading = function() {
 }
 loading();
 
-var canvas = document.getElementById('swarr');
+var canvas = document.getElementById('ca');
 var sizes = {'width':canvas.width, 'height':canvas.height};
 var lastAllowDefault  = false;
 

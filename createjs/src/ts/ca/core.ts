@@ -25,24 +25,24 @@ export function getMusicVolume() {
 
 /** A mapping of global variables accessible from the browser's console. */
 var globals;
-window['ca'] = globals = {};
+window['swarr'] = globals = {};
 
-/** Registers a variable on the global 'ca' object. */
+/** Registers a variable on the global 'swarr' object. */
 export function registerGlobal(name: string, command) {
     globals[name] = command;
 }
 
-/** Unregisters a variable from the global 'ca' object. */
+/** Unregisters a variable from the global 'swarr' object. */
 export function unregisterGlobal(name: string) {
     delete globals[name];
 }
 
-/** Registers a collection of variables on the global 'ca' object. */
+/** Registers a collection of variables on the global 'swarr' object. */
 export function registerGlobals(globals) {
     _.forOwn(globals, (val, key: string) => registerGlobal(key, val));
 }
 
-/** Unregisters a collection of variables on the global 'ca' object. */
+/** Unregisters a collection of variables on the global 'swarr' object. */
 export function unregisterGlobals(globals) {
     _.forEach(globals, unregisterGlobal);
 }
@@ -61,7 +61,7 @@ var screen: Screen;
 
 /** Initializes the EaselJS stage, called once when the game boots. */
 function initStage() {
-    stage = new createjs.Stage('ca');
+    stage = new createjs.Stage('swarr');
 
     stage.enableMouseOver();
     stage.mouseMoveOutside = true;
