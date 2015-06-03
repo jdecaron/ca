@@ -24,11 +24,11 @@ export class GameScreen extends core.Screen {
     }
 
     public preload() {
+
         var scope = this;
         var manifest = core.assetManifest(
             {
-                baseUrl: '../assets/',
-                sprites: ["scrubbable"]
+                baseUrl: '../assets/'
             }
         );
         core.preloadAssets(manifest, _.noop);
