@@ -7,7 +7,7 @@ document['frima'] = {
     enablefps:   	false,
     enablesounds: 	true,
     enablerender: 	true,
-    framerate: 	    30,
+    framerate: 	    60,
     load:         	'main',
     multi:          false,
     musicvolume:   	0.3,
