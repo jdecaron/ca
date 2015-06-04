@@ -29,7 +29,7 @@ export class Player {
         this.game = game;
         this.sprite = core.getSprite('player');
         this.collideableList = game.collideableList;
-        createjs.Ticker.addEventListener("tick", this.tick.bind(this));
+        createjs.Ticker.addEventListener('tick', this.tick.bind(this));
     }
 
     public tick() {
@@ -73,6 +73,7 @@ export class Player {
 export class GameScreen extends core.Screen {
     private action:string = 'add';
     private collideableList:any[] = [];
+    private mouseText:createjs.Text = null;
     private player:any = null;
 
     public layer: createjs.Container = null;
@@ -104,8 +105,10 @@ export class GameScreen extends core.Screen {
             this.player.jump();
         } else if(e.keyCode == 49) {
             this.action = 'add';
+            this.mouseText.text = this.action;
         } else if(e.keyCode == 50) {
             this.action = 'remove';
+            this.mouseText.text = this.action;
         } else if(e.keyCode == 65) {
             this.player.velocity.x = -10;
         } else if(e.keyCode == 68) {
@@ -120,6 +123,11 @@ export class GameScreen extends core.Screen {
     }
 
     private initMouseListener() {
+        core.getStage().on('stagemousemove',function(e:any) {
+            this.mouseText.x = e.stageX;
+            this.mouseText.y = e.stageY;
+        }, this);
+
         this.layer.on('click', function(e:any){
                 var local = this.layer.globalToLocal(e.stageX, e.stageY);
                 var position = {x:Math.floor(local.x/48) * 48, y:Math.floor(local.y/48) * 48};
@@ -150,7 +158,7 @@ export class GameScreen extends core.Screen {
 
         this.layer = new createjs.Container();
         var hit = new createjs.Shape();
-        hit.graphics.beginFill("#000").drawRect(-3000, -3000, 6000, 6000);
+        hit.graphics.beginFill('#000').drawRect(-3000, -3000, 6000, 6000);
         this.layer.hitArea = hit;
 
         document.onkeydown = this.keyDown.bind(this);
@@ -161,6 +169,11 @@ export class GameScreen extends core.Screen {
         this.loadLevel();
         this.layer.addChild(this.player.sprite);
         this.addChild(this.layer);
+
+        this.addChild(new createjs.Text('Move with WASD, 1 & 2 (add / remove mode), click to interract, jump with space!', '30px Arial', '#ffffff'));
+
+        this.mouseText = new createjs.Text(this.action, '30px Arial', '#ffffff');
+        this.addChild(this.mouseText);
     }
 
     private loadLevel() {
