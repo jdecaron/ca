@@ -22,7 +22,7 @@ module.exports = function(grunt) {
                         'lib/**/*.ts',
                         'd.ts/**/*.d.ts'],
             reference: 'src/_references.ts',
-            outDir:    'public/js/game',
+            outDir:    'www/js/game',
             options: {
                 allowImportModule: true,
                 declaration:       true,

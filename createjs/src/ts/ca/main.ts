@@ -119,22 +119,7 @@ export class GameScreen extends core.Screen {
         }
     }
 
-    public init() {
-        super.init();
-
-        if (util.os() != 'iOS') {
-            core.playMusic('music');
-        }
-
-        var time: number  = 500;
-
-        document.onkeydown = this.keyDown.bind(this);
-        document.onkeyup = this.keyUp.bind(this);
-
-        this.layer = new createjs.Container();
-        var hit = new createjs.Shape();
-        hit.graphics.beginFill("#000").drawRect(-3000, -3000, 6000, 6000);
-        this.layer.hitArea = hit;
+    private initMouseListener() {
         this.layer.on('click', function(e:any){
                 var local = this.layer.globalToLocal(e.stageX, e.stageY);
                 var position = {x:Math.floor(local.x/48) * 48, y:Math.floor(local.y/48) * 48};
@@ -153,7 +138,24 @@ export class GameScreen extends core.Screen {
                     }
                 }
             },
-        this);
+            this);
+    }
+
+    public init() {
+        super.init();
+
+        if (util.os() != 'iOS') {
+            core.playMusic('music');
+        }
+
+        this.layer = new createjs.Container();
+        var hit = new createjs.Shape();
+        hit.graphics.beginFill("#000").drawRect(-3000, -3000, 6000, 6000);
+        this.layer.hitArea = hit;
+
+        document.onkeydown = this.keyDown.bind(this);
+        document.onkeyup = this.keyUp.bind(this);
+        this.initMouseListener();
 
         this.player = new Player(this);
         this.loadLevel();
