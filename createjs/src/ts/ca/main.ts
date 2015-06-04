@@ -33,74 +33,33 @@ export class Player {
         createjs.Ticker.addEventListener("tick", this.tick.bind(this));
     }
 
-    private calculateIntersection(rect1, rect2, x, y)
-    {
-        // prevent x|y from being null||undefined
-        x = x || 0; y = y || 0;
-
-        // first we have to calculate the
-        // center of each rectangle and half of
-        // width and height
-        var dx, dy, r1={}, r2={};
-
-        r1['cx'] = rect1.x+x+(r1['hw'] = (rect1.width /2));
-        r1['cy'] = rect1.y+y+(r1['hh'] = (rect1.height/2));
-        r2['cx'] = rect2.x + (r2['hw'] = (rect2.width /2));
-        r2['cy'] = rect2.y + (r2['hh'] = (rect2.height/2));
-
-        dx = Math.abs(r1['cx']-r2['cx']) - (r1['hw'] + r2['hw']);
-        dy = Math.abs(r1['cy']-r2['cy']) - (r1['hh'] + r2['hh']);
-
-        if (dx < 0 && dy < 0) {
-            return {width:-dx,height:-dy};
-        } else {
-            return null;
-        }
-    }
-
     public tick() {
         this.game.layer.x = -this.sprite.x + (core.getStage().canvas.width/2);
         this.game.layer.y = -this.sprite.y + (core.getStage().canvas.height/2);
 
         this.velocity.y += 1;
 
-        var addY = this.velocity.y;
-        var bounds = {x:this.sprite.x, y:this.sprite.y, width:48, height:48};
-        var counter = 0;
+        var moveBy = {x:0, y:this.velocity.y},
+            collision = null,
+            collideables = this.collideableList;
 
-        var collideableBounds
+        collision = util.calculateCollision(this.sprite, 'y', collideables, moveBy);
+        this.sprite.y += moveBy.y;
 
-        while ( !this.collision && counter < this.collideableList.length ) {
-            var collideable = this.collideableList[counter]
-            collideableBounds = {x:collideable.x, y:collideable.y, width:48, height:48};
-            if ( this.collideableList[counter].isVisible ) {
-                this.collision = this.calculateIntersection(bounds, collideableBounds, 0, addY);
-            }
-
-            if ( !this.collision && this.collideableList[counter].isVisible ) {
-                if ( ( bounds.y < collideableBounds.y && bounds.y + addY > collideableBounds.y )
-                    || ( bounds.y > collideableBounds.y && bounds.y + addY < collideableBounds.y ) ) {
-                    addY = collideableBounds.y - bounds.y;
-                } else {
-                    counter++;
-                }
-            }
-        }
-
-        if ( !this.collision ) {
-            this.sprite.y += addY;
+        if ( !collision ) {
             if ( this.onGround ) {
                 this.onGround = false;
             }
         } else {
-            this.sprite.y += addY - this.collision.height;
-            if ( addY > 0 ) {
+            if ( moveBy.y >= 0 ) {
                 this.onGround = true;
             }
             this.velocity.y = 0;
         }
-        this.sprite.x += this.velocity.x;
-        this.collision = null;
+
+        moveBy = {x:this.velocity.x, y:0};
+        collision = util.calculateCollision(this.sprite, 'x', collideables, moveBy);
+        this.sprite.x += moveBy.x;
     }
 
     public jump() {
@@ -278,6 +237,7 @@ export class GameScreen extends core.Screen {
                             return 'block';
                         }
                     };
+
                     if(checkSurrounding() == 'empty') {
                         var sprite = core.getSprite('dirt_cube');
                         sprite.x = j*48;
