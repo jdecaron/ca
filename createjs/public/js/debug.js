@@ -19,6 +19,7 @@ document['frima'] = {
 	scalable:		true
 };
 
+/*
 window.onerror = function(message, url, lineNumber, column, errorObj) {
     var toSend = {
         msg:  message,
@@ -31,6 +32,7 @@ window.onerror = function(message, url, lineNumber, column, errorObj) {
     $.post('/debug/error', toSend);
     return false;
 };
+*/
 
 var options = function(event) {
     var urlAmperstandSplit = window.location.hash.replace('#','').split('&');

@@ -16,7 +16,6 @@ export function start() {
     resize();
 }
 
-
 export class Player {
     private collideableList:any[] = null;
     private collision:any = null;
@@ -44,7 +43,7 @@ export class Player {
             collideables = this.collideableList;
 
         collision = util.calculateCollision(this.sprite, 'y', collideables, moveBy);
-        this.sprite.y += moveBy.y;
+        this.sprite.y += isNaN(moveBy.y) ? 0 : moveBy.y;
 
         if ( !collision ) {
             if ( this.onGround ) {
@@ -59,18 +58,20 @@ export class Player {
 
         moveBy = {x:this.velocity.x, y:0};
         collision = util.calculateCollision(this.sprite, 'x', collideables, moveBy);
-        this.sprite.x += moveBy.x;
+
+        this.sprite.x += isNaN(moveBy.x) ? 0 : moveBy.x;
     }
 
     public jump() {
         if ( this.onGround ) {
-            this.velocity.y = -17;
+            this.velocity.y = -20;
             this.onGround = false;
         }
     }
 }
 
 export class GameScreen extends core.Screen {
+    private action:string = 'add';
     private collideableList:any[] = [];
     private player:any = null;
 
@@ -101,23 +102,25 @@ export class GameScreen extends core.Screen {
     private keyDown(e) {
         if(e.keyCode == 32) {
             this.player.jump();
+        } else if(e.keyCode == 49) {
+            this.action = 'add';
+        } else if(e.keyCode == 50) {
+            this.action = 'remove';
         } else if(e.keyCode == 65) {
-            this.player.velocity.x = -15;
+            this.player.velocity.x = -10;
         } else if(e.keyCode == 68) {
-            this.player.velocity.x = 15;
+            this.player.velocity.x = 10;
         }
     }
 
     private keyUp(e) {
-        if (e.keyCode == 65 || e.keyCode == 68) {
+        if ((e.keyCode == 65 && this.player.velocity.x == -10) || (e.keyCode == 68 && this.player.velocity.x == 10)) {
             this.player.velocity.x = 0;
         }
     }
 
     public init() {
         super.init();
-
-        console.log('init scene');
 
         if (util.os() != 'iOS') {
             core.playMusic('music');
@@ -129,6 +132,29 @@ export class GameScreen extends core.Screen {
         document.onkeyup = this.keyUp.bind(this);
 
         this.layer = new createjs.Container();
+        var hit = new createjs.Shape();
+        hit.graphics.beginFill("#000").drawRect(-3000, -3000, 6000, 6000);
+        this.layer.hitArea = hit;
+        this.layer.on('click', function(e:any){
+                var local = this.layer.globalToLocal(e.stageX, e.stageY);
+                var position = {x:Math.floor(local.x/48) * 48, y:Math.floor(local.y/48) * 48};
+                if(this.action == 'add') {
+                    var sprite = core.getSprite('dirt_cube');
+                    sprite.x = position.x;
+                    sprite.y = position.y;
+                    this.collideableList.push(sprite);
+                    this.layer.addChild(sprite);
+                }else {
+                    for(var i = this.collideableList.length-1; i > 0; i--) {
+                        if(this.collideableList[i].x == position.x && this.collideableList[i].y == position.y) {
+                            this.layer.removeChild(this.collideableList[i]);
+                            this.collideableList.splice(i, 1);
+                        }
+                    }
+                }
+            },
+        this);
+
         this.player = new Player(this);
         this.loadLevel();
         this.layer.addChild(this.player.sprite);
@@ -218,9 +244,17 @@ export class GameScreen extends core.Screen {
             }
         }
 
+        var backgroundCube = function(i, j, scope) {
+            var sprite = core.getSprite('background_cube');
+            sprite.x = j*48;
+            sprite.y = i*48;
+            scope.layer.addChild(sprite);
+        };
+
         for(var i = 0; i < data.length; i++) {
             for(var j = 0; j < data[i].length; j++) {
                 if(data[i][j] == 1) {
+                    backgroundCube(i, j, this);
                     var sprite = core.getSprite('green_cube');
                     sprite.x = j*48;
                     sprite.y = i*48;
@@ -228,36 +262,15 @@ export class GameScreen extends core.Screen {
                     this.layer.addChild(sprite);
                 }
                 else if(data[i][j] == 2) {
-                    var checkSurrounding = function() {
-                        if(i == 0 || j == 0 || i >= data.length-1 || j >= data[i].length-1 || data[i-1][j] == 0 || data[i][j-1] == 0 || data[i+1][j] == 0 || data[i][j+1] == 0
-                            || data[i-1][j] == 3 || data[i][j-1] == 3 || data[i+1][j] == 3 || data[i][j+1] == 3
-                        ) {
-                            return 'empty';
-                        } else {
-                            return 'block';
-                        }
-                    };
-
-                    if(checkSurrounding() == 'empty') {
-                        var sprite = core.getSprite('dirt_cube');
-                        sprite.x = j*48;
-                        sprite.y = i*48;
-                        this.collideableList.push(sprite);
-                        this.layer.addChild(sprite);
-                    }
-                    else {
-                        var sprite = core.getSprite('dirt_cube');
-                        sprite.x = j*48;
-                        sprite.y = i*48;
-                        this.collideableList.push(sprite);
-                        this.layer.addChild(sprite);
-                    }
-                }
-                else if(data[i][j] == 3) {
-                    var sprite = core.getSprite('background_cube');
+                    backgroundCube(i, j, this);
+                    var sprite = core.getSprite('dirt_cube');
                     sprite.x = j*48;
                     sprite.y = i*48;
+                    this.collideableList.push(sprite);
                     this.layer.addChild(sprite);
+                }
+                else if(data[i][j] == 3) {
+                    backgroundCube(i, j, this);
                 }
             }
         }
