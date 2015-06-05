@@ -39,27 +39,30 @@ var DiggerScene = cc.Scene.extend({
                 event: cc.EventListener.KEYBOARD,
                 onKeyPressed: function (key, event) {
                     var isTouchingGround = function() {
-                        if(self.player.body.arbiterList == null) { return false; }
-                        return true;
+                        if(self.player.body.arbiterList == null) {
+                            return false;
+                        } else if (Math.abs(Math.floor(self.player.body.vy)) <= 20){
+                            return true;
+                        } else {
+                            return false;
+                        }
                     }
                     if(key == 65) {
-                        if(isTouchingGround()) {
+                        if(isTouchingGround() && self.player.body.f.x > -1000) {
                             self.player.body.applyForce(cp.v(-1000, 0), cp.v(0, 0));
-                        }else {
-                            self.player.body.applyForce(cp.v(-50, 0), cp.v(0, 0));
                         }
                     } else if(key == 68) {
-                        if(isTouchingGround()) {
+                        if(isTouchingGround() && self.player.body.f.x < 1000) {
                             self.player.body.applyForce(cp.v(1000, 0), cp.v(0, 0));
-                        }else {
-                            self.player.body.applyForce(cp.v(50, 0), cp.v(0, 0));
                         }
-                    } else if(/*isTouchingGround() && */key == 32) {
-                        self.player.body.applyImpulse(cp.v(0, 750), cp.v(0, 0));
+                    } else if(isTouchingGround() && key == 32) {
+                        self.player.body.applyImpulse(cp.v(0, 1000), cp.v(0, 0));
                     }
                 },
                 onKeyReleased: function (key, event) {
-                    self.player.body.f = cp.v(0,0);
+                    if(key == 65 || key == 68) {
+                        self.player.body.f = cp.v(0,0);
+                    }
                 }
             }, this);
         } else {
@@ -106,7 +109,7 @@ var DiggerScene = cc.Scene.extend({
 
     loadLevel: function() {
         var collision = [];
-        var levelSize = {'x':120, 'y':40};
+        var levelSize = {'x':60, 'y':40};
         for(var i = 0; i < levelSize.y; i++) {
             var inside = [];
             for(var j = 0; j < levelSize.x; j++) {
@@ -189,7 +192,7 @@ var DiggerScene = cc.Scene.extend({
         }
 
         for(var i = 0; i < data.length; i++) {
-            for(var j = 0; j < data.length; j++) {
+            for(var j = 0; j < data[i].length; j++) {
                 if(data[i][j] == 1) {
                     this.gameLayer.addChild(this.createStaticSprite(cc.p(j*48,-(i*48)+2000), res.green_cube_png));
                 }
