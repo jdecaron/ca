@@ -66,15 +66,35 @@
                 "container",
             ];
 
+			var loopEverything = function(armature) {
+                animationDataList = armature.animation.getAnimationDataList();
+                for(var i = 0; i < animationDataList.length; i++) {
+                    animationDataList[i].loop = 0;
+                }
+                var bones = armature.getBones();
+                for(var i = 0; i < bones.length; i++) {
+                    var slots = bones[i].getSlots();
+                    for(var j = 0; j < slots.length; j++) {
+                        var displayList = slots[j].getDisplayList();
+                        for(var k = 0; k < displayList.length; k++) {
+                            if(displayList[k]['getBones']) {
+                                loopEverything(displayList[k]);
+                            }
+                        }
+                    }
+                }
+            }
+
             var addArmature = function(name, x, y) {
-				console.log(factory);
                 var armature = factory.buildArmature(name);
                 armature.getDisplay().x = x;
                 armature.getDisplay().y = y;
                 
                 dragonBones.animation.WorldClock.clock.add(armature);
-                armature.animation.gotoAndPlay('default', -1, -1, null);
-                
+
+                loopEverything(armature);
+                armature.animation.gotoAndPlay('default', -1, -1, 0);
+
                 stage.addChild(armature.getDisplay());
             };
 

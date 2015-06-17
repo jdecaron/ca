@@ -194,6 +194,7 @@ var dragonBones;
             };
 
             EventDispatcher.prototype.dispatchEvent = function (event) {
+                //console.assert(false, 'event');
                 if (event) {
                     var listeners = this._listenersMap[event.type];
                     if (listeners) {
@@ -670,10 +671,13 @@ var dragonBones;
             };
 
             AnimationState.prototype.fadeIn = function (armature, clip, fadeInTime, timeScale, loop, layer, displayControl, pauseBeforeFadeInComplete) {
+                //console.assert(false, loop);
                 this.layer = layer;
                 this.clip = clip;
                 this.name = this.clip.name;
                 this.totalTime = this.clip.duration;
+
+                loop = 0;
 
                 this._armature = armature;
 
@@ -874,6 +878,7 @@ var dragonBones;
                                         event.animationState = this;
                                         this._armature._eventList.push(event);
                                     }
+                                    //console.assert(false, 'event');
                                 } else {
                                     if (this._armature.hasEventListener(events.AnimationEvent.LOOP_COMPLETE)) {
                                         event = new events.AnimationEvent(events.AnimationEvent.LOOP_COMPLETE);
@@ -1108,6 +1113,7 @@ var dragonBones;
             };
 
             Animation.prototype.gotoAndPlay = function (animationName, fadeInTime, duration, loop, layer, group, fadeOutMode, displayControl, pauseFadeOut, pauseFadeIn) {
+                //console.assert(false, 'gotoAndPlay');
                 if (typeof fadeInTime === "undefined") { fadeInTime = -1; }
                 if (typeof duration === "undefined") { duration = -1; }
                 if (typeof loop === "undefined") { loop = NaN; }
@@ -1219,6 +1225,7 @@ var dragonBones;
             };
 
             Animation.prototype.play = function () {
+                //console.assert(false, this, this.getState('loop'));
                 if (!this._animationDataList || this._animationDataList.length == 0) {
                     return;
                 }
