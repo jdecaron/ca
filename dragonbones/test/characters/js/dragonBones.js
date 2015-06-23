@@ -713,8 +713,8 @@ var dragonBones;
                 this.weight = 1;
                 this.blend = true;
                 this.enabled = true;
-                //this.tweenEnabled = true;
-                this.tweenEnabled = false;
+                this.tweenEnabled = true;
+                //this.tweenEnabled = false;
 
                 this.updateTimelineStates();
             };
