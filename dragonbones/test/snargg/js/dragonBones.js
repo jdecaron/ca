@@ -709,8 +709,7 @@ var dragonBones;
                 this.weight = 1;
                 this.blend = true;
                 this.enabled = true;
-                //this.tweenEnabled = true;
-                this.tweenEnabled = false;
+                this.tweenEnabled = true;
 
                 this.updateTimelineStates();
             };
@@ -2132,7 +2131,7 @@ var dragonBones;
                         frame.tweenEasing = Number(tweenEase);
                     }
                 } else {
-                    frame.tweenEasing = 0;
+                    frame.tweenEasing = NaN;
                 }
 
                 frame.tweenRotate = Number(frameObject[utils.ConstValues.A_TWEEN_ROTATE]) || 0;

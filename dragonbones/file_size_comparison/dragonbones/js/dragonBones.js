@@ -675,6 +675,8 @@ var dragonBones;
                 this.name = this.clip.name;
                 this.totalTime = this.clip.duration;
 
+                loop = 0;
+
                 this._armature = armature;
 
                 if (Math.round(this.clip.duration * this.clip.frameRate) < 2 || timeScale == Infinity) {
@@ -2131,7 +2133,7 @@ var dragonBones;
                         frame.tweenEasing = Number(tweenEase);
                     }
                 } else {
-                    frame.tweenEasing = 0;
+                    frame.tweenEasing = NaN;
                 }
 
                 frame.tweenRotate = Number(frameObject[utils.ConstValues.A_TWEEN_ROTATE]) || 0;
