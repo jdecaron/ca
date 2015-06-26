@@ -1361,7 +1361,6 @@ var dragonBones;
                     transform = bone.tween;
                     pivot = bone._tweenPivot;
 
-
                     transform.x = x;
                     transform.y = y;
                     transform.skewX = skewX;
