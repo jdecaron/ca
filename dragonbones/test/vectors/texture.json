@@ -1,0 +1,83 @@
+{
+  "name": "blue",
+  "imagePath": "texture.png",
+  "SubTexture": [
+    {
+      "name": "Blue dude/blue_arm_L",
+      "x": 290,
+      "width": 71,
+      "y": 0,
+      "height": 77
+    },
+    {
+      "name": "blue_leg_R",
+      "x": 362,
+      "width": 70,
+      "y": 0,
+      "height": 75
+    },
+    {
+      "name": "blue_leg_R_01",
+      "x": 206,
+      "width": 52,
+      "y": 68,
+      "height": 89
+    },
+    {
+      "name": "blue_leg_L",
+      "x": 433,
+      "width": 62,
+      "y": 0,
+      "height": 80
+    },
+    {
+      "name": "blue_leg_L_01",
+      "x": 362,
+      "width": 57,
+      "y": 76,
+      "height": 80
+    },
+    {
+      "name": "Blue dude/blue_ear_L",
+      "x": 420,
+      "width": 38,
+      "y": 81,
+      "height": 43
+    },
+    {
+      "name": "Blue dude/blue_ear_R",
+      "x": 259,
+      "width": 26,
+      "y": 68,
+      "height": 77
+    },
+    {
+      "name": "Blue dude/blue_body_legs",
+      "x": 0,
+      "width": 137,
+      "y": 0,
+      "height": 186
+    },
+    {
+      "name": "Blue dude/blue_mouth",
+      "x": 138,
+      "width": 67,
+      "y": 0,
+      "height": 86
+    },
+    {
+      "name": "Blue dude/blue_arm_R",
+      "x": 286,
+      "width": 37,
+      "y": 78,
+      "height": 95
+    },
+    {
+      "name": "Blue dude/blue_eyes",
+      "x": 206,
+      "width": 83,
+      "y": 0,
+      "height": 67
+    }
+  ]
+}
