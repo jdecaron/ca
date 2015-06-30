@@ -134,19 +134,16 @@ var dragonBones;
                 var rect = textureAtlas.getRegion(fullName);
                 if (rect) {
                     var shape = new createjs.Shape(null);
-                    CreateJSFactory._helpMatrix.a = 1;
-                    CreateJSFactory._helpMatrix.b = 0;
-                    CreateJSFactory._helpMatrix.c = 0;
-                    CreateJSFactory._helpMatrix.d = 1;
-                    CreateJSFactory._helpMatrix.scale(1 / textureAtlas.scale, 1 / textureAtlas.scale);
-                    CreateJSFactory._helpMatrix.tx = -pivotX - rect.x;
-                    CreateJSFactory._helpMatrix.ty = -pivotY - rect.y;
-                    shape.graphics.beginBitmapFill(textureAtlas.image, null, CreateJSFactory._helpMatrix);
+					// Matrix2D changed in easeljs 0.8
+					// http://f-site.org/articles/2015/01/09000000.html
+					var matrix = new createjs.Matrix2D(1, 0, 0, 1, 0, 0);
+                  	matrix.prependMatrix(new createjs.Matrix2D().scale(1/textureAtlas.scale, 1/textureAtlas.scale));
+					matrix.prependMatrix(new createjs.Matrix2D().translate(-pivotX-rect.x, -pivotY-rect.y));
+                    shape.graphics.beginBitmapFill(textureAtlas.image, null, matrix);
                     shape.graphics.drawRect(-pivotX, -pivotY, rect.width, rect.height);
                 }
                 return shape;
             };
-            CreateJSFactory._helpMatrix = new createjs.Matrix2D(1, 0, 0, 1, 0, 0);
             return CreateJSFactory;
         })(factorys.BaseFactory);
         factorys.CreateJSFactory = CreateJSFactory;
