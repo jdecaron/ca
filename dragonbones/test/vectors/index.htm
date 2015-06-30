@@ -46,13 +46,13 @@
                     )
                 }
             );
-            //texture = new Image();
-			//texture.src = "texture.png";
 		}
 		
 		var factory;
 
 		var getAtlas = function(textureData) {
+            var self = this;
+            var container = new createjs.Container();
             var width = 0;
             var height = 0;
             for(var i=0; i<textureData.SubTexture.length; i++) {
@@ -63,16 +63,27 @@
                 if(subTexture.height + subTexture.y > height) {
                     height = subTexture.height + subTexture.y;
                 }
+                if(subTexture.shapes.length) {
+                    for(var j=0; j<subTexture.shapes.length; j++) {
+                        var color = subTexture.shapes[j][0];
+                        var path = subTexture.shapes[j][1];
+                        var transform = subTexture.shapes[j][2].map(Number);
+                        var shape = new createjs.Shape();
+                        shape.setTransform.apply(shape, transform);
+                        shape.graphics.f(color).s().p(path);
+                        shape.setTransform(shape.x + subTexture.x, shape.y + subTexture.y);
+                        container.addChild(shape);
+                    }
+                }
             }
 
-            var container = new createjs.Container();
-            container.setBounds(0, 0, width, height);
+            //TODO REMOVE THIS
+            stage.addChild(container);
 
-            var shape = new createjs.Shape();
-            shape.graphics.f("#0099FF").s().p("AmFFZIAAqxIMLAAIAAKxg");
-            shape.cache(Math.floor(-(78/2)),Math.floor(-(69/2)),78,69);
+            container.setBounds(0, 0, width, height);
+            container.cache(0, 0, width, height);
             var image = new Image();
-            image.src = shape.cacheCanvas.toDataURL();
+            image.src = container.cacheCanvas.toDataURL();
             return image;
         }
 		
