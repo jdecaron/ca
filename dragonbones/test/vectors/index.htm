@@ -79,11 +79,15 @@
                 if(subTexture.shapes.length) {
                     var object = new createjs.Container();
                     object.setTransform(subTexture.x, subTexture.y);
+                    if(subTexture.hasOwnProperty('nominalBounds')) {
+                        object.x = object.x - subTexture.nominalBounds.x;
+                        object.y = object.y - subTexture.nominalBounds.y;
+                    }
                     container.addChild(object);
                     for(var j=0; j<subTexture.shapes.length; j++) {
-                        var color = subTexture.shapes[j][0];
-                        var path = subTexture.shapes[j][1];
-                        var transform = subTexture.shapes[j][2].map(Number);
+                        var color = subTexture.shapes[j]['color'];
+                        var path = subTexture.shapes[j]['path'];
+                        var transform = subTexture.shapes[j]['transform'].map(Number);
                         var shape = new createjs.Shape();
                         shape.setTransform.apply(shape, transform);
                         shape.graphics.f(color).s().p(path);
@@ -91,8 +95,6 @@
                     }
                 }
             }
-
-            s.graphics.beginFill("#ff0000").drawRect(0, 0, width, height);
 
             //TODO REMOVE THIS
             stage.addChild(container);

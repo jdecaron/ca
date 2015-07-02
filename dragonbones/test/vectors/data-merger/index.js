@@ -20,10 +20,28 @@ if(args[1].match(/.js$/) == null) {
     usageError();
 }
 
-var createjs = {};
-createjs.Container = function() {};
+var createjs = cjs = {};
+createjs.Container = function() { this.initialize = function() {}; this.addChild = function() {}; };
 createjs.MovieClip = function() {};
-createjs.Rectangle = function() {};
+createjs.Rectangle = function(x, y, width, height) { return {x:x, y:y, width:width, height:height} };
+createjs.Shape = function() {
+    properties = {};
+    return {
+        graphics:{
+            f:function(color) { properties.color = color; return {s: function() { return {p: function(path) { properties.path = path; return {} } } } } }
+        },
+        properties: properties,
+        setTransform: function() {
+            var counter = 0;
+            argumentList = [];
+            for (var key in arguments) {
+                argumentList[counter] = arguments[key];
+                counter = counter + 1;
+            }
+            properties.transform = argumentList;
+        }
+    };
+};
 var encoding = 'utf8';
 
 eval(fs.readFileSync(args[1], encoding));
@@ -39,18 +57,15 @@ for(var i=0; i<texture.SubTexture.length; i++) {
     var object = texture.SubTexture[i];
     var objectName = object.name.split('/');
     objectName = objectName[objectName.length-1];
-    var lines = lib[objectName].toString().split('\n');
     var objectList = [];
-    for(var j=0; j<lines.length; j++) {
-        var line = lines[j];
-        var properties = line.match(/"[^\)]*/g);
-        if(properties) {
-            removeQuotes(properties);
-            var transform = lines[j+1].match(/\(.*\)/)[0].replace(/[\(\)]/g, '').split(',');
-            properties.push(transform);
-            objectList.push(properties);
+    var container = new lib[objectName]();
+    for (var key in container) {
+        if(container[key].hasOwnProperty('graphics')) {
+            console.log(container[key]);
+            objectList.push(container[key].properties);
         }
     }
+    object.shapes.nominalBounds = container.nominalBounds;
     object.shapes = objectList.reverse();
 }
 
