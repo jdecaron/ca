@@ -50,11 +50,24 @@
 		
 		var factory;
 
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF'.split('');
+            var color = '#';
+            for (var i = 0; i < 6; i++ ) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
 		var getAtlas = function(textureData) {
             var self = this;
             var container = new createjs.Container();
             var width = 0;
             var height = 0;
+
+            var s = new createjs.Shape();
+            container.addChild(s);
+
             for(var i=0; i<textureData.SubTexture.length; i++) {
                 var subTexture = textureData.SubTexture[i];
                 if(subTexture.width + subTexture.x > width) {
@@ -64,6 +77,9 @@
                     height = subTexture.height + subTexture.y;
                 }
                 if(subTexture.shapes.length) {
+                    var object = new createjs.Container();
+                    object.setTransform(subTexture.x, subTexture.y);
+                    container.addChild(object);
                     for(var j=0; j<subTexture.shapes.length; j++) {
                         var color = subTexture.shapes[j][0];
                         var path = subTexture.shapes[j][1];
@@ -71,11 +87,12 @@
                         var shape = new createjs.Shape();
                         shape.setTransform.apply(shape, transform);
                         shape.graphics.f(color).s().p(path);
-                        shape.setTransform(shape.x + subTexture.x, shape.y + subTexture.y);
-                        container.addChild(shape);
+                        object.addChild(shape);
                     }
                 }
             }
+
+            s.graphics.beginFill("#ff0000").drawRect(0, 0, width, height);
 
             //TODO REMOVE THIS
             stage.addChild(container);
