@@ -19,26 +19,19 @@ function ParseTimeline(timeline)
             counter++;
 		}
 
-		// For all Layers
 		for(var layer in timeline.layers)
 		{
-			// For all Frames
 			for(var i=0 ; i<timeline.layers[layer].frames.length ; i++)
 			{
-				// For each elements
 				for(var e=0 ; e<timeline.layers[layer].frames[i].elements.length ; e++)
 				{
-					var seekedElement = timeline.layers[layer].frames[i].elements[e];
-					if(seekedElement.symbolType == "graphic") {
-						seekedElement.symbolType = "movie clip";
+					var element = timeline.layers[layer].frames[i].elements[e];
+					if(element.symbolType == "graphic") {
+						element.symbolType = "movie clip";
 					}
-					//fl.getDocumentDOM().setElementProperty('symbolType', 'movie clip');
-
-					if(seekedElement.libraryItem && (seekedElement.symbolType == "movie clip" || seekedElement.symbolType == "graphic")) {
-                        ParseTimeline(seekedElement.libraryItem.timeline);
+					if(element.libraryItem && (element.symbolType == "movie clip" || element.symbolType == "graphic")) {
+                        ParseTimeline(element.libraryItem.timeline);
 					}
-
-					//seekedElement.name = timeline.layers[layer].name;
 				}
 			}
 		}
