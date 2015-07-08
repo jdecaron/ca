@@ -69,6 +69,33 @@ var DiggerScene = cc.Scene.extend({
             cc.log("KEYBOARD Not supported");
         }
     },
+    gamepad:function() {
+        var self = this;
+        var buttonPressed = function(b) {
+            if (typeof(b) == "object") {
+                return b.pressed;
+            }
+            return b == 1.0;
+        }
+
+        var gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
+
+        if (!gamepads) {
+            return;
+        }
+        var gamepad = gamepads[0];
+        if (buttonPressed(gamepad.buttons[0])) {
+            cc.log("gamepad 0");
+            self.player.body.applyImpulse(cp.v(0, 1000), cp.v(0, 0));
+        } else if (buttonPressed(gamepad.buttons[2])) {
+            cc.log("gamepad 2");
+        }
+        if (buttonPressed(gamepad.buttons[1])) {
+            cc.log("gamepad 1");
+        } else if (buttonPressed(gamepad.buttons[3])) {
+            cc.log("gamepad 3");
+        }
+    },
     update:function (dt) {
         // chipmunk step
         this.space.step(dt);
@@ -79,6 +106,7 @@ var DiggerScene = cc.Scene.extend({
 
         this.gameLayer.setPosition(cc.p(-eyeX,0));
         */
+        this.gamepad();
         this.gameLayer.setPosition(cc.p(-this.player.getPositionX()+200,-this.player.getPositionY()+200));
     },
     createDynamicSprite : function(pos, file) {
