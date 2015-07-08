@@ -21,14 +21,17 @@ if(args[1].match(/.js$/) == null) {
 }
 
 var createjs = cjs = {};
-createjs.Container = function() { this.initialize = function() {}; this.addChild = function() {}; };
-createjs.MovieClip = function() {};
-createjs.Rectangle = function(x, y, width, height) { return {x:x, y:y, width:width, height:height} };
-createjs.Shape = function() {
+createjs.Bitmap    = function() { this.type = 'Bitmap'; };
+createjs.Container = function() { this.type = 'Container'; this.addChild = function() {}; this.initialize = function() {}; this.setTransform = function() {}; };
+createjs.MovieClip = function() { this.type = 'MovieClip'; };
+createjs.Rectangle = function(x, y, width, height) { this.type = 'Rectangle'; return {x:x, y:y, width:width, height:height} };
+createjs.Shape     = function() {
     properties = {};
     return {
         graphics:{
-            f:function(color) { properties.color = color; return {s: function() { return {p: function(path) { properties.path = path; return {} } } } } }
+            lf:function(colors, ratios, x0, y0, r0, x1, y1, r1) { properties.color = [colors, ratios, x0, y0, r0, x1, y1, r1, 'lf']; return {s: function() { return {p: function(path) { properties.path = path; return {} } } } } },
+            f:function(color) { properties.color = [color, 'f']; return {s: function() { return {p: function(path) { properties.path = path; return {} } } } } },
+            rf:function(colors, ratios, x0, y0, r0, x1, y1, r1) { properties.color = [colors, ratios, x0, y0, r0, x1, y1, r1, 'rf']; return {s: function() { return {p: function(path) { properties.path = path; return {} } } } } }
         },
         properties: properties,
         setTransform: function() {
@@ -39,7 +42,8 @@ createjs.Shape = function() {
                 counter = counter + 1;
             }
             properties.transform = argumentList;
-        }
+        },
+        type: 'Shape'
     };
 };
 var encoding = 'utf8';
@@ -61,11 +65,10 @@ for(var i=0; i<texture.SubTexture.length; i++) {
     var container = new lib[objectName]();
     for (var key in container) {
         if(container[key].hasOwnProperty('graphics')) {
-            console.log(container[key]);
             objectList.push(container[key].properties);
         }
     }
-    object.shapes.nominalBounds = container.nominalBounds;
+    object.nominalBounds = container.nominalBounds;
     object.shapes = objectList.reverse();
 }
 

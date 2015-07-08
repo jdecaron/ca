@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>html5</title>
+
+<script src="http://code.createjs.com/easeljs-0.8.1.min.js"></script>
+<script src="http://code.createjs.com/tweenjs-0.6.1.min.js"></script>
+<script src="http://code.createjs.com/movieclip-0.8.1.min.js"></script>
+<script src="html5.js"></script>
+
+<script>
+var canvas, stage, exportRoot;
+
+function init() {
+	createjs.MotionGuidePlugin.install();
+
+	canvas = document.getElementById("canvas");
+	exportRoot = new lib.html5();
+
+	stage = new createjs.Stage(canvas);
+	stage.addChild(exportRoot);
+	stage.update();
+
+	createjs.Ticker.setFPS(lib.properties.fps);
+	createjs.Ticker.addEventListener("tick", stage);
+}
+</script>
+</head>
+
+<body onload="init();" style="background-color:#D4D4D4">
+	<canvas id="canvas" width="1200" height="720" style="background-color:#FFFFFF"></canvas>
+</body>
+</html>
