@@ -1,5 +1,6 @@
 var DiggerScene = cc.Scene.extend({
     gameLayer:null,
+    lastTouch:0,
     player: null,
     space:null,
     shapesToRemove:[],
@@ -68,19 +69,49 @@ var DiggerScene = cc.Scene.extend({
         } else {
             cc.log("KEYBOARD Not supported");
         }
-        if ('mouse' in cc.sys.capabilities) {
-            cc.eventManager.addListener({
-                event: cc.EventListener.MOUSE,
-                onMouseDown: function(e) {
-                    var position = self.gameLayer.convertToWorldSpace(cc.Point(e.getLocationX(), e.getLocationY()));
-                    var sprite = new cc.Sprite();
-                    sprite.initWithFile(res.background_cube_png,cc.rect(0,0,48,48));
-                    sprite.setPosition(cc.p(position.x,position.y));
-                    self.gameLayer.addChild(sprite);
-                }
-            }, this);
-        } else {
-            cc.log("MOUSE Not supported");
+        var handleMouseDown = function(e) {
+            cc.log('handleMouseDown', e);
+            var position = self.gameLayer.convertTouchToNodeSpace(e);
+            var sprite = new cc.Sprite();
+            sprite.initWithFile(res.background_cube_png,cc.rect(0,0,48,48));
+            sprite.setPosition(cc.p(position.x,position.y));
+            self.gameLayer.addChild(sprite);
+        };
+        cc.eventManager.addListener({ event: cc.EventListener.MOUSE, onMouseDown: handleMouseDown }, this);
+        var handleTouch = function(e) {
+            e = e[0];
+            var point = self.gameLayer.convertTouchToNodeSpace(e);
+            self.player.x = point.x;
+            self.player.y = point.y;
+            self.lastTouch = new Date().getTime();
+        }
+        cc.eventManager.addListener({ event: cc.EventListener.TOUCH_ALL_AT_ONCE, onTouchesMoved: handleTouch }, this);
+    },
+    gamepad:function() {
+        var self = this;
+        var buttonPressed = function(b) {
+            if (typeof(b) == "object") {
+                return b.pressed;
+            }
+            return b == 1.0;
+        }
+
+        var gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
+
+        if (!gamepads) {
+            return;
+        }
+        var gamepad = gamepads[0];
+        if (buttonPressed(gamepad.buttons[0])) {
+            cc.log("gamepad 0");
+            self.player.body.applyImpulse(cp.v(0, 1000), cp.v(0, 0));
+        } else if (buttonPressed(gamepad.buttons[2])) {
+            cc.log("gamepad 2");
+        }
+        if (buttonPressed(gamepad.buttons[1])) {
+            cc.log("gamepad 1");
+        } else if (buttonPressed(gamepad.buttons[3])) {
+            cc.log("gamepad 3");
         }
     },
     update:function (dt) {
@@ -93,7 +124,21 @@ var DiggerScene = cc.Scene.extend({
 
         this.gameLayer.setPosition(cc.p(-eyeX,0));
         */
-        this.gameLayer.setPosition(cc.p(-this.player.getPositionX()+200,-this.player.getPositionY()+200));
+        this.gamepad();
+        if(new Date().getTime() > this.lastTouch + 200) {
+            var position = cc.p(-this.player.getPositionX()+200,-this.player.getPositionY()+200);
+            var absolute = Math.abs(position.y - this.gameLayer.y);
+            var sign = position.y - this.gameLayer.y >= 0 ? 1 : -1;
+            if(absolute > 10) {
+                position.y = this.gameLayer.y + (10 * sign);
+            }
+            absolute = Math.abs(position.x - this.gameLayer.x);
+            sign = position.x - this.gameLayer.x >= 0 ? 1 : -1;
+            if(absolute > 10) {
+                position.x = this.gameLayer.x + (10 * sign);
+            }
+            this.gameLayer.setPosition(position);
+        }
     },
     createDynamicSprite : function(pos, file) {
         var body = new cp.Body(1, cp.momentForBox(1, 48, 48) );
@@ -123,7 +168,7 @@ var DiggerScene = cc.Scene.extend({
 
     loadLevel: function() {
         var collision = [];
-        var levelSize = {'x':60, 'y':40};
+        var levelSize = {'x':40, 'y':30};
         for(var i = 0; i < levelSize.y; i++) {
             var inside = [];
             for(var j = 0; j < levelSize.x; j++) {
