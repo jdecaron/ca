@@ -12,25 +12,25 @@
     <div id="canvasHolder">
         <canvas id="canvas" width="1280" height="720"></canvas>
     </div>
-	
+
 	<script type='text/javascript'>
 		function init()
 		{
 			createJSInit();
 		}
-		
+
 		var canvas;
 		var stage;
-		
+
 		var texture;
 		var textureData;
 		var skeletonData;
-		
+
 		function createJSInit()
 		{
 			canvas = document.getElementById("canvas");
 			stage = new createjs.Stage(canvas);
-			
+
 			texture = new Image();
 			texture.onload = function()
 			{
@@ -52,15 +52,15 @@
 			}
 			texture.src = "texture.png";
 		}
-		
+
 		var factory;
-		
+
 		function dragonBonesInit()
 		{
 			factory = new dragonBones.factorys.CreateJSFactory();
 			factory.addSkeletonData(dragonBones.objects.DataParser.parseSkeletonData(skeletonData));
 			factory.addTextureAtlas(new dragonBones.textures.CreateJSTextureAtlas(texture, textureData));
-			
+
 
             var armatureList = [
                 "all",
@@ -70,22 +70,22 @@
                 var armature = factory.buildArmature(name);
                 armature.getDisplay().x = x;
                 armature.getDisplay().y = y;
-                
+
                 dragonBones.animation.WorldClock.clock.add(armature);
                 armature.animation.gotoAndPlay('default', -1, -1, false);
-                
+
                 stage.addChild(armature.getDisplay());
             };
 
             addArmature(armatureList[0], 630, 250);
 
-			createjs.Ticker.setFPS(30);
+			createjs.Ticker.setFPS(60);
 			createjs.Ticker.addEventListener("tick", update);
 		}
-		
-		function update() 
+
+		function update()
 		{
-			dragonBones.animation.WorldClock.clock.advanceTime(1/30);
+			dragonBones.animation.WorldClock.clock.advanceTime(1/60);
 			stage.update();
 		}
 
