@@ -1,4 +1,6 @@
 var __extends = this.__extends || function (d, b) {
+    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
+    function __() { this.constructor = d; }
     __.prototype = b.prototype;
     d.prototype = new __();
 };
@@ -50,7 +52,7 @@ var dragonBones;
 
             CreateJSDisplayBridge.prototype.updateColor = function (aOffset, rOffset, gOffset, bOffset, aMultiplier, rMultiplier, gMultiplier, bMultiplier) {
                 if (this._display) {
-                    //this._display.alpha = aMultiplier;
+                    this._display.alpha = aMultiplier;
                 }
             };
 
@@ -131,16 +133,33 @@ var dragonBones;
             CreateJSFactory.prototype._generateDisplay = function (textureAtlas, fullName, pivotX, pivotY) {
                 var rect = textureAtlas.getRegion(fullName);
                 if (rect) {
-                    var shape = new createjs.Shape(null);
-					// Matrix2D changed in easeljs 0.8
-					// http://f-site.org/articles/2015/01/09000000.html
-					var matrix = new createjs.Matrix2D(1, 0, 0, 1, 0, 0);
-                  	matrix.prependMatrix(new createjs.Matrix2D().scale(1/textureAtlas.scale, 1/textureAtlas.scale));
-					matrix.prependMatrix(new createjs.Matrix2D().translate(-pivotX-rect.x, -pivotY-rect.y));
-                    shape.graphics.beginBitmapFill(textureAtlas.image, null, matrix);
-                    shape.graphics.drawRect(-pivotX, -pivotY, rect.width, rect.height);
+					var bmp = new createjs.Bitmap(textureAtlas.image);
+					bmp.sourceRect = rect;
+
+					bmp.draw = function(ctx, ignoreCache) {
+						var img = this.image;
+						var rect = this.sourceRect;
+						var x1 = rect.x;
+						var y1 = rect.y;
+						var x2 = x1 + rect.width;
+						var y2 = y1 + rect.height;
+						var x = 0
+						var y = 0;
+						var w = img.width;
+						var h = img.height;
+						if (x1 < 0) { x -= x1; x1 = 0; }
+						if (x2 > w) { x2 = w; }
+						if (y1 < 0) { y -= y1; y1 = 0; }
+						if (y2 > h) { y2 = h; }
+						ctx.save();
+						ctx.scale(1/textureAtlas.scale, 1/textureAtlas.scale);
+						ctx.translate(-pivotX, -pivotY);
+						ctx.drawImage(img, x1, y1, x2-x1, y2-y1, x, y, x2-x1, y2-y1);
+						ctx.restore();
+						return true;
+					};
                 }
-                return shape;
+                return bmp;
             };
             return CreateJSFactory;
         })(factorys.BaseFactory);
