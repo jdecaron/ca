@@ -68,6 +68,20 @@ var DiggerScene = cc.Scene.extend({
         } else {
             cc.log("KEYBOARD Not supported");
         }
+        if ('mouse' in cc.sys.capabilities) {
+            cc.eventManager.addListener({
+                event: cc.EventListener.MOUSE,
+                onMouseDown: function(e) {
+                    var position = self.gameLayer.convertToWorldSpace(cc.Point(e.getLocationX(), e.getLocationY()));
+                    var sprite = new cc.Sprite();
+                    sprite.initWithFile(res.background_cube_png,cc.rect(0,0,48,48));
+                    sprite.setPosition(cc.p(position.x,position.y));
+                    self.gameLayer.addChild(sprite);
+                }
+            }, this);
+        } else {
+            cc.log("MOUSE Not supported");
+        }
     },
     update:function (dt) {
         // chipmunk step
