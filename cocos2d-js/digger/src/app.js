@@ -1,4 +1,5 @@
 var DiggerScene = cc.Scene.extend({
+    blockList:[],
     gameLayer:null,
     lastTouch:0,
     player: null,
@@ -29,6 +30,37 @@ var DiggerScene = cc.Scene.extend({
             self.player.body.applyImpulse(cp.v(0, 1000), cp.v(0, 0));
         }
     },
+    clean: function() {
+        var positions = {
+            topLeft:this.gameLayer.convertToNodeSpace(cc.p(0,this.height)),
+            topRight:this.gameLayer.convertToNodeSpace(cc.p(this.width,this.height)),
+            bottomLeft:this.gameLayer.convertToNodeSpace(cc.p(0,0)),
+            bottomRight:this.gameLayer.convertToNodeSpace(cc.p(this.width,0))
+        };
+        var limits = {
+            minX:positions.bottomLeft.x,
+            minY:positions.bottomLeft.y,
+            maxX:positions.topRight.x,
+            maxY:positions.topRight.y
+        };
+        for(var i=0; i<this.blockList.length; i++) {
+            var node = this.blockList[i][0];
+            var shape = this.blockList[i][1];
+            if(node.x < limits.minX || node.x > limits.maxX || node.y < limits.minY || node.y > limits.maxY) {
+                node.opacity = 150;
+                if(this.blockList[i][2]) {
+                    this.space.removeShape(shape);
+                    this.blockList[i][2] = 0;
+                }
+            } else{
+                node.opacity = 50;
+                if(!this.blockList[i][2]) {
+                    this.space.addShape(shape);
+                    this.blockList[i][2] = 1;
+                }
+            }
+        }
+    },
     release:function() {
         var self = this;
         self.player.body.f = cp.v(0,0);
@@ -43,10 +75,11 @@ var DiggerScene = cc.Scene.extend({
         this.initPhysics();
 
         this.gameLayer = new cc.LayerColor(cc.color(65,198,255));
+        this.gameLayer.y = -1200;
         this.gameLayer.setContentSize(cc.size(120*48, 4000));
 
-        /*
         // Debug physics.
+        /*
         this._debugNode = new cc.PhysicsDebugNode(this.space );
         this._debugNode.visible = true ;
         this.gameLayer.addChild( this._debugNode );
@@ -57,7 +90,7 @@ var DiggerScene = cc.Scene.extend({
 
         this.loadLevel();
 
-        this.player = this.createDynamicSprite(cc.p(200,2000), res.player_png)
+        this.player = this.createDynamicSprite(cc.p(600,2000), res.player_png)
         this.player.body.v_limit = 500;
         this.gameLayer.addChild(this.player);
 
@@ -80,6 +113,7 @@ var DiggerScene = cc.Scene.extend({
         var handleMouseDown = function(e) {
             cc.log('handleMouseDown', e);
             var position = self.gameLayer.convertTouchToNodeSpace(e);
+            cc.log(position);
             var sprite = new cc.Sprite();
             sprite.initWithFile(res.background_cube_png,cc.rect(0,0,48,48));
             sprite.setPosition(cc.p(position.x,position.y));
@@ -88,10 +122,14 @@ var DiggerScene = cc.Scene.extend({
         cc.eventManager.addListener({ event: cc.EventListener.MOUSE, onMouseDown: handleMouseDown }, this);
         var handleTouch = function(e) {
             e = e[0];
-            var point = self.gameLayer.convertTouchToNodeSpace(e);
-            self.player.x = point.x;
-            self.player.y = point.y;
-            self.lastTouch = new Date().getTime();
+            var location = e.getLocation();
+            var previousLocation = e.getPreviousLocation();
+            if(location.x != previousLocation.x || location.y != previousLocation.y) {
+                var point = self.gameLayer.convertTouchToNodeSpace(e);
+                self.player.x = point.x;
+                self.player.y = point.y;
+                self.lastTouch = new Date().getTime();
+            }
         }
         cc.eventManager.addListener({ event: cc.EventListener.TOUCH_ALL_AT_ONCE, onTouchesMoved: handleTouch }, this);
     },
@@ -124,13 +162,8 @@ var DiggerScene = cc.Scene.extend({
         // chipmunk step
         this.space.step(dt);
 
-        /*
-        var animationLayer = this.gameLayer.getChildByTag(TagOfLayer.Animation);
-        var eyeX = animationLayer.getEyeX();
-
-        this.gameLayer.setPosition(cc.p(-eyeX,0));
-        */
         this.gamepad();
+        this.clean();
         if(new Date().getTime() > this.lastTouch + 200) {
             var position = cc.p(-this.player.getPositionX()+Math.floor(this.width/2),-this.player.getPositionY()+200);
             var absolute = Math.abs(position.y - this.gameLayer.y);
@@ -168,6 +201,8 @@ var DiggerScene = cc.Scene.extend({
         shape.setFriction(0.9);
         this.space.addShape( shape );
         var sprite = new cc.Sprite(file);
+        sprite.opacity = 50;
+        this.blockList.push([sprite, shape, 1]);
         sprite.setPosition( pos );
         return sprite;
     },
