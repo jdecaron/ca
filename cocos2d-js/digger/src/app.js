@@ -6,6 +6,33 @@ var DiggerScene = cc.Scene.extend({
     shapesToRemove:[],
 
     // init space of chipmunk
+    action: function(key) {
+        var self = this;
+        var isTouchingGround = function() {
+            if(self.player.body.arbiterList == null) {
+                return false;
+            } else if (Math.abs(Math.floor(self.player.body.vy)) <= 20){
+                return true;
+            } else {
+                return false;
+            }
+        }
+        if(key == 65) {
+            if(isTouchingGround() && self.player.body.f.x > -1000) {
+                self.player.body.applyForce(cp.v(-1000, 0), cp.v(0, 0));
+            }
+        } else if(key == 68) {
+            if(isTouchingGround() && self.player.body.f.x < 1000) {
+                self.player.body.applyForce(cp.v(1000, 0), cp.v(0, 0));
+            }
+        } else if(isTouchingGround() && key == 32) {
+            self.player.body.applyImpulse(cp.v(0, 1000), cp.v(0, 0));
+        }
+    },
+    release:function() {
+        var self = this;
+        self.player.body.f = cp.v(0,0);
+    },
     initPhysics:function() {
         this.space = new cp.Space();
         // Gravity
@@ -39,30 +66,11 @@ var DiggerScene = cc.Scene.extend({
             cc.eventManager.addListener({
                 event: cc.EventListener.KEYBOARD,
                 onKeyPressed: function (key, event) {
-                    var isTouchingGround = function() {
-                        if(self.player.body.arbiterList == null) {
-                            return false;
-                        } else if (Math.abs(Math.floor(self.player.body.vy)) <= 20){
-                            return true;
-                        } else {
-                            return false;
-                        }
-                    }
-                    if(key == 65) {
-                        if(isTouchingGround() && self.player.body.f.x > -1000) {
-                            self.player.body.applyForce(cp.v(-1000, 0), cp.v(0, 0));
-                        }
-                    } else if(key == 68) {
-                        if(isTouchingGround() && self.player.body.f.x < 1000) {
-                            self.player.body.applyForce(cp.v(1000, 0), cp.v(0, 0));
-                        }
-                    } else if(isTouchingGround() && key == 32) {
-                        self.player.body.applyImpulse(cp.v(0, 1000), cp.v(0, 0));
-                    }
+                    self.action(key);
                 },
                 onKeyReleased: function (key, event) {
                     if(key == 65 || key == 68) {
-                        self.player.body.f = cp.v(0,0);
+                        self.release();
                     }
                 }
             }, this);
@@ -98,20 +106,18 @@ var DiggerScene = cc.Scene.extend({
 
         var gamepads = navigator.getGamepads ? navigator.getGamepads() : (navigator.webkitGetGamepads ? navigator.webkitGetGamepads : []);
 
-        if (!gamepads) {
+        if (!gamepads || gamepads[0] == undefined) {
             return;
         }
         var gamepad = gamepads[0];
         if (buttonPressed(gamepad.buttons[0])) {
-            cc.log("gamepad 0");
-            self.player.body.applyImpulse(cp.v(0, 1000), cp.v(0, 0));
-        } else if (buttonPressed(gamepad.buttons[2])) {
-            cc.log("gamepad 2");
-        }
-        if (buttonPressed(gamepad.buttons[1])) {
-            cc.log("gamepad 1");
-        } else if (buttonPressed(gamepad.buttons[3])) {
-            cc.log("gamepad 3");
+            self.action(32);
+        } else if (buttonPressed(gamepad.buttons[14])) {
+            self.action(65);
+        }else if (buttonPressed(gamepad.buttons[15])) {
+            self.action(68);
+        } else {
+            self.release();
         }
     },
     update:function (dt) {
@@ -126,7 +132,7 @@ var DiggerScene = cc.Scene.extend({
         */
         this.gamepad();
         if(new Date().getTime() > this.lastTouch + 200) {
-            var position = cc.p(-this.player.getPositionX()+200,-this.player.getPositionY()+200);
+            var position = cc.p(-this.player.getPositionX()+Math.floor(this.width/2),-this.player.getPositionY()+200);
             var absolute = Math.abs(position.y - this.gameLayer.y);
             var sign = position.y - this.gameLayer.y >= 0 ? 1 : -1;
             if(absolute > 10) {
