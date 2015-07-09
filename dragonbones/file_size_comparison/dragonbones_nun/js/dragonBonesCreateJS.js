@@ -133,20 +133,34 @@ var dragonBones;
             CreateJSFactory.prototype._generateDisplay = function (textureAtlas, fullName, pivotX, pivotY) {
                 var rect = textureAtlas.getRegion(fullName);
                 if (rect) {
-                    var shape = new createjs.Shape(null);
-                    CreateJSFactory._helpMatrix.a = 1;
-                    CreateJSFactory._helpMatrix.b = 0;
-                    CreateJSFactory._helpMatrix.c = 0;
-                    CreateJSFactory._helpMatrix.d = 1;
-                    CreateJSFactory._helpMatrix.scale(1 / textureAtlas.scale, 1 / textureAtlas.scale);
-                    CreateJSFactory._helpMatrix.tx = -pivotX - rect.x;
-                    CreateJSFactory._helpMatrix.ty = -pivotY - rect.y;
-                    shape.graphics.beginBitmapFill(textureAtlas.image, null, CreateJSFactory._helpMatrix);
-                    shape.graphics.drawRect(-pivotX, -pivotY, rect.width, rect.height);
+					var bmp = new createjs.Bitmap(textureAtlas.image);
+					bmp.sourceRect = rect;
+
+					bmp.draw = function(ctx, ignoreCache) {
+						var img = this.image;
+						var rect = this.sourceRect;
+						var x1 = rect.x;
+						var y1 = rect.y;
+						var x2 = x1 + rect.width;
+						var y2 = y1 + rect.height;
+						var x = 0
+						var y = 0;
+						var w = img.width;
+						var h = img.height;
+						if (x1 < 0) { x -= x1; x1 = 0; }
+						if (x2 > w) { x2 = w; }
+						if (y1 < 0) { y -= y1; y1 = 0; }
+						if (y2 > h) { y2 = h; }
+						ctx.save();
+						ctx.scale(1/textureAtlas.scale, 1/textureAtlas.scale);
+						ctx.translate(-pivotX, -pivotY);
+						ctx.drawImage(img, x1, y1, x2-x1, y2-y1, x, y, x2-x1, y2-y1);
+						ctx.restore();
+						return true;
+					};
                 }
-                return shape;
+                return bmp;
             };
-            CreateJSFactory._helpMatrix = new createjs.Matrix2D(1, 0, 0, 1, 0, 0);
             return CreateJSFactory;
         })(factorys.BaseFactory);
         factorys.CreateJSFactory = CreateJSFactory;

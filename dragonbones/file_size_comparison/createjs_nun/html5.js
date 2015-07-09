@@ -2474,7 +2474,6 @@ p.nominalBounds = new cjs.Rectangle(-0.2,-14.8,85.1,27.1);
 	// Calque 1
 	this.instance = new lib.NA_Imp_Foot01();
 	this.instance.setTransform(18.6,-22.1,1.029,0.667,0,-55.3,-60);
-	this.instance.filters = [new cjs.ColorFilter(0, 0, 0, 1, 46, 21, 27, 0)];
 	this.instance.cache(-5,-4,10,8);
 
 	this.instance_1 = new lib.NA_Imp_Foot01();
@@ -2567,32 +2566,26 @@ p.nominalBounds = new cjs.Rectangle(-21.1,-25.6,42.3,51.2);
 
 	this.instance = new lib.Tank_12GaugeCartridge();
 	this.instance.setTransform(28.3,11.1,1.056,1.056);
-	this.instance.filters = [new cjs.ColorFilter(0.7, 0.7, 0.7, 1, 0, 0, 0, 0)];
 	this.instance.cache(-10,-5,19,11);
 
 	this.instance_1 = new lib.Tank_12GaugeCartridge();
 	this.instance_1.setTransform(29.3,16.2,1.003,1.003);
-	this.instance_1.filters = [new cjs.ColorFilter(0.6, 0.6, 0.6, 1, 0, 0, 0, 0)];
 	this.instance_1.cache(-10,-5,19,11);
 
 	this.instance_2 = new lib.Tank_12GaugeCartridge();
 	this.instance_2.setTransform(30.8,18.6,0.953,0.953);
-	this.instance_2.filters = [new cjs.ColorFilter(0.5, 0.5, 0.5, 1, 0, 0, 0, 0)];
 	this.instance_2.cache(-10,-5,19,11);
 
 	this.instance_3 = new lib.Tank_12GaugeCartridge();
 	this.instance_3.setTransform(28.1,4.4,1.111,1.111);
-	this.instance_3.filters = [new cjs.ColorFilter(0.75, 0.75, 0.75, 1, 0, 0, 0, 0)];
 	this.instance_3.cache(-10,-5,19,11);
 
 	this.instance_4 = new lib.Tank_12GaugeCartridge();
 	this.instance_4.setTransform(28.3,-1.9,1.056,1.056);
-	this.instance_4.filters = [new cjs.ColorFilter(0.8, 0.8, 0.8, 1, 0, 0, 0, 0)];
 	this.instance_4.cache(-10,-5,19,11);
 
 	this.instance_5 = new lib.Tank_12GaugeCartridge();
 	this.instance_5.setTransform(29.3,-7,1.003,1.003);
-	this.instance_5.filters = [new cjs.ColorFilter(0.9, 0.9, 0.9, 1, 0, 0, 0, 0)];
 	this.instance_5.cache(-10,-5,19,11);
 
 	this.instance_6 = new lib.Tank_12GaugeCartridge();
@@ -2925,22 +2918,18 @@ p.nominalBounds = new cjs.Rectangle(-12.7,-24.4,112.4,46.5);
 
 	this.instance = new lib.Tank_12GaugeCartridge();
 	this.instance.setTransform(32.1,11.7,1.004,1.003,0,-4.3,-1.3);
-	this.instance.filters = [new cjs.ColorFilter(0.75, 0.75, 0.75, 1, 0, 0, 0, 0)];
 	this.instance.cache(-10,-5,19,11);
 
 	this.instance_1 = new lib.Tank_12GaugeCartridge();
 	this.instance_1.setTransform(31.6,4.6,1.004,1.003,0,-4.3,-1.3);
-	this.instance_1.filters = [new cjs.ColorFilter(0.75, 0.75, 0.75, 1, 0, 0, 0, 0)];
 	this.instance_1.cache(-10,-5,19,11);
 
 	this.instance_2 = new lib.Tank_12GaugeCartridge();
 	this.instance_2.setTransform(31.3,-2.7,1.004,1.003,0,-4.3,-1.3);
-	this.instance_2.filters = [new cjs.ColorFilter(0.75, 0.75, 0.75, 1, 0, 0, 0, 0)];
 	this.instance_2.cache(-10,-5,19,11);
 
 	this.instance_3 = new lib.Tank_12GaugeCartridge();
 	this.instance_3.setTransform(30.9,-9.7,1.004,1.003,0,-4.3,-1.3);
-	this.instance_3.filters = [new cjs.ColorFilter(0.75, 0.75, 0.75, 1, 0, 0, 0, 0)];
 	this.instance_3.cache(-10,-5,19,11);
 
 	this.shape_37 = new cjs.Shape();
@@ -3344,7 +3333,6 @@ p.nominalBounds = new cjs.Rectangle(-88.9,-67.3,134.8,82.1);
 	// NA_GreenImp_Pinch01
 	this.instance_1 = new lib.NA_Imp_Pinch01();
 	this.instance_1.setTransform(-16.7,-13.5,1.008,1.058,0,40.3,37.7);
-	this.instance_1.filters = [new cjs.ColorFilter(0.54, 0.54, 0.54, 1, 103.5, 0, 0, 0)];
 	this.instance_1.cache(-15,-9,35,21);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_1).to({scaleX:0.97,scaleY:1.09,skewX:15.8,skewY:30.4,x:-10.5,y:-12.6},5).to({scaleX:0.99,scaleY:1.15,skewX:11.3,skewY:25.7,x:-4.7,y:-32.3},4).to({scaleX:0.98,skewX:-3.7,skewY:9.7,x:0,y:-50.9},4).to({scaleX:1,scaleY:1.04,skewX:-1.7,skewY:-0.5,x:-0.7,y:-59.7},4).to({scaleX:1.01,scaleY:1.04,skewX:-6.1,skewY:-7.1,x:0.6,y:-48.4},3).to({scaleX:0.91,scaleY:1.15,skewX:-11.4,skewY:-23.9,x:6,y:-28.3},4).to({scaleX:1.03,scaleY:1.02,skewX:-32.9,skewY:-20.7,x:7.5,y:-4.5},4).to({scaleX:0.9,scaleY:1.01,skewX:-28.9,skewY:-26.5,x:7.3,y:-7.3},5).to({scaleX:0.9,scaleY:1.01,skewX:-16,skewY:-23.1,x:3.4,y:-26.4},4).to({scaleX:0.94,skewX:-10.1,skewY:-8.6,x:-0.7,y:-46.3},4).to({scaleX:1.01,scaleY:1.04,skewX:0.6,skewY:0.8,y:-59.4},4).to({scaleX:1.01,skewX:11.6,skewY:15.8,x:-5.5,y:-52},3).to({scaleX:1.02,scaleY:1.09,skewX:22.1,skewY:31.2,x:-8.9,y:-37.7},3).to({scaleX:1.01,scaleY:1.06,skewX:40.3,skewY:37.7,x:-16.7,y:-13.5},3).wait(1));
@@ -3364,7 +3352,6 @@ p.nominalBounds = new cjs.Rectangle(-88.9,-67.3,134.8,82.1);
 	// NA_GreenImp_RightEye01_0
 	this.instance_4 = new lib.NA_Imp_RightEye01();
 	this.instance_4.setTransform(4.5,-51.2,0.72,0.925,0,0.6,-172.3,0.1,-0.4);
-	this.instance_4.filters = [new cjs.ColorFilter(0.54, 0.54, 0.54, 1, 103.5, 0, 0, 0)];
 	this.instance_4.cache(-12,-12,24,24);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_4).to({regY:-0.2,scaleX:0.71,scaleY:0.96,skewX:12.9,skewY:-163.2,x:3.2,y:-59.5},5).to({scaleY:0.92,skewX:13.2,skewY:-165.9,x:4.7,y:-85.2},4).to({regX:0.2,regY:-0.5,scaleX:0.71,scaleY:0.93,skewX:-14.3,skewY:-193.7,x:-4.7,y:-99.2},4).to({regX:0.3,scaleX:0.71,scaleY:0.95,skewX:-22.3,skewY:-192.8,x:-7.6,y:-101.3},4).to({scaleX:0.73,scaleY:0.94,skewX:-24.7,skewY:-202,x:-11.5,y:-92.9},3).to({regX:0.4,regY:-0.4,scaleX:0.73,scaleY:0.9,skewX:-33.4,skewY:-216.6,x:-15.1,y:-72.1},4).to({regX:0.3,regY:-0.5,scaleX:0.73,scaleY:0.86,skewX:-42.4,skewY:-220,x:-23.1,y:-35.9},4).to({regY:-0.4,skewX:-59.9,skewY:-237.4,x:-17.2,y:-41.7},5).to({regX:0.4,scaleX:0.71,scaleY:0.9,skewX:-30.5,skewY:-217,x:-13.1,y:-71.7},4).to({regY:-0.6,scaleX:0.71,scaleY:0.89,skewX:-23.9,skewY:-197.5,x:-12.1,y:-91.6},4).to({regX:0.3,scaleX:0.73,scaleY:0.94,skewX:-19.8,skewY:-196.1,x:-7.8,y:-101.2},4).to({regX:0.1,regY:-0.8,scaleX:0.73,scaleY:0.94,skewX:-4.2,skewY:-179.4,x:-5.8,y:-96.5},3).to({regX:0.3,regY:-0.7,scaleX:0.72,scaleY:0.99,skewX:15.7,skewY:-161.5,x:2.5,y:-89.5},3).to({regX:0.1,regY:-0.4,scaleX:0.72,scaleY:0.93,skewX:0.6,skewY:-172.3,x:4.5,y:-51.2},3).wait(1));
@@ -3372,7 +3359,6 @@ p.nominalBounds = new cjs.Rectangle(-88.9,-67.3,134.8,82.1);
 	// NA_GreenImp_RightEye01
 	this.instance_5 = new lib.NA_Imp_RightEye01();
 	this.instance_5.setTransform(25.7,-37.6,1,1.008,0,53,55.5);
-	this.instance_5.filters = [new cjs.ColorFilter(0.54, 0.54, 0.54, 1, 103.5, 0, 0, 0)];
 	this.instance_5.cache(-12,-12,24,24);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_5).to({scaleX:1,skewX:45.6,skewY:44.3,x:22.8,y:-46.6},5).to({scaleX:1,scaleY:0.99,skewX:38.9,skewY:37,x:25.4,y:-74.3},4).to({skewX:8.9,skewY:7,x:17.7,y:-98.7},4).to({scaleX:1,scaleY:1,skewX:14.7,skewY:7.6,x:16.4,y:-101.6},4).to({scaleX:1.01,scaleY:0.99,skewX:-2.3,skewY:-4.7,x:10.8,y:-97.4},3).to({scaleX:1.02,scaleY:1,skewX:-17.7,skewY:-25.2,x:4.3,y:-83.7},4).to({scaleX:1.01,skewX:-10.7,skewY:-15.9,x:-1.9,y:-46.8},4).to({scaleX:1,scaleY:1.01,skewX:-5.3,skewY:-12.8,x:3.6,y:-55.3},5).to({skewX:-14.8,skewY:-22.4,x:6.4,y:-82.8},4).to({scaleX:1.01,scaleY:0.97,skewX:-4.4,skewY:-6.5,x:10.4,y:-96.2},4).to({scaleX:1.01,scaleY:0.98,skewX:15.9,skewY:8.7,x:16.4,y:-101.6},4).to({scaleX:1.01,scaleY:0.99,skewX:24.3,skewY:18.1,x:16.8,y:-92.6},3).to({scaleX:1.03,scaleY:0.95,skewX:38.9,skewY:34.3,x:23.1,y:-78.6},3).to({scaleX:1,scaleY:1.01,skewX:53,skewY:55.5,x:25.7,y:-37.6},3).wait(1));
@@ -3380,7 +3366,6 @@ p.nominalBounds = new cjs.Rectangle(-88.9,-67.3,134.8,82.1);
 	// NA_GreenImp_Ear01_0
 	this.instance_6 = new lib.NA_Imp_Ear01();
 	this.instance_6.setTransform(34.5,-34.8,0.999,0.999,27,0,0,-0.1,0);
-	this.instance_6.filters = [new cjs.ColorFilter(0.54, 0.54, 0.54, 1, 103.5, 0, 0, 0)];
 	this.instance_6.cache(-3,-8,11,11);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_6).to({regX:0,scaleY:1.02,rotation:0,skewX:83.7,skewY:72,x:27.2,y:-43},5).to({skewX:113.2,skewY:101.5,x:29.8,y:-70.7},4).to({scaleX:0.99,scaleY:1.08,skewX:45.8,skewY:37.2,x:25.7,y:-97.1},4).to({scaleX:0.99,skewX:0.8,skewY:-4.5,x:25.6,y:-100.6},4).to({skewX:-11.8,skewY:-17.2,x:20.4,y:-97.7},3).to({skewX:-17.8,skewY:-23.2,x:12.8,y:-86},4).to({skewX:-16.3,skewY:-21.7,x:7.7,y:-48.4},4).to({skewX:-22.3,skewY:-27.6,x:7.4,y:-61.8},5).to({x:13.3,y:-90.6},4).to({scaleX:0.98,skewY:-19.9,x:19.8,y:-100.4},4).to({scaleY:1.08,skewX:-3.6,skewY:-4.9,x:26.2,y:-100.8},4).to({skewX:7.4,skewY:6.1,x:26,y:-92.4},3).to({skewX:22.4,skewY:21.1,x:30.4,y:-78},3).to({regX:-0.1,scaleX:1,scaleY:1,rotation:27,skewX:0,skewY:0,x:34.5,y:-34.8},3).wait(1));
@@ -3388,7 +3373,6 @@ p.nominalBounds = new cjs.Rectangle(-88.9,-67.3,134.8,82.1);
 	// NA_GreenImp_Nose01_0
 	this.instance_7 = new lib.NA_Imp_Nose01_0();
 	this.instance_7.setTransform(11.6,-40.1,1,1,31.7);
-	this.instance_7.filters = [new cjs.ColorFilter(0.54, 0.54, 0.54, 1, 103.5, 0, 0, 0)];
 	this.instance_7.cache(-6,-3,11,7);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_7).to({x:8.5,y:-47.8},5).to({scaleX:1,rotation:0,skewX:22.7,skewY:25.3,x:10.9,y:-73.8},4).to({scaleY:1.08,skewX:-11.7,skewY:10.3,x:5.8,y:-91.3},4).to({scaleX:0.97,skewY:4.7,x:3.8,y:-94.2},4).to({skewX:-20.9,skewY:-4.5,x:0.7,y:-87.6},3).to({scaleX:0.93,skewX:-34.6,skewY:-28.6,x:-2.8,y:-70},4).to({skewX:-32.4,skewY:-26.4,x:-10.4,y:-34.3},4).to({skewX:-36.9,skewY:-30.9,x:-4.7,y:-43.1},5).to({scaleX:0.93,scaleY:0.98,skewX:-31.4,skewY:-28.8,x:-1.1,y:-69},4).to({scaleY:0.98,skewX:-10.7,skewY:-13.8,x:-0.5,y:-86.2},4).to({skewX:4.3,skewY:1.2,x:3.5,y:-94.1},4).to({scaleX:0.93,skewX:13,skewY:8.6,x:3.2,y:-87.2},3).to({scaleX:0.98,scaleY:0.99,skewX:34.7,skewY:23.6,x:8.3,y:-77.5},3).to({scaleX:1,scaleY:1,rotation:31.7,skewX:0,skewY:0,x:11.6,y:-40.1},3).wait(1));
@@ -3396,7 +3380,6 @@ p.nominalBounds = new cjs.Rectangle(-88.9,-67.3,134.8,82.1);
 	// NA_GreenImp_Nose01
 	this.instance_8 = new lib.NA_Imp_Nose01();
 	this.instance_8.setTransform(11.6,-40.1,1,1,31.7);
-	this.instance_8.filters = [new cjs.ColorFilter(0.54, 0.54, 0.54, 1, 103.5, 0, 0, 0)];
 	this.instance_8.cache(-6,-5,13,9);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_8).to({x:8.5,y:-47.8},5).to({scaleX:1,rotation:0,skewX:22.7,skewY:25.3,x:10.9,y:-73.8},4).to({scaleY:1.08,skewX:-11.7,skewY:10.3,x:5.8,y:-91.3},4).to({scaleX:0.97,skewY:4.7,x:3.8,y:-94.2},4).to({skewX:-20.9,skewY:-4.5,x:0.7,y:-87.6},3).to({scaleX:0.93,skewX:-34.6,skewY:-28.6,x:-2.8,y:-70},4).to({skewX:-32.4,skewY:-26.4,x:-10.4,y:-34.3},4).to({skewX:-36.9,skewY:-30.9,x:-4.7,y:-43.1},5).to({scaleX:0.93,scaleY:0.98,skewX:-31.4,skewY:-28.8,x:-1.1,y:-69},4).to({scaleY:0.98,skewX:-10.7,skewY:-13.8,x:-0.5,y:-86.2},4).to({skewX:4.3,skewY:1.2,x:3.5,y:-94.1},4).to({scaleX:0.93,skewX:13,skewY:8.6,x:3.2,y:-87.2},3).to({scaleX:0.98,scaleY:0.99,skewX:34.7,skewY:23.6,x:8.3,y:-77.5},3).to({scaleX:1,scaleY:1,rotation:31.7,skewX:0,skewY:0,x:11.6,y:-40.1},3).wait(1));
@@ -3422,7 +3405,6 @@ p.nominalBounds = new cjs.Rectangle(-88.9,-67.3,134.8,82.1);
 	// NA_GreenImp_LowerJaw01
 	this.instance_12 = new lib.NA_Imp_LowerJaw01();
 	this.instance_12.setTransform(-7.1,-20.3,1.022,1.005,0,37.8,29.9,-0.3,-0.3);
-	this.instance_12.filters = [new cjs.ColorFilter(0.54, 0.54, 0.54, 1, 103.5, 0, 0, 0)];
 	this.instance_12.cache(-20,-13,49,22);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_12).to({regX:-0.4,regY:-0.1,scaleX:1.04,scaleY:0.92,skewX:33.2,skewY:38.3,x:-6.8,y:-26},5).to({regX:-0.5,regY:0.1,scaleX:0.97,scaleY:0.93,skewX:15.9,skewY:30.4,x:-1.1,y:-44.2},4).to({regX:-0.4,regY:0.4,scaleX:0.96,scaleY:0.89,skewX:4.1,skewY:10.4,x:0.7,y:-61.4},4).to({regY:0.3,scaleX:1.02,scaleY:0.88,skewX:0.2,skewY:0.7,x:-0.3,y:-70.1},4).to({regX:-0.3,regY:0.2,scaleX:1.02,scaleY:0.85,skewX:-0.1,skewY:-9.3,x:-0.2,y:-59.2},3).to({regX:-0.1,regY:0.1,scaleX:1.02,scaleY:0.83,skewX:-21.4,skewY:-31.9,x:4,y:-40.3},4).to({regX:-0.4,scaleX:1.04,scaleY:0.85,skewX:-25,skewY:-21.2,x:0.6,y:-11.3},4).to({regX:-0.3,regY:0.3,scaleX:0.95,scaleY:0.88,skewX:-15.1,skewY:-30.7,x:2.3,y:-18.1},5).to({regX:-0.1,regY:0.2,scaleX:0.97,scaleY:0.8,skewX:-16.3,skewY:-31.2,x:2,y:-37.2},4).to({regX:-0.2,regY:0,scaleX:0.95,scaleY:0.81,skewX:-3,skewY:-15.9,x:-1.3,y:-56},4).to({regX:-0.3,regY:-0.2,scaleX:1.04,scaleY:0.79,skewX:0.2,skewY:-0.2,x:-0.5,y:-70.9},4).to({regX:-0.1,regY:-0.3,scaleX:1.04,scaleY:0.85,skewX:14,skewY:14.8,x:-1.6,y:-65.3},3).to({regX:0,regY:-0.4,scaleX:1.03,scaleY:0.87,skewX:17.8,skewY:29.5,x:-0.8,y:-50.4},3).to({regX:-0.4,regY:-0.3,scaleX:1.02,scaleY:1,skewX:37.8,skewY:29.9,x:-7.2,y:-20.4},3).wait(1));
@@ -3430,7 +3412,6 @@ p.nominalBounds = new cjs.Rectangle(-88.9,-67.3,134.8,82.1);
 	// NA_GreenImp_UpperJaw01
 	this.instance_13 = new lib.NA_Imp_UpperJaw01();
 	this.instance_13.setTransform(6.6,-36.9,1.016,0.971,0,45.4,29.6);
-	this.instance_13.filters = [new cjs.ColorFilter(0.54, 0.54, 0.54, 1, 103.5, 0, 0, 0)];
 	this.instance_13.cache(-19,-9,46,18);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_13).to({scaleX:0.88,scaleY:1.02,skewX:25.8,skewY:34.3,x:4.3,y:-43},5).to({scaleX:0.84,scaleY:1.02,skewX:20.2,skewY:28,x:7.2,y:-68.8},4).to({scaleX:0.95,scaleY:1.02,skewX:-1.5,skewY:3.7,x:3.2,y:-86.7},4).to({scaleX:1.03,scaleY:0.75,skewX:-5,skewY:-0.4,x:1.7,y:-90.3},4).to({scaleX:0.99,scaleY:0.89,skewX:-2.5,skewY:-14.5,x:-0.6,y:-81.9},3).to({scaleX:0.98,scaleY:0.93,skewX:-17.1,skewY:-35.2,x:-2,y:-65},4).to({scaleX:0.95,scaleY:0.88,skewX:-26.4,skewY:-28.8,x:-8.7,y:-29.3},4).to({scaleX:0.95,scaleY:0.91,skewX:-17.8,skewY:-33.2,x:-2.9,y:-37.1},5).to({scaleX:0.97,scaleY:0.9,skewX:-15.9,skewY:-34.5,x:-1.1,y:-64.1},4).to({scaleX:0.98,scaleY:0.87,skewX:-2.6,skewY:-14.3,x:-0.7,y:-81.4},4).to({scaleX:1.05,scaleY:0.78,skewX:2.6,skewY:-1,x:2.2,y:-90.5},4).to({scaleX:0.96,scaleY:1.04,skewX:-2.9,skewY:8.4,x:1.9,y:-82.6},3).to({scaleX:0.93,scaleY:1,skewX:13.2,skewY:24.9,x:7.7,y:-73.5},3).to({scaleX:1.02,scaleY:0.97,skewX:45.4,skewY:29.6,x:6.6,y:-36.9},3).wait(1));
@@ -3444,7 +3425,6 @@ p.nominalBounds = new cjs.Rectangle(-88.9,-67.3,134.8,82.1);
 	// NA_GreenImp_Body01
 	this.instance_15 = new lib.NA_Imp_Body01();
 	this.instance_15.setTransform(9.6,-34.3,1.052,1.044,0,33.4,26.2,-0.1,-0.1);
-	this.instance_15.filters = [new cjs.ColorFilter(0.54, 0.54, 0.54, 1, 103.5, 0, 0, 0)];
 	this.instance_15.cache(-31,-26,61,63);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_15).to({scaleX:0.89,scaleY:1.1,skewX:25.6,skewY:34.6,x:7.9,y:-41.7},5).to({scaleX:0.86,scaleY:1.19,skewX:17.2,skewY:25.6,x:10.3,y:-64.5},4).to({regX:0.1,regY:0.1,scaleX:1,scaleY:1.07,skewX:3.9,skewY:6.2,x:7.3,y:-84},4).to({scaleX:1.09,scaleY:0.96,skewX:2.7,skewY:0.2,x:6.1,y:-89.1},4).to({regX:-0.1,scaleX:1.06,scaleY:1.04,skewX:-7.2,skewY:-14.8,x:2.8,y:-80.5},3).to({regX:0,regY:0,scaleX:0.99,scaleY:1.13,skewX:-19,skewY:-35,x:0.7,y:-64},4).to({scaleX:1.09,scaleY:0.98,skewX:-36.5,skewY:-25,x:-2.7,y:-32.2},4).to({scaleX:1,scaleY:1.06,skewX:-29.4,skewY:-39.4,x:-0.7,y:-39.6},5).to({scaleX:0.97,scaleY:1.23,skewX:-13.2,skewY:-35.4,x:1.2,y:-65.7},4).to({scaleX:1.06,scaleY:1.05,skewX:-7.5,skewY:-18.5,x:2.3,y:-82.1},4).to({scaleX:1.09,scaleY:0.96,skewX:1.8,skewY:0.4,x:5.7,y:-89.4},4).to({scaleX:1.04,scaleY:1.03,skewX:6.4,skewY:9,x:6,y:-81.1},3).to({scaleX:0.97,scaleY:1.18,skewX:17.9,skewY:23.3,x:9.5,y:-68.9},3).to({regX:-0.1,regY:-0.1,scaleX:1.05,scaleY:1.04,skewX:33.4,skewY:26.2,x:9.6,y:-34.3},3).wait(1));
@@ -3452,7 +3432,6 @@ p.nominalBounds = new cjs.Rectangle(-88.9,-67.3,134.8,82.1);
 	// NA_GreenImp_Arm01_0
 	this.instance_16 = new lib.NA_Imp_Arm01();
 	this.instance_16.setTransform(30.4,-27.9,1.004,0.999,0,46.9,52.7,-0.1,0.1);
-	this.instance_16.filters = [new cjs.ColorFilter(0.54, 0.54, 0.54, 1, 103.5, 0, 0, 0)];
 	this.instance_16.cache(-2,-17,23,23);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_16).to({regY:0,scaleX:1,scaleY:0.98,skewX:79.7,skewY:84.7,x:22.6,y:-33.8},5).to({regY:-0.1,scaleY:0.98,skewX:98.7,skewY:92.6,x:25.8,y:-59.9},4).to({scaleX:1.03,scaleY:0.99,skewX:59.1,skewY:67.6,x:25.6,y:-89.6},4).to({regX:-0.2,regY:-0.3,scaleX:1.03,scaleY:0.98,skewX:26.7,skewY:35.1,x:27.7,y:-94.4},4).to({regX:-0.1,regY:-0.4,skewX:-12.9,skewY:-4.1,x:22.3,y:-91.2},3).to({regY:-0.3,scaleX:1.04,scaleY:0.97,skewX:-20.6,skewY:-25.9,x:15.5,y:-78.7},4).to({scaleY:0.97,skewX:-44.5,skewY:-40.9,x:13.5,y:-45.4},4).to({regY:-0.4,scaleY:0.97,skewX:-33.5,skewY:-34.7,x:13.6,y:-53.7},5).to({scaleX:1.04,scaleY:1.03,skewX:-17.9,skewY:-21.1,x:14.9,y:-81.3},4).to({regX:0,regY:-0.3,scaleY:1.03,skewX:-6.6,skewY:-6.1,x:21.5,y:-92.9},4).to({regX:-0.1,scaleX:1.04,scaleY:1.01,skewX:-3.2,skewY:7.7,x:28.1,y:-93.5},4).to({regY:-0.2,skewX:7.8,skewY:18.7,x:26.2,y:-84.8},3).to({regY:-0.1,scaleY:0.99,skewX:52.6,skewY:57.7,x:26.6,y:-67.9},3).to({regY:0.1,scaleX:1,scaleY:1,skewX:46.9,skewY:52.7,x:30.4,y:-27.9},3).wait(1));
@@ -3466,7 +3445,6 @@ p.nominalBounds = new cjs.Rectangle(-88.9,-67.3,134.8,82.1);
 	// NA_GreenImp_Leg02_0
 	this.instance_18 = new lib.NA_Imp_Leg02();
 	this.instance_18.setTransform(-22.9,-38,1.242,0.366,0,89.9,-94.2);
-	this.instance_18.filters = [new cjs.ColorFilter(0.54, 0.54, 0.54, 1, 103.5, 0, 0, 0)];
 	this.instance_18.cache(-13,-21,25,42);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_18).to({scaleX:1.15,scaleY:0.34,skewX:66.4,skewY:-112.1,x:-21.9,y:-34},5).to({scaleX:1.22,scaleY:0.37,skewX:71.6,skewY:-119.7,x:-17.8,y:-57.3},4).to({scaleY:0.41,skewX:51.1,skewY:-140.2,x:-19.4,y:-65.9},4).to({scaleX:1.23,scaleY:0.43,skewX:11.5,skewY:-176,x:-17.5,y:-65},4).to({scaleX:0.71,scaleY:0.71,skewX:-6.2,skewY:-184.4,x:-12.1,y:-47.7},3).to({scaleX:0.69,scaleY:1.04,skewX:-8.2,skewY:-179.1,x:-5.2,y:-22.4},4).to({scaleX:0.89,scaleY:0.68,skewX:-86.5,skewY:-227.1,x:-8,y:-2.6},4).to({scaleX:0.71,scaleY:0.7,skewX:-103.6,skewY:-264.1,x:1,y:-4.5},5).to({scaleX:0.73,scaleY:0.98,skewX:-34.1,skewY:-192.4,x:0.6,y:-19.4},4).to({scaleX:0.81,scaleY:0.76,skewX:-28.2,skewY:-180.1,x:-8.9,y:-46.1},4).to({scaleX:0.88,scaleY:0.46,skewX:-51.4,skewY:-211.1,x:-20,y:-63.9},4).to({scaleY:0.49,skewX:-29.9,skewY:-180.5,x:-23.7,y:-63.7},3).to({scaleX:0.89,scaleY:0.5,skewX:0.4,skewY:-144.9,x:-21.6,y:-63.8},3).to({scaleX:1.24,scaleY:0.37,skewX:89.9,skewY:-94.2,x:-22.9,y:-38},3).wait(1));
@@ -3486,7 +3464,6 @@ p.nominalBounds = new cjs.Rectangle(-88.9,-67.3,134.8,82.1);
 	this.instance_21 = new lib.NA_Imp_Foot01();
 	this.instance_21.setTransform(41.5,-36.6,0.849,0.81,0,-130.8,-124.7);
 	this.instance_21._off = true;
-	this.instance_21.filters = [new cjs.ColorFilter(0, 0, 0, 1, 46, 21, 27, 0)];
 	this.instance_21.cache(-5,-4,10,8);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_21).wait(28).to({_off:false},0).to({scaleX:0.97,scaleY:0.8,skewX:-99.7,skewY:-96.4,x:34.1,y:-22.8},5).to({scaleX:0.93,scaleY:0.84,skewX:-74.4,skewY:-75,x:32.4,y:-43.8},4).to({scaleX:0.96,scaleY:0.81,skewX:-46.2,skewY:-46.8,x:27.5,y:-52.1},4).to({_off:true},1).wait(13));
@@ -3500,7 +3477,6 @@ p.nominalBounds = new cjs.Rectangle(-88.9,-67.3,134.8,82.1);
 	// NA_GreenImp_Leg02
 	this.instance_23 = new lib.NA_Imp_Leg02();
 	this.instance_23.setTransform(6.2,-9.7,2.035,0.733,0,-27.4,8.9);
-	this.instance_23.filters = [new cjs.ColorFilter(0.54, 0.54, 0.54, 1, 103.5, 0, 0, 0)];
 	this.instance_23.cache(-13,-21,25,42);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_23).to({scaleX:1.41,scaleY:0.71,skewX:-31.8,skewY:-1.1,x:11.7,y:-8.6},5).to({scaleX:0.76,scaleY:1.19,skewX:-4.2,skewY:-25.8,x:16.7,y:-26.9},4).to({scaleX:0.74,scaleY:0.76,skewX:1.8,skewY:-16.3,x:25.1,y:-51.6},4).to({scaleX:1.16,scaleY:0.46,skewX:47.8,skewY:25.9,x:27.8,y:-63.5},4).to({scaleX:1.23,scaleY:0.39,skewX:18.6,skewY:-5.9,x:28.9,y:-59.4},3).to({scaleX:1,scaleY:0.48,skewX:-4.8,skewY:-47.4,x:31.6,y:-53},4).to({scaleX:0.85,skewX:-62.7,skewY:-98.8,x:33.3,y:-39.2},4).to({scaleX:0.97,scaleY:0.47,skewX:-20.9,skewY:-66.1,x:29.5,y:-29.3},5).to({scaleX:0.77,scaleY:0.54,skewX:2.2,skewY:-43.7,x:30.2,y:-53},4).to({scaleX:0.83,scaleY:0.55,skewX:18,skewY:-21.1,x:29.2,y:-60.8},4).to({scaleX:0.95,scaleY:0.38,skewX:32.5,skewY:0.5,x:29.5,y:-61.8},4).to({scaleX:0.82,scaleY:0.69,skewX:14.9,skewY:11,x:17.3,y:-46.7},3).to({scaleX:0.74,scaleY:1.14,skewX:21,skewY:4,x:13,y:-25.8},3).to({scaleX:2.04,scaleY:0.73,skewX:-27.4,skewY:8.9,x:6.2,y:-9.7},3).wait(1));
@@ -3508,7 +3484,6 @@ p.nominalBounds = new cjs.Rectangle(-88.9,-67.3,134.8,82.1);
 	// NA_GreenImp_Ear01
 	this.instance_24 = new lib.NA_Imp_Ear01();
 	this.instance_24.setTransform(7.7,-54.2,0.95,0.95,0,39.9,-140.1,-0.1,-0.2);
-	this.instance_24.filters = [new cjs.ColorFilter(0.54, 0.54, 0.54, 1, 103.5, 0, 0, 0)];
 	this.instance_24.cache(-3,-8,11,11);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_24).to({regX:0,regY:-0.1,x:4.8,y:-64.5},5).to({regX:-0.1,skewX:30.9,skewY:-149.1,x:4.3,y:-88.3},4).to({regX:0,regY:-0.2,skewX:-1.6,skewY:-181.6,x:-8.9,y:-100.5},4).to({skewX:-1.6,x:-11.2,y:-101.8},4).to({regX:-0.2,skewX:-5.1,skewY:-185.1,x:-14.6,y:-93},3).to({regX:-0.1,skewX:-14.6,skewY:-194.6,x:-16.4,y:-71.4},4).to({skewX:-12.4,skewY:-192.4,x:-27.6,y:-37.2},4).to({regX:0.1,regY:-0.3,skewX:-47.1,skewY:-227.1,x:-20.6,y:-42.4},5).to({regX:-0.1,scaleY:0.95,skewX:-48.7,skewY:-223.4,x:-14.6,y:-75},4).to({regX:0,scaleY:0.95,skewX:-25.2,skewY:-205.2,x:-15.6,y:-91.8},4).to({regY:-0.1,skewX:4.8,skewY:-175.2,x:-11.4,y:-101.2},4).to({regX:0.1,skewX:7.6,skewY:-172.4,x:-10,y:-97.8},3).to({regX:0,skewX:22.6,skewY:-155.2,x:1.4,y:-91.9},3).to({regX:-0.1,regY:-0.2,skewX:39.9,skewY:-140.1,x:7.7,y:-54.2},3).wait(1));
@@ -3516,7 +3491,6 @@ p.nominalBounds = new cjs.Rectangle(-88.9,-67.3,134.8,82.1);
 	// NA_GreenImp_Arm01
 	this.instance_25 = new lib.NA_Imp_Arm01();
 	this.instance_25.setTransform(1.5,-51.3,0.959,0.946,0,43.1,-130.5);
-	this.instance_25.filters = [new cjs.ColorFilter(0.54, 0.54, 0.54, 1, 103.5, 0, 0, 0)];
 	this.instance_25.cache(-2,-17,23,23);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_25).to({scaleX:0.95,scaleY:0.95,skewX:16.6,skewY:-159.7,x:-1.2,y:-57.5},5).to({skewX:14.1,skewY:-162.2,x:0,y:-81.5},4).to({scaleX:0.96,skewX:-15.9,skewY:-189.7,x:-7.5,y:-93.9},4).to({scaleX:0.95,scaleY:0.96,skewX:0.1,skewY:-187.6,x:-13.1,y:-93.5},4).to({scaleX:0.95,scaleY:0.9,skewX:4.4,skewY:-189,x:-15.2,y:-83.5},3).to({scaleX:0.92,scaleY:0.91,skewX:-13,skewY:-190.4,x:-13.7,y:-61.6},4).to({scaleX:0.94,skewX:-42.6,skewY:-220.2,x:-24,y:-30.6},4).to({scaleX:0.94,scaleY:0.9,skewX:-62.4,skewY:-243.9,x:-18.6,y:-34.2},5).to({scaleX:1.11,scaleY:0.97,skewX:-98.5,skewY:-265.7,x:-12.1,y:-62},4).to({scaleX:1.11,scaleY:0.95,skewX:-30.1,skewY:-215.8,x:-12.6,y:-86.5},4).to({scaleX:1.13,scaleY:0.93,skewX:3.6,skewY:-184.8,x:-11.5,y:-93.3},4).to({scaleY:0.92,skewX:5.5,skewY:-173.8,x:-9.4,y:-90.4},3).to({scaleX:1.18,scaleY:0.96,skewX:33.3,skewY:-141,x:-2,y:-83.1},3).to({scaleX:0.96,scaleY:0.95,skewX:43.1,skewY:-130.5,x:1.5,y:-51.3},3).wait(1));
@@ -3543,7 +3517,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_Pinch01
 	this.instance_1 = new lib.NA_Imp_Pinch01();
 	this.instance_1.setTransform(-16.7,-13.5,1.008,1.058,0,40.3,37.7);
-	this.instance_1.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 68.85, 22.95, 0)];
 	this.instance_1.cache(-15,-9,35,21);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_1).to({scaleX:0.97,scaleY:1.09,skewX:15.8,skewY:30.4,x:-10.5,y:-12.6},5).to({scaleX:0.99,scaleY:1.15,skewX:11.3,skewY:25.7,x:-4.7,y:-32.3},4).to({scaleX:0.98,skewX:-3.7,skewY:9.7,x:0,y:-50.9},4).to({scaleX:1,scaleY:1.04,skewX:-1.7,skewY:-0.5,x:-0.7,y:-59.7},4).to({scaleX:1.01,scaleY:1.04,skewX:-6.1,skewY:-7.1,x:0.6,y:-48.4},3).to({scaleX:0.91,scaleY:1.15,skewX:-11.4,skewY:-23.9,x:6,y:-28.3},4).to({scaleX:1.03,scaleY:1.02,skewX:-32.9,skewY:-20.7,x:7.5,y:-4.5},4).to({scaleX:0.9,scaleY:1.01,skewX:-28.9,skewY:-26.5,x:7.3,y:-7.3},5).to({scaleX:0.9,scaleY:1.01,skewX:-16,skewY:-23.1,x:3.4,y:-26.4},4).to({scaleX:0.94,skewX:-10.1,skewY:-8.6,x:-0.7,y:-46.3},4).to({scaleX:1.01,scaleY:1.04,skewX:0.6,skewY:0.8,y:-59.4},4).to({scaleX:1.01,skewX:11.6,skewY:15.8,x:-5.5,y:-52},3).to({scaleX:1.02,scaleY:1.09,skewX:22.1,skewY:31.2,x:-8.9,y:-37.7},3).to({scaleX:1.01,scaleY:1.06,skewX:40.3,skewY:37.7,x:-16.7,y:-13.5},3).wait(1));
@@ -3563,7 +3536,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_RightEye01_0
 	this.instance_4 = new lib.NA_Imp_RightEye01();
 	this.instance_4.setTransform(4.5,-51.1,0.72,0.925,0,0.6,-172.3,0.1,-0.3);
-	this.instance_4.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 68.85, 22.95, 0)];
 	this.instance_4.cache(-12,-12,24,24);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_4).to({regY:-0.2,scaleX:0.71,scaleY:0.96,skewX:12.9,skewY:-163.2,x:3.2,y:-59.5},5).to({scaleY:0.92,skewX:13.2,skewY:-165.9,x:4.7,y:-85.2},4).to({regY:-0.5,scaleX:0.71,scaleY:0.93,skewX:-14.3,skewY:-193.7,x:-4.6,y:-99.3},4).to({regX:0.3,scaleX:0.71,scaleY:0.95,skewX:-22.3,skewY:-192.8,x:-7.6,y:-101.3},4).to({scaleX:0.73,scaleY:0.94,skewX:-24.7,skewY:-202,x:-11.5,y:-92.9},3).to({regY:-0.4,scaleX:0.73,scaleY:0.9,skewX:-33.4,skewY:-216.6,x:-15.1,y:-72.1},4).to({regY:-0.5,scaleX:0.73,scaleY:0.86,skewX:-42.4,skewY:-220,x:-23.1,y:-35.9},4).to({regY:-0.4,skewX:-59.9,skewY:-237.4,x:-17.2,y:-41.7},5).to({regX:0.4,scaleX:0.71,scaleY:0.9,skewX:-30.5,skewY:-217,x:-13.1,y:-71.7},4).to({regY:-0.6,scaleX:0.71,scaleY:0.89,skewX:-23.9,skewY:-197.5,x:-12.1,y:-91.6},4).to({regX:0.2,scaleX:0.73,scaleY:0.94,skewX:-19.8,skewY:-196.1,x:-7.8,y:-101.2},4).to({regY:-0.8,scaleX:0.73,scaleY:0.94,skewX:-4.2,skewY:-179.4,x:-5.9,y:-96.5},3).to({regX:0.3,regY:-0.7,scaleX:0.72,scaleY:0.99,skewX:15.7,skewY:-161.5,x:2.5,y:-89.5},3).to({regX:0.1,regY:-0.4,scaleX:0.72,scaleY:0.93,skewX:0.6,skewY:-172.3,x:4.5,y:-51.2},3).wait(1));
@@ -3571,7 +3543,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_RightEye01
 	this.instance_5 = new lib.NA_Imp_RightEye01();
 	this.instance_5.setTransform(25.7,-37.6,1,1.008,0,53,55.5);
-	this.instance_5.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 68.85, 22.95, 0)];
 	this.instance_5.cache(-12,-12,24,24);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_5).to({scaleX:1,skewX:45.6,skewY:44.3,x:22.8,y:-46.6},5).to({scaleX:1,scaleY:0.99,skewX:38.9,skewY:37,x:25.4,y:-74.3},4).to({skewX:8.9,skewY:7,x:17.7,y:-98.7},4).to({scaleX:1,scaleY:1,skewX:14.7,skewY:7.6,x:16.4,y:-101.6},4).to({scaleX:1.01,scaleY:0.99,skewX:-2.3,skewY:-4.7,x:10.8,y:-97.4},3).to({scaleX:1.02,scaleY:1,skewX:-17.7,skewY:-25.2,x:4.3,y:-83.7},4).to({scaleX:1.01,skewX:-10.7,skewY:-15.9,x:-1.9,y:-46.8},4).to({scaleX:1,scaleY:1.01,skewX:-5.3,skewY:-12.8,x:3.6,y:-55.3},5).to({skewX:-14.8,skewY:-22.4,x:6.4,y:-82.8},4).to({scaleX:1.01,scaleY:0.97,skewX:-4.4,skewY:-6.5,x:10.4,y:-96.2},4).to({scaleX:1.01,scaleY:0.98,skewX:15.9,skewY:8.7,x:16.4,y:-101.6},4).to({scaleX:1.01,scaleY:0.99,skewX:24.3,skewY:18.1,x:16.8,y:-92.6},3).to({scaleX:1.03,scaleY:0.95,skewX:38.9,skewY:34.3,x:23.1,y:-78.6},3).to({scaleX:1,scaleY:1.01,skewX:53,skewY:55.5,x:25.7,y:-37.6},3).wait(1));
@@ -3579,7 +3550,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_Ear01_0
 	this.instance_6 = new lib.NA_Imp_Ear01();
 	this.instance_6.setTransform(34.6,-34.7,0.999,0.999,27);
-	this.instance_6.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 68.85, 22.95, 0)];
 	this.instance_6.cache(-3,-8,11,11);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_6).to({scaleY:1.02,rotation:0,skewX:83.7,skewY:72,x:27.2,y:-43},5).to({skewX:113.2,skewY:101.5,x:29.8,y:-70.7},4).to({scaleX:0.99,scaleY:1.08,skewX:45.8,skewY:37.2,x:25.7,y:-97.1},4).to({scaleX:0.99,skewX:0.8,skewY:-4.5,x:25.6,y:-100.6},4).to({skewX:-11.8,skewY:-17.2,x:20.4,y:-97.7},3).to({skewX:-17.8,skewY:-23.2,x:12.8,y:-86},4).to({skewX:-16.3,skewY:-21.7,x:7.7,y:-48.4},4).to({skewX:-22.3,skewY:-27.6,x:7.4,y:-61.8},5).to({x:13.3,y:-90.6},4).to({scaleX:0.98,skewY:-19.9,x:19.8,y:-100.4},4).to({scaleY:1.08,skewX:-3.6,skewY:-4.9,x:26.2,y:-100.8},4).to({skewX:7.4,skewY:6.1,x:26,y:-92.4},3).to({skewX:22.4,skewY:21.1,x:30.4,y:-78},3).to({regX:-0.1,scaleX:1,scaleY:1,rotation:27,skewX:0,skewY:0,x:34.5,y:-34.8},3).wait(1));
@@ -3593,7 +3563,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_Nose01
 	this.instance_8 = new lib.NA_Imp_Nose01();
 	this.instance_8.setTransform(11.6,-40.1,1,1,31.7);
-	this.instance_8.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 68.85, 22.95, 0)];
 	this.instance_8.cache(-6,-5,13,9);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_8).to({x:8.5,y:-47.8},5).to({scaleX:1,rotation:0,skewX:22.7,skewY:25.3,x:10.9,y:-73.8},4).to({scaleY:1.08,skewX:-11.7,skewY:10.3,x:5.8,y:-91.3},4).to({scaleX:0.97,skewY:4.7,x:3.8,y:-94.2},4).to({skewX:-20.9,skewY:-4.5,x:0.7,y:-87.6},3).to({scaleX:0.93,skewX:-34.6,skewY:-28.6,x:-2.8,y:-70},4).to({skewX:-32.4,skewY:-26.4,x:-10.4,y:-34.3},4).to({skewX:-36.9,skewY:-30.9,x:-4.7,y:-43.1},5).to({scaleX:0.93,scaleY:0.98,skewX:-31.4,skewY:-28.8,x:-1.1,y:-69},4).to({scaleY:0.98,skewX:-10.7,skewY:-13.8,x:-0.5,y:-86.2},4).to({skewX:4.3,skewY:1.2,x:3.5,y:-94.1},4).to({scaleX:0.93,skewX:13,skewY:8.6,x:3.2,y:-87.2},3).to({scaleX:0.98,scaleY:0.99,skewX:34.7,skewY:23.6,x:8.3,y:-77.5},3).to({scaleX:1,scaleY:1,rotation:31.7,skewX:0,skewY:0,x:11.6,y:-40.1},3).wait(1));
@@ -3619,7 +3588,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_LowerJaw01
 	this.instance_12 = new lib.NA_Imp_LowerJaw01();
 	this.instance_12.setTransform(-7.2,-20.2,1.022,1.005,0,37.8,29.9,-0.3,-0.2);
-	this.instance_12.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 68.85, 22.95, 0)];
 	this.instance_12.cache(-20,-13,49,22);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_12).to({regX:-0.5,regY:-0.1,scaleX:1.04,scaleY:0.92,skewX:33.2,skewY:38.3,x:-6.9,y:-26},5).to({regY:0.1,scaleX:0.97,scaleY:0.93,skewX:15.9,skewY:30.4,x:-1.1,y:-44.2},4).to({regX:-0.4,regY:0.3,scaleX:0.96,scaleY:0.89,skewX:4.1,skewY:10.4,x:0.8,y:-61.5},4).to({scaleX:1.02,scaleY:0.88,skewX:0.2,skewY:0.7,x:-0.3,y:-70.1},4).to({regX:-0.3,regY:0.2,scaleX:1.02,scaleY:0.85,skewX:-0.1,skewY:-9.3,x:-0.2,y:-59.2},3).to({regX:-0.1,regY:0.1,scaleX:1.02,scaleY:0.83,skewX:-21.4,skewY:-31.9,x:4,y:-40.3},4).to({regX:-0.4,scaleX:1.04,scaleY:0.85,skewX:-25,skewY:-21.2,x:0.6,y:-11.3},4).to({regX:-0.2,scaleX:0.95,scaleY:0.88,skewX:-15.1,skewY:-30.7,x:2.4,y:-18.3},5).to({regX:-0.1,scaleX:0.97,scaleY:0.8,skewX:-16.3,skewY:-31.2,x:1.9,y:-37.3},4).to({regX:-0.2,regY:0,scaleX:0.95,scaleY:0.81,skewX:-3,skewY:-15.9,x:-1.3,y:-56},4).to({regX:-0.3,regY:-0.2,scaleX:1.04,scaleY:0.79,skewX:0.2,skewY:-0.2,x:-0.5,y:-70.9},4).to({regX:-0.1,regY:-0.3,scaleX:1.04,scaleY:0.85,skewX:14,skewY:14.8,x:-1.6,y:-65.3},3).to({scaleX:1.03,scaleY:0.87,skewX:17.8,skewY:29.5,x:-0.9,y:-50.3},3).to({regX:-0.3,scaleX:1.02,scaleY:1,skewX:37.8,skewY:29.9,x:-7.1,y:-20.3},3).wait(1));
@@ -3627,7 +3595,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_UpperJaw01
 	this.instance_13 = new lib.NA_Imp_UpperJaw01();
 	this.instance_13.setTransform(6.6,-36.9,1.016,0.971,0,45.4,29.6);
-	this.instance_13.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 68.85, 22.95, 0)];
 	this.instance_13.cache(-19,-9,46,18);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_13).to({scaleX:0.88,scaleY:1.02,skewX:25.8,skewY:34.3,x:4.3,y:-43},5).to({scaleX:0.84,scaleY:1.02,skewX:20.2,skewY:28,x:7.2,y:-68.8},4).to({scaleX:0.95,scaleY:1.02,skewX:-1.5,skewY:3.7,x:3.2,y:-86.7},4).to({scaleX:1.03,scaleY:0.75,skewX:-5,skewY:-0.4,x:1.7,y:-90.3},4).to({scaleX:0.99,scaleY:0.89,skewX:-2.5,skewY:-14.5,x:-0.6,y:-81.9},3).to({scaleX:0.98,scaleY:0.93,skewX:-17.1,skewY:-35.2,x:-2,y:-65},4).to({scaleX:0.95,scaleY:0.88,skewX:-26.4,skewY:-28.8,x:-8.7,y:-29.3},4).to({scaleX:0.95,scaleY:0.91,skewX:-17.8,skewY:-33.2,x:-2.9,y:-37.1},5).to({scaleX:0.97,scaleY:0.9,skewX:-15.9,skewY:-34.5,x:-1.1,y:-64.1},4).to({scaleX:0.98,scaleY:0.87,skewX:-2.6,skewY:-14.3,x:-0.7,y:-81.4},4).to({scaleX:1.05,scaleY:0.78,skewX:2.6,skewY:-1,x:2.2,y:-90.5},4).to({scaleX:0.96,scaleY:1.04,skewX:-2.9,skewY:8.4,x:1.9,y:-82.6},3).to({scaleX:0.93,scaleY:1,skewX:13.2,skewY:24.9,x:7.7,y:-73.5},3).to({scaleX:1.02,scaleY:0.97,skewX:45.4,skewY:29.6,x:6.6,y:-36.9},3).wait(1));
@@ -3641,7 +3608,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_Body01
 	this.instance_15 = new lib.NA_Imp_Body01();
 	this.instance_15.setTransform(9.6,-34.3,1.052,1.044,0,33.4,26.2,-0.1,-0.1);
-	this.instance_15.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 68.85, 22.95, 0)];
 	this.instance_15.cache(-31,-26,61,63);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_15).to({regX:0,scaleX:0.89,scaleY:1.1,skewX:25.6,skewY:34.6,x:8,y:-41.6},5).to({regX:-0.1,scaleX:0.86,scaleY:1.19,skewX:17.2,skewY:25.6,x:10.3,y:-64.5},4).to({regX:0.1,regY:0.1,scaleX:1,scaleY:1.07,skewX:3.9,skewY:6.2,x:7.3,y:-84},4).to({scaleX:1.09,scaleY:0.96,skewX:2.7,skewY:0.2,x:6.1,y:-89.1},4).to({regX:-0.1,scaleX:1.06,scaleY:1.04,skewX:-7.2,skewY:-14.8,x:2.8,y:-80.5},3).to({regX:0,regY:0,scaleX:0.99,scaleY:1.13,skewX:-19,skewY:-35,x:0.7,y:-64},4).to({scaleX:1.09,scaleY:0.98,skewX:-36.5,skewY:-25,x:-2.7,y:-32.2},4).to({scaleX:1,scaleY:1.06,skewX:-29.4,skewY:-39.4,x:-0.7,y:-39.6},5).to({scaleX:0.97,scaleY:1.23,skewX:-13.2,skewY:-35.4,x:1.2,y:-65.7},4).to({scaleX:1.06,scaleY:1.05,skewX:-7.5,skewY:-18.5,x:2.3,y:-82.1},4).to({scaleX:1.09,scaleY:0.96,skewX:1.8,skewY:0.4,x:5.7,y:-89.4},4).to({scaleX:1.04,scaleY:1.03,skewX:6.4,skewY:9,x:6,y:-81.1},3).to({scaleX:0.97,scaleY:1.18,skewX:17.9,skewY:23.3,x:9.5,y:-68.9},3).to({regX:-0.1,regY:-0.1,scaleX:1.05,scaleY:1.04,skewX:33.4,skewY:26.2,x:9.6,y:-34.3},3).wait(1));
@@ -3649,7 +3615,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_Arm01_0
 	this.instance_16 = new lib.NA_Imp_Arm01();
 	this.instance_16.setTransform(30.4,-27.9,1.004,0.999,0,46.9,52.7,-0.1,0.1);
-	this.instance_16.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 68.85, 22.95, 0)];
 	this.instance_16.cache(-2,-17,23,23);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_16).to({regY:0,scaleX:1,scaleY:0.98,skewX:79.7,skewY:84.7,x:22.6,y:-33.8},5).to({regY:-0.1,scaleY:0.98,skewX:98.7,skewY:92.6,x:25.8,y:-59.9},4).to({scaleX:1.03,scaleY:0.99,skewX:59.1,skewY:67.6,x:25.6,y:-89.6},4).to({regX:-0.2,regY:-0.3,scaleX:1.03,scaleY:0.98,skewX:26.7,skewY:35.1,x:27.7,y:-94.4},4).to({regX:-0.1,regY:-0.4,skewX:-12.9,skewY:-4.1,x:22.3,y:-91.2},3).to({regY:-0.3,scaleX:1.04,scaleY:0.97,skewX:-20.6,skewY:-25.9,x:15.5,y:-78.7},4).to({scaleY:0.97,skewX:-44.5,skewY:-40.9,x:13.5,y:-45.4},4).to({regY:-0.4,scaleY:0.97,skewX:-33.5,skewY:-34.7,x:13.6,y:-53.7},5).to({scaleX:1.04,scaleY:1.03,skewX:-17.9,skewY:-21.1,x:14.9,y:-81.3},4).to({regX:0,regY:-0.3,scaleY:1.03,skewX:-6.6,skewY:-6.1,x:21.5,y:-92.9},4).to({regX:-0.1,scaleX:1.04,scaleY:1.01,skewX:-3.2,skewY:7.7,x:28.1,y:-93.5},4).to({skewX:7.8,skewY:18.7,x:26.2,y:-84.9},3).to({regY:-0.2,scaleY:0.99,skewX:52.6,skewY:57.7,x:26.6,y:-67.9},3).to({regY:0.1,scaleX:1,scaleY:1,skewX:46.9,skewY:52.7,x:30.4,y:-27.9},3).wait(1));
@@ -3663,7 +3628,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_Leg02_0
 	this.instance_18 = new lib.NA_Imp_Leg02();
 	this.instance_18.setTransform(-22.9,-38,1.242,0.366,0,89.9,-94.2);
-	this.instance_18.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 68.85, 22.95, 0)];
 	this.instance_18.cache(-13,-21,25,42);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_18).to({scaleX:1.15,scaleY:0.34,skewX:66.4,skewY:-112.1,x:-21.9,y:-34},5).to({scaleX:1.22,scaleY:0.37,skewX:71.6,skewY:-119.7,x:-17.8,y:-57.3},4).to({scaleY:0.41,skewX:51.1,skewY:-140.2,x:-19.4,y:-65.9},4).to({scaleX:1.23,scaleY:0.43,skewX:11.5,skewY:-176,x:-17.5,y:-65},4).to({scaleX:0.71,scaleY:0.71,skewX:-6.2,skewY:-184.4,x:-12.1,y:-47.7},3).to({scaleX:0.69,scaleY:1.04,skewX:-8.2,skewY:-179.1,x:-5.2,y:-22.4},4).to({scaleX:0.89,scaleY:0.68,skewX:-86.5,skewY:-227.1,x:-8,y:-2.6},4).to({scaleX:0.71,scaleY:0.7,skewX:-103.6,skewY:-264.1,x:1,y:-4.5},5).to({scaleX:0.73,scaleY:0.98,skewX:-34.1,skewY:-192.4,x:0.6,y:-19.4},4).to({scaleX:0.81,scaleY:0.76,skewX:-28.2,skewY:-180.1,x:-8.9,y:-46.1},4).to({scaleX:0.88,scaleY:0.46,skewX:-51.4,skewY:-211.1,x:-20,y:-63.9},4).to({scaleY:0.49,skewX:-29.9,skewY:-180.5,x:-23.7,y:-63.7},3).to({scaleX:0.89,scaleY:0.5,skewX:0.4,skewY:-144.9,x:-21.6,y:-63.8},3).to({scaleX:1.24,scaleY:0.37,skewX:89.9,skewY:-94.2,x:-22.9,y:-38},3).wait(1));
@@ -3683,7 +3647,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	this.instance_21 = new lib.NA_Imp_Foot01();
 	this.instance_21.setTransform(41.5,-36.6,0.849,0.81,0,-130.8,-124.7);
 	this.instance_21._off = true;
-	this.instance_21.filters = [new cjs.ColorFilter(0, 0, 0, 1, 46, 21, 27, 0)];
 	this.instance_21.cache(-5,-4,10,8);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_21).wait(28).to({_off:false},0).to({scaleX:0.97,scaleY:0.8,skewX:-99.7,skewY:-96.4,x:34.1,y:-22.8},5).to({scaleX:0.93,scaleY:0.84,skewX:-74.4,skewY:-75,x:32.4,y:-43.8},4).to({scaleX:0.96,scaleY:0.81,skewX:-46.2,skewY:-46.8,x:27.5,y:-52.1},4).to({_off:true},1).wait(13));
@@ -3697,7 +3660,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_Leg02
 	this.instance_23 = new lib.NA_Imp_Leg02();
 	this.instance_23.setTransform(6.2,-9.7,2.035,0.733,0,-27.4,8.9);
-	this.instance_23.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 68.85, 22.95, 0)];
 	this.instance_23.cache(-13,-21,25,42);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_23).to({scaleX:1.41,scaleY:0.71,skewX:-31.8,skewY:-1.1,x:11.7,y:-8.6},5).to({scaleX:0.76,scaleY:1.19,skewX:-4.2,skewY:-25.8,x:16.7,y:-26.9},4).to({scaleX:0.74,scaleY:0.76,skewX:1.8,skewY:-16.3,x:25.1,y:-51.6},4).to({scaleX:1.16,scaleY:0.46,skewX:47.8,skewY:25.9,x:27.8,y:-63.5},4).to({scaleX:1.23,scaleY:0.39,skewX:18.6,skewY:-5.9,x:28.9,y:-59.4},3).to({scaleX:1,scaleY:0.48,skewX:-4.8,skewY:-47.4,x:31.6,y:-53},4).to({scaleX:0.85,skewX:-62.7,skewY:-98.8,x:33.3,y:-39.2},4).to({scaleX:0.97,scaleY:0.47,skewX:-20.9,skewY:-66.1,x:29.5,y:-29.3},5).to({scaleX:0.77,scaleY:0.54,skewX:2.2,skewY:-43.7,x:30.2,y:-53},4).to({scaleX:0.83,scaleY:0.55,skewX:18,skewY:-21.1,x:29.2,y:-60.8},4).to({scaleX:0.95,scaleY:0.38,skewX:32.5,skewY:0.5,x:29.5,y:-61.8},4).to({scaleX:0.82,scaleY:0.69,skewX:14.9,skewY:11,x:17.3,y:-46.7},3).to({scaleX:0.74,scaleY:1.14,skewX:21,skewY:4,x:13,y:-25.8},3).to({scaleX:2.04,scaleY:0.73,skewX:-27.4,skewY:8.9,x:6.2,y:-9.7},3).wait(1));
@@ -3705,7 +3667,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_Ear01
 	this.instance_24 = new lib.NA_Imp_Ear01();
 	this.instance_24.setTransform(7.7,-54.2,0.95,0.95,0,39.9,-140.1,-0.1,-0.2);
-	this.instance_24.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 68.85, 22.95, 0)];
 	this.instance_24.cache(-3,-8,11,11);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_24).to({regX:0,regY:-0.1,x:4.8,y:-64.5},5).to({regX:-0.1,skewX:30.9,skewY:-149.1,x:4.3,y:-88.3},4).to({regX:0,regY:-0.2,skewX:-1.6,skewY:-181.6,x:-8.9,y:-100.5},4).to({skewX:-1.6,x:-11.2,y:-101.8},4).to({regX:-0.1,skewX:-5.1,skewY:-185.1,x:-14.7,y:-93},3).to({skewX:-14.6,skewY:-194.6,x:-16.4,y:-71.4},4).to({skewX:-12.4,skewY:-192.4,x:-27.6,y:-37.2},4).to({regX:0.1,regY:-0.3,skewX:-47.1,skewY:-227.1,x:-20.6,y:-42.4},5).to({regX:-0.1,regY:-0.2,scaleY:0.95,skewX:-48.7,skewY:-223.4,x:-14.5,y:-75},4).to({regX:0,regY:-0.3,scaleY:0.95,skewX:-25.2,skewY:-205.2,x:-15.6,y:-91.8},4).to({regY:-0.1,skewX:4.8,skewY:-175.2,x:-11.4,y:-101.2},4).to({regX:0.1,skewX:7.6,skewY:-172.4,x:-10,y:-97.8},3).to({regX:0,skewX:22.6,skewY:-155.2,x:1.4,y:-91.9},3).to({regX:-0.1,regY:-0.2,skewX:39.9,skewY:-140.1,x:7.7,y:-54.2},3).wait(1));
@@ -3713,7 +3674,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_Arm01
 	this.instance_25 = new lib.NA_Imp_Arm01();
 	this.instance_25.setTransform(1.5,-51.3,0.959,0.946,0,43.1,-130.5);
-	this.instance_25.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 68.85, 22.95, 0)];
 	this.instance_25.cache(-2,-17,23,23);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_25).to({scaleX:0.95,scaleY:0.95,skewX:16.6,skewY:-159.7,x:-1.2,y:-57.5},5).to({skewX:14.1,skewY:-162.2,x:0,y:-81.5},4).to({scaleX:0.96,skewX:-15.9,skewY:-189.7,x:-7.5,y:-93.9},4).to({scaleX:0.95,scaleY:0.96,skewX:0.1,skewY:-187.6,x:-13.1,y:-93.5},4).to({scaleX:0.95,scaleY:0.9,skewX:4.4,skewY:-189,x:-15.2,y:-83.5},3).to({scaleX:0.92,scaleY:0.91,skewX:-13,skewY:-190.4,x:-13.7,y:-61.6},4).to({scaleX:0.94,skewX:-42.6,skewY:-220.2,x:-24,y:-30.6},4).to({scaleX:0.94,scaleY:0.9,skewX:-62.4,skewY:-243.9,x:-18.6,y:-34.2},5).to({scaleX:1.11,scaleY:0.97,skewX:-98.5,skewY:-265.7,x:-12.1,y:-62},4).to({scaleX:1.11,scaleY:0.95,skewX:-30.1,skewY:-215.8,x:-12.6,y:-86.5},4).to({scaleX:1.13,scaleY:0.93,skewX:3.6,skewY:-184.8,x:-11.5,y:-93.3},4).to({scaleY:0.92,skewX:5.5,skewY:-173.8,x:-9.4,y:-90.4},3).to({scaleX:1.18,scaleY:0.96,skewX:33.3,skewY:-141,x:-2,y:-83.1},3).to({scaleX:0.96,scaleY:0.95,skewX:43.1,skewY:-130.5,x:1.5,y:-51.3},3).wait(1));
@@ -3740,7 +3700,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_Pinch01
 	this.instance_1 = new lib.NA_Imp_Pinch01();
 	this.instance_1.setTransform(-16.7,-13.5,1.008,1.058,0,40.3,37.7);
-	this.instance_1.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 22.95, 91.8, 0)];
 	this.instance_1.cache(-15,-9,35,21);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_1).to({scaleX:0.97,scaleY:1.09,skewX:15.8,skewY:30.4,x:-10.5,y:-12.6},5).to({scaleX:0.99,scaleY:1.15,skewX:11.3,skewY:25.7,x:-4.7,y:-32.3},4).to({scaleX:0.98,skewX:-3.7,skewY:9.7,x:0,y:-50.9},4).to({scaleX:1,scaleY:1.04,skewX:-1.7,skewY:-0.5,x:-0.7,y:-59.7},4).to({scaleX:1.01,scaleY:1.04,skewX:-6.1,skewY:-7.1,x:0.6,y:-48.4},3).to({scaleX:0.91,scaleY:1.15,skewX:-11.4,skewY:-23.9,x:6,y:-28.3},4).to({scaleX:1.03,scaleY:1.02,skewX:-32.9,skewY:-20.7,x:7.5,y:-4.5},4).to({scaleX:0.9,scaleY:1.01,skewX:-28.9,skewY:-26.5,x:7.3,y:-7.3},5).to({scaleX:0.9,scaleY:1.01,skewX:-16,skewY:-23.1,x:3.4,y:-26.4},4).to({scaleX:0.94,skewX:-10.1,skewY:-8.6,x:-0.7,y:-46.3},4).to({scaleX:1.01,scaleY:1.04,skewX:0.6,skewY:0.8,y:-59.4},4).to({scaleX:1.01,skewX:11.6,skewY:15.8,x:-5.5,y:-52},3).to({scaleX:1.02,scaleY:1.09,skewX:22.1,skewY:31.2,x:-8.9,y:-37.7},3).to({scaleX:1.01,scaleY:1.06,skewX:40.3,skewY:37.7,x:-16.7,y:-13.5},3).wait(1));
@@ -3760,7 +3719,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_RightEye01_0
 	this.instance_4 = new lib.NA_Imp_RightEye01();
 	this.instance_4.setTransform(4.5,-51.2,0.72,0.925,0,0.6,-172.3,0.1,-0.4);
-	this.instance_4.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 22.95, 91.8, 0)];
 	this.instance_4.cache(-12,-12,24,24);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_4).to({regY:-0.2,scaleX:0.71,scaleY:0.96,skewX:12.9,skewY:-163.2,x:3.2,y:-59.5},5).to({scaleY:0.92,skewX:13.2,skewY:-165.9,x:4.7,y:-85.2},4).to({regX:0.3,regY:-0.5,scaleX:0.71,scaleY:0.93,skewX:-14.3,skewY:-193.7,x:-4.8,y:-99.2},4).to({scaleX:0.71,scaleY:0.95,skewX:-22.3,skewY:-192.8,x:-7.6,y:-101.3},4).to({scaleX:0.73,scaleY:0.94,skewX:-24.7,skewY:-202,x:-11.5,y:-92.9},3).to({regX:0.4,regY:-0.3,scaleX:0.73,scaleY:0.9,skewX:-33.4,skewY:-216.6,x:-15.1,y:-72},4).to({regX:0.3,regY:-0.5,scaleX:0.73,scaleY:0.86,skewX:-42.4,skewY:-220,x:-23.1,y:-35.9},4).to({regX:0.4,regY:-0.4,skewX:-59.9,skewY:-237.4,x:-17.3,y:-41.7},5).to({regX:0.5,scaleX:0.71,scaleY:0.9,skewX:-30.5,skewY:-217,x:-13.2,y:-71.6},4).to({regX:0.4,regY:-0.6,scaleX:0.71,scaleY:0.89,skewX:-23.9,skewY:-197.5,x:-12.1,y:-91.6},4).to({regX:0.3,scaleX:0.73,scaleY:0.94,skewX:-19.8,skewY:-196.1,x:-7.8,y:-101.2},4).to({regX:0.1,regY:-0.8,scaleX:0.73,scaleY:0.94,skewX:-4.2,skewY:-179.4,x:-5.8,y:-96.5},3).to({regX:0.3,regY:-0.7,scaleX:0.72,scaleY:0.99,skewX:15.7,skewY:-161.5,x:2.5,y:-89.5},3).to({regX:0.1,regY:-0.4,scaleX:0.72,scaleY:0.93,skewX:0.6,skewY:-172.3,x:4.5,y:-51.2},3).wait(1));
@@ -3768,7 +3726,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_RightEye01
 	this.instance_5 = new lib.NA_Imp_RightEye01();
 	this.instance_5.setTransform(25.7,-37.6,1,1.008,0,53,55.5);
-	this.instance_5.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 22.95, 91.8, 0)];
 	this.instance_5.cache(-12,-12,24,24);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_5).to({scaleX:1,skewX:45.6,skewY:44.3,x:22.8,y:-46.6},5).to({scaleX:1,scaleY:0.99,skewX:38.9,skewY:37,x:25.4,y:-74.3},4).to({skewX:8.9,skewY:7,x:17.7,y:-98.7},4).to({scaleX:1,scaleY:1,skewX:14.7,skewY:7.6,x:16.4,y:-101.6},4).to({scaleX:1.01,scaleY:0.99,skewX:-2.3,skewY:-4.7,x:10.8,y:-97.4},3).to({scaleX:1.02,scaleY:1,skewX:-17.7,skewY:-25.2,x:4.3,y:-83.7},4).to({scaleX:1.01,skewX:-10.7,skewY:-15.9,x:-1.9,y:-46.8},4).to({scaleX:1,scaleY:1.01,skewX:-5.3,skewY:-12.8,x:3.6,y:-55.3},5).to({skewX:-14.8,skewY:-22.4,x:6.4,y:-82.8},4).to({scaleX:1.01,scaleY:0.97,skewX:-4.4,skewY:-6.5,x:10.4,y:-96.2},4).to({scaleX:1.01,scaleY:0.98,skewX:15.9,skewY:8.7,x:16.4,y:-101.6},4).to({scaleX:1.01,scaleY:0.99,skewX:24.3,skewY:18.1,x:16.8,y:-92.6},3).to({scaleX:1.03,scaleY:0.95,skewX:38.9,skewY:34.3,x:23.1,y:-78.6},3).to({scaleX:1,scaleY:1.01,skewX:53,skewY:55.5,x:25.7,y:-37.6},3).wait(1));
@@ -3776,7 +3733,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_Ear01_0
 	this.instance_6 = new lib.NA_Imp_Ear01();
 	this.instance_6.setTransform(34.5,-34.8,0.999,0.999,27,0,0,-0.1,0);
-	this.instance_6.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 22.95, 91.8, 0)];
 	this.instance_6.cache(-3,-8,11,11);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_6).to({regX:0,scaleY:1.02,rotation:0,skewX:83.7,skewY:72,x:27.2,y:-43},5).to({skewX:113.2,skewY:101.5,x:29.8,y:-70.7},4).to({scaleX:0.99,scaleY:1.08,skewX:45.8,skewY:37.2,x:25.7,y:-97.1},4).to({scaleX:0.99,skewX:0.8,skewY:-4.5,x:25.6,y:-100.6},4).to({skewX:-11.8,skewY:-17.2,x:20.4,y:-97.7},3).to({skewX:-17.8,skewY:-23.2,x:12.8,y:-86},4).to({skewX:-16.3,skewY:-21.7,x:7.7,y:-48.4},4).to({skewX:-22.3,skewY:-27.6,x:7.4,y:-61.8},5).to({x:13.3,y:-90.6},4).to({scaleX:0.98,skewY:-19.9,x:19.8,y:-100.4},4).to({scaleY:1.08,skewX:-3.6,skewY:-4.9,x:26.2,y:-100.8},4).to({skewX:7.4,skewY:6.1,x:26,y:-92.4},3).to({skewX:22.4,skewY:21.1,x:30.4,y:-78},3).to({regX:-0.1,regY:0.1,scaleX:1,scaleY:1,rotation:27,skewX:0,skewY:0,x:34.4,y:-34.7},3).wait(1));
@@ -3784,7 +3740,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_Nose01_0
 	this.instance_7 = new lib.NA_Imp_Nose01_0();
 	this.instance_7.setTransform(11.6,-40.1,1,1,31.7);
-	this.instance_7.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 22.95, 91.8, 0)];
 	this.instance_7.cache(-6,-3,11,7);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_7).to({x:8.5,y:-47.8},5).to({scaleX:1,rotation:0,skewX:22.7,skewY:25.3,x:10.9,y:-73.8},4).to({scaleY:1.08,skewX:-11.7,skewY:10.3,x:5.8,y:-91.3},4).to({scaleX:0.97,skewY:4.7,x:3.8,y:-94.2},4).to({skewX:-20.9,skewY:-4.5,x:0.7,y:-87.6},3).to({scaleX:0.93,skewX:-34.6,skewY:-28.6,x:-2.8,y:-70},4).to({skewX:-32.4,skewY:-26.4,x:-10.4,y:-34.3},4).to({skewX:-36.9,skewY:-30.9,x:-4.7,y:-43.1},5).to({scaleX:0.93,scaleY:0.98,skewX:-31.4,skewY:-28.8,x:-1.1,y:-69},4).to({scaleY:0.98,skewX:-10.7,skewY:-13.8,x:-0.5,y:-86.2},4).to({skewX:4.3,skewY:1.2,x:3.5,y:-94.1},4).to({scaleX:0.93,skewX:13,skewY:8.6,x:3.2,y:-87.2},3).to({scaleX:0.98,scaleY:0.99,skewX:34.7,skewY:23.6,x:8.3,y:-77.5},3).to({scaleX:1,scaleY:1,rotation:31.7,skewX:0,skewY:0,x:11.6,y:-40.1},3).wait(1));
@@ -3792,7 +3747,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_Nose01
 	this.instance_8 = new lib.NA_Imp_Nose01();
 	this.instance_8.setTransform(11.6,-40.1,1,1,31.7);
-	this.instance_8.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 22.95, 91.8, 0)];
 	this.instance_8.cache(-6,-5,13,9);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_8).to({x:8.5,y:-47.8},5).to({scaleX:1,rotation:0,skewX:22.7,skewY:25.3,x:10.9,y:-73.8},4).to({scaleY:1.08,skewX:-11.7,skewY:10.3,x:5.8,y:-91.3},4).to({scaleX:0.97,skewY:4.7,x:3.8,y:-94.2},4).to({skewX:-20.9,skewY:-4.5,x:0.7,y:-87.6},3).to({scaleX:0.93,skewX:-34.6,skewY:-28.6,x:-2.8,y:-70},4).to({skewX:-32.4,skewY:-26.4,x:-10.4,y:-34.3},4).to({skewX:-36.9,skewY:-30.9,x:-4.7,y:-43.1},5).to({scaleX:0.93,scaleY:0.98,skewX:-31.4,skewY:-28.8,x:-1.1,y:-69},4).to({scaleY:0.98,skewX:-10.7,skewY:-13.8,x:-0.5,y:-86.2},4).to({skewX:4.3,skewY:1.2,x:3.5,y:-94.1},4).to({scaleX:0.93,skewX:13,skewY:8.6,x:3.2,y:-87.2},3).to({scaleX:0.98,scaleY:0.99,skewX:34.7,skewY:23.6,x:8.3,y:-77.5},3).to({scaleX:1,scaleY:1,rotation:31.7,skewX:0,skewY:0,x:11.6,y:-40.1},3).wait(1));
@@ -3818,7 +3772,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_LowerJaw01
 	this.instance_12 = new lib.NA_Imp_LowerJaw01();
 	this.instance_12.setTransform(-7.2,-20.4,1.022,1.005,0,37.8,29.9,-0.4,-0.3);
-	this.instance_12.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 22.95, 91.8, 0)];
 	this.instance_12.cache(-20,-13,49,22);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_12).to({regY:-0.1,scaleX:1.04,scaleY:0.92,skewX:33.2,skewY:38.3,x:-6.8,y:-26},5).to({regX:-0.5,regY:0.1,scaleX:0.97,scaleY:0.93,skewX:15.9,skewY:30.4,x:-1.1,y:-44.2},4).to({regX:-0.3,regY:0.4,scaleX:0.96,scaleY:0.89,skewX:4.1,skewY:10.4,x:0.8,y:-61.4},4).to({regX:-0.4,regY:0.3,scaleX:1.02,scaleY:0.88,skewX:0.2,skewY:0.7,x:-0.3,y:-70.1},4).to({regX:-0.3,regY:0.2,scaleX:1.02,scaleY:0.85,skewX:-0.1,skewY:-9.3,x:-0.2,y:-59.2},3).to({regX:-0.1,regY:0.1,scaleX:1.02,scaleY:0.83,skewX:-21.4,skewY:-31.9,x:4,y:-40.3},4).to({regX:-0.4,scaleX:1.04,scaleY:0.85,skewX:-25,skewY:-21.2,x:0.6,y:-11.3},4).to({regX:-0.3,regY:0.3,scaleX:0.95,scaleY:0.88,skewX:-15.1,skewY:-30.7,x:2.3,y:-18.1},5).to({regX:-0.1,regY:0.2,scaleX:0.97,scaleY:0.8,skewX:-16.3,skewY:-31.2,x:2,y:-37.2},4).to({regX:-0.2,regY:0,scaleX:0.95,scaleY:0.81,skewX:-3,skewY:-15.9,x:-1.3,y:-56},4).to({regX:-0.3,regY:-0.2,scaleX:1.04,scaleY:0.79,skewX:0.2,skewY:-0.2,x:-0.5,y:-70.9},4).to({regX:-0.1,regY:-0.4,scaleX:1.04,scaleY:0.85,skewX:14,skewY:14.8,x:-1.6,y:-65.4},3).to({regX:0.1,scaleX:1.03,scaleY:0.87,skewX:17.8,skewY:29.5,x:-0.7,y:-50.3},3).to({regX:-0.4,regY:-0.3,scaleX:1.02,scaleY:1,skewX:37.8,skewY:29.9,x:-7.2,y:-20.4},3).wait(1));
@@ -3826,7 +3779,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_UpperJaw01
 	this.instance_13 = new lib.NA_Imp_UpperJaw01();
 	this.instance_13.setTransform(6.6,-36.9,1.016,0.971,0,45.4,29.6);
-	this.instance_13.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 22.95, 91.8, 0)];
 	this.instance_13.cache(-19,-9,46,18);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_13).to({scaleX:0.88,scaleY:1.02,skewX:25.8,skewY:34.3,x:4.3,y:-43},5).to({scaleX:0.84,scaleY:1.02,skewX:20.2,skewY:28,x:7.2,y:-68.8},4).to({scaleX:0.95,scaleY:1.02,skewX:-1.5,skewY:3.7,x:3.2,y:-86.7},4).to({scaleX:1.03,scaleY:0.75,skewX:-5,skewY:-0.4,x:1.7,y:-90.3},4).to({scaleX:0.99,scaleY:0.89,skewX:-2.5,skewY:-14.5,x:-0.6,y:-81.9},3).to({scaleX:0.98,scaleY:0.93,skewX:-17.1,skewY:-35.2,x:-2,y:-65},4).to({scaleX:0.95,scaleY:0.88,skewX:-26.4,skewY:-28.8,x:-8.7,y:-29.3},4).to({scaleX:0.95,scaleY:0.91,skewX:-17.8,skewY:-33.2,x:-2.9,y:-37.1},5).to({scaleX:0.97,scaleY:0.9,skewX:-15.9,skewY:-34.5,x:-1.1,y:-64.1},4).to({scaleX:0.98,scaleY:0.87,skewX:-2.6,skewY:-14.3,x:-0.7,y:-81.4},4).to({scaleX:1.05,scaleY:0.78,skewX:2.6,skewY:-1,x:2.2,y:-90.5},4).to({scaleX:0.96,scaleY:1.04,skewX:-2.9,skewY:8.4,x:1.9,y:-82.6},3).to({scaleX:0.93,scaleY:1,skewX:13.2,skewY:24.9,x:7.7,y:-73.5},3).to({scaleX:1.02,scaleY:0.97,skewX:45.4,skewY:29.6,x:6.6,y:-36.9},3).wait(1));
@@ -3840,7 +3792,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_Body01
 	this.instance_15 = new lib.NA_Imp_Body01();
 	this.instance_15.setTransform(9.6,-34.3,1.052,1.044,0,33.4,26.2,-0.1,-0.1);
-	this.instance_15.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 22.95, 91.8, 0)];
 	this.instance_15.cache(-31,-26,61,63);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_15).to({scaleX:0.89,scaleY:1.1,skewX:25.6,skewY:34.6,x:7.9,y:-41.7},5).to({scaleX:0.86,scaleY:1.19,skewX:17.2,skewY:25.6,x:10.3,y:-64.5},4).to({regX:0.1,regY:0.1,scaleX:1,scaleY:1.07,skewX:3.9,skewY:6.2,x:7.3,y:-84},4).to({scaleX:1.09,scaleY:0.96,skewX:2.7,skewY:0.2,x:6.1,y:-89.1},4).to({regX:-0.2,scaleX:1.06,scaleY:1.04,skewX:-7.2,skewY:-14.8,x:2.7,y:-80.5},3).to({regX:0,regY:0,scaleX:0.99,scaleY:1.13,skewX:-19,skewY:-35,x:0.7,y:-64},4).to({scaleX:1.09,scaleY:0.98,skewX:-36.5,skewY:-25,x:-2.7,y:-32.2},4).to({scaleX:1,scaleY:1.06,skewX:-29.4,skewY:-39.4,x:-0.7,y:-39.6},5).to({scaleX:0.97,scaleY:1.23,skewX:-13.2,skewY:-35.4,x:1.2,y:-65.7},4).to({scaleX:1.06,scaleY:1.05,skewX:-7.5,skewY:-18.5,x:2.3,y:-82.1},4).to({scaleX:1.09,scaleY:0.96,skewX:1.8,skewY:0.4,x:5.7,y:-89.4},4).to({scaleX:1.04,scaleY:1.03,skewX:6.4,skewY:9,x:6,y:-81.1},3).to({scaleX:0.97,scaleY:1.18,skewX:17.9,skewY:23.3,x:9.5,y:-68.9},3).to({regX:-0.1,regY:-0.1,scaleX:1.05,scaleY:1.04,skewX:33.4,skewY:26.2,x:9.6,y:-34.3},3).wait(1));
@@ -3848,7 +3799,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_Arm01_0
 	this.instance_16 = new lib.NA_Imp_Arm01();
 	this.instance_16.setTransform(30.4,-27.9,1.004,0.999,0,46.9,52.7,-0.1,0.1);
-	this.instance_16.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 22.95, 91.8, 0)];
 	this.instance_16.cache(-2,-17,23,23);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_16).to({regY:0,scaleX:1,scaleY:0.98,skewX:79.7,skewY:84.7,x:22.6,y:-33.8},5).to({regY:-0.1,scaleY:0.98,skewX:98.7,skewY:92.6,x:25.8,y:-59.9},4).to({scaleX:1.03,scaleY:0.99,skewX:59.1,skewY:67.6,x:25.6,y:-89.6},4).to({regX:-0.2,regY:-0.3,scaleX:1.03,scaleY:0.98,skewX:26.7,skewY:35.1,x:27.7,y:-94.4},4).to({regX:-0.1,regY:-0.4,skewX:-12.9,skewY:-4.1,x:22.3,y:-91.2},3).to({regY:-0.3,scaleX:1.04,scaleY:0.97,skewX:-20.6,skewY:-25.9,x:15.5,y:-78.7},4).to({scaleY:0.97,skewX:-44.5,skewY:-40.9,x:13.5,y:-45.4},4).to({regY:-0.4,scaleY:0.97,skewX:-33.5,skewY:-34.7,x:13.6,y:-53.7},5).to({scaleX:1.04,scaleY:1.03,skewX:-17.9,skewY:-21.1,x:14.9,y:-81.3},4).to({regX:0,regY:-0.3,scaleY:1.03,skewX:-6.6,skewY:-6.1,x:21.5,y:-92.9},4).to({regX:-0.1,scaleX:1.04,scaleY:1.01,skewX:-3.2,skewY:7.7,x:28.1,y:-93.5},4).to({regY:-0.1,skewX:7.8,skewY:18.7,x:26.2,y:-84.7},3).to({scaleY:0.99,skewX:52.6,skewY:57.7,x:26.6,y:-67.9},3).to({regY:0.1,scaleX:1,scaleY:1,skewX:46.9,skewY:52.7,x:30.4,y:-27.9},3).wait(1));
@@ -3862,7 +3812,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_Leg02_0
 	this.instance_18 = new lib.NA_Imp_Leg02();
 	this.instance_18.setTransform(-22.9,-38,1.242,0.366,0,89.9,-94.2);
-	this.instance_18.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 22.95, 91.8, 0)];
 	this.instance_18.cache(-13,-21,25,42);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_18).to({scaleX:1.15,scaleY:0.34,skewX:66.4,skewY:-112.1,x:-21.9,y:-34},5).to({scaleX:1.22,scaleY:0.37,skewX:71.6,skewY:-119.7,x:-17.8,y:-57.3},4).to({scaleY:0.41,skewX:51.1,skewY:-140.2,x:-19.4,y:-65.9},4).to({scaleX:1.23,scaleY:0.43,skewX:11.5,skewY:-176,x:-17.5,y:-65},4).to({scaleX:0.71,scaleY:0.71,skewX:-6.2,skewY:-184.4,x:-12.1,y:-47.7},3).to({scaleX:0.69,scaleY:1.04,skewX:-8.2,skewY:-179.1,x:-5.2,y:-22.4},4).to({scaleX:0.89,scaleY:0.68,skewX:-86.5,skewY:-227.1,x:-8,y:-2.6},4).to({scaleX:0.71,scaleY:0.7,skewX:-103.6,skewY:-264.1,x:1,y:-4.5},5).to({scaleX:0.73,scaleY:0.98,skewX:-34.1,skewY:-192.4,x:0.6,y:-19.4},4).to({scaleX:0.81,scaleY:0.76,skewX:-28.2,skewY:-180.1,x:-8.9,y:-46.1},4).to({scaleX:0.88,scaleY:0.46,skewX:-51.4,skewY:-211.1,x:-20,y:-63.9},4).to({scaleY:0.49,skewX:-29.9,skewY:-180.5,x:-23.7,y:-63.7},3).to({scaleX:0.89,scaleY:0.5,skewX:0.4,skewY:-144.9,x:-21.6,y:-63.8},3).to({scaleX:1.24,scaleY:0.37,skewX:89.9,skewY:-94.2,x:-22.9,y:-38},3).wait(1));
@@ -3882,7 +3831,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	this.instance_21 = new lib.NA_Imp_Foot01();
 	this.instance_21.setTransform(41.5,-36.6,0.849,0.81,0,-130.8,-124.7);
 	this.instance_21._off = true;
-	this.instance_21.filters = [new cjs.ColorFilter(0, 0, 0, 1, 46, 21, 27, 0)];
 	this.instance_21.cache(-5,-4,10,8);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_21).wait(28).to({_off:false},0).to({scaleX:0.97,scaleY:0.8,skewX:-99.7,skewY:-96.4,x:34.1,y:-22.8},5).to({scaleX:0.93,scaleY:0.84,skewX:-74.4,skewY:-75,x:32.4,y:-43.8},4).to({scaleX:0.96,scaleY:0.81,skewX:-46.2,skewY:-46.8,x:27.5,y:-52.1},4).to({_off:true},1).wait(13));
@@ -3896,7 +3844,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_Leg02
 	this.instance_23 = new lib.NA_Imp_Leg02();
 	this.instance_23.setTransform(6.2,-9.7,2.035,0.733,0,-27.4,8.9);
-	this.instance_23.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 22.95, 91.8, 0)];
 	this.instance_23.cache(-13,-21,25,42);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_23).to({scaleX:1.41,scaleY:0.71,skewX:-31.8,skewY:-1.1,x:11.7,y:-8.6},5).to({scaleX:0.76,scaleY:1.19,skewX:-4.2,skewY:-25.8,x:16.7,y:-26.9},4).to({scaleX:0.74,scaleY:0.76,skewX:1.8,skewY:-16.3,x:25.1,y:-51.6},4).to({scaleX:1.16,scaleY:0.46,skewX:47.8,skewY:25.9,x:27.8,y:-63.5},4).to({scaleX:1.23,scaleY:0.39,skewX:18.6,skewY:-5.9,x:28.9,y:-59.4},3).to({scaleX:1,scaleY:0.48,skewX:-4.8,skewY:-47.4,x:31.6,y:-53},4).to({scaleX:0.85,skewX:-62.7,skewY:-98.8,x:33.3,y:-39.2},4).to({scaleX:0.97,scaleY:0.47,skewX:-20.9,skewY:-66.1,x:29.5,y:-29.3},5).to({scaleX:0.77,scaleY:0.54,skewX:2.2,skewY:-43.7,x:30.2,y:-53},4).to({scaleX:0.83,scaleY:0.55,skewX:18,skewY:-21.1,x:29.2,y:-60.8},4).to({scaleX:0.95,scaleY:0.38,skewX:32.5,skewY:0.5,x:29.5,y:-61.8},4).to({scaleX:0.82,scaleY:0.69,skewX:14.9,skewY:11,x:17.3,y:-46.7},3).to({scaleX:0.74,scaleY:1.14,skewX:21,skewY:4,x:13,y:-25.8},3).to({scaleX:2.04,scaleY:0.73,skewX:-27.4,skewY:8.9,x:6.2,y:-9.7},3).wait(1));
@@ -3904,7 +3851,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_Ear01
 	this.instance_24 = new lib.NA_Imp_Ear01();
 	this.instance_24.setTransform(7.7,-54.2,0.95,0.95,0,39.9,-140.1,-0.1,-0.2);
-	this.instance_24.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 22.95, 91.8, 0)];
 	this.instance_24.cache(-3,-8,11,11);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_24).to({regX:0,regY:-0.1,x:4.8,y:-64.5},5).to({regX:-0.1,skewX:30.9,skewY:-149.1,x:4.3,y:-88.3},4).to({regX:0,regY:-0.2,skewX:-1.6,skewY:-181.6,x:-8.9,y:-100.5},4).to({skewX:-1.6,x:-11.2,y:-101.8},4).to({regX:-0.2,regY:-0.1,skewX:-5.1,skewY:-185.1,x:-14.6,y:-92.9},3).to({regX:-0.1,regY:-0.2,skewX:-14.6,skewY:-194.6,x:-16.4,y:-71.4},4).to({skewX:-12.4,skewY:-192.4,x:-27.6,y:-37.2},4).to({regX:0.1,regY:-0.3,skewX:-47.1,skewY:-227.1,x:-20.6,y:-42.4},5).to({regX:-0.1,scaleY:0.95,skewX:-48.7,skewY:-223.4,x:-14.6,y:-75},4).to({regX:0,scaleY:0.95,skewX:-25.2,skewY:-205.2,x:-15.6,y:-91.8},4).to({regY:-0.1,skewX:4.8,skewY:-175.2,x:-11.4,y:-101.2},4).to({regX:0.1,skewX:7.6,skewY:-172.4,x:-10,y:-97.8},3).to({regX:0,skewX:22.6,skewY:-155.2,x:1.4,y:-91.9},3).to({regX:-0.1,regY:-0.2,skewX:39.9,skewY:-140.1,x:7.7,y:-54.2},3).wait(1));
@@ -3912,7 +3858,6 @@ p.nominalBounds = new cjs.Rectangle(-37.6,-75.7,90.9,85.3);
 	// NA_GreenImp_Arm01
 	this.instance_25 = new lib.NA_Imp_Arm01();
 	this.instance_25.setTransform(1.5,-51.3,0.959,0.946,0,43.1,-130.5);
-	this.instance_25.filters = [new cjs.ColorFilter(0.55, 0.55, 0.55, 1, 0, 22.95, 91.8, 0)];
 	this.instance_25.cache(-2,-17,23,23);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_25).to({scaleX:0.95,scaleY:0.95,skewX:16.6,skewY:-159.7,x:-1.2,y:-57.5},5).to({skewX:14.1,skewY:-162.2,x:0,y:-81.5},4).to({scaleX:0.96,skewX:-15.9,skewY:-189.7,x:-7.5,y:-93.9},4).to({scaleX:0.95,scaleY:0.96,skewX:0.1,skewY:-187.6,x:-13.1,y:-93.5},4).to({scaleX:0.95,scaleY:0.9,skewX:4.4,skewY:-189,x:-15.2,y:-83.5},3).to({scaleX:0.92,scaleY:0.91,skewX:-13,skewY:-190.4,x:-13.7,y:-61.6},4).to({scaleX:0.94,skewX:-42.6,skewY:-220.2,x:-24,y:-30.6},4).to({scaleX:0.94,scaleY:0.9,skewX:-62.4,skewY:-243.9,x:-18.6,y:-34.2},5).to({scaleX:1.11,scaleY:0.97,skewX:-98.5,skewY:-265.7,x:-12.1,y:-62},4).to({scaleX:1.11,scaleY:0.95,skewX:-30.1,skewY:-215.8,x:-12.6,y:-86.5},4).to({scaleX:1.13,scaleY:0.93,skewX:3.6,skewY:-184.8,x:-11.5,y:-93.3},4).to({scaleY:0.92,skewX:5.5,skewY:-173.8,x:-9.4,y:-90.4},3).to({scaleX:1.18,scaleY:0.96,skewX:33.3,skewY:-141,x:-2,y:-83.1},3).to({scaleX:0.96,scaleY:0.95,skewX:43.1,skewY:-130.5,x:1.5,y:-51.3},3).wait(1));
