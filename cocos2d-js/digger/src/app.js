@@ -3,6 +3,7 @@ var DiggerScene = cc.Scene.extend({
     gameLayer:null,
     lastTouch:0,
     player: null,
+    playerBody: null,
     space:null,
     shapesToRemove:[],
 
@@ -31,11 +32,12 @@ var DiggerScene = cc.Scene.extend({
         }
     },
     clean: function() {
+        var winSize = cc.director.getWinSize();
         var positions = {
-            topLeft:this.gameLayer.convertToNodeSpace(cc.p(0,this.height)),
-            topRight:this.gameLayer.convertToNodeSpace(cc.p(this.width,this.height)),
+            topLeft:this.gameLayer.convertToNodeSpace(cc.p(0,winSize.height)),
+            topRight:this.gameLayer.convertToNodeSpace(cc.p(winSize.width,winSize.height)),
             bottomLeft:this.gameLayer.convertToNodeSpace(cc.p(0,0)),
-            bottomRight:this.gameLayer.convertToNodeSpace(cc.p(this.width,0))
+            bottomRight:this.gameLayer.convertToNodeSpace(cc.p(winSize.width,0))
         };
         var limits = {
             minX:positions.bottomLeft.x,
@@ -47,13 +49,11 @@ var DiggerScene = cc.Scene.extend({
             var node = this.blockList[i][0];
             var shape = this.blockList[i][1];
             if(node.x < limits.minX || node.x > limits.maxX || node.y < limits.minY || node.y > limits.maxY) {
-                node.opacity = 150;
                 if(this.blockList[i][2]) {
                     this.space.removeShape(shape);
                     this.blockList[i][2] = 0;
                 }
             } else{
-                node.opacity = 50;
                 if(!this.blockList[i][2]) {
                     this.space.addShape(shape);
                     this.blockList[i][2] = 1;
@@ -74,16 +74,15 @@ var DiggerScene = cc.Scene.extend({
         this._super();
         this.initPhysics();
 
-        this.gameLayer = new cc.LayerColor(cc.color(65,198,255));
+        //this.gameLayer = new cc.LayerColor(cc.color(65,198,255));
+        this.gameLayer = new cc.Layer();
         this.gameLayer.y = -1200;
         this.gameLayer.setContentSize(cc.size(120*48, 4000));
 
         // Debug physics.
-        /*
         this._debugNode = new cc.PhysicsDebugNode(this.space );
         this._debugNode.visible = true ;
         this.gameLayer.addChild( this._debugNode );
-        */
 
         this.addChild(this.gameLayer);
         this.scheduleUpdate();
@@ -107,31 +106,30 @@ var DiggerScene = cc.Scene.extend({
                     }
                 }
             }, this);
-        } else {
-            cc.log("KEYBOARD Not supported");
         }
-        var handleMouseDown = function(e) {
-            cc.log('handleMouseDown', e);
-            var position = self.gameLayer.convertTouchToNodeSpace(e);
-            cc.log(position);
-            var sprite = new cc.Sprite();
-            sprite.initWithFile(res.background_cube_png,cc.rect(0,0,48,48));
-            sprite.setPosition(cc.p(position.x,position.y));
-            self.gameLayer.addChild(sprite);
-        };
-        cc.eventManager.addListener({ event: cc.EventListener.MOUSE, onMouseDown: handleMouseDown }, this);
-        var handleTouch = function(e) {
-            e = e[0];
-            var location = e.getLocation();
-            var previousLocation = e.getPreviousLocation();
-            if(location.x != previousLocation.x || location.y != previousLocation.y) {
-                var point = self.gameLayer.convertTouchToNodeSpace(e);
-                self.player.x = point.x;
-                self.player.y = point.y;
-                self.lastTouch = new Date().getTime();
-            }
+        if ('mouse' in cc.sys.capabilities) {
+            cc.eventManager.addListener({
+                event: cc.EventListener.MOUSE,
+                onMouseDown: function (e) {
+                    var position = self.gameLayer.convertTouchToNodeSpace(e);
+                    var sprite = new cc.Sprite();
+                    sprite.initWithFile(res.background_cube_png,cc.rect(0,0,48,48));
+                    sprite.setPosition(cc.p(position.x,position.y));
+                    self.gameLayer.addChild(sprite);
+                }
+            }, this);
         }
-        cc.eventManager.addListener({ event: cc.EventListener.TOUCH_ALL_AT_ONCE, onTouchesMoved: handleTouch }, this);
+        if (cc.sys.capabilities.hasOwnProperty('touches')){
+            cc.eventManager.addListener({
+                prevTouchId: -1,
+                event: cc.EventListener.TOUCH_ALL_AT_ONCE,
+                onTouchesMoved:function (touches, event) {
+                    var point = self.gameLayer.convertTouchToNodeSpace(touches[0]);
+                    self.playerBody.setPos(point);
+                    self.lastTouch = new Date().getTime();
+                }
+            }, this);
+        }
     },
     gamepad:function() {
         var self = this;
@@ -162,25 +160,29 @@ var DiggerScene = cc.Scene.extend({
         // chipmunk step
         this.space.step(dt);
 
-        this.gamepad();
+        if (typeof navigator !== 'undefined') {
+            this.gamepad();
+        }
         this.clean();
         if(new Date().getTime() > this.lastTouch + 200) {
-            var position = cc.p(-this.player.getPositionX()+Math.floor(this.width/2),-this.player.getPositionY()+200);
+            var winSize = cc.director.getWinSize();
+            var position = cc.p(-this.player.getPositionX()+Math.floor(winSize.width/2),-this.player.getPositionY()+200);
             var absolute = Math.abs(position.y - this.gameLayer.y);
             var sign = position.y - this.gameLayer.y >= 0 ? 1 : -1;
-            if(absolute > 10) {
-                position.y = this.gameLayer.y + (10 * sign);
+            if(absolute > 20) {
+                position.y = this.gameLayer.y + (20 * sign);
             }
             absolute = Math.abs(position.x - this.gameLayer.x);
             sign = position.x - this.gameLayer.x >= 0 ? 1 : -1;
-            if(absolute > 10) {
-                position.x = this.gameLayer.x + (10 * sign);
+            if(absolute > 20) {
+                position.x = this.gameLayer.x + (20 * sign);
             }
             this.gameLayer.setPosition(position);
         }
     },
     createDynamicSprite : function(pos, file) {
         var body = new cp.Body(1, cp.momentForBox(1, 48, 48) );
+        this.playerBody = body;
         body.setPos( pos );
         this.space.addBody( body );
         var shape = new cp.BoxShape( body, 48, 48);
