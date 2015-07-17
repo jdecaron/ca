@@ -54,12 +54,12 @@
                 armature.getDisplay().y = y;
                 
                 dragonBones.animation.WorldClock.clock.add(armature);
-                armature.animation.gotoAndPlay('default', -1, -1, false);
+                armature.animation.gotoAndPlay('anime', -1, -1, false);
                 
                 stage.addChild(armature.getDisplay());
             };
 
-            addArmature("scene", 625, 375);
+            addArmature("anime", 0, 0);
 
 			createjs.Ticker.setFPS(24);
 			createjs.Ticker.addEventListener("tick", update);
