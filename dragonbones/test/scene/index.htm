@@ -30,7 +30,7 @@
 		{
 			canvas = document.getElementById("canvas");
 			stage = new createjs.Stage(canvas);
-			
+
 			texture = new Image();
 			texture.onload = function()
 			{
@@ -54,7 +54,7 @@
                 armature.getDisplay().y = y;
                 
                 dragonBones.animation.WorldClock.clock.add(armature);
-                armature.animation.gotoAndPlay('anime', -1, -1, false);
+                armature.animation.gotoAndPlay('default', -1, -1, false);
                 
                 stage.addChild(armature.getDisplay());
             };
