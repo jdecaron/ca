@@ -131,7 +131,6 @@ var dragonBones;
             };
 
             CreateJSFactory.prototype._generateDisplay = function (textureAtlas, fullName, pivotX, pivotY) {
-                console.log(fullName);
                 var shape = subTextureList[fullName];
                 /*
                 var rect = textureAtlas.getRegion(fullName);
