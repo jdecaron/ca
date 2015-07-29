@@ -4,8 +4,8 @@ var p; // shortcut to reference prototypes
 
 // library properties:
 lib.properties = {
-	width: 1250,
-	height: 750,
+	width: 900,
+	height: 550,
 	fps: 24,
 	color: "#FFFFFF",
 	manifest: [
@@ -4461,11 +4461,11 @@ p.nominalBounds = new cjs.Rectangle(-22.3,-3.5,2388.4,834);
 
 	// Calque 1
 	this.instance = new lib.anime();
-	this.instance.setTransform(625,375,1,1,0,0,0,625,375);
+	this.instance.setTransform(445,275,1,1,0,0,0,625,375);
 
 	this.addChild(this.instance);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(602.7,371.5,2388.4,834);
+p.nominalBounds = new cjs.Rectangle(247.7,171.4,2388.4,834);
 
 })(lib = lib||{}, images = images||{}, createjs = createjs||{}, ss = ss||{});
 var lib, images, createjs, ss;
