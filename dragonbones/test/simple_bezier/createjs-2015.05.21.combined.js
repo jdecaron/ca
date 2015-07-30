@@ -4507,6 +4507,7 @@ createjs.indexOf = function (array, searchElement){
 				params[p] = num;
 				i += charCount;
 			}
+			console.log(f, params);
 			f.apply(this,params);
 		}
 		return this;

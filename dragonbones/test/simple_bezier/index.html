@@ -6,20 +6,41 @@
     <title></title>
 </head>
 <body style="margin:0px; padding:0px;">
-<canvas id=canvasElementId width=2000 height=2000></canvas>
+<canvas id=canvasElementId width=500 height=500></canvas>
 </body>
 <script>
     var stage = new createjs.Stage("canvasElementId");
 
+    // quadratic curve
+    var p0 = {x:50, y:20};
+    var p1 = {x:230, y:30};
+    var p2 = {x:50, y:100};
     for(var t = 0; t < 1; t = t + 0.01) {
-        var p0 = {x:50, y:20};
-        var p1 = {x:230, y:30};
-        var p2 = {x:50, y:100};
         var x = (1-t) * ((1-t) * p0.x + t*p1.x) + t*((1-t) * p1.x + t*p2.x);
         var y = (1-t) * ((1-t) * p0.y + t*p1.y) + t*((1-t) * p1.y + t*p2.y);
 
         var shape = new createjs.Shape();
         shape.graphics.beginFill("#ff0000").drawRect(x, y, 1, 1);
+        stage.addChild(shape);
+    }
+
+    // cubic curve
+    var pq0 = {x:50, y:20};
+    var pq1 = {x:230, y:30};
+    var pq2 = {x:50, y:100};
+
+    var pc0 = {x:pq0.x, y:pq0.y};
+    var pc1 = {x:(pc0.x + pq1.x * 2.0) / 3.0, y:(pc0.y + pq1.y * 2.0) / 3.0};
+    var pc2 = {x:(pq2.x + pq1.x * 2.0) / 3.0, y:(pq2.y + pq1.y * 2.0) / 3.0};
+    var pc3 = {x:pq2.x, y:pq2.y};
+    for(var t = 0; t < 1; t = t + 0.01) {
+        var x = Math.pow(1-t, 3) * pc0.x + 3 * Math.pow(1-t, 2) * t * pc1.x + 3 * (1-t) * Math.pow(t, 2) * pc2.x + Math.pow(t, 3) * pc3.x;
+        var y = Math.pow(1-t, 3) * pc0.y + 3 * Math.pow(1-t, 2) * t * pc1.y + 3 * (1-t) * Math.pow(t, 2) * pc2.y + Math.pow(t, 3) * pc3.y;
+
+        var shape = new createjs.Shape();
+
+        // shift the curve by 5 pixels so they don't overlap.
+        shape.graphics.beginFill("#0000ff").drawRect(x+5, y, 1, 1);
         stage.addChild(shape);
     }
 
