@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>scene</title>
 
-<script src="http://code.createjs.com/easeljs-0.8.1.min.js"></script>
+<script src="easeljs-0.8.1.combined.js"></script>
 <script src="http://code.createjs.com/tweenjs-0.6.1.min.js"></script>
 <script src="http://code.createjs.com/movieclip-0.8.1.min.js"></script>
 <script src="http://code.createjs.com/preloadjs-0.6.1.min.js"></script>
@@ -32,6 +32,46 @@ function handleFileLoad(evt) {
 function handleComplete(evt) {
 	exportRoot = new lib.scene();
 
+    var cacheable = function(object) {
+        if(object.timeline) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    var mergeArrays = function(destination, toMerge) {
+        for(var i = 0; i < toMerge.length; i++) {
+            destination.push(toMerge[i]);
+        }
+    }
+
+    var recursiveNodeAnalysis = function(object, name) {
+        var objectsToCache = [];
+        for(item in object) {
+            if(item.match(/^instance/)) {
+                mergeArrays(objectsToCache, recursiveNodeAnalysis(object[item], item));
+            }
+        }
+        if(cacheable(object)) {
+            return [object];
+        } else {
+            if(objectsToCache.length > 0) {
+                for(var i = objectsToCache.length-1; i > 0; i--) {
+                    if(objectsToCache[i].nominalBounds.width > 2048 || objectsToCache[i].nominalBounds.height > 2048) {
+                        console.warn("Object with a larger size than 2048:", objectsToCache[i]);
+                    }
+                    console.log('cache', objectsToCache[i]);
+                    objectsToCache[i].cache(objectsToCache[i].nominalBounds.x, objectsToCache[i].nominalBounds.y, Math.min(2048, objectsToCache[i].nominalBounds.width), Math.min(2048, objectsToCache[i].nominalBounds.height));
+                    objectsToCache.pop();
+                }
+            }
+            return [];
+        }
+    }
+    recursiveNodeAnalysis(exportRoot, 'scene');
+
 	stage = new createjs.Stage(canvas);
 	stage.addChild(exportRoot);
 	stage.update();
@@ -53,6 +93,6 @@ function playSound(id, loop) {
 </head>
 
 <body onload="init();" style="background-color:#D4D4D4">
-	<canvas id="canvas" width="900" height="550" style="background-color:#FFFFFF"></canvas>
+	<canvas id="canvas" width="1000" height="600" style="background-color:#FFFFFF"></canvas>
 </body>
 </html>
