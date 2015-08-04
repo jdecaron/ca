@@ -32,6 +32,7 @@ function handleFileLoad(evt) {
 function handleComplete(evt) {
 	exportRoot = new lib.scene();
 
+    /*
     var cacheable = function(object) {
         if(object.timeline) {
             return false;
@@ -47,13 +48,37 @@ function handleComplete(evt) {
         }
     }
 
-    var recursiveNodeAnalysis = function(object, name) {
-        var objectsToCache = [];
-        for(item in object) {
-            if(item.match(/^instance/)) {
-                mergeArrays(objectsToCache, recursiveNodeAnalysis(object[item], item));
+    var findScaledObjects = function(object) {
+        var scaledObjects = [];
+        if(object.scaleX > 1 || object.scaleY > 1) {
+            scaledObjects.push(object);
+        } else {
+            if(object.timeline) {
+                for(var i = 0; i < object.timeline._tweens.length; i++) {
+                    var tween = object.timeline._tweens[i];
+                    for(var j = 0; j < tween._steps.length; j++) {
+                        var step = tween._steps[j];
+                        if(step.p0.scaleX > 1 || step.p0.scaleX > 1 || step.p1.scaleX > 1 || step.p1.scaleY > 1) {
+                            scaledObjects.push(tween.target);
+                        }
+                    }
+                }
             }
         }
+        return scaledObjects;
+    }
+
+    var recursiveNodeAnalysis = function(object, name) {
+        var objectsToCache = [];
+        var scaledObjects = findScaledObjects(object);
+        if(scaledObjects.indexOf(object) == -1) {
+            for(item in object) {
+                if(item.match(/^instance/) && scaledObjects.indexOf(object[item]) == -1) {
+                    mergeArrays(objectsToCache, recursiveNodeAnalysis(object[item], item));
+                }
+            }
+        }
+
         if(cacheable(object)) {
             return [object];
         } else {
@@ -64,13 +89,17 @@ function handleComplete(evt) {
                     }
                     console.log('cache', objectsToCache[i]);
                     objectsToCache[i].cache(objectsToCache[i].nominalBounds.x, objectsToCache[i].nominalBounds.y, Math.min(2048, objectsToCache[i].nominalBounds.width), Math.min(2048, objectsToCache[i].nominalBounds.height));
+                    if(objectsToCache[i].removeAllChildren) {
+                        objectsToCache[i].removeAllChildren();
+                    }
                     objectsToCache.pop();
                 }
             }
             return [];
         }
     }
-    recursiveNodeAnalysis(exportRoot, 'scene');
+    recursiveNodeAnalysis(exportRoot, 'scene', false);
+    */
 
 	stage = new createjs.Stage(canvas);
 	stage.addChild(exportRoot);
