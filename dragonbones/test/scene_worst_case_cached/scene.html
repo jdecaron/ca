@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>scene</title>
+
+<script src="easeljs-0.8.1.combined.js"></script>
+<script src="http://code.createjs.com/tweenjs-0.6.1.min.js"></script>
+<script src="http://code.createjs.com/movieclip-0.8.1.min.js"></script>
+<script src="http://code.createjs.com/preloadjs-0.6.1.min.js"></script>
+<script src="http://code.createjs.com/soundjs-0.6.1.min.js"></script>
+<script src="scene.js"></script>
+
+<script>
+var canvas, stage, exportRoot;
+
+function init() {
+	canvas = document.getElementById("canvas");
+	images = images||{};
+
+	var loader = new createjs.LoadQueue(false);
+	loader.installPlugin(createjs.Sound);
+	loader.addEventListener("fileload", handleFileLoad);
+	loader.addEventListener("complete", handleComplete);
+	loader.loadManifest(lib.properties.manifest);
+}
+
+function handleFileLoad(evt) {
+	if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
+}
+
+function handleComplete(evt) {
+	exportRoot = new lib.scene();
+
+    var cacheable = function(object) {
+        if(object.timeline) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    var mergeArrays = function(destination, toMerge) {
+        for(var i = 0; i < toMerge.length; i++) {
+            destination.push(toMerge[i]);
+        }
+    }
+
+    var findScaledObjects = function(object) {
+        var scaledObjects = [];
+        if(object.scaleX > 1 || object.scaleY > 1) {
+            scaledObjects.push(object);
+        } else {
+            if(object.timeline) {
+                for(var i = 0; i < object.timeline._tweens.length; i++) {
+                    var tween = object.timeline._tweens[i];
+                    for(var j = 0; j < tween._steps.length; j++) {
+                        var step = tween._steps[j];
+                        if(step.p0.scaleX > 1 || step.p0.scaleX > 1 || step.p1.scaleX > 1 || step.p1.scaleY > 1) {
+                            scaledObjects.push(tween.target);
+                        }
+                    }
+                }
+            }
+        }
+        return scaledObjects;
+    }
+
+    var recursiveNodeAnalysis = function(object, name) {
+        var objectsToCache = [];
+        var scaledObjects = findScaledObjects(object);
+        if(scaledObjects.indexOf(object) == -1) {
+            for(item in object) {
+                if(item.match(/^instance/) && scaledObjects.indexOf(object[item]) == -1) {
+                    mergeArrays(objectsToCache, recursiveNodeAnalysis(object[item], item));
+                }
+            }
+        }
+
+        if(cacheable(object)) {
+            return [object];
+        } else {
+            if(objectsToCache.length > 0) {
+                for(var i = objectsToCache.length-1; i > 0; i--) {
+                    if(objectsToCache[i].nominalBounds.width > 2048 || objectsToCache[i].nominalBounds.height > 2048) {
+                        console.warn("Object with a larger size than 2048:", objectsToCache[i]);
+                    }
+                    console.log('cache', objectsToCache[i]);
+                    objectsToCache[i].cache(objectsToCache[i].nominalBounds.x, objectsToCache[i].nominalBounds.y, Math.min(2048, objectsToCache[i].nominalBounds.width), Math.min(2048, objectsToCache[i].nominalBounds.height));
+                    if(objectsToCache[i].removeAllChildren) {
+                        objectsToCache[i].removeAllChildren();
+                    }
+                    objectsToCache.pop();
+                }
+            }
+            return [];
+        }
+    }
+    recursiveNodeAnalysis(exportRoot, 'scene', false);
+
+	stage = new createjs.Stage(canvas);
+	stage.addChild(exportRoot);
+	stage.update();
+
+	var text = new createjs.Text("FPS", "20px Arial", "#ff0000");
+	stage.addChild(text);
+
+	createjs.Ticker.setFPS(lib.properties.fps);
+	createjs.Ticker.addEventListener("tick", function() {
+		text.text = Math.round(createjs.Ticker.getMeasuredFPS());
+		stage.update();
+	});
+}
+
+function playSound(id, loop) {
+	createjs.Sound.play(id, createjs.Sound.INTERRUPT_EARLY, 0, 0, loop);
+}
+</script>
+</head>
+
+<body onload="init();" style="background-color:#D4D4D4">
+	<canvas id="canvas" width="1000" height="600" style="background-color:#FFFFFF"></canvas>
+</body>
+</html>
