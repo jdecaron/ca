@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>scene</title>
+
+<script src="http://code.createjs.com/easeljs-0.8.1.min.js"></script>
+<script src="http://code.createjs.com/tweenjs-0.6.1.min.js"></script>
+<script src="http://code.createjs.com/movieclip-0.8.1.min.js"></script>
+<script src="scene.js"></script>
+
+<script>
+var canvas, stage, exportRoot;
+
+function getType(object){
+    object.getType = function() {
+        return (this).constructor.toString().match(/this\.[^_]*/)[0].substring(5);
+    };
+    return object.getType();
+}
+
+function init() {
+	canvas = document.getElementById("canvas");
+	exportRoot = new lib.scene();
+
+    var cache = function(object) {
+        if(cacheable(object)) {
+            return [object];
+        } else {
+            if(objectsToCache.length > 0) {
+                for(var i = objectsToCache.length-1; i >= 0; i--) {
+                    if(objectsToCache[i].nominalBounds.width > 2048 || objectsToCache[i].nominalBounds.height > 2048) {
+                        console.warn("Object with a larger size than 2048:", objectsToCache[i]);
+                    }
+                    objectsToCache[i].cache(objectsToCache[i].nominalBounds.x, objectsToCache[i].nominalBounds.y, Math.min(2048, objectsToCache[i].nominalBounds.width), Math.min(2048, objectsToCache[i].nominalBounds.height));
+                    if(objectsToCache[i].removeAllChildren) {
+                        objectsToCache[i].removeAllChildren();
+                    }
+                    objectsToCache.pop();
+                }
+            }
+            return [];
+        }
+    }
+
+    var cacheable = function(object) {
+        if(object.timeline) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+
+    var findMaximumScale = function(object) {
+        var max = function() {
+            var currentMax = -Infinity;
+            for(var k = 0; k < arguments.length; k++) {
+                if(arguments[k] > currentMax) {
+                    currentMax = arguments[k];
+                }
+            }
+            return currentMax;
+        };
+        var maximumScale = function(object, scale) {
+            if(object.maximumScale === undefined) {
+                object.maximumScale = scale;
+            } else {
+                object.maximumScale = max(scale, object.maximumScale);
+            }
+        };
+        maximumScale(object, max(object.scaleX, object.scaleY));
+        if(object.timeline) {
+            for(var i = 0; i < object.timeline._tweens.length; i++) {
+                var tween = object.timeline._tweens[i];
+                for(var j = 0; j < tween._steps.length; j++) {
+                    var step = tween._steps[j];
+                    if(step.p0.scaleX > 1 || step.p0.scaleY > 1 || step.p1.scaleX > 1 || step.p1.scaleY > 1) {
+                        maximumScale(tween.target, max(step.p0.scaleX, step.p0.scaleY, step.p1.scaleX, step.p1.scaleY));
+                    }
+                }
+            }
+        }
+    };
+
+    var addParent = function(object, parent) {
+        if(!object.parents) {
+            object.parents = [];
+        }
+        if(object.parents.indexOf(parent) == -1) {
+            object.parents.push(object);
+        }
+    }
+
+    var recursiveNodeAnalysis = function(object) {
+        findMaximumScale(object);
+        console.log('maximumScale', object.maximumScale, object);
+        for(item in object) {
+            if(item.match(/^instance/)) {
+                addParent(object[item], object);
+                recursiveNodeAnalysis(object[item], item);
+            }
+        }
+    };
+    recursiveNodeAnalysis(exportRoot);
+
+	stage = new createjs.Stage(canvas);
+	stage.addChild(exportRoot);
+	stage.update();
+
+	createjs.Ticker.setFPS(lib.properties.fps);
+	createjs.Ticker.addEventListener("tick", stage);
+}
+</script>
+</head>
+
+<body onload="init();" style="background-color:#D4D4D4">
+	<canvas id="canvas" width="500" height="500" style="background-color:#FFFFFF"></canvas>
+</body>
+</html>
