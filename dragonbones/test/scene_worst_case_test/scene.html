@@ -24,31 +24,11 @@ function init() {
 	exportRoot = new lib.scene();
 
     var cache = function(object) {
-        if(cacheable(object)) {
-            return [object];
-        } else {
-            if(objectsToCache.length > 0) {
-                for(var i = objectsToCache.length-1; i >= 0; i--) {
-                    if(objectsToCache[i].nominalBounds.width > 2048 || objectsToCache[i].nominalBounds.height > 2048) {
-                        console.warn("Object with a larger size than 2048:", objectsToCache[i]);
-                    }
-                    objectsToCache[i].cache(objectsToCache[i].nominalBounds.x, objectsToCache[i].nominalBounds.y, Math.min(2048, objectsToCache[i].nominalBounds.width), Math.min(2048, objectsToCache[i].nominalBounds.height));
-                    if(objectsToCache[i].removeAllChildren) {
-                        objectsToCache[i].removeAllChildren();
-                    }
-                    objectsToCache.pop();
-                }
+        if(getType(object) == 'DisplayObject' && object.parents != undefined) {
+            if(object.nominalBounds.width > 2048 || object.nominalBounds.height > 2048) {
+                console.warn("Object with a larger size than 2048:", object);
             }
-            return [];
-        }
-    }
-
-    var cacheable = function(object) {
-        if(object.timeline) {
-            return false;
-        }
-        else {
-            return true;
+            object.cache(object.nominalBounds.x, object.nominalBounds.y, Math.min(2048, object.nominalBounds.width), Math.min(2048, object.nominalBounds.height), object.absoluteMaximumScale);
         }
     }
 
@@ -107,18 +87,19 @@ function init() {
         } else if(action == 'findAbsoluteMaximumScale') {
             object.absoluteMaximumScale = findAbsoluteMaximumScale(object);
         }
-        console.log('maximumScale', object.maximumScale, 'absoluteMaximumScale', object.absoluteMaximumScale, object);
         for(item in object) {
             if(item.match(/^instance/)) {
                 addParent(object[item], object);
                 recursiveNodeAnalysis(object[item], action);
             }
         }
+        if(action == 'cache') {
+            cache(object);
+        }
     };
-    console.log('recursiveNodeAnalysis findMaximumScale');
     recursiveNodeAnalysis(exportRoot, 'findMaximumScale');
-    console.log('recursiveNodeAnalysis findAbsoluteMaximumScale');
     recursiveNodeAnalysis(exportRoot, 'findAbsoluteMaximumScale');
+    recursiveNodeAnalysis(exportRoot, 'cache');
 
 	stage = new createjs.Stage(canvas);
 	stage.addChild(exportRoot);
