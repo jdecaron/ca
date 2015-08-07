@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>scene</title>
+
+<script src="easeljs-0.8.1.combined.js"></script>
+<script src="http://code.createjs.com/tweenjs-0.6.1.min.js"></script>
+<script src="http://code.createjs.com/movieclip-0.8.1.min.js"></script>
+<script src="http://code.createjs.com/preloadjs-0.6.1.min.js"></script>
+<script src="http://code.createjs.com/soundjs-0.6.1.min.js"></script>
+<script src="scene.js"></script>
+
+<script>
+var canvas, stage, exportRoot;
+
+function getType(object){
+	object.getType = function() {
+		return (this).constructor.toString().match(/this\.[^_]*/)[0].substring(5);
+	};
+	return object.getType();
+}
+
+function init() {
+	canvas = document.getElementById("canvas");
+	images = images||{};
+
+	var loader = new createjs.LoadQueue(false);
+	loader.installPlugin(createjs.Sound);
+	loader.addEventListener("fileload", handleFileLoad);
+	loader.addEventListener("complete", handleComplete);
+	loader.loadManifest(lib.properties.manifest);
+}
+
+function handleFileLoad(evt) {
+	if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
+}
+
+var uncachedList = [];
+
+function handleComplete(evt) {
+	exportRoot = new lib.scene();
+
+	var cache = function(object) {
+		if(getType(object) == 'DisplayObject' && object.parents != undefined) {
+			if(object.nominalBounds.width*object.absoluteMaximumScale <= 2048 && object.nominalBounds.height*object.absoluteMaximumScale <= 2048) {
+				console.log("Caching:", 'width:', object.nominalBounds.width*object.absoluteMaximumScale, 'height:', object.nominalBounds.height*object.absoluteMaximumScale, object);
+				object.cache(object.nominalBounds.x, object.nominalBounds.y, Math.min(2048, object.nominalBounds.width), Math.min(2048, object.nominalBounds.height), object.absoluteMaximumScale);
+			}
+			else {
+				uncachedList.push(object);
+			}
+		}
+	}
+
+	var findMaximumScale = function(object) {
+		var max = function() {
+			var currentMax = -Infinity;
+			for(var k = 0; k < arguments.length; k++) {
+				if(arguments[k] > currentMax) {
+					currentMax = arguments[k];
+				}
+			}
+			return currentMax;
+		};
+		var maximumScale = function(object, scale) {
+			if(object.maximumScale === undefined) {
+				object.maximumScale = scale;
+			} else {
+				object.maximumScale = max(scale, object.maximumScale);
+			}
+		};
+		maximumScale(object, max(object.scaleX, object.scaleY));
+		if(object.timeline) {
+			for(var i = 0; i < object.timeline._tweens.length; i++) {
+				var tween = object.timeline._tweens[i];
+				for(var j = 0; j < tween._steps.length; j++) {
+					var step = tween._steps[j];
+					if(step.p0.scaleX > 1 || step.p0.scaleY > 1 || step.p1.scaleX > 1 || step.p1.scaleY > 1) {
+						maximumScale(tween.target, max(step.p0.scaleX, step.p0.scaleY, step.p1.scaleX, step.p1.scaleY));
+					}
+				}
+			}
+		}
+	};
+
+	var findAbsoluteMaximumScale = function(object) {
+		var scale = object.maximumScale;
+		if(object.parents && object.parents.length > 0 && object.parents[0] != object) {
+			scale = scale * object.parents[0].maximumScale;
+			findAbsoluteMaximumScale(object.parents[0]);
+		}
+		return scale;
+	}
+
+	var addParent = function(object, parent) {
+		if(!object.parents) {
+			object.parents = [];
+		}
+		if(object != parent && object.parents.indexOf(parent) == -1) {
+			object.parents.push(parent);
+		}
+	}
+
+	var recursiveNodeAnalysis = function(object, action) {
+		if(action == 'findMaximumScale') {
+			findMaximumScale(object);
+		} else if(action == 'findAbsoluteMaximumScale') {
+			object.absoluteMaximumScale = findAbsoluteMaximumScale(object);
+		}
+		for(item in object) {
+			if(item.match(/^instance/)) {
+				addParent(object[item], object);
+				recursiveNodeAnalysis(object[item], action);
+			}
+		}
+		if(action == 'cache') {
+			cache(object);
+		}
+	};
+	recursiveNodeAnalysis(exportRoot, 'findMaximumScale');
+	recursiveNodeAnalysis(exportRoot, 'findAbsoluteMaximumScale');
+	recursiveNodeAnalysis(exportRoot, 'cache');
+	for(var i=0; i<uncachedList.length; i++) {
+		console.warn("Object with a larger size than 2048:", 'width:', uncachedList[i].nominalBounds.width*uncachedList[i].absoluteMaximumScale, 'height:', uncachedList[i].nominalBounds.height*uncachedList[i].absoluteMaximumScale, uncachedList[i]);
+	}
+
+	stage = new createjs.Stage(canvas);
+	stage.addChild(exportRoot);
+	stage.update();
+
+	var text = new createjs.Text("FPS", "20px Arial", "#ff0000");
+	stage.addChild(text);
+
+	createjs.Ticker.setFPS(lib.properties.fps);
+	createjs.Ticker.addEventListener("tick", function() {
+		text.text = Math.round(createjs.Ticker.getMeasuredFPS());
+		stage.update();
+	});
+}
+
+function playSound(id, loop) {
+	createjs.Sound.play(id, createjs.Sound.INTERRUPT_EARLY, 0, 0, loop);
+}
+</script>
+</head>
+
+<body onload="init();" style="background-color:#D4D4D4">
+	<canvas id="canvas" width="1000" height="600" style="background-color:#FFFFFF"></canvas>
+</body>
+</html>
