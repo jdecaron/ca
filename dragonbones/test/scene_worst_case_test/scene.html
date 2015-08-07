@@ -83,26 +83,42 @@ function init() {
         }
     };
 
+    var findAbsoluteMaximumScale = function(object) {
+        var scale = object.maximumScale;
+        if(object.parents && object.parents.length > 0 && object.parents[0] != object) {
+            scale = scale * object.parents[0].maximumScale;
+            findAbsoluteMaximumScale(object.parents[0]);
+        }
+        return scale;
+    }
+
     var addParent = function(object, parent) {
         if(!object.parents) {
             object.parents = [];
         }
-        if(object.parents.indexOf(parent) == -1) {
-            object.parents.push(object);
+        if(object != parent && object.parents.indexOf(parent) == -1) {
+            object.parents.push(parent);
         }
     }
 
-    var recursiveNodeAnalysis = function(object) {
-        findMaximumScale(object);
-        console.log('maximumScale', object.maximumScale, object);
+    var recursiveNodeAnalysis = function(object, action) {
+        if(action == 'findMaximumScale') {
+            findMaximumScale(object);
+        } else if(action == 'findAbsoluteMaximumScale') {
+            object.absoluteMaximumScale = findAbsoluteMaximumScale(object);
+        }
+        console.log('maximumScale', object.maximumScale, 'absoluteMaximumScale', object.absoluteMaximumScale, object);
         for(item in object) {
             if(item.match(/^instance/)) {
                 addParent(object[item], object);
-                recursiveNodeAnalysis(object[item], item);
+                recursiveNodeAnalysis(object[item], action);
             }
         }
     };
-    recursiveNodeAnalysis(exportRoot);
+    console.log('recursiveNodeAnalysis findMaximumScale');
+    recursiveNodeAnalysis(exportRoot, 'findMaximumScale');
+    console.log('recursiveNodeAnalysis findAbsoluteMaximumScale');
+    recursiveNodeAnalysis(exportRoot, 'findAbsoluteMaximumScale');
 
 	stage = new createjs.Stage(canvas);
 	stage.addChild(exportRoot);
