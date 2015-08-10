@@ -109,8 +109,14 @@ p.nominalBounds = new cjs.Rectangle(0,0,143.8,109.3);
 
 	this.timeline.addTween(cjs.Tween.get(this.instance_1).to({scaleX:4,scaleY:4},49).wait(1));
 
+	// turquoise_circle
+	this.instance_2 = new lib.turquoise_circle();
+	this.instance_2.setTransform(362,366,1,1,0,0,0,25,25);
+
+	this.timeline.addTween(cjs.Tween.get(this.instance_2).to({scaleX:9.04,scaleY:9.04},49).wait(1));
+
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(0,0,330.7,324);
+p.nominalBounds = new cjs.Rectangle(0,0,387,391);
 
 
 // stage content:
@@ -126,7 +132,7 @@ p.nominalBounds = new cjs.Rectangle(0,0,330.7,324);
 
 	this.addChild(this.instance);
 }).prototype = p = new cjs.Container();
-p.nominalBounds = new cjs.Rectangle(321,343,330.7,324);
+p.nominalBounds = new cjs.Rectangle(321,343,387,391);
 
 })(lib = lib||{}, images = images||{}, createjs = createjs||{}, ss = ss||{});
 var lib, images, createjs, ss;
