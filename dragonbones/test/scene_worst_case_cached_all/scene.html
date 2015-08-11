@@ -102,11 +102,8 @@ function handleComplete(evt) {
 
 	var findAbsoluteMaximumScale = function(object) {
 		var scale = object.maximumScale;
-		var maximumScale = [];
 		if(object.inheritor) {
-			maximumScale.push(scale * object.inheritor.maximumScale);
-			findAbsoluteMaximumScale(object.inheritor);
-			scale = max(maximumScale, scale);
+			scale = scale * findAbsoluteMaximumScale(object.inheritor);
 		}
 		return scale;
 	}
