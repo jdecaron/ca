@@ -6811,14 +6811,15 @@
     }
     .title{
         text-align: center;
+        text-transform: uppercase;
     }
     .instructions{
         width: 600px;
         margin-left: auto;
         margin-right: auto;
     }
-    #holder { border: 10px dashed #ccc; width: 300px; height: 300px; margin: 20px auto;}
-    #holder.hover { border: 10px dashed #333; }
+    #zone { border: 10px dashed #ccc; width: 300px; height: 300px; margin: 20px auto;}
+    #zone.hover { border: 10px dashed #333; }
 </style>
 <script>
     /* FileSaver.js
@@ -7083,29 +7084,29 @@
     <title></title>
 </head>
 <body>
-<h1 class="title">Optimize your animations</h1>
-    <div id="holder" style="border-radius: 6px;"></div>
+<h1 class="title">Optimize your animation</h1>
+    <div id="zone" style="border-radius: 6px;"></div>
     <div class="instructions">Drag your animation file from your desktop on to the drop zone above or click on the zone to select your animation from a menu.</div>
     <div class="buttons">
         <input type="button" value="Debug">
-        <input type="button" value="Relase">
+        <input type="button" value="Release">
     </div>
 </body>
 </html>
 <script>
-    var holder = document.getElementById('holder');
-    holder.ondragover = function () { this.className = 'hover'; return false; };
-    holder.ondragend = function () { this.className = ''; return false; };
-    holder.ondrop = function (e) {
+    var zone = document.getElementById('zone');
+    zone.ondragover = function () { this.className = 'hover'; return false; };
+    zone.ondragend = function () { this.className = ''; return false; };
+    zone.ondrop = function (e) {
         this.className = '';
         e.preventDefault();
         var file = e.dataTransfer.files[0],
         reader = new FileReader();
         reader.onload = function (event) {
-            console.log(event.target);
-            holder.style.background = 'url(' + event.target.result + ') no-repeat center';
+            console.log(atob(event.target.result.substring(event.target.result.indexOf(',')+1)));
+            zone.style.background = 'url(' + event.target.result + ') no-repeat center';
         };
-        console.log(file);
+        console.log('file', file);
         reader.readAsDataURL(file);
         return false;
     };
