@@ -1,5 +1,6 @@
-var Optimizer = function(exportRoot) {
+var Optimizer = function(exportRoot, visualize) {
     this.exportRoot = exportRoot;
+    this.visualize = visualize;
 
     this.getType = function(object){
         object.getType = function() {
@@ -23,17 +24,17 @@ var Optimizer = function(exportRoot) {
     this.cache = function(object) {
         if(this.getType(object) == 'DisplayObject' && object.inheritor != undefined) {
             if(object.nominalBounds.width*object.absoluteMaximumScale <= 2048 && object.nominalBounds.height*object.absoluteMaximumScale <= 2048) {
-                if(object.addChild) {
+                if(this.visualize && object.addChild) {
                     var shape = new createjs.Shape();
-                    shape.graphics.beginFill("#ff0000").drawRect(0, 0, object.nominalBounds.width, object.nominalBounds.height);
+                    shape.graphics.beginFill('#ff0000').drawRect(0, 0, object.nominalBounds.width, object.nominalBounds.height);
                     shape.alpha = .5;
                     object.addChild(shape);
                 }
                 if(object.absoluteMaximumScale > 1) {
-                    console.log("Caching:", 'scale:', object.absoluteMaximumScale, 'width:', object.nominalBounds.width*object.absoluteMaximumScale, 'height:', object.nominalBounds.height*object.absoluteMaximumScale, object);
+                    console.log('Caching:', 'scale:', object.absoluteMaximumScale, 'width:', object.nominalBounds.width*object.absoluteMaximumScale, 'height:', object.nominalBounds.height*object.absoluteMaximumScale, object);
                     object.cache(object.nominalBounds.x, object.nominalBounds.y, Math.min(2048, object.nominalBounds.width), Math.min(2048, object.nominalBounds.height), object.absoluteMaximumScale);
                 } else {
-                    console.log("Caching:", 'scale:', 1, 'width:', object.nominalBounds.width*object.absoluteMaximumScale, 'height:', object.nominalBounds.height*object.absoluteMaximumScale, object);
+                    console.log('Caching:', 'scale:', 1, 'width:', object.nominalBounds.width*object.absoluteMaximumScale, 'height:', object.nominalBounds.height*object.absoluteMaximumScale, object);
                     object.cache(object.nominalBounds.x, object.nominalBounds.y, Math.min(2048, object.nominalBounds.width), Math.min(2048, object.nominalBounds.height));
                 }
             }
@@ -110,6 +111,6 @@ var Optimizer = function(exportRoot) {
     this.recursiveNodeAnalysis(this.exportRoot, 'cache');
 
     for(var i=0; i<this.uncachedList.length; i++) {
-        console.warn("Object with a larger size than 2048:", 'width:', this.uncachedList[i].nominalBounds.width*this.uncachedList[i].absoluteMaximumScale, 'height:', this.uncachedList[i].nominalBounds.height*this.uncachedList[i].absoluteMaximumScale, this.uncachedList[i]);
+        console.warn('Object with a larger size than 2048:', 'width:', this.uncachedList[i].nominalBounds.width*this.uncachedList[i].absoluteMaximumScale, 'height:', this.uncachedList[i].nominalBounds.height*this.uncachedList[i].absoluteMaximumScale, this.uncachedList[i]);
     }
 };
