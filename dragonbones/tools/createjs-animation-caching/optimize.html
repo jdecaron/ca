@@ -321,7 +321,7 @@
                                     Show cached objects:
                                 </td>
                                 <td>
-                                    <input type="checkbox" data-toggle="toggle" data-size="small">
+                                    <input type="checkbox" data-toggle="toggle" data-size="small" id="visualize">
                                 </td>
                             </tr>
                         </table>
@@ -329,7 +329,7 @@
                     </div>
                 </td>
                 <td align="center" valign="center" style="width:200px; padding-left:15px;">
-                    <div class="well"><button class="btn btn-success">Release</button></div>
+                    <div class="well"><button class="btn btn-success disabled">Release</button></div>
                 </td>
             </tr>
         </table>
@@ -337,6 +337,7 @@
 </body>
 </html>
 <script>
+    var optimizer = "var Optimizer = function(exportRoot, visualize) {\n    this.exportRoot = exportRoot;\n    this.visualize = visualize;\n\n    this.getType = function(object){\n        object.getType = function() {\n            return (this).constructor.toString().match(/this\.[^_]*/)[0].substring(5);\n        };\n        return object.getType();\n    };\n\n    this.max = function(list) {\n        var currentMax = -Infinity;\n        for(var k = 0; k < list.length; k++) {\n            if(list[k] > currentMax) {\n                currentMax = list[k];\n            }\n        }\n        return currentMax;\n    };\n\n    this.uncachedList = [];\n\n    this.cache = function(object) {\n        if(this.getType(object) == 'DisplayObject' && object.inheritor != undefined) {\n            if(object.nominalBounds.width*object.absoluteMaximumScale <= 2048 && object.nominalBounds.height*object.absoluteMaximumScale <= 2048) {\n                if(this.visualize && object.addChild) {\n                    var shape = new createjs.Shape();\n                    shape.graphics.beginFill('#ff0000').drawRect(0, 0, object.nominalBounds.width, object.nominalBounds.height);\n                    shape.alpha = .5;\n                    object.addChild(shape);\n                }\n                if(object.absoluteMaximumScale > 1) {\n                    console.log('Caching:', 'scale:', object.absoluteMaximumScale, 'width:', object.nominalBounds.width*object.absoluteMaximumScale, 'height:', object.nominalBounds.height*object.absoluteMaximumScale, object);\n                    object.cache(object.nominalBounds.x, object.nominalBounds.y, Math.min(2048, object.nominalBounds.width), Math.min(2048, object.nominalBounds.height), object.absoluteMaximumScale);\n                } else {\n                    console.log('Caching:', 'scale:', 1, 'width:', object.nominalBounds.width*object.absoluteMaximumScale, 'height:', object.nominalBounds.height*object.absoluteMaximumScale, object);\n                    object.cache(object.nominalBounds.x, object.nominalBounds.y, Math.min(2048, object.nominalBounds.width), Math.min(2048, object.nominalBounds.height));\n                }\n            }\n            else {\n                this.uncachedList.push(object);\n            }\n        }\n    }\n\n    this.findMaximumScale = function(object) {\n        var self = this;\n        var maximumScale = function(object, scale) {\n            if(object.maximumScale === undefined) {\n                object.maximumScale = scale;\n            } else {\n                object.maximumScale = self.max([scale, object.maximumScale]);\n            }\n        };\n        maximumScale(object, this.max([object.scaleX, object.scaleY]));\n        if(object.timeline) {\n            for(var i = 0; i < object.timeline._tweens.length; i++) {\n                var tween = object.timeline._tweens[i];\n                for(var j = 0; j < tween._steps.length; j++) {\n                    var step = tween._steps[j];\n                    if(step.p0.scaleX > 1 || step.p0.scaleY > 1 || step.p1.scaleX > 1 || step.p1.scaleY > 1) {\n                        maximumScale(tween.target, this.max([step.p0.scaleX, step.p0.scaleY, step.p1.scaleX, step.p1.scaleY]));\n                    }\n                    if(step.p0.state || step.p1.state) {\n                        var steps = [step.p0.state, step.p1.state];\n                        for(var k=0; k<steps.length; k++) {\n                            for(var l=0; l<steps[k].length; l++) {\n                                if(steps[k][l].p) {\n                                    maximumScale(steps[k][l].t, this.max([steps[k][l].p.scaleX, steps[k][l].p.scaleY]));\n                                }\n                            }\n                        }\n                    }\n                }\n            }\n        }\n    };\n\n    this.findAbsoluteMaximumScale = function(object) {\n        var scale = object.maximumScale;\n        if(object.inheritor) {\n            scale = scale * this.findAbsoluteMaximumScale(object.inheritor);\n        }\n        return scale;\n    };\n\n    this.addParent = function(object, inheritor) {\n        object.inheritor = inheritor;\n    };\n\n    this.recursiveNodeAnalysis = function(object, action) {\n        if(action == 'findMaximumScale') {\n            this.findMaximumScale(object);\n        } else if(action == 'findAbsoluteMaximumScale') {\n            var scale = this.findAbsoluteMaximumScale(object);\n            object.absoluteMaximumScale = this.max([scale, object.absoluteMaximumScale]);\n        }\n        for(item in object) {\n            if(item.match(/^instance/)) {\n                this.addParent(object[item], object);\n                this.recursiveNodeAnalysis(object[item], action);\n            }\n        }\n        if(action == 'cache') {\n            this.cache(object);\n        }\n    };\n    this.recursiveNodeAnalysis(this.exportRoot, 'findMaximumScale');\n    this.recursiveNodeAnalysis(this.exportRoot, 'findAbsoluteMaximumScale');\n    this.recursiveNodeAnalysis(this.exportRoot, 'cache');\n\n    for(var i=0; i<this.uncachedList.length; i++) {\n        console.warn('Object with a larger size than 2048:', 'width:', this.uncachedList[i].nominalBounds.width*this.uncachedList[i].absoluteMaximumScale, 'height:', this.uncachedList[i].nominalBounds.height*this.uncachedList[i].absoluteMaximumScale, this.uncachedList[i]);\n    }\n};";
     var debug = document.getElementById('debug');
     var file;
     debug.onclick = function() {
@@ -345,13 +346,14 @@
         }else {
             for(var i=0; i<textList.length; i++) {
                 if(textList[i].match(/^\<script/)) {
-                    textList.splice(i, 0, '<script src="optimizer.js"><\/script>');
+                    textList.splice(i, 0, '<script>' + optimizer + '<\/script>');
                     i = Infinity;
                 }
             }
             for(var i=0; i<textList.length; i++) {
+                console.log();
                 if(textList[i].match(/^\s*exportRoot = new/)) {
-                    textList.splice(i+1, 0, "Optimizer(exportRoot);");
+                    textList.splice(i+1, 0, "Optimizer(exportRoot, " + document.getElementById('visualize').checked.toString() + ");");;
                     i = Infinity;
                 }
             }
@@ -361,7 +363,6 @@
                     i = Infinity;
                 }
             }
-            console.log(textList);
             var blob = new Blob([textList.join('\n')], {type: "text/plain;charset=utf-8"});
             saveAs(blob, file.name);
         }
