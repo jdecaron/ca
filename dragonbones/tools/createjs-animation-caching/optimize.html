@@ -325,7 +325,7 @@
                                 </td>
                             </tr>
                         </table>
-                        <button class="btn btn-primary" style="margin-top:15px;">Debug</button>
+                        <button class="btn btn-primary" style="margin-top:15px;" id="debug">Debug</button>
                     </div>
                 </td>
                 <td align="center" valign="center" style="width:200px; padding-left:15px;">
@@ -337,19 +337,50 @@
 </body>
 </html>
 <script>
+    var debug = document.getElementById('debug');
+    var file;
+    debug.onclick = function() {
+        if(textList.length == 0) {
+            alert('Error: Add a file to process, either drop it in the zone or click the zone and select a file.');
+        }else {
+            for(var i=0; i<textList.length; i++) {
+                if(textList[i].match(/^\<script/)) {
+                    textList.splice(i, 0, '<script src="optimizer.js"><\/script>');
+                    i = Infinity;
+                }
+            }
+            for(var i=0; i<textList.length; i++) {
+                if(textList[i].match(/^\s*exportRoot = new/)) {
+                    textList.splice(i+1, 0, "Optimizer(exportRoot);");
+                    i = Infinity;
+                }
+            }
+            for(var i=0; i<textList.length; i++) {
+                if(textList[i].match(/^\s*createjs\.Ticker\.addEventListener/)) {
+                    textList[i] = "var text = new createjs.Text('FPS', '20px Arial', '#ff0000'); stage.addChild(text); createjs.Ticker.addEventListener('tick', function() { text.text = Math.round(createjs.Ticker.getMeasuredFPS()); stage.update(); });";
+                    i = Infinity;
+                }
+            }
+            console.log(textList);
+            var blob = new Blob([textList.join('\n')], {type: "text/plain;charset=utf-8"});
+            saveAs(blob, file.name);
+        }
+    };
+
+    var textList = [];
     var zone = document.getElementById('zone');
     zone.ondragover = function () { this.className = 'hover'; return false; };
     zone.ondragend = function () { this.className = ''; return false; };
     zone.ondrop = function (e) {
         this.className = '';
         e.preventDefault();
-        var file = e.dataTransfer.files[0],
+        file = e.dataTransfer.files[0],
         reader = new FileReader();
         reader.onload = function (event) {
-            console.log(atob(event.target.result.substring(event.target.result.indexOf(',')+1)));
+            console.log(event);
+            textList = atob(event.target.result.substring(event.target.result.indexOf(',')+1)).split('\n');
             zone.style.background = 'url(' + event.target.result + ') no-repeat center';
         };
-        console.log('file', file);
         reader.readAsDataURL(file);
         return false;
     };
