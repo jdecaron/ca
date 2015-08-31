@@ -348,8 +348,11 @@
         }else {
             for(var i=textList.length-1; i>=0; i--) {
                 // Cleanup.
-                if(textList[i].match(/(Optimizer|var text )/)) {
+                if(textList[i].match(/Optimizer/)) {
                     textList.splice(i, 1);
+                }
+                else if(textList[i].match(/var text /)) {
+                    textList[i] = '    createjs.Ticker.addEventListener("tick", stage);';
                 }
             }
             for(var i=0; i<textList.length; i++) {
@@ -369,7 +372,6 @@
                     i = Infinity;
                 }
             }
-            console.log(event.target.id);
             if(event.target.id == 'debug') {
                 for(var i=0; i<textList.length; i++) {
                     if(textList[i].match(/^\s*createjs\.Ticker\.addEventListener/)) {
@@ -378,7 +380,7 @@
                     }
                 }
             }
-            var blob = new Blob([textList.join('\n')], {type: "text/plain;charset=utf-8"});
+            var blob = new Blob([textList.join('\n')]);
             saveAs(blob, file.name);
         }
     };
@@ -389,7 +391,6 @@
         file = handle;
         reader = new FileReader();
         reader.onload = function (event) {
-            console.log(event);
             textList = atob(event.target.result.substring(event.target.result.indexOf(',')+1)).split('\n');
             zone.style.background = 'url(' + event.target.result + ') no-repeat center';
         };
