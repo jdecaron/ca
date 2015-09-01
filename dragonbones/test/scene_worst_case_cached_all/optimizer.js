@@ -42,7 +42,7 @@ var Optimizer = function(exportRoot, visualize) {
                 this.uncachedList.push(object);
             }
         }
-    }
+    };
 
     this.findMaximumScale = function(object) {
         var self = this;
