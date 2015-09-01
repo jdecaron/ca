@@ -386,9 +386,13 @@
     };
 
     var textList = [];
+    var zone = document.getElementById('zone');
 
     readFile = function (handle) {
         file = handle;
+
+        zone.innerHTML = file.name;
+
         reader = new FileReader();
         reader.onload = function (event) {
             textList = atob(event.target.result.substring(event.target.result.indexOf(',')+1)).split('\n');
@@ -398,7 +402,6 @@
         return false;
     };
 
-    var zone = document.getElementById('zone');
     zone.ondragover = function () { this.className = 'hover'; return false; };
     zone.ondragend = function () { this.className = ''; return false; };
     zone.ondragleave = function () { this.className = ''; };
