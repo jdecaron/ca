@@ -1,0 +1,17 @@
+<script src="../js/jquery.js"></script>
+<script>
+    var createjs = cjs = {};
+    createjs.Container = function() { p = {}; this.initialize = function() {}; this.addChild = function() {}; };
+    createjs.MovieClip = function() {};
+    createjs.Rectangle = function() {};
+    createjs.Shape = function() {
+        return {
+            graphics:{
+                f:function(color) { return {s: function() { return {p: function(path) { return null } } } } }
+            },
+            setTransform: function() {}
+        };
+    };
+</script>
+<script src="blue-canvas.js"></script>
+<script src="debug.js"></script>

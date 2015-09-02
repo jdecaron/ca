@@ -1,0 +1,1214 @@
+{
+  "frameRate": 24,
+  "name": "blue",
+  "armature": [
+    {
+      "name": "Blue dude/Blue_character_walk",
+      "animation": [
+        {
+          "name": "default",
+          "scale": 1,
+          "loop": 1,
+          "duration": 24,
+          "fadeInTime": 0,
+          "frame": [
+            {
+              "duration": 9
+            },
+            {
+              "event": "custom",
+              "duration": 15
+            }
+          ],
+          "timeline": [
+            {
+              "name": "blue_arm_L",
+              "scale": 1,
+              "frame": [
+                {
+                  "z": 0,
+                  "transform": {
+                    "skX": -127.2,
+                    "scY": 1.225601,
+                    "x": 137.15,
+                    "y": 153.3,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": -1.225601,
+                    "skY": -127.2
+                  },
+                  "tweenEasing": 0,
+                  "duration": 6
+                },
+                {
+                  "z": 0,
+                  "transform": {
+                    "skX": -142.64,
+                    "scY": 1.225586,
+                    "x": 132.85,
+                    "y": 146.8,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": -1.225586,
+                    "skY": -142.64
+                  },
+                  "tweenEasing": 0,
+                  "duration": 5
+                },
+                {
+                  "transform": {
+                    "skX": -164.85,
+                    "scY": 1.225586,
+                    "x": 122.15,
+                    "y": 153.3,
+                    "pX": 0,
+                    "pY": -0.05,
+                    "scX": -1.225586,
+                    "skY": -164.85
+                  },
+                  "z": 0,
+                  "duration": 1
+                },
+                {
+                  "z": 0,
+                  "transform": {
+                    "skX": -164.85,
+                    "scY": 1.225586,
+                    "x": 122.15,
+                    "y": 153.3,
+                    "pX": 0,
+                    "pY": -0.05,
+                    "scX": -1.225586,
+                    "skY": -164.85
+                  },
+                  "tweenEasing": 0,
+                  "duration": 5
+                },
+                {
+                  "z": 0,
+                  "transform": {
+                    "skX": -142.39,
+                    "scY": 1.225601,
+                    "x": 132.85,
+                    "y": 146.85,
+                    "pX": 0.05,
+                    "pY": -0.05,
+                    "scX": -1.225601,
+                    "skY": -142.39
+                  },
+                  "tweenEasing": 0,
+                  "duration": 6
+                },
+                {
+                  "transform": {
+                    "skX": -127.2,
+                    "scY": 1.225601,
+                    "x": 137.15,
+                    "y": 153.3,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": -1.225601,
+                    "skY": -127.2
+                  },
+                  "z": 0,
+                  "duration": 1
+                }
+              ],
+              "offset": 0
+            },
+            {
+              "name": "blue_leg_R",
+              "scale": 1,
+              "frame": [
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": 38.2,
+                    "y": 250.9,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "z": 1,
+                  "duration": 1
+                },
+                {
+                  "z": 1,
+                  "displayIndex": 1,
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": 38.2,
+                    "y": 240.65,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "tweenEasing": 0,
+                  "duration": 5
+                },
+                {
+                  "z": 1,
+                  "displayIndex": 1,
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": 48.05,
+                    "y": 234.5,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "tweenEasing": 0,
+                  "duration": 5
+                },
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": 62.8,
+                    "y": 250.9,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "z": 1,
+                  "duration": 2
+                },
+                {
+                  "z": 1,
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": 62.8,
+                    "y": 250.9,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "tweenEasing": 0,
+                  "duration": 10
+                },
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": 38.2,
+                    "y": 250.9,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "z": 1,
+                  "duration": 1
+                }
+              ],
+              "offset": 0
+            },
+            {
+              "name": "blue_leg_L",
+              "scale": 1,
+              "frame": [
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": 98.5,
+                    "y": 247.3,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "z": 2,
+                  "duration": 1
+                },
+                {
+                  "z": 2,
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": 98.5,
+                    "y": 247.3,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "tweenEasing": 0,
+                  "duration": 10
+                },
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": 45.2,
+                    "y": 247.3,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "z": 2,
+                  "duration": 2
+                },
+                {
+                  "z": 2,
+                  "displayIndex": 1,
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": 45.2,
+                    "y": 235,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "tweenEasing": 0,
+                  "duration": 5
+                },
+                {
+                  "z": 2,
+                  "displayIndex": 1,
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": 71.85,
+                    "y": 228.85,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "tweenEasing": 0,
+                  "duration": 5
+                },
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": 98.5,
+                    "y": 247.3,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "z": 2,
+                  "duration": 1
+                }
+              ],
+              "offset": 0
+            },
+            {
+              "name": "blue_ear_L",
+              "scale": 1,
+              "frame": [
+                {
+                  "z": 3,
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1.225616,
+                    "x": 96.95,
+                    "y": 38.75,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1.225616,
+                    "skY": 0
+                  },
+                  "tweenEasing": 0,
+                  "duration": 6
+                },
+                {
+                  "z": 3,
+                  "transform": {
+                    "skX": -2.17,
+                    "scY": 1.252243,
+                    "x": 88.25,
+                    "y": 27.9,
+                    "pX": -0.05,
+                    "pY": 0,
+                    "scX": 1.225693,
+                    "skY": -2.26
+                  },
+                  "tweenEasing": 0,
+                  "duration": 5
+                },
+                {
+                  "transform": {
+                    "skX": 4.47,
+                    "scY": 1.225601,
+                    "x": 97,
+                    "y": 41.1,
+                    "pX": -0.05,
+                    "pY": 0,
+                    "scX": 1.225601,
+                    "skY": 4.47
+                  },
+                  "z": 3,
+                  "duration": 1
+                },
+                {
+                  "z": 3,
+                  "transform": {
+                    "skX": 4.47,
+                    "scY": 1.225601,
+                    "x": 97,
+                    "y": 41.1,
+                    "pX": -0.05,
+                    "pY": 0,
+                    "scX": 1.225601,
+                    "skY": 4.47
+                  },
+                  "tweenEasing": 0,
+                  "duration": 5
+                },
+                {
+                  "z": 3,
+                  "transform": {
+                    "skX": -2.25,
+                    "scY": 1.207001,
+                    "x": 88.25,
+                    "y": 36.7,
+                    "pX": -0.05,
+                    "pY": -0.1,
+                    "scX": 1.225616,
+                    "skY": -2.18
+                  },
+                  "tweenEasing": 0,
+                  "duration": 6
+                },
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1.225616,
+                    "x": 96.95,
+                    "y": 38.75,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1.225616,
+                    "skY": 0
+                  },
+                  "z": 3,
+                  "duration": 1
+                }
+              ],
+              "offset": 0
+            },
+            {
+              "name": "blue_ear_R",
+              "scale": 1,
+              "frame": [
+                {
+                  "z": 4,
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1.225616,
+                    "x": 29.8,
+                    "y": 54.1,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1.225616,
+                    "skY": 0
+                  },
+                  "tweenEasing": 0,
+                  "duration": 6
+                },
+                {
+                  "z": 4,
+                  "transform": {
+                    "skX": -2.17,
+                    "scY": 1.252243,
+                    "x": 21.7,
+                    "y": 47.05,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1.225693,
+                    "skY": -2.26
+                  },
+                  "tweenEasing": 0,
+                  "duration": 5
+                },
+                {
+                  "transform": {
+                    "skX": 6.2,
+                    "scY": 1.225601,
+                    "x": 32.6,
+                    "y": 54.1,
+                    "pX": 0,
+                    "pY": -0.05,
+                    "scX": 1.225601,
+                    "skY": 6.2
+                  },
+                  "z": 4,
+                  "duration": 1
+                },
+                {
+                  "z": 4,
+                  "transform": {
+                    "skX": 6.2,
+                    "scY": 1.225601,
+                    "x": 32.6,
+                    "y": 54.1,
+                    "pX": 0,
+                    "pY": -0.05,
+                    "scX": 1.225601,
+                    "skY": 6.2
+                  },
+                  "tweenEasing": 0,
+                  "duration": 5
+                },
+                {
+                  "z": 4,
+                  "transform": {
+                    "skX": -2.25,
+                    "scY": 1.207001,
+                    "x": 21.7,
+                    "y": 55.1,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1.225616,
+                    "skY": -2.18
+                  },
+                  "tweenEasing": 0,
+                  "duration": 6
+                },
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1.225616,
+                    "x": 29.8,
+                    "y": 54.1,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1.225616,
+                    "skY": 0
+                  },
+                  "z": 4,
+                  "duration": 1
+                }
+              ],
+              "offset": 0
+            },
+            {
+              "name": "blue_body_legs",
+              "scale": 1,
+              "frame": [
+                {
+                  "z": 5,
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1.225616,
+                    "x": 94.3,
+                    "y": 189.3,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1.225616,
+                    "skY": 0
+                  },
+                  "tweenEasing": 0,
+                  "duration": 6
+                },
+                {
+                  "z": 5,
+                  "transform": {
+                    "skX": -2.17,
+                    "scY": 1.252243,
+                    "x": 91.45,
+                    "y": 182.55,
+                    "pX": 0,
+                    "pY": 0.05,
+                    "scX": 1.225693,
+                    "skY": -2.26
+                  },
+                  "tweenEasing": 0,
+                  "duration": 5
+                },
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1.225616,
+                    "x": 94.3,
+                    "y": 189.3,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1.225616,
+                    "skY": 0
+                  },
+                  "z": 5,
+                  "duration": 1
+                },
+                {
+                  "z": 5,
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1.225616,
+                    "x": 94.3,
+                    "y": 189.3,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1.225616,
+                    "skY": 0
+                  },
+                  "tweenEasing": 0,
+                  "duration": 5
+                },
+                {
+                  "z": 5,
+                  "transform": {
+                    "skX": -2.25,
+                    "scY": 1.207001,
+                    "x": 91.45,
+                    "y": 185.65,
+                    "pX": 0,
+                    "pY": 0.1,
+                    "scX": 1.225616,
+                    "skY": -2.18
+                  },
+                  "tweenEasing": 0,
+                  "duration": 6
+                },
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1.225616,
+                    "x": 94.3,
+                    "y": 189.3,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1.225616,
+                    "skY": 0
+                  },
+                  "z": 5,
+                  "duration": 1
+                }
+              ],
+              "offset": 0
+            },
+            {
+              "name": "blue_mouth",
+              "scale": 1,
+              "frame": [
+                {
+                  "z": 6,
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1.225616,
+                    "x": 98.65,
+                    "y": 139.05,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1.225616,
+                    "skY": 0
+                  },
+                  "tweenEasing": 0,
+                  "duration": 6
+                },
+                {
+                  "z": 6,
+                  "transform": {
+                    "skX": -2.14,
+                    "scY": 1.270493,
+                    "x": 93.85,
+                    "y": 129.2,
+                    "pX": 0.05,
+                    "pY": 0,
+                    "scX": 1.225708,
+                    "skY": -2.3
+                  },
+                  "tweenEasing": 0,
+                  "duration": 5
+                },
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1.225616,
+                    "x": 106.7,
+                    "y": 139.05,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1.225616,
+                    "skY": 0
+                  },
+                  "z": 6,
+                  "duration": 1
+                },
+                {
+                  "z": 6,
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1.225616,
+                    "x": 106.7,
+                    "y": 139.05,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1.225616,
+                    "skY": 0
+                  },
+                  "tweenEasing": 0,
+                  "duration": 5
+                },
+                {
+                  "z": 6,
+                  "transform": {
+                    "skX": -2.21,
+                    "scY": 1.225632,
+                    "x": 93.85,
+                    "y": 134.1,
+                    "pX": 0.05,
+                    "pY": -0.05,
+                    "scX": 1.225632,
+                    "skY": -2.21
+                  },
+                  "tweenEasing": 0,
+                  "duration": 6
+                },
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1.225616,
+                    "x": 98.65,
+                    "y": 139.05,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1.225616,
+                    "skY": 0
+                  },
+                  "z": 6,
+                  "duration": 1
+                }
+              ],
+              "offset": 0
+            },
+            {
+              "name": "blue_arm_R",
+              "scale": 1,
+              "frame": [
+                {
+                  "z": 7,
+                  "transform": {
+                    "skX": -9.47,
+                    "scY": 1.225632,
+                    "x": 40.75,
+                    "y": 158.65,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1.225632,
+                    "skY": -9.47
+                  },
+                  "tweenEasing": 0,
+                  "duration": 6
+                },
+                {
+                  "z": 7,
+                  "transform": {
+                    "skX": 4.12,
+                    "scY": 1.270279,
+                    "x": 36.65,
+                    "y": 151.85,
+                    "pX": 0.05,
+                    "pY": 0,
+                    "scX": 1.225861,
+                    "skY": 4.42
+                  },
+                  "tweenEasing": 0,
+                  "duration": 5
+                },
+                {
+                  "transform": {
+                    "skX": 19.05,
+                    "scY": 1.225616,
+                    "x": 55.7,
+                    "y": 158.75,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1.225616,
+                    "skY": 19.05
+                  },
+                  "z": 7,
+                  "duration": 1
+                },
+                {
+                  "z": 7,
+                  "transform": {
+                    "skX": 19.05,
+                    "scY": 1.225616,
+                    "x": 55.7,
+                    "y": 158.75,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1.225616,
+                    "skY": 19.05
+                  },
+                  "tweenEasing": 0,
+                  "duration": 5
+                },
+                {
+                  "z": 7,
+                  "transform": {
+                    "skX": 4.33,
+                    "scY": 1.207001,
+                    "x": 36.7,
+                    "y": 157.6,
+                    "pX": 0.05,
+                    "pY": 0.1,
+                    "scX": 1.225525,
+                    "skY": 4.2
+                  },
+                  "tweenEasing": 0,
+                  "duration": 6
+                },
+                {
+                  "transform": {
+                    "skX": -9.47,
+                    "scY": 1.225632,
+                    "x": 40.75,
+                    "y": 158.65,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1.225632,
+                    "skY": -9.47
+                  },
+                  "z": 7,
+                  "duration": 1
+                }
+              ],
+              "offset": 0
+            },
+            {
+              "name": "blue_eyes",
+              "scale": 1,
+              "frame": [
+                {
+                  "z": 8,
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1.225616,
+                    "x": 104.25,
+                    "y": 85.4,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1.225616,
+                    "skY": 0
+                  },
+                  "tweenEasing": 0,
+                  "duration": 6
+                },
+                {
+                  "z": 8,
+                  "transform": {
+                    "skX": -2.21,
+                    "scY": 1.225632,
+                    "x": 97.35,
+                    "y": 78.25,
+                    "pX": 0,
+                    "pY": 0.05,
+                    "scX": 1.225632,
+                    "skY": -2.21
+                  },
+                  "tweenEasing": 0,
+                  "duration": 5
+                },
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1.225616,
+                    "x": 112.3,
+                    "y": 85.4,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1.225616,
+                    "skY": 0
+                  },
+                  "z": 8,
+                  "duration": 1
+                },
+                {
+                  "z": 8,
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1.225616,
+                    "x": 112.3,
+                    "y": 85.4,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1.225616,
+                    "skY": 0
+                  },
+                  "tweenEasing": 0,
+                  "duration": 5
+                },
+                {
+                  "z": 8,
+                  "transform": {
+                    "skX": -2.21,
+                    "scY": 1.225632,
+                    "x": 97.35,
+                    "y": 82.25,
+                    "pX": 0.05,
+                    "pY": 0.05,
+                    "scX": 1.225632,
+                    "skY": -2.21
+                  },
+                  "tweenEasing": 0,
+                  "duration": 6
+                },
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1.225616,
+                    "x": 104.25,
+                    "y": 85.4,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1.225616,
+                    "skY": 0
+                  },
+                  "z": 8,
+                  "duration": 1
+                }
+              ],
+              "offset": 0
+            }
+          ],
+          "autoTween": 1,
+          "tweenEasing": null
+        }
+      ],
+      "bone": [
+        {
+          "transform": {
+            "skX": -127.2,
+            "scY": 1.225601,
+            "x": 137.15,
+            "scX": -1.225601,
+            "y": 153.3,
+            "skY": -127.2
+          },
+          "name": "blue_arm_L"
+        },
+        {
+          "transform": {
+            "skX": 0,
+            "scY": 1,
+            "x": 38.2,
+            "scX": 1,
+            "y": 250.9,
+            "skY": 0
+          },
+          "name": "blue_leg_R"
+        },
+        {
+          "transform": {
+            "skX": 0,
+            "scY": 1,
+            "x": 98.5,
+            "scX": 1,
+            "y": 247.3,
+            "skY": 0
+          },
+          "name": "blue_leg_L"
+        },
+        {
+          "transform": {
+            "skX": 0,
+            "scY": 1.225616,
+            "x": 96.95,
+            "scX": 1.225616,
+            "y": 38.75,
+            "skY": 0
+          },
+          "name": "blue_ear_L"
+        },
+        {
+          "transform": {
+            "skX": 0,
+            "scY": 1.225616,
+            "x": 29.8,
+            "scX": 1.225616,
+            "y": 54.1,
+            "skY": 0
+          },
+          "name": "blue_ear_R"
+        },
+        {
+          "transform": {
+            "skX": 0,
+            "scY": 1.225616,
+            "x": 94.3,
+            "scX": 1.225616,
+            "y": 189.3,
+            "skY": 0
+          },
+          "name": "blue_body_legs"
+        },
+        {
+          "transform": {
+            "skX": 0,
+            "scY": 1.225616,
+            "x": 98.65,
+            "scX": 1.225616,
+            "y": 139.05,
+            "skY": 0
+          },
+          "name": "blue_mouth"
+        },
+        {
+          "transform": {
+            "skX": -9.47,
+            "scY": 1.225632,
+            "x": 40.75,
+            "scX": 1.225632,
+            "y": 158.65,
+            "skY": -9.47
+          },
+          "name": "blue_arm_R"
+        },
+        {
+          "transform": {
+            "skX": 0,
+            "scY": 1.225616,
+            "x": 104.25,
+            "scX": 1.225616,
+            "y": 85.4,
+            "skY": 0
+          },
+          "name": "blue_eyes"
+        }
+      ],
+      "skin": [
+        {
+          "slot": [
+            {
+              "name": "blue_arm_L",
+              "z": 0,
+              "display": [
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": -0.05,
+                    "y": -76.6,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "name": "Blue dude/blue_arm_L",
+                  "type": "image"
+                }
+              ],
+              "parent": "blue_arm_L"
+            },
+            {
+              "name": "blue_leg_R",
+              "z": 1,
+              "display": [
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": -8.8,
+                    "y": -3.6,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "name": "blue_leg_R",
+                  "type": "image"
+                },
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": -8.8,
+                    "y": -3.6,
+                    "pX": 0,
+                    "pY": 2,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "name": "blue_leg_R_01",
+                  "type": "image"
+                }
+              ],
+              "parent": "blue_leg_R"
+            },
+            {
+              "name": "blue_leg_L",
+              "z": 2,
+              "display": [
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": -5.2,
+                    "y": -5,
+                    "pX": 1.15,
+                    "pY": 14.4,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "name": "blue_leg_L",
+                  "type": "image"
+                },
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": -5.2,
+                    "y": -5,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "name": "blue_leg_L_01",
+                  "type": "image"
+                }
+              ],
+              "parent": "blue_leg_L"
+            },
+            {
+              "name": "blue_ear_L",
+              "z": 3,
+              "display": [
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": -15.2,
+                    "y": -30.95,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "name": "Blue dude/blue_ear_L",
+                  "type": "image"
+                }
+              ],
+              "parent": "blue_ear_L"
+            },
+            {
+              "name": "blue_ear_R",
+              "z": 4,
+              "display": [
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": -12.55,
+                    "y": -38.1,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "name": "Blue dude/blue_ear_R",
+                  "type": "image"
+                }
+              ],
+              "parent": "blue_ear_R"
+            },
+            {
+              "name": "blue_body_legs",
+              "z": 5,
+              "display": [
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": -76.95,
+                    "y": -124.85,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "name": "Blue dude/blue_body_legs",
+                  "type": "image"
+                }
+              ],
+              "parent": "blue_body_legs"
+            },
+            {
+              "name": "blue_mouth",
+              "z": 6,
+              "display": [
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": -30.35,
+                    "y": -11.95,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "name": "Blue dude/blue_mouth",
+                  "type": "image"
+                }
+              ],
+              "parent": "blue_mouth"
+            },
+            {
+              "name": "blue_arm_R",
+              "z": 7,
+              "display": [
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": -18.2,
+                    "y": -4.5,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "name": "Blue dude/blue_arm_R",
+                  "type": "image"
+                }
+              ],
+              "parent": "blue_arm_R"
+            },
+            {
+              "name": "blue_eyes",
+              "z": 8,
+              "display": [
+                {
+                  "transform": {
+                    "skX": 0,
+                    "scY": 1,
+                    "x": -41,
+                    "y": -33.2,
+                    "pX": 0,
+                    "pY": 0,
+                    "scX": 1,
+                    "skY": 0
+                  },
+                  "name": "Blue dude/blue_eyes",
+                  "type": "image"
+                }
+              ],
+              "parent": "blue_eyes"
+            }
+          ],
+          "name": "default"
+        }
+      ]
+    }
+  ],
+  "version": 2.3
+}

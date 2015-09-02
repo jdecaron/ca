@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>blue_cc</title>
+
+<script src="http://code.createjs.com/easeljs-0.8.1.min.js"></script>
+<script src="http://code.createjs.com/tweenjs-0.6.1.min.js"></script>
+<script src="http://code.createjs.com/movieclip-0.8.1.min.js"></script>
+<script src="blue_cc.js"></script>
+
+<script>
+var canvas, stage, exportRoot;
+
+function init() {
+	canvas = document.getElementById("canvas");
+	//exportRoot = new lib.blue_cc();
+
+    console.log(new lib.blue_leg_R_01());
+    //exportRoot = new lib.blue_leg_R_01();
+
+    /*
+    var container = new createjs.Container();
+    // Layer 1
+    var shape = new createjs.Shape();
+    shape.graphics.f("#0A3C4B").s().p("Ajzh2QAVgbAfgkIAzApIAAAAIAEADQCKBECGCDQBEBDAoA1g");
+    shape.setTransform(7,54.2,1,1,0,0,0,-19.8,-13.6);
+
+    var shape_1 = new createjs.Shape();
+    shape_1.graphics.f("#0A3C4B").s().p("AiXFTQG0nhnKitQBKgtBfAqQGDCvnDHig");
+    shape_1.setTransform(14.8,26.9,0.85,0.85);
+
+    container.addChild(shape, shape_1);
+    */
+
+	stage = new createjs.Stage(canvas);
+	stage.addChild(container);
+	stage.update();
+
+	createjs.Ticker.setFPS(lib.properties.fps);
+	createjs.Ticker.addEventListener("tick", stage);
+}
+</script>
+</head>
+
+<body onload="init();" style="background-color:#D4D4D4">
+	<canvas id="canvas" width="550" height="400" style="background-color:#FFFFFF"></canvas>
+</body>
+</html>

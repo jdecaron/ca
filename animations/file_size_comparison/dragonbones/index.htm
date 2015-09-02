@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>demo</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/createjs.js"></script>
+    <script src="js/dragonBones.js"></script>
+    <script src="js/dragonBonesCreateJS.js"></script>
+</head>
+<body onLoad="init();">
+    <div id="canvasHolder">
+        <canvas id="canvas" width="1280" height="720"></canvas>
+    </div>
+
+	<script type='text/javascript'>
+		function init()
+		{
+			createJSInit();
+		}
+
+		var canvas;
+		var stage;
+
+		var texture;
+		var textureData;
+		var skeletonData;
+
+		function createJSInit()
+		{
+			canvas = document.getElementById("canvas");
+			stage = new createjs.Stage(canvas);
+
+			texture = new Image();
+			texture.onload = function()
+			{
+				$.getJSON(
+					"texture.json",
+					function(data)
+					{
+						textureData = data;
+						$.getJSON(
+							"skeleton.json",
+							function(data)
+							{
+								skeletonData = data;
+								dragonBonesInit();
+							}
+						)
+					}
+				);
+			}
+			texture.src = "texture.png";
+		}
+
+		var factory;
+
+		function dragonBonesInit()
+		{
+			factory = new dragonBones.factorys.CreateJSFactory();
+			factory.addSkeletonData(dragonBones.objects.DataParser.parseSkeletonData(skeletonData));
+			factory.addTextureAtlas(new dragonBones.textures.CreateJSTextureAtlas(texture, textureData));
+
+
+            var armatureList = [
+                "_export/1/bsl03_reels_cannon-sd",
+                "_export/1/bsl03_reels_grog-sd",
+                "_export/1/bsl03_reels_hook-sd",
+                "_export/1/bsl03_reels_parrot-sd",
+                "_export/1/bsl03_reels_pistol-sd",
+                "_export/1/bsl03_reels_shark-sd",
+                "_export/2/bsl03_reels_buccaneer-sd",
+                "_export/2/bsl03_reels_captain-sd",
+                "_export/2/bsl03_reels_hookpirate-sd",
+                "_export/2/bsl03_reels_pirette-sd",
+                "_export/2/bsl03_reels_skeleton-sd"
+            ];
+
+            var addArmature = function(name, x, y) {
+                var armature = factory.buildArmature(name);
+                armature.getDisplay().x = x;
+                armature.getDisplay().y = y;
+
+                dragonBones.animation.WorldClock.clock.add(armature);
+                armature.animation.gotoAndPlay('yaaarr', -1, -1, false);
+
+                stage.addChild(armature.getDisplay());
+            };
+
+            for(var i = 0; i < 4; i++) {
+                addArmature(armatureList[i], 0 + (150 * i), 0);
+            }
+            for(var i = 4; i < 8; i++) {
+                addArmature(armatureList[i], -600 + (150 * i), 150);
+            }
+            for(var i = 8; i < 10; i++) {
+                addArmature(armatureList[i], -1200 + (150 * i), 300);
+            }
+
+			createjs.Ticker.setFPS(60);
+			createjs.Ticker.addEventListener("tick", update);
+		}
+
+		function update()
+		{
+			dragonBones.animation.WorldClock.clock.advanceTime(1/60);
+			stage.update();
+		}
+
+	</script>
+</body>
+</html>

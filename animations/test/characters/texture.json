@@ -1,0 +1,580 @@
+{
+  "imagePath": "texture.png",
+  "name": "FR_Character_Test_export2",
+  "SubTexture": [
+    {
+      "name": "Orange dude/orange_arm_L",
+      "x": 251,
+      "width": 34,
+      "y": 230,
+      "height": 79
+    },
+    {
+      "name": "Orange dude/orange_legs",
+      "x": 498,
+      "width": 119,
+      "y": 0,
+      "height": 121
+    },
+    {
+      "name": "Orange dude/orange_body_legs",
+      "x": 0,
+      "width": 187,
+      "y": 0,
+      "height": 135
+    },
+    {
+      "name": "Orange dude/orange_arm_R",
+      "x": 569,
+      "width": 43,
+      "y": 231,
+      "height": 78
+    },
+    {
+      "name": "Orange dude/orange_arm_R_bend01",
+      "x": 613,
+      "width": 60,
+      "y": 230,
+      "height": 87
+    },
+    {
+      "name": "Orange dude/orange_mouth",
+      "x": 327,
+      "width": 170,
+      "y": 0,
+      "height": 138
+    },
+    {
+      "name": "Orange dude/orange_eyes",
+      "x": 733,
+      "width": 104,
+      "y": 83,
+      "height": 88
+    },
+    {
+      "name": "Blue dude/blue_ear_L",
+      "x": 966,
+      "width": 38,
+      "y": 301,
+      "height": 43
+    },
+    {
+      "name": "Blue dude/blue_ear_R",
+      "x": 294,
+      "width": 26,
+      "y": 187,
+      "height": 77
+    },
+    {
+      "name": "Blue dude/blue_arm_L",
+      "x": 179,
+      "width": 71,
+      "y": 230,
+      "height": 77
+    },
+    {
+      "name": "Blue dude/blue_legs",
+      "x": 618,
+      "width": 125,
+      "y": 0,
+      "height": 80
+    },
+    {
+      "name": "Blue dude/blue_body_legs",
+      "x": 189,
+      "width": 137,
+      "y": 0,
+      "height": 186
+    },
+    {
+      "name": "Blue dude/blue_mouth",
+      "x": 321,
+      "width": 67,
+      "y": 205,
+      "height": 86
+    },
+    {
+      "name": "Blue dude/blue_eyes",
+      "x": 859,
+      "width": 83,
+      "y": 215,
+      "height": 67
+    },
+    {
+      "name": "Blue dude/blue_arm_R",
+      "x": 790,
+      "width": 37,
+      "y": 172,
+      "height": 95
+    },
+    {
+      "name": "orange_leg_R",
+      "x": 119,
+      "width": 58,
+      "y": 136,
+      "height": 98
+    },
+    {
+      "name": "orange_leg_L",
+      "x": 730,
+      "width": 58,
+      "y": 172,
+      "height": 95
+    },
+    {
+      "name": "orange_leg_R_01",
+      "x": 446,
+      "width": 51,
+      "y": 139,
+      "height": 100
+    },
+    {
+      "name": "orange_leg_L_01",
+      "x": 972,
+      "width": 51,
+      "y": 100,
+      "height": 100
+    },
+    {
+      "name": "blue_leg_R",
+      "x": 498,
+      "width": 70,
+      "y": 231,
+      "height": 75
+    },
+    {
+      "name": "blue_leg_R_01",
+      "x": 674,
+      "width": 52,
+      "y": 230,
+      "height": 89
+    },
+    {
+      "name": "blue_leg_L",
+      "x": 115,
+      "width": 62,
+      "y": 235,
+      "height": 80
+    },
+    {
+      "name": "blue_leg_L_01",
+      "x": 438,
+      "width": 57,
+      "y": 240,
+      "height": 80
+    },
+    {
+      "name": "Orange dude/orange_hand01",
+      "x": 169,
+      "width": 41,
+      "y": 333,
+      "height": 32
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_arm_L wave/arm_0",
+      "x": 828,
+      "width": 20,
+      "y": 243,
+      "height": 79
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_arm_L wave/arm_4",
+      "x": 838,
+      "width": 20,
+      "y": 163,
+      "height": 79
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_arm_L wave/arm_8",
+      "x": 838,
+      "width": 20,
+      "y": 83,
+      "height": 79
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_arm_L wave/arm_12",
+      "x": 943,
+      "width": 20,
+      "y": 215,
+      "height": 79
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_arm_L wave/arm_16",
+      "x": 87,
+      "width": 20,
+      "y": 245,
+      "height": 79
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_arm_L wave/arm_20",
+      "x": 66,
+      "width": 20,
+      "y": 245,
+      "height": 79
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_arm_L wave/efx_0",
+      "x": 97,
+      "width": 47,
+      "y": 341,
+      "height": 24
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_arm_L wave/efx_4",
+      "x": 878,
+      "width": 47,
+      "y": 340,
+      "height": 24
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_arm_L wave/efx_8",
+      "x": 364,
+      "width": 47,
+      "y": 337,
+      "height": 24
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_arm_L wave/efx_12",
+      "x": 0,
+      "width": 47,
+      "y": 338,
+      "height": 24
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_arm_L wave/efx_16",
+      "x": 316,
+      "width": 47,
+      "y": 335,
+      "height": 24
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_arm_L wave/efx_20",
+      "x": 496,
+      "width": 47,
+      "y": 339,
+      "height": 24
+    },
+    {
+      "name": "__dbTextures/Blue dude/blue_arm_L_wave/arm_0",
+      "x": 0,
+      "width": 64,
+      "y": 245,
+      "height": 60
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_mouth_talk/mouth_0",
+      "x": 179,
+      "width": 114,
+      "y": 187,
+      "height": 42
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_mouth_talk/mouth_2",
+      "x": 617,
+      "width": 112,
+      "y": 164,
+      "height": 64
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_mouth_talk/mouth_4",
+      "x": 0,
+      "width": 118,
+      "y": 136,
+      "height": 64
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_mouth_talk/mouth_6",
+      "x": 618,
+      "width": 114,
+      "y": 81,
+      "height": 82
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_mouth_talk/mouth_8",
+      "x": 286,
+      "width": 32,
+      "y": 265,
+      "height": 56
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_mouth_talk/mouth_10",
+      "x": 1005,
+      "width": 17,
+      "y": 301,
+      "height": 30
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_mouth_talk/mouth_12",
+      "x": 0,
+      "width": 114,
+      "y": 202,
+      "height": 42
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_mouth_talk/mouth_14",
+      "x": 859,
+      "width": 112,
+      "y": 149,
+      "height": 64
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_mouth_talk/mouth_16",
+      "x": 498,
+      "width": 118,
+      "y": 122,
+      "height": 64
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_mouth_talk/mouth_18",
+      "x": 744,
+      "width": 114,
+      "y": 0,
+      "height": 82
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_mouth_talk/mouth_20",
+      "x": 908,
+      "width": 32,
+      "y": 283,
+      "height": 56
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_mouth_talk/mouth_22",
+      "x": 594,
+      "width": 17,
+      "y": 310,
+      "height": 30
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_mouth_talk/mouth_24",
+      "x": 498,
+      "width": 114,
+      "y": 188,
+      "height": 42
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_mouth_talk/mouth_26",
+      "x": 859,
+      "width": 112,
+      "y": 83,
+      "height": 64
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_mouth_talk/mouth_28",
+      "x": 327,
+      "width": 118,
+      "y": 139,
+      "height": 64
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_mouth_talk/mouth_30",
+      "x": 859,
+      "width": 114,
+      "y": 0,
+      "height": 82
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_mouth_talk/mouth_32",
+      "x": 786,
+      "width": 32,
+      "y": 268,
+      "height": 56
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_mouth_talk/mouth_34",
+      "x": 942,
+      "width": 17,
+      "y": 324,
+      "height": 30
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_mouth_talk/ear piece_0",
+      "x": 974,
+      "width": 48,
+      "y": 0,
+      "height": 99
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_mouth_talk/ear piece_12",
+      "x": 972,
+      "width": 48,
+      "y": 201,
+      "height": 99
+    },
+    {
+      "name": "__dbTextures/Orange dude/orange_mouth_talk/ear piece_24",
+      "x": 389,
+      "width": 48,
+      "y": 205,
+      "height": 99
+    },
+    {
+      "name": "__dbTextures/Blue dude/blue_mouth_talk/image_0",
+      "x": 555,
+      "width": 38,
+      "y": 310,
+      "height": 43
+    },
+    {
+      "name": "__dbTextures/Blue dude/blue_mouth_talk/image_18",
+      "x": 727,
+      "width": 38,
+      "y": 311,
+      "height": 43
+    },
+    {
+      "name": "__dbTextures/Blue dude/blue_mouth_talk/image_28",
+      "x": 239,
+      "width": 38,
+      "y": 310,
+      "height": 43
+    },
+    {
+      "name": "__dbTextures/Blue dude/blue_mouth_talk/jaw_2",
+      "x": 496,
+      "width": 58,
+      "y": 307,
+      "height": 31
+    },
+    {
+      "name": "__dbTextures/Blue dude/blue_mouth_talk/jaw_4",
+      "x": 178,
+      "width": 60,
+      "y": 308,
+      "height": 24
+    },
+    {
+      "name": "__dbTextures/Blue dude/blue_mouth_talk/jaw_6",
+      "x": 727,
+      "width": 58,
+      "y": 268,
+      "height": 42
+    },
+    {
+      "name": "__dbTextures/Blue dude/blue_mouth_talk/jaw_8",
+      "x": 476,
+      "width": 19,
+      "y": 321,
+      "height": 29
+    },
+    {
+      "name": "__dbTextures/Blue dude/blue_mouth_talk/jaw_10",
+      "x": 711,
+      "width": 14,
+      "y": 320,
+      "height": 25
+    },
+    {
+      "name": "__dbTextures/Blue dude/blue_mouth_talk/jaw_20",
+      "x": 379,
+      "width": 58,
+      "y": 305,
+      "height": 31
+    },
+    {
+      "name": "__dbTextures/Blue dude/blue_mouth_talk/jaw_22",
+      "x": 612,
+      "width": 60,
+      "y": 318,
+      "height": 24
+    },
+    {
+      "name": "__dbTextures/Blue dude/blue_mouth_talk/jaw_24",
+      "x": 320,
+      "width": 58,
+      "y": 292,
+      "height": 42
+    },
+    {
+      "name": "__dbTextures/Blue dude/blue_mouth_talk/jaw_26",
+      "x": 820,
+      "width": 19,
+      "y": 323,
+      "height": 29
+    },
+    {
+      "name": "__dbTextures/Blue dude/blue_mouth_talk/jaw_30",
+      "x": 0,
+      "width": 58,
+      "y": 306,
+      "height": 31
+    },
+    {
+      "name": "__dbTextures/Blue dude/blue_mouth_talk/jaw_32",
+      "x": 108,
+      "width": 60,
+      "y": 316,
+      "height": 24
+    },
+    {
+      "name": "__dbTextures/Blue dude/blue_mouth_talk/jaw_34",
+      "x": 849,
+      "width": 58,
+      "y": 283,
+      "height": 42
+    },
+    {
+      "name": "__dbTextures/Blue dude/blue_mouth_talk/jaw_36",
+      "x": 766,
+      "width": 19,
+      "y": 311,
+      "height": 29
+    },
+    {
+      "name": "blue_teeth",
+      "x": 594,
+      "width": 49,
+      "y": 343,
+      "height": 20
+    },
+    {
+      "name": "Orange dude/orange_fingers_wave01",
+      "x": 786,
+      "width": 31,
+      "y": 325,
+      "height": 22
+    },
+    {
+      "name": "Orange dude/orange_finger_waves 02",
+      "x": 942,
+      "width": 23,
+      "y": 295,
+      "height": 28
+    },
+    {
+      "name": "__dbTextures/Blue dude/blue_fingers_wave/fx_0",
+      "x": 59,
+      "width": 36,
+      "y": 325,
+      "height": 40
+    },
+    {
+      "name": "__dbTextures/Blue dude/blue_fingers_wave/fx_4",
+      "x": 673,
+      "width": 36,
+      "y": 320,
+      "height": 40
+    },
+    {
+      "name": "__dbTextures/Blue dude/blue_fingers_wave/fx_8",
+      "x": 278,
+      "width": 36,
+      "y": 322,
+      "height": 40
+    },
+    {
+      "name": "__dbTextures/Blue dude/blue_fingers_wave/fx_12",
+      "x": 438,
+      "width": 36,
+      "y": 321,
+      "height": 40
+    },
+    {
+      "name": "__dbTextures/Blue dude/blue_fingers_wave/fx_16",
+      "x": 840,
+      "width": 36,
+      "y": 326,
+      "height": 40
+    }
+  ]
+}

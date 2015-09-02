@@ -1,0 +1,145 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>demo</title>
+    <script src="js/jquery.js"></script>
+    <script src="js/createjs.js"></script>
+    <script src="js/dragonBones.js"></script>
+    <script src="js/dragonBonesCreateJS.js"></script>
+</head>
+<body onLoad="init();">
+    <div id="canvasHolder">
+        <canvas id="canvas" width="1280" height="720"></canvas>
+    </div>
+	
+	<script type='text/javascript'>
+		function init()
+		{
+			createJSInit();
+		}
+		
+		var canvas;
+		var stage;
+		
+		var texture;
+		var textureData;
+		var skeletonData;
+		
+		function createJSInit()
+		{
+			canvas = document.getElementById("canvas");
+			stage = new createjs.Stage(canvas);
+			
+            $.getJSON(
+                "texture.json",
+                function(data)
+                {
+                    textureData = data;
+                    $.getJSON(
+                        "skeleton.json",
+                        function(data)
+                        {
+                            skeletonData = data;
+                            dragonBonesInit();
+                        }
+                    )
+                }
+            );
+		}
+		
+		var factory;
+
+        function getRandomColor() {
+            var letters = '0123456789ABCDEF'.split('');
+            var color = '#';
+            for (var i = 0; i < 6; i++ ) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+		var getAtlas = function(textureData) {
+            var self = this;
+            var container = new createjs.Container();
+            var width = 0;
+            var height = 0;
+
+            var s = new createjs.Shape();
+            container.addChild(s);
+
+            for(var i=0; i<textureData.SubTexture.length; i++) {
+                var subTexture = textureData.SubTexture[i];
+                if(subTexture.width + subTexture.x > width) {
+                    width = subTexture.width + subTexture.x;
+                }
+                if(subTexture.height + subTexture.y > height) {
+                    height = subTexture.height + subTexture.y;
+                }
+                if(subTexture.shapes.length) {
+                    var object = new createjs.Container();
+                    object.setTransform(subTexture.x, subTexture.y);
+                    if(subTexture.hasOwnProperty('nominalBounds')) {
+                        object.x = object.x - subTexture.nominalBounds.x;
+                        object.y = object.y - subTexture.nominalBounds.y;
+                    }
+                    container.addChild(object);
+                    for(var j=0; j<subTexture.shapes.length; j++) {
+                        var color = subTexture.shapes[j]['color'];
+                        var path = subTexture.shapes[j]['path'];
+                        var transform = subTexture.shapes[j]['transform'].map(Number);
+                        var shape = new createjs.Shape();
+                        shape.setTransform.apply(shape, transform);
+                        shape.graphics.f(color).s().p(path);
+                        object.addChild(shape);
+                    }
+                }
+            }
+
+            //TODO REMOVE THIS
+            stage.addChild(container);
+
+            container.setBounds(0, 0, width, height);
+            container.cache(0, 0, width, height);
+            var image = new Image();
+            image.src = container.cacheCanvas.toDataURL();
+            return image;
+        }
+		
+		function dragonBonesInit()
+		{
+			factory = new dragonBones.factorys.CreateJSFactory();
+			factory.addSkeletonData(dragonBones.objects.DataParser.parseSkeletonData(skeletonData));
+            var texture = getAtlas(textureData);
+			factory.addTextureAtlas(new dragonBones.textures.CreateJSTextureAtlas(texture, textureData));
+
+            var armatureList = [
+                "Blue dude/Blue_character_walk",
+            ];
+
+            var addArmature = function(name, x, y) {
+                var armature = factory.buildArmature(name);
+                armature.getDisplay().x = x;
+                armature.getDisplay().y = y;
+                
+                dragonBones.animation.WorldClock.clock.add(armature);
+                armature.animation.gotoAndPlay('default', -1, -1, false);
+                
+                stage.addChild(armature.getDisplay());
+            };
+
+            addArmature(armatureList[0], 300, 300);
+
+			createjs.Ticker.setFPS(30);
+			createjs.Ticker.addEventListener("tick", update);
+		}
+		
+		function update() 
+		{
+			dragonBones.animation.WorldClock.clock.advanceTime(1/30);
+			stage.update();
+		}
+
+	</script>
+</body>
+</html>

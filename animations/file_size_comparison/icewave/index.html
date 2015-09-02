@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Mobile devices -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, user-scalable=no" />
+
+  <title>IceWave</title>
+</head>
+
+<body style="background:#ffffff;margin:0px;">
+
+  <!-- Game ------------------------------------------------------------------->
+  <div id="canvas-wrapper" style="width:100%;"><canvas id="test" width="1280" height="720" style="background: #ffffff;">Canvas support required.</canvas></div>
+  
+  <!-- Debug -->
+  <script src="js/debug.js"></script>
+
+  <!-- Dependencies -->
+  <script src="js/createjs/preloadjs-0.6.0.min.js"></script>
+  <script src="js/createjs/tweenjs-0.6.0.min.js"></script>
+  <script src="js/createjs/easeljs-0.8.0.js"></script>
+  <script src="js/createjs/soundjs-0.6.0.min.js"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/lodash.min.js"></script>
+  <script src="js/require.js"></script>
+
+  <!-- Game -->
+  <script>
+    require.config({baseUrl: 'js/'});
+    require(['test'], function(module) {
+        module.start();
+    });
+  </script>
+</body>
+
+</html>
